@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="60%" stop-color="#0369a1" />
+      <stop offset="100%" stop-color="#075985" />
+    </linearGradient>
+    <linearGradient id="mapFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#e0f2fe" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#0f172a" flood-opacity="0.3" />
+    </filter>
+  </defs>
+  <!-- Background Badge -->
+  <rect width="64" height="64" rx="16" fill="url(#bg)" />
+  <!-- Border stroke -->
+  <rect width="62" height="62" x="1" y="1" rx="15" fill="none" stroke="#ffffff" stroke-opacity="0.25" stroke-width="1.5" />
+  
+  <!-- Inabanga Map Silhouette -->
+  <g filter="url(#shadow)">
+    <path d="M 50.82,35.16 L 47.97,32.55 L 46.84,30.30 L 46.52,31.10 L 45.73,31.52 L 45.24,32.07 L 45.35,35.20 L 46.57,36.92 L 46.42,38.10 L 50.82,35.16 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 38.58,46.63 L 35.65,46.59 L 34.34,49.64 L 38.32,52.07 L 38.64,51.87 L 38.58,46.63 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 34.53,35.86 L 32.62,35.70 L 31.66,36.66 L 30.30,36.44 L 29.03,36.95 L 27.61,37.25 L 24.78,37.14 L 24.13,39.74 L 29.37,39.13 L 30.37,38.23 L 32.95,38.69 L 33.83,38.18 L 33.61,37.06 L 34.53,35.86 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 44.22,40.20 L 40.15,40.10 L 39.83,41.28 L 42.73,43.31 L 45.04,44.04 L 46.40,45.05 L 46.66,44.66 L 47.47,43.63 L 44.22,40.20 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 35.84,44.08 L 35.85,45.61 L 35.44,45.94 L 35.65,46.59 L 38.58,46.63 L 40.60,44.18 L 36.87,44.87 L 35.84,44.08 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 42.30,27.75 L 40.09,26.84 L 39.71,29.42 L 40.53,30.24 L 42.52,30.66 L 43.31,31.99 L 45.24,32.07 L 45.73,31.52 L 44.95,31.34 L 42.30,27.75 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 34.86,23.73 L 34.24,22.67 L 34.38,20.36 L 33.36,18.43 L 32.40,19.85 L 31.30,20.67 L 30.34,23.00 L 31.57,24.23 L 29.45,25.83 L 30.48,26.78 L 30.38,28.68 L 32.64,28.75 L 32.88,27.80 L 32.14,26.33 L 34.86,23.73 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 29.03,36.95 L 29.73,35.63 L 28.09,34.55 L 25.76,34.01 L 25.60,36.11 L 24.78,37.14 L 27.61,37.25 L 29.03,36.95 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 34.23,32.15 L 34.26,30.53 L 34.88,28.74 L 32.40,29.69 L 32.01,31.08 L 33.35,31.84 L 34.23,32.15 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 48.80,50.12 L 48.21,46.50 L 47.39,44.72 L 46.66,44.66 L 46.40,45.05 L 45.93,45.65 L 44.87,46.88 L 43.76,49.51 L 45.18,48.85 L 47.04,49.20 L 48.48,50.48 L 48.80,50.12 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 39.83,41.28 L 37.86,40.89 L 35.84,44.08 L 36.87,44.87 L 40.60,44.18 L 42.73,43.31 L 39.83,41.28 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 37.86,40.89 L 35.83,40.60 L 35.95,39.02 L 33.71,39.04 L 34.14,41.01 L 33.63,41.45 L 31.49,40.92 L 33.25,42.21 L 33.76,44.27 L 35.85,45.61 L 35.84,44.08 L 37.86,40.89 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 31.15,31.24 L 30.87,30.89 L 26.49,32.27 L 26.54,32.86 L 31.24,33.20 L 31.15,31.24 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 9.85,9.00 L 9.00,9.29 L 10.13,9.55 L 9.85,9.00 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 41.13,47.76 L 40.20,47.76 L 38.58,46.63 L 38.64,51.87 L 43.76,49.51 L 41.13,47.76 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 33.71,39.04 L 33.83,38.18 L 32.95,38.69 L 30.37,38.23 L 29.37,39.13 L 30.23,40.46 L 31.49,40.92 L 33.63,41.45 L 34.14,41.01 L 33.71,39.04 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 40.09,26.84 L 39.27,26.17 L 35.55,27.71 L 34.88,28.74 L 37.42,28.41 L 39.71,29.42 L 40.09,26.84 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 46.42,38.10 L 46.57,36.92 L 45.35,35.20 L 45.24,32.07 L 42.42,36.69 L 37.86,37.83 L 40.15,40.10 L 44.22,40.20 L 46.42,38.10 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 39.27,26.17 L 38.29,24.19 L 36.24,24.03 L 35.67,24.93 L 35.55,27.71 L 39.27,26.17 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 18.57,19.58 L 18.47,20.03 L 19.25,20.25 L 18.99,19.74 L 18.57,19.58 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 30.55,29.79 L 30.38,28.68 L 29.07,29.00 L 29.37,30.07 L 30.55,29.79 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 47.85,42.58 L 50.82,35.16 L 46.42,38.10 L 44.22,40.20 L 47.47,43.63 L 47.85,42.58 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 35.44,45.94 L 34.29,45.83 L 30.04,43.47 L 28.75,44.93 L 30.70,45.71 L 32.73,47.34 L 34.34,49.64 L 35.65,46.59 L 35.44,45.94 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 46.84,30.30 L 48.91,29.82 L 47.06,28.33 L 45.17,28.47 L 45.62,30.23 L 46.52,31.10 L 46.84,30.30 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 45.17,28.47 L 43.06,27.35 L 42.30,27.75 L 44.95,31.34 L 45.73,31.52 L 46.52,31.10 L 45.62,30.23 L 45.17,28.47 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 31.20,19.68 L 28.92,20.69 L 28.61,23.86 L 30.02,22.86 L 30.31,21.05 L 31.20,19.68 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 45.24,32.07 L 43.31,31.99 L 42.52,30.66 L 40.53,30.24 L 37.92,32.65 L 42.42,36.69 L 45.24,32.07 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 37.92,32.65 L 35.99,33.29 L 36.40,34.86 L 37.29,36.44 L 37.24,37.98 L 37.86,37.83 L 42.42,36.69 L 37.92,32.65 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 42.39,45.98 L 42.73,43.31 L 40.60,44.18 L 38.58,46.63 L 40.20,47.76 L 41.13,47.76 L 42.39,45.98 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 37.24,37.98 L 37.29,36.44 L 36.40,34.86 L 34.53,35.86 L 33.61,37.06 L 33.83,38.18 L 33.71,39.04 L 35.95,39.02 L 37.24,37.98 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 34.23,32.15 L 33.35,31.84 L 32.17,33.31 L 32.62,35.70 L 34.53,35.86 L 36.40,34.86 L 35.99,33.29 L 34.23,32.15 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 31.24,33.20 L 26.54,32.86 L 25.76,34.01 L 28.09,34.55 L 29.73,35.63 L 29.03,36.95 L 30.30,36.44 L 31.66,36.66 L 32.62,35.70 L 32.17,33.31 L 31.24,33.20 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 32.64,28.75 L 30.38,28.68 L 30.55,29.79 L 30.87,30.89 L 31.15,31.24 L 32.01,31.08 L 32.40,29.69 L 32.64,28.75 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 35.85,45.61 L 33.76,44.27 L 33.25,42.21 L 31.49,40.92 L 30.99,41.63 L 30.04,43.47 L 34.29,45.83 L 35.44,45.94 L 35.85,45.61 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 43.76,49.51 L 44.87,46.88 L 45.93,45.65 L 42.39,45.98 L 41.13,47.76 L 43.76,49.51 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 39.71,29.42 L 37.42,28.41 L 34.88,28.74 L 34.26,30.53 L 34.23,32.15 L 35.99,33.29 L 37.92,32.65 L 40.53,30.24 L 39.71,29.42 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 40.15,40.10 L 37.86,37.83 L 37.24,37.98 L 35.95,39.02 L 35.83,40.60 L 37.86,40.89 L 39.83,41.28 L 40.15,40.10 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 30.34,23.00 L 30.02,22.86 L 28.61,23.86 L 27.84,26.84 L 28.56,26.81 L 30.48,26.78 L 29.45,25.83 L 31.57,24.23 L 30.34,23.00 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 30.87,30.89 L 30.55,29.79 L 29.37,30.07 L 27.35,30.01 L 26.49,32.27 L 30.87,30.89 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 46.40,45.05 L 45.04,44.04 L 42.73,43.31 L 42.39,45.98 L 45.93,45.65 L 46.40,45.05 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 30.38,28.68 L 30.48,26.78 L 28.56,26.81 L 29.07,29.00 L 30.38,28.68 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 36.24,24.03 L 34.86,23.73 L 32.14,26.33 L 32.88,27.80 L 32.64,28.75 L 32.40,29.69 L 34.88,28.74 L 35.55,27.71 L 35.67,24.93 L 36.24,24.03 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 48.48,50.48 L 48.41,51.58 L 49.78,52.11 L 53.19,55.00 L 55.00,50.72 L 52.88,48.42 L 48.80,50.12 L 48.48,50.48 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 32.40,19.85 L 31.20,19.68 L 30.31,21.05 L 30.02,22.86 L 30.34,23.00 L 31.30,20.67 L 32.40,19.85 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 29.37,39.13 L 24.13,39.74 L 24.64,40.80 L 29.21,40.61 L 30.99,41.63 L 31.49,40.92 L 30.23,40.46 L 29.37,39.13 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 52.88,48.42 L 49.61,44.84 L 47.85,42.58 L 47.47,43.63 L 46.66,44.66 L 47.39,44.72 L 48.21,46.50 L 48.80,50.12 L 52.88,48.42 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 32.01,31.08 L 31.15,31.24 L 31.24,33.20 L 32.17,33.31 L 33.35,31.84 L 32.01,31.08 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 28.56,26.81 L 27.84,26.84 L 28.12,28.64 L 27.35,30.01 L 29.37,30.07 L 29.07,29.00 L 28.56,26.81 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 30.99,41.63 L 29.21,40.61 L 24.64,40.80 L 24.82,41.86 L 27.80,42.26 L 30.04,43.47 L 30.99,41.63 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+    <path d="M 30.04,43.47 L 27.80,42.26 L 24.82,41.86 L 28.75,44.93 L 30.04,43.47 Z" fill="url(#mapFill)" stroke="#0284c7" stroke-width="0.35" stroke-opacity="0.4" />
+  </g>
+  
+  <!-- Poblacion Town Center Golden Star -->
+  <circle cx="31.5" cy="29.8" r="3.2" fill="#f59e0b" fill-opacity="0.35" />
+  <circle cx="31.5" cy="29.8" r="1.8" fill="#fbbf24" stroke="#ffffff" stroke-width="0.8" />
+</svg>
