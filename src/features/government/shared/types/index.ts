@@ -49,4 +49,6 @@ export interface Hotline {
   email?: string;
   note: string;
   primary?: boolean;
+  /** Short label shown in the header hotline bar (e.g. "PNP"); omit to keep it off the bar. */
+  short?: string;
 }

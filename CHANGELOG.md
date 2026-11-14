@@ -20,6 +20,7 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Changed
 
+- Simpler header in the BetterInabanga style: a dark 24/7 hotline bar (911, Municipal Hall, MDRRMO; hotlines with a `short` label appear automatically), then the logo, six plain links (Home, Services, Government, Transparency, Barangays, Hotlines & Contact) with no dropdowns, and a "Citizen Feedback" button that opens the new feedback section on the contact page. Town, News and About moved to the footer.
 - Official cards are text-only (role, name, term, profile link); no portrait frame.
 - ZIP code 6337 added to the LGU profile.
 - README, CLAUDE.md and AGENTS.md describe the current data status; remaining "city" wording in search examples and labels changed to "municipal".

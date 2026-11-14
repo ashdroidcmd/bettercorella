@@ -55,6 +55,16 @@ test.describe('Smoke — main pages', () => {
 })
 
 test.describe('Navigation', () => {
+  test('header has the hotline bar and the citizen feedback link', async ({ page, isMobile }) => {
+    await page.goto('/')
+    await expect(page.locator('a[href="tel:911"]').first()).toBeVisible()
+    if (!isMobile) {
+      await page.getByRole('link', { name: 'Citizen Feedback' }).click()
+      await expect(page).toHaveURL(/\/contact#feedback$/)
+      await expect(page.getByRole('heading', { name: 'Feedback and complaints' })).toBeVisible()
+    }
+  })
+
   test('global search is removed', async ({ request }) => {
     const response = await request.get('/search')
     expect(response.status()).toBe(404)

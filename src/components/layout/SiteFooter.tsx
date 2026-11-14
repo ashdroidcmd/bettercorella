@@ -235,6 +235,8 @@ export function SiteFooter() {
             </p>
             <nav aria-label="Legal and site links" className="flex flex-wrap gap-x-5 gap-y-2">
               {[
+                { label: 'About', href: '/about' },
+                { label: 'FAQ', href: '/faq' },
                 { label: 'Sitemap', href: '/sitemap' },
                 { label: 'Accessibility', href: '/accessibility' },
                 { label: 'Privacy', href: '/privacy' },
