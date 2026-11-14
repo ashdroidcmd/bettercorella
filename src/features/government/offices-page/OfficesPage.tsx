@@ -5,13 +5,14 @@ import { useState } from 'react'
 import { EmptyState } from '../../../components/ui/EmptyState'
 import { OfficeCard } from '../shared/components/OfficeCard'
 import { PageHero } from '../../../components/ui/PageHero'
+import { PendingPage } from '../../../components/ui/PendingPage'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
 import { city } from '../../../config/city'
 import { offices } from '../shared/data/offices'
 import { normalize } from '../../../lib/utils'
 
-export function OfficesPage() {
+function OfficesPageContent() {
 
   const [query, setQuery] = useState('')
   const normalizedQuery = normalize(query)
@@ -32,9 +33,9 @@ export function OfficesPage() {
   return (
     <>
       <PageHero
-        eyebrow="City offices"
+        eyebrow="Municipal offices"
         title="Departments and offices"
-        description="38 offices and departments organized into 12 sectors. Find the office that handles your transaction, then open its contact details and services."
+        description={`${offices.length} offices and departments. Find the office that handles your transaction, then open its contact details and services.`}
         crumbs={[{ label: 'Government', href: '/government' }, { label: 'Offices' }]}
       >
         <div className="max-w-md">
@@ -74,7 +75,7 @@ export function OfficesPage() {
               description={
                 normalizedQuery
                   ? 'Showing filtered office results'
-                  : 'Offices are grouped the way the city government organizes its work.'
+                  : 'Offices are grouped the way the municipal government organizes its work.'
               }
             />
             {normalizedQuery ? (
@@ -133,4 +134,20 @@ export function OfficesPage() {
       </section>
     </>
   )
+}
+
+export function OfficesPage() {
+  if (!offices.length) {
+    return (
+      <PendingPage
+      eyebrow="Municipal offices"
+      title="Departments and offices"
+      description={`The offices and departments of the Municipal Government of ${city.name}, with contacts and the services they handle.`}
+      crumbs={[{ label: 'Government', href: '/government' }, { label: 'Offices' }]}
+      topic="Municipal offices and their contacts"
+      source="They will come from the municipal office directory and Citizen's Charter."
+      />
+    )
+  }
+  return <OfficesPageContent />
 }

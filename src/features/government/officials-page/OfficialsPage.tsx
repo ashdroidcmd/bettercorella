@@ -2,6 +2,7 @@
 
 import { OfficialCard } from '../shared/components/OfficialCard'
 import { PageHero } from '../../../components/ui/PageHero'
+import { PendingPage } from '../../../components/ui/PendingPage'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
@@ -9,7 +10,7 @@ import { city } from '../../../config/city'
 import { cityElections, electionSourceUrl, electionSupplementSources } from '../shared/data/elections'
 import { officials } from '../shared/data/officials'
 
-export function OfficialsPage() {
+function OfficialsPageContent() {
 
   const mayor = officials.find((official) => official.role === 'Municipal Mayor')
   const viceMayor = officials.find((official) => official.role === 'Municipal Vice Mayor')
@@ -23,7 +24,7 @@ export function OfficialsPage() {
       <PageHero
         eyebrow="Municipal officials"
         title="The people in municipal hall"
-        description="The elected leadership of Inabanga: the mayor, vice mayor, 8 Sangguniang Bayan members, the Liga ng mga Barangay (ABC) president, and the SK Federation representative. Profiles link to the official municipal website."
+        description={`The elected leadership of ${city.name}: the mayor, vice mayor, Sangguniang Bayan members, the Liga ng mga Barangay (ABC) president, and the SK Federation representative.`}
         crumbs={[{ label: 'Government', href: '/government' }, { label: 'Officials' }]}
       />
 
@@ -92,7 +93,7 @@ export function OfficialsPage() {
               className="overflow-x-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
             >
               <table className="w-full min-w-[620px] text-left text-sm">
-                <caption className="sr-only">Mayors and vice mayors of Inabanga, Bohol, by election year</caption>
+                <caption className="sr-only">Mayors and vice mayors of {city.name}, {city.province}, by election year</caption>
                 <thead className="bg-surface text-[11px] font-bold uppercase tracking-[0.1em] text-ink-500">
                   <tr>
                     <th scope="col" className="px-5 py-3">
@@ -175,10 +176,30 @@ export function OfficialsPage() {
       <section className="border-t border-line">
         <div className="container-page py-8">
           <SourceNote href={city.website} linkLabel="View official profiles">
-            {'The city government supplies these portraits, roles, and profile links. This guide does not publish personal contact details. Check official profiles for current roles and news.'}
+            {'The municipal government supplies these portraits, roles, and profile links. This guide does not publish personal contact details. Check official profiles for current roles and news.'}
           </SourceNote>
         </div>
       </section>
     </>
   )
+}
+
+export function OfficialsPage() {
+  if (!officials.length) {
+    return (
+      <PendingPage
+      eyebrow="Municipal officials"
+      title="The people in Municipal Hall"
+      description={`The elected leadership of ${city.name}: the mayor, vice mayor and Sangguniang Bayan members.`}
+      crumbs={[{ label: 'Government', href: '/government' }, { label: 'Officials' }]}
+      topic="Elected municipal officials"
+      source="They will come from official municipal sources and COMELEC election results."
+      links={[
+        { label: 'COMELEC', href: 'https://comelec.gov.ph', description: 'Official election results and lists of elected local officials.' },
+        { label: 'Election winners dataset', href: 'https://data.bettergov.ph/datasets/25', description: 'OpenHalalan dataset of winning candidates in national and local elections.' },
+      ]}
+      />
+    )
+  }
+  return <OfficialsPageContent />
 }

@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { NewsCard } from '../shared/components/NewsCard'
 import { PageHero } from '../../../components/ui/PageHero'
+import { PendingPage } from '../../../components/ui/PendingPage'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
@@ -10,7 +11,7 @@ import { city } from '../../../config/city'
 import { news, newsLastVerified } from '../shared/data/news'
 import { formatDate } from '../../../lib/utils'
 
-export function NewsArchivePage() {
+function NewsArchivePageContent() {
 
   return (
     <>
@@ -47,11 +48,11 @@ export function NewsArchivePage() {
             </div>
           ) : (
             <p className="rounded-2xl border border-line bg-white p-6 text-sm leading-6 text-ink-600">
-              {"No stories are currently indexed. Visit the official city website for recent announcements."}</p>
+              {"No stories are currently indexed. Visit the official municipal channels for recent announcements."}</p>
           )}
 
           <div className="mt-10">
-            <SourceNote href={city.website} linkLabel="Visit the official city website">
+            <SourceNote href={city.website} linkLabel="Visit the official municipal website">
               {"This archive contains the stories currently tracked by the guide; it may not include every city announcement. Stories last verified on"}{' '}{formatDate(newsLastVerified)}.
             </SourceNote>
           </div>
@@ -59,4 +60,20 @@ export function NewsArchivePage() {
       </section>
     </>
   )
+}
+
+export function NewsArchivePage() {
+  if (!news.length) {
+    return (
+      <PendingPage
+      eyebrow="From Municipal Hall"
+      title="News archive"
+      description="Every news item tracked by this guide, each linked to the original announcement."
+      crumbs={[{ label: 'News', href: '/news' }, { label: 'News archive' }]}
+      topic="Municipal news and advisories"
+      source="Each item will link to the official announcement."
+      />
+    )
+  }
+  return <NewsArchivePageContent />
 }

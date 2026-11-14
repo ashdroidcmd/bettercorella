@@ -84,21 +84,21 @@ export function PrivacyPage() {
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"03 · Off-site services"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Third-party services and links"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
-            {"The site loads the Figtree typeface from Google Fonts, which may receive your IP address when the font is requested. Links to the official city website, Google Drive, and other public records take you to services with their own privacy policies. This guide does not control those services."}</p>
+            {"The site loads the Figtree typeface from Google Fonts, which may receive your IP address when the font is requested. Links to official government websites and other public records take you to services with their own privacy policies. This guide does not control those services."}</p>
         </section>
 
         <section id="your-choices" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"04 · Your control"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Your choices"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
-            {"You can block third-party fonts, scripts, or cookies through your browser settings. Doing so may change the site’s appearance but should not prevent access to the written content. For city transactions, use the official channels listed on the contact page."}</p>
+            {"You can block third-party fonts, scripts, or cookies through your browser settings. Doing so may change the site’s appearance but should not prevent access to the written content. For municipal transactions, use the official channels listed on the contact page."}</p>
         </section>
 
         <section id="changes-and-contact" className="scroll-mt-28 rounded-2xl border border-line bg-surface p-5 sm:p-7">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"05 · Policy details"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Changes and contact"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
-            {"This policy may be updated as the site’s practices change. It describes this independent guide, not the Municipal Government of Inabanga’s official website. The city-data review date shown elsewhere does not indicate a revision to this policy."}</p>
+            {"This policy may be updated as the site’s practices change. It describes this independent guide, not the Municipal Government of Corella’s official website. The data review date shown elsewhere does not indicate a revision to this policy."}</p>
           <Link
             href="/contact"
            

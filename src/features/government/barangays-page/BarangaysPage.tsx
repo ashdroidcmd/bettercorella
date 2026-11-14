@@ -5,12 +5,14 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { BarangayMap } from './components/BarangayMap'
+import { ComingSoon } from '../../../components/ui/ComingSoon'
 import { EmptyState } from '../../../components/ui/EmptyState'
 import { PageHero } from '../../../components/ui/PageHero'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
 import { StatCard } from '../../../components/ui/StatCard'
+import { barangayMap } from '../shared/data/barangayMap'
 import { barangayDilgSourceUrl, barangays } from '../shared/data/barangays'
 import { city } from '../../../config/city'
 import { formatNumber, normalize } from '../../../lib/utils'
@@ -54,11 +56,12 @@ export function BarangaysPage() {
     <>
       <PageHero
         eyebrow="Barangays"
-        title="50 barangays, 8 districts"
-        description="Every community in Inabanga, with 2024 population, share of the city, change since 2020, rank, and elected barangay officials."
+        title={city.barangayCount ? `${city.barangayCount} barangays` : 'Barangays'}
+        description={`Every community in ${city.name}, with PSA population figures and elected barangay officials, added as they are verified.`}
         crumbs={[{ label: 'Government', href: '/government' }, { label: 'Barangays' }]}
         overflowVisible
       >
+        {barangays.length ? (
         <div className="relative z-30 max-w-md">
           <label htmlFor="barangay-search" className="sr-only">
             {'Search barangays'}
@@ -165,14 +168,16 @@ export function BarangaysPage() {
             </ul>
           ) : null}
         </div>
+        ) : null}
       </PageHero>
 
       <section>
         <div className="container-page py-8 sm:py-16">
+          {barangayMap.features.length ? (
           <section>
             <Reveal delay={0.06}>
               <SectionHeading
-                eyebrow="City map"
+                eyebrow="Barangay map"
                 title="See where every barangay sits"
                 description="Click a barangay to zoom in and raise it above the map. Drag to explore nearby boundaries, or open its profile for full details."
               />
@@ -195,20 +200,23 @@ export function BarangaysPage() {
               </div>
             </Reveal>
           </section>
+          ) : null}
 
+          {barangays.length ? (
+          <>
           <Reveal className="mt-8 sm:mt-10">
             <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-              <StatCard value={formatNumber(city.barangayCount)} label="Barangays" note="Across the city" />
+              <StatCard value={formatNumber(barangays.length)} label="Barangays" note={`Across ${city.name}`} />
               <StatCard
-                value={formatNumber(city.population2024)}
+                value={formatNumber(barangays.reduce((total, barangay) => total + barangay.population2024, 0))}
                 label="Residents"
-                note="2024 Census of Population"
+                note="PSA Census of Population"
               />
-              <StatCard value={formatNumber(city.districtCount)} label="Districts" note="Administrative districts" />
+              <StatCard value={formatNumber(districtNumbers.length)} label="Districts" note="Administrative districts" />
               <StatCard
                 value={formatNumber(poblacionCount)}
                 label="Poblacion barangays"
-                note="Barangays I to IV"
+                note="Town-center barangays"
               />
             </div>
           </Reveal>
@@ -264,7 +272,7 @@ export function BarangaysPage() {
                     >
                       <table className="min-w-[760px] w-full text-left text-sm">
                         <caption className="sr-only">
-                          {"Barangays in"}{' '}{districtName}{", Inabanga, Bohol"}</caption>
+                          {"Barangays in"}{' '}{districtName}{`, ${city.name}, ${city.province}`}</caption>
                         <thead className="bg-surface text-[11px] font-bold uppercase tracking-[0.1em] text-ink-500">
                           <tr>
                             <th scope="col" className="px-4 py-3">
@@ -344,18 +352,24 @@ export function BarangaysPage() {
               />
             </div>
           )}
+          </>
+          ) : (
+            <ComingSoon
+              topic="Barangay names, populations and officials"
+              source="Names and populations will come from the PSA Philippine Standard Geographic Code and census; officials from the DILG barangay officials directory."
+            />
+          )}
 
           <div className="mt-10">
             <SourceNote
-              href="https://psa.gov.ph/classification/psgc/barangays/0103314000"
-              linkLabel="PSA barangay list and 2024 population"
+              href="https://psa.gov.ph/classification/psgc"
+              linkLabel="PSA Philippine Standard Geographic Code"
               links={[
-                { href: 'https://www.inabanga.gov.ph/vision-and-mission-2-3/', label: 'city barangay directory' },
                 { href: barangayDilgSourceUrl, label: 'DILG barangay officials directory' },
                 { href: 'https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/103013', label: 'Republic Act No. 12326' },
               ]}
             >
-              {'Barangay names and populations follow the PSA 2024 Census. Shares, changes, and ranks are calculated from those counts. Official names follow the PSA spelling. Barangay officials follow the city roster. SK chairperson entries should be confirmed with DILG. The next regular barangay and SK elections are scheduled for November 2028 under Republic Act No. 12326. Boundaries use the 2023 release.'}
+              {'Barangay names and populations follow the PSA. Barangay officials follow the DILG directory. The next regular barangay and SK elections are scheduled for November 2028 under Republic Act No. 12326.'}
             </SourceNote>
           </div>
         </div>

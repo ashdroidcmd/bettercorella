@@ -36,7 +36,7 @@ export function BarangayDetailPage() {
       <PageHero
         eyebrow={barangay.district}
         title={barangay.name}
-        description={`A barangay in ${barangay.district}, Municipality of Inabanga, Bohol. Population, growth, and elected barangay officials from public records.`}
+        description={`A barangay in ${barangay.district}, ${city.officialName}. Population, growth, and elected barangay officials from public records.`}
         crumbs={[
           { label: 'Government', href: '/government' },
           { label: 'Barangays', href: '/government/barangays' },
@@ -92,9 +92,11 @@ export function BarangayDetailPage() {
                   </div>
                 ))}
               </div>
-              <p className="mt-5 text-xs leading-5 text-ink-500">
-                {"City-wide population was"}{' '}{formatNumber(city.population2024)} {"in 2024, compared with"}{' '}
-                {formatNumber(city.population2020)} {"in 2020."}</p>
+              {city.population2024 !== null && city.population2020 !== null ? (
+                <p className="mt-5 text-xs leading-5 text-ink-500">
+                  {`Municipality-wide population was ${formatNumber(city.population2024)} in 2024, compared with ${formatNumber(city.population2020)} in 2020.`}
+                </p>
+              ) : null}
             </section>
           </Reveal>
 
@@ -189,7 +191,7 @@ export function BarangayDetailPage() {
               { href: 'https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/103013', label: 'Republic Act No. 12326' },
             ]}
           >
-            {"Population figures use the 2024 Census of Population. The punong barangay and council come from the city government’s published directory. SK chairperson names were previously entered from the DILG Barangay Information System, but its records request failed with a 502 error during the October 23, 2026 review. The local roster has 58 names; Puspus has no verified entry, and the rest could not be rechecked. Confirm SK names with DILG before relying on them. The next regular barangay and SK elections are scheduled for November 2028 under Republic Act No. 12326. Facilities are not yet published in a citywide dataset."}</SourceNote>
+            {"Population figures follow the PSA Census of Population. Barangay officials follow the DILG Barangay Information System; confirm names with DILG before relying on them. The next regular barangay and SK elections are scheduled for November 2028 under Republic Act No. 12326."}</SourceNote>
         </div>
 
         <div className="mt-6">

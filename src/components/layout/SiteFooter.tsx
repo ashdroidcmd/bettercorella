@@ -6,6 +6,7 @@ import Link from 'next/link'
 import logoLight from '../../assets/logo-light.png'
 import { categories } from '../../features/services/shared/data/categories'
 import { city } from '../../config/city'
+import { ISSUES_URL, REPOSITORY_URL, SITE_NAME } from '../../config/site'
 import { telHref } from '../../lib/utils'
 import { BackToTopButton } from './BackToTopButton'
 
@@ -48,8 +49,8 @@ export function SiteFooter() {
               <div>
                 <img
                   src={logoLight.src}
-                  alt="Better Inabanga"
-                  width="960"
+                  alt={SITE_NAME}
+                  width="802"
                   height="199"
                   className="h-10 w-auto"
                 />
@@ -58,7 +59,7 @@ export function SiteFooter() {
                 </p>
               </div>
               <p className="mt-5 max-w-sm text-sm leading-6 text-white/60">
-                {'A clearer, independent guide to city services, public officials, barangays, and public money. Built with open data and links to official sources.'}
+                {`A clearer, independent guide to ${city.name}'s municipal services, public officials, barangays, and public money. Built with open data and links to official sources.`}
               </p>
             </div>
 
@@ -68,13 +69,13 @@ export function SiteFooter() {
                   { label: 'All services', href: '/services' },
                   { label: 'Online services', href: '/online-services' },
                   { label: 'Municipal government', href: '/government' },
-                  { label: 'City officials', href: '/government/officials' },
+                  { label: 'Municipal officials', href: '/government/officials' },
                   { label: 'Barangays', href: '/government/barangays' },
                   { label: 'Ordinances and executive orders', href: '/government/legislation' },
-                  { label: 'City profile', href: '/city' },
-                  { label: 'Life and tourism', href: '/city/life' },
-                  { label: 'Places directory', href: '/city/places' },
-                  { label: 'Business and investment', href: '/city/business' },
+                  { label: 'Town profile', href: '/town' },
+                  { label: 'Life and tourism', href: '/town/life' },
+                  { label: 'Places directory', href: '/town/places' },
+                  { label: 'Business and investment', href: '/town/business' },
                   { label: 'Transparency', href: '/transparency' },
                   { label: 'Infrastructure projects', href: '/transparency/projects' },
                   { label: 'News', href: '/news' },
@@ -107,26 +108,40 @@ export function SiteFooter() {
 
             <FooterGroup title="Municipal Hall">
               <ul className="space-y-3 text-sm text-white/70">
-                <li className="flex gap-2.5">
-                  <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
-                  <span>{city.address}</span>
-                </li>
-                <li className="flex gap-2.5">
-                  <Phone aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
-                  <a href={telHref(city.trunkline)} className="transition hover:text-white">
-                    {city.trunkline}
-                  </a>
-                </li>
-                <li className="flex gap-2.5">
-                  <Mail aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
-                  <a href={`mailto:${city.email}`} className="break-all transition hover:text-white">
-                    {city.email}
-                  </a>
-                </li>
-                <li className="flex gap-2.5">
-                  <Clock aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
-                  <span>{city.hours}</span>
-                </li>
+                {city.address ? (
+                  <li className="flex gap-2.5">
+                    <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
+                    <span>{city.address}</span>
+                  </li>
+                ) : null}
+                {city.trunkline ? (
+                  <li className="flex gap-2.5">
+                    <Phone aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
+                    <a href={telHref(city.trunkline)} className="transition hover:text-white">
+                      {city.trunkline}
+                    </a>
+                  </li>
+                ) : null}
+                {city.email ? (
+                  <li className="flex gap-2.5">
+                    <Mail aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
+                    <a href={`mailto:${city.email}`} className="break-all transition hover:text-white">
+                      {city.email}
+                    </a>
+                  </li>
+                ) : null}
+                {city.hours ? (
+                  <li className="flex gap-2.5">
+                    <Clock aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
+                    <span>{city.hours}</span>
+                  </li>
+                ) : null}
+                {!city.address && !city.trunkline && !city.email ? (
+                  <li className="flex gap-2.5">
+                    <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
+                    <span>{`Municipal Hall contact details for ${city.name} will be listed once verified.`}</span>
+                  </li>
+                ) : null}
               </ul>
             </FooterGroup>
           </div>
@@ -156,10 +171,12 @@ export function SiteFooter() {
                   {'Official & broader ecosystem'}
                 </p>
                 <nav aria-label="Official and broader civic ecosystem" className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                  <a href={city.website} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-semibold text-white/85 transition hover:text-white">
-                    {'Official city portal'}
-                    <ArrowUpRight aria-hidden="true" className="size-3.5" />
-                  </a>
+                  {city.website ? (
+                    <a href={city.website} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-semibold text-white/85 transition hover:text-white">
+                      {'Official municipal website'}
+                      <ArrowUpRight aria-hidden="true" className="size-3.5" />
+                    </a>
+                  ) : null}
                   <a href="https://bettergov.ph/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-semibold text-white/85 transition hover:text-white">
                     {'National services — BetterGov'}
                     <ArrowUpRight aria-hidden="true" className="size-3.5" />
@@ -170,18 +187,18 @@ export function SiteFooter() {
                   </a>
                 </nav>
                 <p className="mt-3 text-xs leading-5 text-white/55">
-                  {'Better Inabanga is an independent civic project, not the official Municipal Government website.'}
+                  {`${SITE_NAME} is an independent civic project, not the official website of the Municipal Government of ${city.name}.`}
                 </p>
               </div>
             </div>
 
             <div>
               <p className="text-sm font-semibold text-white/75">
-                {'Cost to the people of Inabanga'} <span className="ml-1 font-extrabold text-emerald-300">₱0</span>
+                {`Cost to the people of ${city.name}`} <span className="ml-1 font-extrabold text-emerald-300">₱0</span>
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <a
-                  href="https://github.com/gerardosocias29/betterinabanga/issues/new"
+                  href={`${ISSUES_URL}/new`}
                   target="_blank"
                   rel="noreferrer"
                   title="Offer to help or suggest an improvement"
@@ -191,7 +208,7 @@ export function SiteFooter() {
                   {'Volunteer with us'}
                 </a>
                 <a
-                  href="https://github.com/gerardosocias29/betterinabanga"
+                  href={REPOSITORY_URL}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex min-h-10 items-center gap-2 rounded-full bg-white/10 px-3.5 py-2 text-sm font-semibold text-white/85 transition hover:bg-white/15 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-300"
@@ -200,7 +217,7 @@ export function SiteFooter() {
                   {'Open-source on GitHub'}
                 </a>
                 <a
-                  href="https://github.com/gerardosocias29/betterinabanga/blob/main/CONTRIBUTING.md"
+                  href={`${REPOSITORY_URL}/blob/main/CONTRIBUTING.md`}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex min-h-10 items-center gap-2 rounded-full bg-white/10 px-3.5 py-2 text-sm font-semibold text-white/85 transition hover:bg-white/15 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-300"
@@ -214,7 +231,7 @@ export function SiteFooter() {
 
           <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-white/60 lg:flex-row lg:items-center lg:justify-between">
             <p>
-              {'© 2026 Better Inabanga. Independent civic project. Source dates vary by dataset; see page citations.'}
+              {`© 2026 ${SITE_NAME}. Independent civic project. Source dates vary by dataset; see page citations.`}
             </p>
             <nav aria-label="Legal and site links" className="flex flex-wrap gap-x-5 gap-y-2">
               {[

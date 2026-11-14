@@ -10,7 +10,8 @@ import { barangays } from '../../shared/data/barangays'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 const workerUrl = '/vendor/maplibre-gl-worker.mjs'
-const boundaryUrl = '/data/inabanga-barangays.geojson'
+// Add the Corella boundary GeoJSON here once sourced from PSA/NAMRIA (see barangayMap.ts).
+const boundaryUrl = '/data/barangay-boundaries.geojson'
 
 setWorkerUrl(workerUrl)
 
@@ -382,7 +383,7 @@ export function BarangayMapCanvas({ resetToken, onSelect, onHover }: BarangayMap
           className="h-full w-full"
           data-lenis-prevent-wheel
           role="application"
-          aria-label="Interactive 3D map of Inabanga barangays. Scroll to zoom, drag to pan, click a barangay to select it."
+          aria-label="Interactive 3D map of the barangays. Scroll to zoom, drag to pan, click a barangay to select it."
         />
       </div>
       <div className="pointer-events-none absolute bottom-3 left-3 z-10 rounded-lg bg-white/90 px-2.5 py-1.5 text-[10px] font-semibold text-ink-600 shadow-sm backdrop-blur-sm">

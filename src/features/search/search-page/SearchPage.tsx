@@ -21,7 +21,7 @@ export function SearchPage() {
     <>
       <PageHero
         eyebrow="Search"
-        title={query ? `Results for “${query}”` : 'Search the city guide'}
+        title={query ? `Results for “${query}”` : 'Search the guide'}
         description={
           query
             ? `${results.length} ${results.length === 1 ? 'match' : 'matches'} across services, offices, barangays, and pages.`

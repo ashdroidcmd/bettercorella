@@ -19,10 +19,10 @@ interface PaletteItem {
 }
 
 const quickLinks: PaletteItem[] = [
-  { title: 'All city services', href: '/services', meta: 'Services' },
+  { title: 'All municipal services', href: '/services', meta: 'Services' },
   { title: 'Online services', href: '/online-services', meta: 'Services' },
   { title: 'Emergency hotlines', href: '/government/hotlines', meta: 'Government' },
-  { title: 'City officials', href: '/government/officials', meta: 'Government' },
+  { title: 'Municipal officials', href: '/government/officials', meta: 'Government' },
   { title: 'Barangays', href: '/government/barangays', meta: 'Government' },
   { title: 'Budget and spending', href: '/transparency/budget', meta: 'Transparency' },
 ]

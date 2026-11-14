@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { NotFoundPage } from '../../info/not-found-page'
 import { PageHero } from '../../../components/ui/PageHero'
+import { city } from '../../../config/city'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SourceNote } from '../../../components/ui/SourceNote'
 import { categories } from '../shared/data/categories'
@@ -25,7 +26,7 @@ function pdfLabel(url: string) {
 
 function resolvePdfUrl(url: string) {
   if (url.startsWith('/')) return url
-  if (url.includes('cc.inabanga.gov.ph') || url.includes('cc.sanfernandocity.gov.ph')) {
+  if (city.citizensCharter && url.startsWith(city.citizensCharter)) {
     const filename = url.split('/').pop()
     return `/forms/${filename}`
   }

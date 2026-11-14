@@ -18,7 +18,7 @@ const sections = [
 const termsHighlights = [
   { icon: ShieldCheck, title: 'Independent civic reference', text: 'This guide is not operated or endorsed by Municipal Hall.' },
   { icon: TimerReset, title: 'Details can change', text: 'Confirm requirements, fees, and schedules with the issuing office.' },
-  { icon: Verified, title: 'Official sources take priority', text: 'Use the original city or agency source before relying on a summary.' },
+  { icon: Verified, title: 'Official sources take priority', text: 'Use the original municipal or agency source before relying on a summary.' },
 ]
 
 export function TermsPage() {
@@ -28,7 +28,7 @@ export function TermsPage() {
       <PageHero
         eyebrow="Terms of use"
         title="What this guide is — and is not"
-        description="Better Inabanga is an independent civic reference. It is not the official city website and does not provide legal, financial, or professional advice."
+        description="BetterCorella is an independent civic reference. It is not the official municipal website and does not provide legal, financial, or professional advice."
         crumbs={[{ label: 'Terms' }]}
       />
 
@@ -39,16 +39,21 @@ export function TermsPage() {
             {"Important"}</p>
           <h2 className="mt-2 text-lg font-extrabold text-amber-950">{"Not an official government website"}</h2>
           <p className="mt-2 text-sm leading-6 text-amber-900/80">
-            {"This project is not affiliated with, endorsed by, or operated by the Municipal Government of Inabanga. The official website is"}{' '}
-            <a
-              href={city.website}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1 font-bold underline decoration-amber-400 underline-offset-2"
-            >
-              {"inabanga.gov.ph"}<ExternalLink aria-hidden="true" className="size-3.5" />
-            </a>
-            .
+            {`This project is not affiliated with, endorsed by, or operated by the Municipal Government of ${city.name}.`}
+            {city.website ? (
+              <>
+                {' The official website is '}
+                <a
+                  href={city.website}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 font-bold underline decoration-amber-400 underline-offset-2"
+                >
+                  {new URL(city.website).hostname}<ExternalLink aria-hidden="true" className="size-3.5" />
+                </a>
+                .
+              </>
+            ) : null}
           </p>
         </section>
 
@@ -66,14 +71,14 @@ export function TermsPage() {
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"01 · Using this guide"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Use of the site"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
-            {"You may read, link to, and share the guide for personal, civic, educational, and journalistic use. Do not present it as an official city publication or use it to mislead others about an official transaction."}</p>
+            {"You may read, link to, and share the guide for personal, civic, educational, and journalistic use. Do not present it as an official municipal publication or use it to mislead others about an official transaction."}</p>
         </section>
 
         <section id="accuracy" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"02 · Public information"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Accuracy and timeliness"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
-            {"The guide summarizes public records and links to official sources. Requirements, fees, schedules, officials, and documents can change without notice. Information is provided as-is, without a warranty of completeness or accuracy. Always confirm details with the issuing office or the official city website before relying on them."}</p>
+            {"The guide summarizes public records and links to official sources. Requirements, fees, schedules, officials, and documents can change without notice. Information is provided as-is, without a warranty of completeness or accuracy. Always confirm details with the issuing office or the official municipal channels before relying on them."}</p>
         </section>
 
         <section id="professional-advice" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
@@ -87,14 +92,14 @@ export function TermsPage() {
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"04 · Other websites"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"External links"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
-            {"Links to the city website, the Citizens’ Charter, Google Drive, and other public records are provided for reference. This project does not control those destinations and is not responsible for their content, availability, or policies."}</p>
+            {"Links to government websites, the Citizen’s Charter, and other public records are provided for reference. This project does not control those destinations and is not responsible for their content, availability, or policies."}</p>
         </section>
 
         <section id="intellectual-property" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"05 · Attribution"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Intellectual property"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
-            {"The city seal, official documents, photographs, and news material belong to their respective owners. This guide’s original summaries and layout are provided for public understanding. If you believe something is attributed incorrectly, use the contact page to find the appropriate official channel."}</p>
+            {"The municipal seal, official documents, photographs, and news material belong to their respective owners. This guide’s original summaries and layout are provided for public understanding. If you believe something is attributed incorrectly, use the contact page to find the appropriate official channel."}</p>
         </section>
 
         <section id="changes" className="scroll-mt-28 rounded-2xl border border-line bg-surface p-5 sm:p-7">

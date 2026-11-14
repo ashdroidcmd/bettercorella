@@ -5,6 +5,8 @@ import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { CustomSelect } from '../../../components/ui/CustomSelect'
 import { PageHero } from '../../../components/ui/PageHero'
+import { PendingPage } from '../../../components/ui/PendingPage'
+import { city } from '../../../config/city'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
@@ -16,7 +18,7 @@ const statuses: string[] = ['All statuses', 'Completed', 'Ongoing', 'For procure
 const categories: string[] = ['All categories', ...Array.from(new Set(dpwhProjects.map((project) => project.category))).sort()]
 const years: string[] = ['All years', ...Array.from(new Set(dpwhProjects.map((project) => String(project.year)))).sort((a, b) => Number(b) - Number(a))]
 
-export function ProjectsPage() {
+function ProjectsPageContent() {
 
   const [query, setQuery] = useState('')
   const [status, setStatus] = useState('All statuses')
@@ -55,7 +57,7 @@ export function ProjectsPage() {
       <PageHero
         eyebrow="Transparency"
         title="Infrastructure projects"
-        description="Every DPWH project linked to Inabanga in the national transparency dataset, with contract value, status, contractor, and project location."
+        description={`Every DPWH project linked to ${city.name} in the national transparency dataset, with contract value, status, contractor, and project location.`}
         crumbs={[
           { label: 'Transparency', href: '/transparency' },
           { label: 'Procurement', href: '/transparency/procurement' },
@@ -85,7 +87,7 @@ export function ProjectsPage() {
         <div className="container-page py-10 sm:py-14">
           <Reveal>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <StatCard value={formatNumber(dpwhProjects.length)} label="Projects" note="DPWH records linked to the city" />
+              <StatCard value={formatNumber(dpwhProjects.length)} label="Projects" note={`DPWH records linked to ${city.name}`} />
               <StatCard value={formatPeso(totalBudget)} label="Contract value" note="Not actual payments" />
               <StatCard value={formatNumber(completed)} label="Completed" note="Based on DPWH record status" />
               <StatCard value={`${Math.round((completed / dpwhProjects.length) * 100)}%`} label="Completion rate" note="By project count" />
@@ -148,7 +150,7 @@ export function ProjectsPage() {
                   className="mt-5 overflow-x-auto rounded-2xl border border-line bg-white shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
                 >
                   <table className="w-full min-w-[920px] text-left text-sm">
-                    <caption className="sr-only">DPWH infrastructure projects linked to Inabanga, Bohol</caption>
+                    <caption className="sr-only">DPWH infrastructure projects linked to {city.name}, Bohol</caption>
                     <thead className="bg-surface text-[11px] font-bold uppercase tracking-[0.1em] text-ink-500">
                       <tr>
                         <th scope="col" className="px-4 py-3">Project</th>
@@ -204,10 +206,30 @@ export function ProjectsPage() {
 
           <div className="mt-10">
             <SourceNote href={dpwhProjectSourceUrl} linkLabel="DPWH infrastructure data on data.bettergov.ph">
-              {"DPWH records are grouped by the city named in the project description. Some road works may cross city limits. Amounts are contract values, not payments; several ongoing procurements do not yet list an amount."}</SourceNote>
+              {"DPWH records are grouped by the LGU named in the project description. Some road works may cross city limits. Amounts are contract values, not payments; several ongoing procurements do not yet list an amount."}</SourceNote>
           </div>
         </div>
       </section>
     </>
   )
+}
+
+export function ProjectsPage() {
+  if (!dpwhProjects.length) {
+    return (
+      <PendingPage
+      eyebrow="Transparency"
+      title="Infrastructure projects"
+      description={`Public works projects in ${city.name}, with contract value, status, contractor and location from official records.`}
+      crumbs={[{ label: 'Transparency', href: '/transparency' }, { label: 'Infrastructure projects' }]}
+      topic="Infrastructure projects"
+      source="They will come from the DPWH dataset and municipal project records."
+      links={[
+        { label: 'DPWH infrastructure dataset', href: 'https://data.bettergov.ph/datasets/19', description: 'Contract-level records of national public works projects as open data from BetterGov.' },
+        { label: 'DPWH', href: 'https://www.dpwh.gov.ph', description: 'Department of Public Works and Highways project information.' },
+      ]}
+      />
+    )
+  }
+  return <ProjectsPageContent />
 }

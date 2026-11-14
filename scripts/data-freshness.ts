@@ -7,7 +7,7 @@ const report = formatDataFreshnessReport()
 console.info(`\n${report}`)
 
 if (process.env.GITHUB_ACTIONS === 'true') {
-  for (const row of getDataFreshness().filter((r) => r.status !== 'current')) {
+  for (const row of getDataFreshness().filter((r) => r.status === 'stale' || r.status === 'unknown')) {
     const reason = row.status === 'unknown' ? 'verification date is missing' : `${row.ageDays} days since verification`
     console.warn(`::warning title=Data review needed::${row.dataset}: ${reason}. Source: ${row.source}`)
   }

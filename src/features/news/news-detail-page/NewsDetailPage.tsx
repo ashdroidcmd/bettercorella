@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation'
 import { NotFoundPage } from '../../info/not-found-page'
 import { NewsCard } from '../shared/components/NewsCard'
 import { PageHero } from '../../../components/ui/PageHero'
+import { city } from '../../../config/city'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
@@ -25,7 +26,7 @@ export function NewsDetailPage() {
       <PageHero
         eyebrow="From Municipal Hall"
         title={item.title}
-        description="A summary of a story published by the Municipal Government of Inabanga."
+        description={`A summary of a story published by the Municipal Government of ${city.name}.`}
         crumbs={[{ label: 'News', href: '/news' }, { label: 'Story' }]}
       >
         <p className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3 py-1.5 text-xs font-semibold text-ink-700">
@@ -52,7 +53,7 @@ export function NewsDetailPage() {
                 rel="noreferrer"
                 className="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800"
               >
-                {"Read on the official city website"}<ArrowUpRight aria-hidden="true" className="size-4" />
+                {"Read the official announcement"}<ArrowUpRight aria-hidden="true" className="size-4" />
               </a>
               <div className="mt-8">
                 <Link
@@ -82,7 +83,7 @@ export function NewsDetailPage() {
                         rel="noreferrer"
                         className="inline-flex items-start gap-1.5 font-semibold leading-6 text-brand-700 hover:text-brand-800"
                       >
-                        {"Municipal Government of Inabanga"}<ExternalLink aria-hidden="true" className="mt-1 size-3.5 shrink-0" />
+                        {`Municipal Government of ${city.name}`}<ExternalLink aria-hidden="true" className="mt-1 size-3.5 shrink-0" />
                       </a>
                     </dd>
                   </div>
@@ -90,7 +91,7 @@ export function NewsDetailPage() {
               </div>
 
               <SourceNote href={item.sourceUrl} linkLabel="Open the official story">
-                {"Text and images belong to the Municipal Government of Inabanga. This page summarizes the published story and links to the original. News last verified on"}{' '}{formatDate(newsLastVerified)}.
+                {`Text and images belong to the Municipal Government of ${city.name}. This page summarizes the published story and links to the original. News last verified on`}{' '}{formatDate(newsLastVerified)}.
               </SourceNote>
             </aside>
           </div>

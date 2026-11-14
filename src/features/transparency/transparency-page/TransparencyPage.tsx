@@ -6,12 +6,10 @@ import { PageHero } from '../../../components/ui/PageHero'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
-import { StatCard } from '../../../components/ui/StatCard'
 import { budgetDocs } from '../shared/data/budgetDocs'
 import { city } from '../../../config/city'
 import { openDataSources } from '../shared/data/openData'
 import { dpwhProjects } from '../shared/data/projects'
-import { formatPeso } from '../../../lib/utils'
 
 const fundCategories = ['Budget & expenditure', 'Special funds', 'Audit & accountability']
 
@@ -19,45 +17,25 @@ export function TransparencyPage() {
 
   const procurementCount = budgetDocs.filter((doc) => doc.category === 'Procurement').length
   const budgetCount = budgetDocs.filter((doc) => fundCategories.includes(doc.category)).length
+  const countLabel = (count: number, noun: string) => (count ? `${count} ${noun}` : 'Coming soon')
 
   return (
     <>
       <PageHero
         eyebrow="Transparency"
         title="Follow public money"
-        description="City revenue, spending, special funds, audit reports, and procurement documents — linked directly to the city’s Full Disclosure Policy portal."
+        description={`Revenue, spending, special funds, audit reports and procurement records of the Municipal Government of ${city.name}, linked to official sources.`}
         crumbs={[{ label: 'Transparency' }]}
       />
 
       <section>
         <div className="container-page py-12 sm:py-16">
-          <Reveal>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <StatCard
-                value={formatPeso(city.revenue2024)}
-                label="Revenue in 2024"
-                note="Municipal government receipts"
-              />
-              <StatCard
-                value={formatPeso(city.expenditures2024)}
-                label="Expenditures in 2024"
-                note="Municipal government spending"
-              />
-              <StatCard
-                value={city.povertyIncidence}
-                label="Poverty incidence"
-                note={`${city.povertyYear} estimate`}
-              />
-              <StatCard value={city.incomeClass} label="Income class" note="City classification" />
-            </div>
-          </Reveal>
-
-          <div className="mt-12">
+          <div>
             <Reveal>
               <SectionHeading
                 eyebrow="Document library"
                 title="Where the money goes"
-                description="Budget and procurement records are grouped into two plain-language collections. Every local link opens the official city document; national datasets are documented separately below."
+                description="Budget and procurement records are grouped into two plain-language collections. Records are added as they are verified against official sources; national datasets are documented separately below."
               />
             </Reveal>
 
@@ -76,7 +54,7 @@ export function TransparencyPage() {
                   <p className="mt-2 flex-1 text-sm leading-6 text-ink-600">
                     {"The Local Expenditure Program, statements of receipts and expenditures, special funds, and audit reports."}</p>
                   <span className="mt-5 inline-flex items-center justify-between gap-3 border-t border-line pt-4 text-sm font-bold text-brand-700">
-                    {budgetCount} {"documents"}<ArrowRight
+                    {countLabel(budgetCount, 'documents')}<ArrowRight
                       aria-hidden="true"
                       className="size-4 transition group-hover:translate-x-0.5"
                     />
@@ -98,7 +76,7 @@ export function TransparencyPage() {
                   <p className="mt-2 flex-1 text-sm leading-6 text-ink-600">
                     {"Annual procurement plans, quarterly bid results, bid documents, and infrastructure project status."}</p>
                   <span className="mt-5 inline-flex items-center justify-between gap-3 border-t border-line pt-4 text-sm font-bold text-brand-700">
-                    {procurementCount} {"documents"}<ArrowRight
+                    {countLabel(procurementCount, 'documents')}<ArrowRight
                       aria-hidden="true"
                       className="size-4 transition group-hover:translate-x-0.5"
                     />
@@ -119,12 +97,12 @@ export function TransparencyPage() {
                 <div className="min-w-0 flex-1">
                   <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">{"Project tracker"}</p>
                   <h2 className="mt-1 text-xl font-extrabold tracking-tight text-ink-950 group-hover:text-brand-700">
-                    {"Every DPWH project linked to the city"}</h2>
+                    {`Public works projects in ${city.name}`}</h2>
                   <p className="mt-1 text-sm leading-6 text-ink-600">
                     {"Contract values, status, contractors, and locations as published in the source records."}</p>
                 </div>
                 <span className="inline-flex shrink-0 items-center gap-2 text-sm font-bold text-brand-700">
-                  {dpwhProjects.length} {"projects"}<ArrowRight aria-hidden="true" className="size-4 transition group-hover:translate-x-0.5" />
+                  {countLabel(dpwhProjects.length, 'projects')}<ArrowRight aria-hidden="true" className="size-4 transition group-hover:translate-x-0.5" />
                 </span>
               </Link>
             </Reveal>
@@ -142,7 +120,7 @@ export function TransparencyPage() {
                   <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-300">{"Open data"}</p>
                   <h2 className="mt-1 text-xl font-extrabold tracking-tight">{"See the sources behind the numbers"}</h2>
                   <p className="mt-1 text-sm leading-6 text-white/60">
-                    {"The national datasets behind the fiscal profile, barangay map, election history, and contract totals, with their licenses and caveats."}</p>
+                    {"National datasets on local fiscal data, boundaries, elections, public works and procurement, with their licenses and caveats."}</p>
                 </div>
                 <span className="inline-flex shrink-0 items-center gap-2 text-sm font-bold text-brand-300">
                   {openDataSources.length} {"datasets"}<ArrowRight aria-hidden="true" className="size-4 transition group-hover:translate-x-0.5" />
@@ -181,9 +159,9 @@ export function TransparencyPage() {
                 <Landmark aria-hidden="true" className="size-6 text-brand-300" />
                 <h2 className="mt-4 text-xl font-extrabold tracking-tight">{"The Full Disclosure Policy"}</h2>
                 <p className="mt-2 text-sm leading-6 text-white/60">
-                  {"The city publishes budget, procurement, and accountability documents under the national Full Disclosure Policy."}</p>
+                  {"LGUs publish budget, procurement, and accountability documents under the national Full Disclosure Policy, collected on the DILG portal."}</p>
                 <a
-                  href="https://www.inabanga.gov.ph/full-disclosure-policy/"
+                  href="https://fdpp.dilg.gov.ph/"
                   target="_blank"
                   rel="noreferrer"
                   className="mt-5 inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-white/15"
@@ -195,8 +173,8 @@ export function TransparencyPage() {
           </div>
 
           <div className="mt-8">
-            <SourceNote href={city.website} linkLabel="Visit the official city website">
-              {"Figures are dated individually. Budget and procurement links point to documents published by the Municipal Government of Inabanga; use each linked publisher for the latest releases."}</SourceNote>
+            <SourceNote href={city.website} linkLabel="Visit the official municipal website">
+              {"Figures are dated individually. Budget and procurement records come from official publishers; use each linked publisher for the latest releases."}</SourceNote>
           </div>
         </div>
       </section>

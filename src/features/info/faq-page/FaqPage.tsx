@@ -56,7 +56,7 @@ export function FaqPage() {
             <div className="rounded-2xl border border-line bg-ink-950 p-5 text-white shadow-card">
               <h2 className="text-lg font-extrabold tracking-tight">{"Still looking?"}</h2>
               <p className="mt-2 text-sm leading-6 text-white/60">
-                {"Search the full guide, browse services by category, or contact the right city office directly."}</p>
+                {"Search the full guide, browse services by category, or contact the right municipal office directly."}</p>
               <div className="mt-4 grid gap-2">
                 <Link
                   href="/search"
@@ -77,7 +77,7 @@ export function FaqPage() {
                  
                   className="inline-flex items-center justify-between gap-3 rounded-xl bg-white/10 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-white/15"
                 >
-                  {"City offices"}<ArrowRight aria-hidden="true" className="size-3.5" />
+                  {"Municipal offices"}<ArrowRight aria-hidden="true" className="size-3.5" />
                 </Link>
               </div>
             </div>
@@ -101,7 +101,7 @@ export function FaqPage() {
         </div>
 
         <div className="mt-10">
-          <SourceNote href={city.website} linkLabel="Visit the official city website">
+          <SourceNote href={city.website} linkLabel="Visit the official municipal website">
             {"Answers are summaries, not official rulings. Requirements and fees can change. Follow the source link and confirm with the issuing office before your visit."}</SourceNote>
         </div>
       </div>

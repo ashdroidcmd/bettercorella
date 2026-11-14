@@ -78,7 +78,7 @@ export function BarangayMap() {
           >
             {'Boundary shapes · PSA / NAMRIA 2023'}
           </a>
-            <span>{barangayMap.features.length} {'barangays'} · {city.districtCount} {'districts'}</span>
+            <span>{barangayMap.features.length} {'barangays'}{city.districtCount ? ` · ${city.districtCount} districts` : ''}</span>
         </figcaption>
       </figure>
 
@@ -93,7 +93,7 @@ export function BarangayMap() {
             </div>
             <h3 className="mt-2 text-2xl font-extrabold tracking-tight text-ink-950">{preview.name}</h3>
             <p className="mt-2 text-sm leading-6 text-ink-600">
-              {'Barangay profile and 2024 census details for this part of Inabanga.'}
+              {`Barangay profile and census details for this part of ${city.name}.`}
             </p>
             <dl className="mt-5 grid grid-cols-2 gap-3">
               <div className="rounded-xl bg-surface p-3">
@@ -146,18 +146,18 @@ export function BarangayMap() {
             <span className="inline-flex size-11 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
               <MapPin aria-hidden="true" className="size-5" />
             </span>
-            <h3 className="mt-4 text-2xl font-extrabold tracking-tight text-ink-950">Explore Inabanga</h3>
+            <h3 className="mt-4 text-2xl font-extrabold tracking-tight text-ink-950">{`Explore ${city.name}`}</h3>
             <p className="mt-2 text-sm leading-6 text-ink-600">
               {'Click a barangay to zoom in and lift it above the map. Drag to explore nearby boundaries; hover to preview another community.'}
             </p>
             <dl className="mt-5 grid grid-cols-2 gap-3">
               <div className="rounded-xl bg-surface p-3">
                 <dt className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink-500">Barangays</dt>
-                <dd className="mt-1 text-base font-extrabold tabular-nums text-ink-950">{city.barangayCount}</dd>
+                <dd className="mt-1 text-base font-extrabold tabular-nums text-ink-950">{city.barangayCount ?? barangayMap.features.length}</dd>
               </div>
               <div className="rounded-xl bg-surface p-3">
                 <dt className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink-500">Districts</dt>
-                <dd className="mt-1 text-base font-extrabold tabular-nums text-ink-950">{city.districtCount}</dd>
+                <dd className="mt-1 text-base font-extrabold tabular-nums text-ink-950">{city.districtCount ?? '—'}</dd>
               </div>
             </dl>
           </>

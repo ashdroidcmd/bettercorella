@@ -4,6 +4,8 @@ import { ExternalLink, FileText, Landmark, Search, X } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { PageHero } from '../../../components/ui/PageHero'
+import { PendingPage } from '../../../components/ui/PendingPage'
+import { city } from '../../../config/city'
 import { Reveal } from '../../../components/ui/Reveal'
 import { CustomSelect } from '../../../components/ui/CustomSelect'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
@@ -51,7 +53,7 @@ function LegislationCard({ item }: { item: LegislationItem }) {
   )
 }
 
-export function LegislationPage() {
+function LegislationPageContent() {
 
   const [query, setQuery] = useState('')
   const [kind, setKind] = useState('All records')
@@ -91,7 +93,7 @@ export function LegislationPage() {
       >
         <div className="flex flex-wrap gap-2">
           <a
-            href={legislationSourceUrl}
+            href={legislationSourceUrl ?? undefined}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-3.5 py-2 text-xs font-bold text-white transition hover:bg-brand-800"
@@ -217,7 +219,7 @@ export function LegislationPage() {
             <SourceNote href={legislationSourceUrl} linkLabel="Sangguniang Bayan ordinances">
               {"This page lists recent records with official copies where available. It is not a substitute for the official ordinance archive or the published minutes of the Sangguniang Bayan."}</SourceNote>
             <div className="rounded-2xl border border-line bg-surface p-5">
-              <h2 className="text-sm font-bold text-ink-950">{"How laws move through the city"}</h2>
+              <h2 className="text-sm font-bold text-ink-950">{"How laws move through the municipality"}</h2>
               <p className="mt-2 text-sm leading-6 text-ink-600">
                 {"Municipal ordinances are enacted by the Sangguniang Bayan, reviewed under national law, and published by the municipality. Executive orders are issued by the Municipal Mayor. Proposed ordinances remain drafts until the council acts."}</p>
               <Link href="/contact" className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-brand-700 hover:text-brand-800">
@@ -229,4 +231,20 @@ export function LegislationPage() {
       </section>
     </>
   )
+}
+
+export function LegislationPage() {
+  if (!legislation.length) {
+    return (
+      <PendingPage
+      eyebrow="Government"
+      title="Ordinances and executive orders"
+      description={`Municipal ordinances, resolutions and executive orders of ${city.name}, linked to official copies.`}
+      crumbs={[{ label: 'Government', href: '/government' }, { label: 'Legislation' }]}
+      topic="Ordinances, resolutions and executive orders"
+      source="They will come from the Sangguniang Bayan and official municipal records."
+      />
+    )
+  }
+  return <LegislationPageContent />
 }

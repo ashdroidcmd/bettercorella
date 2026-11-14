@@ -331,7 +331,7 @@ export function SearchBox({
                         <span className="min-w-0 flex-1">
                           <span className="block truncate text-sm font-bold text-ink-950">{term}</span>
                           <span className="mt-0.5 block truncate text-xs text-ink-500">
-                            {'Search across the city guide'}
+                            {'Search across the guide'}
                           </span>
                         </span>
                         <ArrowRight aria-hidden="true" className="size-4 shrink-0 text-ink-400" />

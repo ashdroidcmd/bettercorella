@@ -23,7 +23,8 @@ Read `AGENTS.md` first. It holds the project rules. This file adds Claude-specif
 - **SEO:** `src/lib/seo/routeMetadata.ts` is the single list of routes. It drives `generateMetadata` (`src/lib/seo/metadata.ts`), JSON-LD (`RouteJsonLd`), `/sitemap.xml` and static params. Add new routes there.
 - **PWA:** Serwist (`@serwist/turbopack`). The worker source is `src/sw.ts`, served at `/serwist/sw.js`.
 - **Site URL:** `NEXT_PUBLIC_SITE_URL` (default `https://bettercorella.vercel.app`), set in `src/config/site.ts`.
-- **Status:** forked from BetterInabanga, so the content still says Inabanga and the rebrand is pending.
+- **Status:** rebranded to Corella, Bohol. Corella data is pending verification, so data pages render `ComingSoon` / `PendingPage` (`src/components/ui/`) until records are added.
+- **Adding data:** fill the feature's `data/` file with records that cite an official `sourceUrl` and a `lastVerified` date, and set verified fields in `src/config/city.ts`. Pages switch from the coming-soon state to the full layout automatically.
 
 ## Commands
 
@@ -50,7 +51,7 @@ Project skills live in `.claude/skills/`: `development-workflow`, `playwright`, 
 
 - Tests: `e2e/`. Config: `playwright.config.ts`. It builds and starts the production server on port 3000 automatically, or reuses one already running there.
 - Prefer `getByRole`, `getByLabel` and `getByText`. Avoid CSS-class selectors, since Tailwind classes change often.
-- Keep assertions brand-neutral where possible. Don't assert on "Inabanga" or "Corella" unless the test is about branding.
+- Keep assertions brand-neutral where possible. Only the `Corella rebrand` block in `e2e/smoke.spec.ts` asserts on branding.
 
 ## Style
 

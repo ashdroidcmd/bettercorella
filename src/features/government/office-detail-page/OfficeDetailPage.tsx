@@ -176,7 +176,7 @@ export function OfficeDetailPage() {
             ) : null}
 
             <SourceNote href={office.sourceUrl} linkLabel="View the official office page">
-              {'Contacts and office details come from the Municipal Government of Inabanga. Check the official directory for changes before contacting or visiting the office.'}
+              {'Contacts and office details come from the municipal government. Check the official directory for changes before contacting or visiting the office.'}
             </SourceNote>
           </aside>
         </div>

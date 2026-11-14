@@ -36,7 +36,7 @@ export function AccessibilityPage() {
           <section id="our-approach" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7">
             <h2 className="text-xl font-extrabold tracking-tight text-ink-950">{"Our approach"}</h2>
             <p className="mt-3 text-[15px] leading-7 text-ink-600">
-              {"Better Inabanga is an independent civic project. We aim to follow the Web Content Accessibility Guidelines (WCAG) 2.2 at the AA level, but the site has not been formally audited or certified. This page describes the practices in place and the known gaps."}</p>
+              {"BetterCorella is an independent civic project. We aim to follow the Web Content Accessibility Guidelines (WCAG) 2.2 at the AA level, but the site has not been formally audited or certified. This page describes the practices in place and the known gaps."}</p>
             <dl className="mt-5 grid gap-3 sm:grid-cols-2">
               <div className="rounded-xl border border-line bg-surface p-4">
                 <dt className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink-500">{"Target"}</dt>
@@ -70,7 +70,7 @@ export function AccessibilityPage() {
               {"Known limitations"}</h2>
             <ul className="mt-3 space-y-2 text-sm leading-6 text-amber-900/80">
               <li>
-                {"Official PDFs, Google Drive files, and pages on the city website are outside this project’s control and may not be fully accessible. If a document is a barrier, contact the issuing office for an alternative format."}</li>
+                {"Official PDFs, Google Drive files, and pages on government websites are outside this project’s control and may not be fully accessible. If a document is a barrier, contact the issuing office for an alternative format."}</li>
               <li>
                 {"Some public records are published as scanned images or inconsistently formatted tables. We summarize them, but the original document remains the authoritative version."}</li>
               <li>
@@ -81,7 +81,7 @@ export function AccessibilityPage() {
           <section id="reporting-a-barrier" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7">
             <h2 className="text-xl font-extrabold tracking-tight text-ink-950">{"Reporting a barrier"}</h2>
             <p className="mt-3 text-[15px] leading-7 text-ink-600">
-              {"This independent project does not yet publish a dedicated support inbox. For barriers in city data or official documents, use the contact page to find the right city channel. For a problem with this site’s layout or navigation, note the page address and the assistive technology you use so it can be reviewed."}</p>
+              {"This independent project does not yet publish a dedicated support inbox. For barriers in official data or documents, use the contact page to find the right official channel. For a problem with this site’s layout or navigation, note the page address and the assistive technology you use so it can be reviewed."}</p>
             <Link
               href="/contact"
              

@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { CategoryCard } from '../shared/components/CategoryCard'
 import { CustomSelect } from '../../../components/ui/CustomSelect'
 import { PageHero } from '../../../components/ui/PageHero'
+import { PendingPage } from '../../../components/ui/PendingPage'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SearchBox } from '../../search/shared/components/SearchBox'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
@@ -35,7 +36,7 @@ const channelOptions = [
   { value: 'G2G', label: 'Government to government (G2G)' },
 ]
 
-export function ServicesPage() {
+function ServicesPageContent() {
   const [officeCode, setOfficeCode] = useState('')
   const [channel, setChannel] = useState('')
   const [onlineOnly, setOnlineOnly] = useState(false)
@@ -62,9 +63,9 @@ export function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="City services"
-        title="Every city service, in one place"
-        description="242 services from the official Citizens’ Charter, grouped into 12 practical categories. Open a service for requirements, fees, forms, and the office that handles it."
+        eyebrow="Municipal services"
+        title="Every municipal service, in one place"
+        description={`${services.length} services from the official Citizen’s Charter, grouped into ${categories.length} practical categories. Open a service for requirements, fees, forms, and the office that handles it.`}
         crumbs={[{ label: 'Services' }]}
         overflowVisible
       >
@@ -114,7 +115,7 @@ export function ServicesPage() {
             <div>
               <h2 className="text-base font-extrabold tracking-tight">Some services can be done online</h2>
               <p className="mt-1 text-sm text-white/60">
-                {'Business permits, cedula, work permits, jobs, and records have official city portals.'}
+                {'Business registration, jobs, procurement, and records have official national portals.'}
               </p>
             </div>
           </div>
@@ -283,4 +284,24 @@ export function ServicesPage() {
       </section>
     </>
   )
+}
+
+export function ServicesPage() {
+  if (!services.length) {
+    return (
+      <PendingPage
+      eyebrow="Municipal services"
+      title="Municipal services, in one place"
+      description={`Services of the Municipal Government of ${city.name}, grouped into practical categories, with requirements, fees, forms and the office that handles each one.`}
+      crumbs={[{ label: 'Services' }]}
+      topic="Citizen's Charter services"
+      source="They will come from the municipal Citizen's Charter, which lists requirements, fees and processing times for every service."
+      links={[
+        { label: 'Online services', href: '/online-services', description: 'National e-government portals you can use now, from eGov PH to PhilJobNet.' },
+        { label: 'eGov PH', href: 'https://e.gov.ph/', description: 'One app for national government services and selected local transactions.' },
+      ]}
+      />
+    )
+  }
+  return <ServicesPageContent />
 }

@@ -2,6 +2,7 @@
 
 import { AlertTriangle, Mail, Phone, PhoneCall } from 'lucide-react'
 import Link from 'next/link'
+import { ComingSoon } from '../../../components/ui/ComingSoon'
 import { PageHero } from '../../../components/ui/PageHero'
 import { SourceNote } from '../../../components/ui/SourceNote'
 import { city } from '../../../config/city'
@@ -24,7 +25,7 @@ export function HotlinesPage() {
       <PageHero
         eyebrow="Emergency contacts"
         title="Hotlines and emergency numbers"
-        description="Call 911 for immediate emergencies. The city and partner agencies publish the contacts below; some police and fire numbers are from the city’s 2023 stakeholder directory."
+        description={`Call 911 for immediate emergencies anywhere in the Philippines. Local emergency numbers for ${city.name} (MDRRMO, police, fire, rural health unit) are added once they are verified with the LGU.`}
         crumbs={[{ label: 'Government', href: '/government' }, { label: 'Hotlines' }]}
       />
 
@@ -98,6 +99,13 @@ export function HotlinesPage() {
           ))}
         </div>
 
+        <div className="mt-8">
+          <ComingSoon
+            topic="Local emergency numbers (MDRRMO, police, fire and rural health unit)"
+            source="They will be confirmed directly with the municipal government before they are listed."
+          />
+        </div>
+
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-line bg-surface p-5">
             <h2 className="text-sm font-bold text-ink-950">When calling an emergency line</h2>
@@ -106,12 +114,17 @@ export function HotlinesPage() {
             </p>
           </div>
           <div className="rounded-2xl border border-line bg-surface p-5">
-            <h2 className="text-sm font-bold text-ink-950">Need a city office instead?</h2>
+            <h2 className="text-sm font-bold text-ink-950">Need a municipal office instead?</h2>
             <p className="mt-2 text-sm leading-6 text-ink-600">
-              {'Browse the office directory for department contacts, or call the Municipal Hall trunkline at'}{' '}
-              <a href={telHref(city.trunkline)} className="font-semibold text-brand-700 hover:text-brand-800">
-                {city.trunkline}
-              </a>
+              {'Browse the office directory for department contacts'}
+              {city.trunkline ? (
+                <>
+                  {', or call the Municipal Hall trunkline at '}
+                  <a href={telHref(city.trunkline)} className="font-semibold text-brand-700 hover:text-brand-800">
+                    {city.trunkline}
+                  </a>
+                </>
+              ) : null}
               .
             </p>
             <Link
@@ -119,24 +132,17 @@ export function HotlinesPage() {
              
               className="mt-3 inline-flex text-sm font-bold text-brand-700 hover:text-brand-800"
             >
-              {'City offices'}
+              {'Municipal offices'}
             </Link>
           </div>
         </div>
 
         <div className="mt-8">
           <SourceNote
-            href="/offices"
-            linkLabel="Inabanga Municipal Offices & Departments Directory"
-            links={[
-              { href: 'https://bohol.gov.ph/contact-us/', label: 'Provincial Government of Bohol contacts' },
-              {
-                href: 'https://www.facebook.com/municipalityofinabanga',
-                label: 'Municipality of Inabanga official communications desk',
-              },
-            ]}
+            href="https://bohol.gov.ph/contact-us/"
+            linkLabel="Provincial Government of Bohol contacts"
           >
-            {'Health, social welfare, public safety, and MDRRMO contacts match the official Inabanga municipal directory. Police and fire direct numbers are coordinated with the Inabanga Municipal Police Station and Inabanga Fire Station. For provincial emergency response, contact Bohol Tarsier 117 or call 911 for life-threatening emergencies.'}
+            {'911 and 8888 are national hotlines. For life-threatening emergencies, call 911.'}
           </SourceNote>
         </div>
       </div>

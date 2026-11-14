@@ -30,7 +30,7 @@ export function CategoryCard({ category, count }: CategoryCardProps) {
       <h3 className="mt-5 text-lg font-bold tracking-tight text-ink-950">{category.name}</h3>
       <p className="mt-1.5 flex-1 text-sm leading-6 text-ink-600">{category.description}</p>
       <p className="mt-4 text-xs font-semibold uppercase tracking-[0.12em] text-ink-400">
-        {count} {'services'}
+        {count ? `${count} ${count === 1 ? 'service' : 'services'}` : 'Services coming soon'}
       </p>
     </Link>
   )

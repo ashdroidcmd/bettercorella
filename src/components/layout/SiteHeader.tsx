@@ -96,7 +96,7 @@ const primaryNav: PrimaryNavItem[] = [
         title: 'More categories',
         items: [
           ...serviceCategories.slice(6),
-          menuLink('Online services', '/online-services', 'Start or complete city services online.', Clock),
+          menuLink('Online services', '/online-services', 'Start or complete government services online.', Clock),
         ],
       },
     ],
@@ -108,36 +108,36 @@ const primaryNav: PrimaryNavItem[] = [
       {
         title: 'People and places',
         items: [
-          menuLink('City officials', '/government/officials', 'Meet elected officials and city leaders.', UsersRound),
-          menuLink('City offices', '/government/offices', 'Find departments, services, and office contacts.', Building2),
+          menuLink('Municipal officials', '/government/officials', 'Meet elected officials and municipal leaders.', UsersRound),
+          menuLink('Municipal offices', '/government/offices', 'Find departments, services, and office contacts.', Building2),
           menuLink('Barangays', '/government/barangays', 'Browse barangay profiles, officials, and districts.', MapPinned),
         ],
       },
       {
         title: 'Public information',
         items: [
-          menuLink('Emergency hotlines', '/government/hotlines', 'Find city and national emergency contacts.', Siren),
+          menuLink('Emergency hotlines', '/government/hotlines', 'Find local and national emergency contacts.', Siren),
           menuLink('Ordinances and orders', '/government/legislation', 'Browse published local laws and executive orders.', ScrollText),
         ],
       },
     ],
   },
   {
-    label: 'City',
-    href: '/city',
+    label: 'Town',
+    href: '/town',
     sections: [
       {
-        title: 'Discover Inabanga',
+        title: 'Discover Corella',
         items: [
-          menuLink('City profile', '/city', 'Explore the city’s profile, people, and local context.', Landmark),
-          menuLink('Life and tourism', '/city/life', 'Explore local places, culture, and things to do.', MapPinned),
-          menuLink('Places directory', '/city/places', 'Find agencies, health facilities, shopping, food, attractions, and services.', MapPinned),
+          menuLink('Town profile', '/town', 'Explore the town’s profile, people, and local context.', Landmark),
+          menuLink('Life and tourism', '/town/life', 'Explore local places, culture, and things to do.', MapPinned),
+          menuLink('Places directory', '/town/places', 'Find agencies, health facilities, shopping, food, attractions, and services.', MapPinned),
         ],
       },
       {
         title: 'Build and invest',
         items: [
-          menuLink('Business and investment', '/city/business', 'Review business guidance, opportunities, and local costs.', BriefcaseBusiness),
+          menuLink('Business and investment', '/town/business', 'Review business guidance, opportunities, and local costs.', BriefcaseBusiness),
         ],
       },
     ],
@@ -149,7 +149,7 @@ const primaryNav: PrimaryNavItem[] = [
       {
         title: 'Public funds',
         items: [
-          menuLink('Budget', '/transparency/budget', 'Review published city budget information.', ChartNoAxesCombined),
+          menuLink('Budget', '/transparency/budget', 'Review published municipal budget information.', ChartNoAxesCombined),
           menuLink('Procurement', '/transparency/procurement', 'Browse bid notices and procurement results.', FileText),
         ],
       },
@@ -157,7 +157,7 @@ const primaryNav: PrimaryNavItem[] = [
         title: 'Public records',
         items: [
           menuLink('Open data', '/transparency/open-data', 'Find datasets and source documents.', Archive),
-          menuLink('Projects', '/transparency/projects', 'See published infrastructure and city projects.', Building2),
+          menuLink('Projects', '/transparency/projects', 'See published infrastructure and municipal projects.', Building2),
         ],
       },
     ],
@@ -354,8 +354,8 @@ export function SiteHeader() {
           >
             <img
               src={logo.src}
-              alt="Better Inabanga"
-              width="960"
+              alt="BetterCorella"
+              width="802"
               height="199"
               className="h-9 w-auto shrink-0 sm:h-10"
             />

@@ -2,8 +2,7 @@ import { expect, test } from '@playwright/test'
 
 /**
  * Smoke test: every top-level section renders the shared layout with no
- * uncaught errors. Assertions are brand-neutral so they survive the
- * Inabanga -> Corella rebrand.
+ * uncaught errors. Keep assertions brand-neutral except in the branding block.
  */
 const PAGES = [
   '/',
@@ -15,11 +14,15 @@ const PAGES = [
   '/government/barangays',
   '/government/hotlines',
   '/government/legislation',
-  '/city',
-  '/city/places',
+  '/town',
+  '/town/life',
+  '/town/places',
+  '/town/business',
   '/transparency',
   '/transparency/budget',
+  '/transparency/procurement',
   '/transparency/projects',
+  '/transparency/open-data',
   '/news',
   '/about',
   '/contact',
@@ -85,5 +88,34 @@ test.describe('Server-rendered HTML (SEO)', () => {
   test('unknown routes return HTTP 404', async ({ request }) => {
     const response = await request.get('/this-page-does-not-exist')
     expect(response.status()).toBe(404)
+  })
+})
+
+test.describe('Corella rebrand', () => {
+  test('home page and metadata say BetterCorella', async ({ page }) => {
+    await page.goto('/')
+    await expect(page).toHaveTitle(/BetterCorella/)
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Corella')
+    const html = await page.content()
+    expect(html).not.toMatch(/inabanga|san fernando/i)
+  })
+
+  test('old /city URLs redirect to /town', async ({ page }) => {
+    await page.goto('/city/places')
+    await expect(page).toHaveURL(/\/town\/places$/)
+    await page.goto('/city')
+    await expect(page).toHaveURL(/\/town$/)
+  })
+
+  test('sections without verified data show the coming-soon notice', async ({ page }) => {
+    for (const path of ['/government/officials', '/transparency/budget', '/news']) {
+      await page.goto(path)
+      await expect(page.getByRole('heading', { name: 'Information coming soon' })).toBeVisible()
+    }
+  })
+
+  test('hotlines list the national 911 line', async ({ page }) => {
+    await page.goto('/government/hotlines')
+    await expect(page.getByRole('link', { name: '911' }).first()).toBeVisible()
   })
 })

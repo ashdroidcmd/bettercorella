@@ -6,7 +6,7 @@
 **Live site:** [bettercorella.vercel.app](https://bettercorella.vercel.app) · **Repository:** [ashdroidcmd/bettercorella](https://github.com/ashdroidcmd/bettercorella)
 
 > [!NOTE]
-> **Rebrand in progress.** This project was started from the BetterInabanga template. Pages are being switched over to Corella, and some still show template content. Corella data is added only after it has been checked against an official source. Until then, a page shows an "information coming soon" notice instead of guessing.
+> **Corella data is being added.** The site has been rebranded from the BetterInabanga template, and all template data from other towns has been removed. Corella information is added only after it is checked against an official source. Until then, a section shows an "information coming soon" notice instead of guessing. Have an official document or link? [Share it](https://github.com/ashdroidcmd/bettercorella/issues).
 
 ---
 
