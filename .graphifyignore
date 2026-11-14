@@ -1,0 +1,26 @@
+﻿# Dependencies & build output
+node_modules/
+dist/
+.next/
+public/vendor/
+coverage/
+test-results/
+playwright-report/
+blob-report/
+
+# Static assets (images, logos, scanned forms) - not useful as graph nodes
+public/
+src/assets/
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.svg
+*.pdf
+*.geojson
+
+# Secrets & local files
+.env
+.env.*
+*.log
+pnpm-lock.yaml

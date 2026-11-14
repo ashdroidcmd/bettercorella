@@ -1,0 +1,130 @@
+'use client'
+
+import { ArrowUpRight, CheckCircle2, ExternalLink, MonitorSmartphone } from 'lucide-react'
+import Link from 'next/link'
+import { PageHero } from '../../../components/ui/PageHero'
+import { Reveal } from '../../../components/ui/Reveal'
+import { SectionHeading } from '../../../components/ui/SectionHeading'
+import { SourceNote } from '../../../components/ui/SourceNote'
+import { onlineServices } from '../shared/data/onlineServices'
+
+export function OnlineServicesPage() {
+
+  return (
+    <>
+      <PageHero
+        eyebrow="Online services"
+        title="Do it online"
+        description="Official city systems for permits, taxes, jobs, records, and feedback. Every link opens the city’s own portal in a new tab."
+        crumbs={[{ label: 'Services', href: '/services' }, { label: 'Online services' }]}
+      >
+        <div className="flex flex-wrap gap-2">
+          <span className="rounded-full border border-line bg-white px-3 py-1.5 text-xs font-semibold text-ink-700">
+            {onlineServices.length} {'official systems'}
+          </span>
+          <span className="rounded-full border border-line bg-white px-3 py-1.5 text-xs font-semibold text-ink-700">
+            {'Accounts and fees are handled by the city'}
+          </span>
+        </div>
+      </PageHero>
+
+      <section>
+        <div className="container-page py-12 sm:py-16">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Systems directory"
+              title="City portals and applications"
+              description="Use these systems for city transactions that can be started or completed online. Some services still require a visit to Municipal Hall."
+            />
+          </Reveal>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {onlineServices.map((service, index) => (
+              <Reveal key={service.slug} delay={(index % 3) * 0.05} className="h-full">
+                <div className="flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card">
+                  <div className="flex items-start justify-between gap-3">
+                    <span className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+                      <MonitorSmartphone aria-hidden="true" className="size-5" />
+                    </span>
+                    <span className="rounded-full bg-surface px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-ink-500">
+                      {service.category}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 text-base font-extrabold tracking-tight text-ink-950">{service.name}</h3>
+                  <p className="mt-1 text-xs font-bold uppercase tracking-[0.1em] text-brand-700">
+                    {service.shortName}
+                  </p>
+                  <p className="mt-2 flex-1 text-sm leading-6 text-ink-600">{service.description}</p>
+                  {service.note ? (
+                    <p className="mt-2 inline-flex items-start gap-1.5 text-xs leading-5 text-ink-500">
+                      <CheckCircle2 aria-hidden="true" className="mt-0.5 size-3.5 shrink-0 text-ink-400" />
+                      {service.note}
+                    </p>
+                  ) : null}
+                  {service.url.startsWith('/') ? (
+                    <Link
+                      href={service.url}
+                      className="group mt-4 inline-flex items-center gap-2 text-sm font-bold text-brand-700 transition hover:text-brand-800"
+                    >
+                      {'View'} {service.shortName}
+                      <ArrowUpRight
+                        aria-hidden="true"
+                        className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                      />
+                    </Link>
+                  ) : (
+                    <a
+                      href={service.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group mt-4 inline-flex items-center gap-2 text-sm font-bold text-brand-700 transition hover:text-brand-800"
+                    >
+                      {'Open'} {service.shortName}
+                      <ArrowUpRight
+                        aria-hidden="true"
+                        className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                      />
+                    </a>
+                  )}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="mt-10 rounded-2xl border border-line bg-surface p-5 sm:p-6">
+            <h2 className="text-base font-extrabold tracking-tight text-ink-950">Prefer to transact in person?</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-ink-600">
+              {"The Citizens’ Charter lists the requirements, fees, and steps for all 242 city services, including the office that handles each one."}</p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <Link
+                href="/services"
+               
+                className="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800"
+              >
+                {"Browse city services"}<ArrowUpRight aria-hidden="true" className="size-4" />
+              </Link>
+              <Link
+                href="/government/hotlines"
+               
+                className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
+              >
+                {"Call an office"}</Link>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <SourceNote
+              href="https://www.inabanga.gov.ph/online-services/"
+              linkLabel="Online Services on the city website"
+            >
+              {"The city publishes and operates these systems. Accounts, payments, and data are handled by the Municipal Government of Inabanga, not by this guide. Check the official service page before submitting information or making payments."}</SourceNote>
+          </div>
+
+          <p className="mt-6 inline-flex items-start gap-2 text-xs leading-5 text-ink-500">
+            <ExternalLink aria-hidden="true" className="mt-0.5 size-3.5 shrink-0" />
+            {"Links open the official portals of the Municipal Government of Inabanga in a new tab."}</p>
+        </div>
+      </section>
+    </>
+  )
+}

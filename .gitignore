@@ -36,3 +36,20 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# graphify (machine-local graph output; regenerate with `graphify update .`)
+/graphify-out/
+
+# claude code (machine-local hooks, e.g. graphify paths)
+.claude/settings.local.json
+
+# next.js
+/.next/
+next-env.d.ts
+/public/vendor/
