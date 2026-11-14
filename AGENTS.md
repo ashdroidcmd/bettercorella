@@ -5,7 +5,7 @@
 **BetterCorella** is a volunteer-run, open-source civic portal for the **Municipality of Corella, Bohol, Philippines**. It shows the LGU's services, officials, barangays, hotlines, budget and news.
 
 - Frontend only. There is no backend or database; typed data lives in each feature's `data/` folder under `src/features/`.
-- It is derived from BetterInabanga (ISC). The site is rebranded to Corella; data sections stay empty (showing `ComingSoon`) until verified Corella data is added. Never add data from another LGU — `src/lib/data.test.ts` fails if Inabanga, San Fernando or La Union content appears.
+- It is derived from BetterInabanga (ISC). The site is rebranded to Corella. Datasets without verified Corella records (news, legislation, budget, procurement, projects, places) stay empty and show `ComingSoon`; source notes and conflicts are in `../rebranding/` (outside git). Never add data from another LGU — `src/lib/data.test.ts` fails if Inabanga, San Fernando or La Union content appears.
 - LGU identity lives in `src/config/city.ts`. Unverified fields are `null`; components must handle `null` (hide the item or show "Pending").
 
 ## Core Rules

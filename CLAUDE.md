@@ -23,7 +23,7 @@ Read `AGENTS.md` first. It holds the project rules. This file adds Claude-specif
 - **SEO:** `src/lib/seo/routeMetadata.ts` is the single list of routes. It drives `generateMetadata` (`src/lib/seo/metadata.ts`), JSON-LD (`RouteJsonLd`), `/sitemap.xml` and static params. Add new routes there.
 - **PWA:** Serwist (`@serwist/turbopack`). The worker source is `src/sw.ts`, served at `/serwist/sw.js`.
 - **Site URL:** `NEXT_PUBLIC_SITE_URL` (default `https://bettercorella.vercel.app`), set in `src/config/site.ts`.
-- **Status:** rebranded to Corella, Bohol. Corella data is pending verification, so data pages render `ComingSoon` / `PendingPage` (`src/components/ui/`) until records are added.
+- **Status:** rebranded to Corella, Bohol (logo, palette `#0038A8`/`#FCD116`, Plus Jakarta Sans). Live data: LGU profile, 86 charter services, 14 offices, officials, 8 barangays (PSA population and boundaries), hotlines, town history. News, legislation, budget, procurement, projects and places still render `ComingSoon` / `PendingPage` (`src/components/ui/`) until verified records are added. The source research lives in `../rebranding/` (outside git).
 - **Adding data:** fill the feature's `data/` file with records that cite an official `sourceUrl` and a `lastVerified` date, and set verified fields in `src/config/city.ts`. Pages switch from the coming-soon state to the full layout automatically.
 
 ## Commands

@@ -89,7 +89,7 @@ const staticPages: SearchResult[] = [
     description: 'Officials, departments, barangays, and emergency hotlines.',
     href: '/government',
     meta: 'Government',
-    keywords: 'city hall departments local government',
+    keywords: 'municipal hall city hall departments local government',
   },
   {
     kind: 'Page',
@@ -233,7 +233,7 @@ const staticPages: SearchResult[] = [
     description: 'Official municipal contact channels and the sources behind this site.',
     href: '/contact',
     meta: 'Contact',
-    keywords: 'contact email phone city hall sources',
+    keywords: 'contact email phone municipal hall city hall sources',
   },
   {
     kind: 'Page',

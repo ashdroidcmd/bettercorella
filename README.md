@@ -6,7 +6,7 @@
 **Live site:** [bettercorella.vercel.app](https://bettercorella.vercel.app) · **Repository:** [ashdroidcmd/bettercorella](https://github.com/ashdroidcmd/bettercorella)
 
 > [!NOTE]
-> **Corella data is being added.** The site has been rebranded from the BetterInabanga template, and all template data from other towns has been removed. Corella information is added only after it is checked against an official source. Until then, a section shows an "information coming soon" notice instead of guessing. Have an official document or link? [Share it](https://github.com/ashdroidcmd/bettercorella/issues).
+> **Rebranded to Corella, with official data.** The town profile, 86 Citizen's Charter services, 14 offices, elected officials, the 8 barangays (with PSA population and boundaries) and local hotlines come from official sources: the municipal website, the Citizen's Charter 2026, the PSA and the Provincial Government of Bohol. News, legislation, budget and procurement records are still being collected, so those sections show an "information coming soon" notice instead of guessing. Have an official document or link? [Share it](https://github.com/ashdroidcmd/bettercorella/issues).
 
 ---
 
@@ -29,10 +29,10 @@ BetterCorella is **not** the official website of the Municipality of Corella. Ev
 | Area | Route | What it offers |
 | --- | --- | --- |
 | **Search** | `Ctrl+K` / `Cmd+K`, `/search` | Search across services, offices, barangays and news from any page |
-| **Services** | `/services`, `/services/:category/:slug` | Citizen's Charter services in 12 categories, with requirements, fees, processing time and downloadable forms. Services can be bookmarked on your device |
+| **Services** | `/services`, `/services/:category/:slug` | The 86 services of the Corella Citizen's Charter 2026 in 12 categories, with the issuing office, who may avail, processing time, listed fees and a link to the charter page. Services can be bookmarked on your device |
 | **Online services** | `/online-services` | Links to national e-government services (eGov PH, PSA, SSS, PhilHealth, Pag-IBIG, DTI and more) |
 | **Government** | `/government` | Elected officials, municipal offices, barangays, legislation, and **24/7 emergency hotlines** |
-| **Town guide** | `/city` | Town profile, life and culture, places to visit, and doing business in Corella |
+| **Town guide** | `/town` | Town profile, history and map, life and culture, places to visit, and doing business in Corella |
 | **Transparency** | `/transparency` | Budget, procurement and bids, infrastructure projects, and open data downloads |
 | **News** | `/news` | Announcements and advisories, each linked to its official source |
 | **Offline use** | (whole site) | Installable as an app (PWA). Pages you've visited still open without a connection, which helps during emergencies |

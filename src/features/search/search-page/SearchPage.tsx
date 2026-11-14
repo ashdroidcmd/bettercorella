@@ -9,7 +9,7 @@ import { Reveal } from '../../../components/ui/Reveal'
 import { SearchBox } from '../shared/components/SearchBox'
 import { searchAll } from '../shared/utils/search'
 
-const exampleSearches = ['business permit', 'birth certificate', 'barangay', 'hotlines', 'city hall']
+const exampleSearches = ['business permit', 'birth certificate', 'barangay', 'hotlines', 'municipal hall']
 
 export function SearchPage() {
   const params = useSearchParams()

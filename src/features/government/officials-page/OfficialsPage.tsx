@@ -89,7 +89,7 @@ function OfficialsPageContent() {
             <p className="mb-2 text-xs text-ink-600 sm:hidden">Swipe the table horizontally to view all columns.</p>
             <div
               role="region"
-              aria-label="City mayors and vice mayors by election year"
+              aria-label="Mayors and vice mayors by election year"
               tabIndex={0}
               className="overflow-x-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
             >

@@ -20,6 +20,7 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Changed
 
+- README, CLAUDE.md and AGENTS.md describe the current data status; remaining "city" wording in search examples and labels changed to "municipal".
 - Interactive barangay map is back for Corella: the 8 barangay boundaries from the PSA/NAMRIA 2023 administrative boundaries (`public/data/barangay-boundaries.geojson`), centred on Corella, with population bands and colors sized for Corella's barangays.
 - Google Maps embeds (`src/components/ui/MapEmbed.tsx`, lazy, no API key) on the town profile, the contact page (Municipal Hall) and the barangays page, with an "Open in Google Maps" link; the privacy page mentions the embed.
 - Town profile page rebuilt with Corella facts (district, income class, PSGC code, barangays, patroness and fiesta) and a short history from the official municipal website; headline stats on the home and About pages; Corella sources listed first on the About page; Life and Business pages link to the official "What to see", history, business permit services and online permit application.
