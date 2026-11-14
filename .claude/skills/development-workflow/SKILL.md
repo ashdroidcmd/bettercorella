@@ -10,7 +10,7 @@ description: Standard end-to-end procedure for implementing any feature, fix or 
 3. **Read** only the relevant docs (`../docs/`), source and tests.
 4. **Plan** a short list of the files to change.
 5. **Implement** the smallest correct change, reusing existing components (`PageHero`, `SectionHeading`, `SourceNote`, cards) and the feature's types (`src/features/<feature>/shared/types/`). The site is English only.
-6. **Verify:** `npm run lint`, `npm test`, `npm run build`, plus `npm run test:e2e` for UI changes.
+6. **Verify:** `pnpm lint`, `pnpm test`, `pnpm build`, plus `pnpm test:e2e` for UI changes.
 7. **Document** using the `documentation` and `changelog` skills.
 8. **Refresh the graph** with `graphify update .`.
 9. **Review** `git status` and `git diff`: only intended files, no secrets, no debug code.

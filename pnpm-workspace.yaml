@@ -1,0 +1,5 @@
+# pnpm settings (pnpm 10+). Dependencies allowed to run install scripts:
+# esbuild and @swc/core are used by Serwist to bundle the service worker.
+onlyBuiltDependencies:
+  - esbuild
+  - '@swc/core'

@@ -4,7 +4,7 @@ const PORT = 3000
 
 /**
  * End-to-end tests live in e2e/. Unit tests (Vitest) live next to the code in src/.
- * `npm run test:e2e` runs Chromium only; `npm run test:e2e:all` adds Firefox, WebKit and mobile.
+ * `pnpm test:e2e` runs Chromium only; `pnpm test:e2e:all` adds Firefox, WebKit and mobile.
  */
 export default defineConfig({
   testDir: './e2e',
@@ -21,7 +21,7 @@ export default defineConfig({
 
   webServer: {
     // Tests run against the production build: the same HTML that search engines and visitors get.
-    command: `npm run build && npm run start -- --port ${PORT}`,
+    command: `pnpm build && pnpm start --port ${PORT}`,
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 300_000,

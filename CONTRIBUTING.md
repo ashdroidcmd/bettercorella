@@ -22,18 +22,18 @@ If you find a broken link, outdated hotline, incorrect official information, or 
    git clone https://github.com/gerardosocias29/betterinabanga.git
    cd betterinabanga
    ```
-2. Install dependencies:
+2. Install dependencies (the project uses pnpm; run `corepack enable` once if `pnpm` is not found):
    ```bash
-   npm install
+   pnpm install
    ```
 3. Start the development server:
    ```bash
-   npm run dev
+   pnpm dev
    ```
 4. Run tests and linting before submitting:
    ```bash
-   npx vitest run
-   npm run build
+   pnpm test
+   pnpm build
    ```
 
 ## 📜 Verifying Citations and Sources

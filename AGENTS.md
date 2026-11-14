@@ -40,8 +40,8 @@
 
 | Change | Run |
 | --- | --- |
-| Any code | `npm run lint`, `npm test`, `npm run build` |
-| UI, routes, navigation | `npm run test:e2e` as well |
+| Any code | `pnpm lint`, `pnpm test`, `pnpm build` |
+| UI, routes, navigation | `pnpm test:e2e` as well |
 
 Do not report completion while relevant tests fail.
 

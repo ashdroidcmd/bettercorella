@@ -86,24 +86,30 @@ services-page/
 
 ## 💻 Getting Started Locally
 
+This project uses **pnpm** (the exact version is pinned in `package.json`). Node.js ships Corepack, which installs the right pnpm for you:
+
+```bash
+corepack enable
+```
+
 1. **Install dependencies:**
    ```bash
-   npm install
+   pnpm install
    ```
 
 2. **Run local development server:**
    ```bash
-   npm run dev
+   pnpm dev
    ```
 
 3. **Build for production:**
    ```bash
-   npm run build
+   pnpm build
    ```
 
 4. **Preview production build:**
    ```bash
-   npm run start
+   pnpm start
    ```
 
 ---

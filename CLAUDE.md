@@ -8,6 +8,7 @@ Read `AGENTS.md` first. It holds the project rules. This file adds Claude-specif
 - **Maintainer:** ashdroidcmd (GitHub)
 - **Frontend:** Next.js 16 (App Router), React 19, TypeScript 6, Tailwind CSS 4, Motion and Lenis, Lucide icons, MapLibre GL
 - **Backend / Database:** none (static site; typed data in each feature's `data/` folder)
+- **Package manager:** pnpm (version pinned in `package.json` `packageManager`; run `corepack enable` once). Use `pnpm add`, never `npm install`. Dependencies allowed to run install scripts are listed in `pnpm-workspace.yaml`.
 - **Language:** English only (language switching was removed; no i18n layer)
 - **Rendering:** every route is prerendered to static HTML at build time (`generateStaticParams` for dynamic routes), so page content is in the HTML for search engines.
 - **Structure (feature-based):**
@@ -28,13 +29,13 @@ Read `AGENTS.md` first. It holds the project rules. This file adds Claude-specif
 
 | Task | Command |
 | --- | --- |
-| Dev server | `npm run dev` (http://localhost:3000) |
-| Lint | `npm run lint` (oxlint) |
-| Unit tests | `npm test` (Vitest, `src/**/*.test.ts(x)`) |
-| E2E tests | `npm run test:e2e` (Playwright, Chromium) |
-| E2E all browsers | `npm run test:e2e:all` |
-| E2E UI mode | `npm run test:e2e:ui` |
-| Production build | `npm run build`, then `npm run start` (http://localhost:3000) |
+| Dev server | `pnpm dev` (http://localhost:3000) |
+| Lint | `pnpm lint` (oxlint) |
+| Unit tests | `pnpm test` (Vitest, `src/**/*.test.ts(x)`) |
+| E2E tests | `pnpm test:e2e` (Playwright, Chromium) |
+| E2E all browsers | `pnpm test:e2e:all` |
+| E2E UI mode | `pnpm test:e2e:ui` |
+| Production build | `pnpm build`, then `pnpm start` (http://localhost:3000) |
 
 ## Skills
 
