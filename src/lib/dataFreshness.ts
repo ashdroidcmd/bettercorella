@@ -39,7 +39,7 @@ function oldestVerificationDate(records: Array<{ lastVerified: string }>) {
 export const manuallyMaintainedData: DataFreshnessRow[] = [
   {
     dataset: 'LGU profile',
-    source: 'PSA (population, land area), DILG and LGU (contacts)',
+    source: 'PSA PSGC (population, barangays, income class), Province of Bohol (district, land area), corella-bohol.gov.ph (contacts)',
     recordCount: city.population2024 === null && city.address === null ? 0 : 1,
     lastVerified: city.lastVerified,
     reviewEveryDays: 365,

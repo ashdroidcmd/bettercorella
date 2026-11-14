@@ -20,6 +20,7 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Changed
 
+- LGU profile (`src/config/city.ts`) filled with verified facts: 2024 population 9,889 and 2020 population 9,479, 8 barangays, 4th income class (PSA), 1st District and 37.22 km² land area (Province of Bohol), Municipal Hall address, phone (038) 422-3865, email, official website, Citizen's Charter, Facebook page and tagline (corella-bohol.gov.ph).
 - New BetterCorella logo: Corella's PSA/NAMRIA map outline in blue with the Philippine flag sun, plus a "Better Corella" wordmark in Plus Jakarta Sans. Header and footer use the horizontal logo; favicon, app icons and the social preview image use the new mark.
 - New color palette matched to the BetterCorella logo: Philippine blue `#0038A8` as the brand color (buttons, links, theme color) and sun gold `#FCD116` as the accent. The template's sky blue is gone.
 - The site font is now Plus Jakarta Sans (self-hosted by `next/font`), replacing Figtree.
