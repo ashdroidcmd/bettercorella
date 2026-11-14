@@ -125,6 +125,7 @@ corepack enable
 | `pnpm build` | Production build (prints a data-freshness report first) |
 | `pnpm start` | Serve the production build |
 | `pnpm lint` | Lint with oxlint |
+| `pnpm typecheck` | TypeScript type checking |
 | `pnpm test` | Unit and data tests (Vitest) |
 | `pnpm test:e2e` | End-to-end tests in Chromium (builds and starts the site automatically) |
 | `pnpm test:e2e:all` | End-to-end tests in Chromium, Firefox, WebKit and mobile |
@@ -135,6 +136,38 @@ corepack enable
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | `https://bettercorella.vercel.app` | Public site address used in canonical URLs, the sitemap and social previews |
+
+---
+
+## 🚦 CI/CD
+
+Every pull request and every push to `main` runs the [CI workflow](.github/workflows/ci.yml) on GitHub Actions:
+
+```
+pull request ─► lint + typecheck + unit tests ─┐
+                production build ──────────────┼─► preview deploy on Vercel (URL posted on the PR)
+                Playwright end-to-end tests ───┘
+
+push to main ─► same checks ─► production deploy to bettercorella.vercel.app ─► delete the merged PR's branch
+```
+
+- **Nothing deploys unless every check passes.** Vercel's own automatic Git deploys are turned off in `vercel.json`, so deploys only come from CI.
+- **Previews** are built only for branches in this repository. Pull requests from forks get all the checks but no preview, because GitHub doesn't share repository secrets with forks.
+- **Branch cleanup:** after a merged PR deploys to production, its branch is deleted automatically. A branch is kept if another open PR is built on top of it.
+
+### One-time setup (maintainers)
+
+The deploy jobs need three repository secrets, added under **Settings → Secrets and variables → Actions**:
+
+| Secret | Where to find it |
+| --- | --- |
+| `VERCEL_TOKEN` | Vercel → **Account Settings → Tokens → Create** |
+| `VERCEL_ORG_ID` | The `orgId` value in `.vercel/project.json` (see below). It is also shown as the **Team ID** in your Vercel team's Settings → General |
+| `VERCEL_PROJECT_ID` | The `projectId` value in `.vercel/project.json`, or Vercel → project **bettercorella → Settings → General → Project ID** |
+
+The easiest way to get both IDs: run `pnpm dlx vercel link` once in the repo, choose the existing **bettercorella** project, and copy `orgId` and `projectId` from the generated `.vercel/project.json`. That file is git-ignored; don't commit it.
+
+Recommended: protect `main` under **Settings → Branches** and require the **Lint, typecheck & unit tests**, **Production build** and **End-to-end tests** checks before merging.
 
 ---
 

@@ -31,11 +31,16 @@ Read `AGENTS.md` first. It holds the project rules. This file adds Claude-specif
 | --- | --- |
 | Dev server | `pnpm dev` (http://localhost:3000) |
 | Lint | `pnpm lint` (oxlint) |
+| Typecheck | `pnpm typecheck` |
 | Unit tests | `pnpm test` (Vitest, `src/**/*.test.ts(x)`) |
 | E2E tests | `pnpm test:e2e` (Playwright, Chromium) |
 | E2E all browsers | `pnpm test:e2e:all` |
 | E2E UI mode | `pnpm test:e2e:ui` |
 | Production build | `pnpm build`, then `pnpm start` (http://localhost:3000) |
+
+## CI/CD
+
+`.github/workflows/ci.yml` runs lint, typecheck, unit tests, build and e2e on every PR and every push to `main`. A deploy to Vercel (a preview for PRs, production for `main`) happens only after all of them pass. After a production deploy, the merged PR's branch is deleted. Vercel's Git auto-deploy is disabled in `vercel.json`. Keep the workflow passing: don't merge red PRs.
 
 ## Skills
 
