@@ -6,7 +6,7 @@
 **Live site:** [bettercorella.vercel.app](https://bettercorella.vercel.app) · **Repository:** [ashdroidcmd/bettercorella](https://github.com/ashdroidcmd/bettercorella)
 
 > [!NOTE]
-> **Rebranded to Corella, with official data.** The town profile, 86 Citizen's Charter services, 14 offices, elected officials, the 8 barangays (with PSA population and boundaries) and local hotlines come from official sources: the municipal website, the Citizen's Charter 2026, the PSA and the Provincial Government of Bohol. News, legislation, budget and procurement records are still being collected, so those sections show an "information coming soon" notice instead of guessing. Have an official document or link? [Share it](https://github.com/ashdroidcmd/bettercorella/issues).
+> **Rebranded to Corella, with official data.** The town profile, 86 Citizen's Charter services, 14 offices, elected officials, the 8 barangays (with PSA population and boundaries) and local hotlines come from official sources: the municipal website, the Citizen's Charter 2026, the PSA and the Provincial Government of Bohol. Legislation, budget and procurement records are still being collected, so those sections show an "information coming soon" notice instead of guessing. Have an official document or link? [Share it](https://github.com/ashdroidcmd/bettercorella/issues).
 
 ---
 
@@ -18,7 +18,6 @@
 - who the elected officials and office heads are, and how to reach them
 - barangay information and emergency hotlines
 - where public money goes: budgets, procurement and infrastructure projects
-- news and advisories from official sources
 
 BetterCorella is **not** the official website of the Municipality of Corella. Every figure links to the official source it came from, so anyone can check it.
 
@@ -33,7 +32,6 @@ BetterCorella is **not** the official website of the Municipality of Corella. Ev
 | **Government** | `/government` | Elected officials, municipal offices, barangays, legislation, and **24/7 emergency hotlines** |
 | **Town guide** | `/town` | Town profile, history and map, life and culture, places to visit, and doing business in Corella |
 | **Transparency** | `/transparency` | Budget, procurement and bids, infrastructure projects, and open data downloads |
-| **News** | `/news` | Announcements and advisories, each linked to its official source |
 | **Offline use** | (whole site) | Installable as an app (PWA). Pages you've visited still open without a connection, which helps during emergencies |
 
 ---
@@ -70,7 +68,6 @@ src/
 │   ├── government/      government-page/, officials-page/, offices-page/, barangays-page/, hotlines-page/, ... shared/
 │   ├── town/            town-profile-page/, life-page/, places-page/, business-page/, shared/
 │   ├── transparency/    transparency-page/, budget-page/, procurement-page/, open-data-page/, projects-page/, shared/
-│   ├── news/            news-page/, news-archive-page/, news-detail-page/, shared/
 │   └── info/            about-page/, contact-page/, faq-page/, privacy-page/, terms-page/, ... shared/
 ├── components/          # layout/ (site shell), ui/ (building blocks), seo/
 ├── config/              # site.ts (site name and URL), city.ts (LGU identity)

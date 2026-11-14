@@ -18,12 +18,12 @@ Read `AGENTS.md` first. It holds the project rules. This file adds Claude-specif
   - `src/components/{layout,ui,seo}`: feature-agnostic UI (site shell, building blocks, JSON-LD).
   - `src/config/`: `site.ts` (site name/URL) and `city.ts` (LGU identity).
   - `src/lib/`: `utils.ts`, `seo/` (metadata + route list), `dataFreshness.ts` and cross-feature data tests.
-  - Features: `home`, `services`, `government`, `town`, `transparency`, `news`, `info`. There is no global site search (removed on purpose).
+  - Features: `home`, `services`, `government`, `town`, `transparency`, `info`. There is no global site search or news section (both removed on purpose).
   - Import with relative paths inside `src/features` and `src/lib` (the data files must also load in plain Node for `scripts/data-freshness.ts`). Files in `src/app/` use `@/`.
 - **SEO:** `src/lib/seo/routeMetadata.ts` is the single list of routes. It drives `generateMetadata` (`src/lib/seo/metadata.ts`), JSON-LD (`RouteJsonLd`), `/sitemap.xml` and static params. Add new routes there.
 - **PWA:** Serwist (`@serwist/turbopack`). The worker source is `src/sw.ts`, served at `/serwist/sw.js`.
 - **Site URL:** `NEXT_PUBLIC_SITE_URL` (default `https://bettercorella.vercel.app`), set in `src/config/site.ts`.
-- **Status:** rebranded to Corella, Bohol (logo, palette `#0038A8`/`#FCD116`, Plus Jakarta Sans). Live data: LGU profile, 86 charter services, 14 offices, officials, 8 barangays (PSA population and boundaries), hotlines, town history. News, legislation, budget, procurement, projects and places still render `ComingSoon` / `PendingPage` (`src/components/ui/`) until verified records are added. The source research lives in `../rebranding/` (outside git).
+- **Status:** rebranded to Corella, Bohol (logo, palette `#0038A8`/`#FCD116`, Plus Jakarta Sans). Live data: LGU profile, 86 charter services, 14 offices, officials, 8 barangays (PSA population and boundaries), hotlines, town history. Legislation, budget, procurement, projects and places still render `ComingSoon` / `PendingPage` (`src/components/ui/`) until verified records are added. The source research lives in `../rebranding/` (outside git).
 - **Adding data:** fill the feature's `data/` file with records that cite an official `sourceUrl` and a `lastVerified` date, and set verified fields in `src/config/city.ts`. Pages switch from the coming-soon state to the full layout automatically.
 
 ## Commands

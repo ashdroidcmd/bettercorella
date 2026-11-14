@@ -23,7 +23,6 @@ const PAGES = [
   '/transparency/procurement',
   '/transparency/projects',
   '/transparency/open-data',
-  '/news',
   '/about',
   '/contact',
   '/faq',
@@ -65,9 +64,11 @@ test.describe('Navigation', () => {
     }
   })
 
-  test('global search is removed', async ({ request }) => {
-    const response = await request.get('/search')
-    expect(response.status()).toBe(404)
+  test('global search and news are removed', async ({ request }) => {
+    for (const path of ['/search', '/news']) {
+      const response = await request.get(path)
+      expect(response.status(), path).toBe(404)
+    }
   })
 })
 
@@ -116,7 +117,7 @@ test.describe('Corella rebrand', () => {
   })
 
   test('sections without verified data show the coming-soon notice', async ({ page }) => {
-    for (const path of ['/transparency/budget', '/news']) {
+    for (const path of ['/transparency/budget', '/transparency/procurement']) {
       await page.goto(path)
       await expect(page.getByRole('heading', { name: 'Information coming soon' })).toBeVisible()
     }

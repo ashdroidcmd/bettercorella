@@ -14,8 +14,6 @@ const mainLinks = [
   { label: 'Municipal government', href: '/government' },
   { label: 'Places directory', href: '/town/places' },
   { label: 'Transparency', href: '/transparency' },
-  { label: 'News', href: '/news' },
-  { label: 'News archive', href: '/news/archive' },
   { label: 'About this project', href: '/about' },
   { label: 'Contact and sources', href: '/contact' },
   { label: 'Frequently asked questions', href: '/faq' },

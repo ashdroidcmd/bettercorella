@@ -8,7 +8,6 @@ import { budgetDocs } from '../features/transparency/shared/data/budgetDocs.ts'
 import { cityElections } from '../features/government/shared/data/elections.ts'
 import { hotlines } from '../features/government/shared/data/hotlines.ts'
 import { legislation } from '../features/government/shared/data/legislation.ts'
-import { news, newsLastVerified } from '../features/news/shared/data/news.ts'
 import { onlineServices } from '../features/services/shared/data/onlineServices.ts'
 import { openDataSources } from '../features/transparency/shared/data/openData.ts'
 import { places } from '../features/town/shared/data/places.ts'
@@ -78,13 +77,6 @@ export const manuallyMaintainedData: DataFreshnessRow[] = [
     recordCount: cityElections.length,
     lastVerified: null,
     reviewEveryDays: 365,
-  },
-  {
-    dataset: 'News',
-    source: 'Official municipal announcements',
-    recordCount: news.length,
-    lastVerified: news.length ? newsLastVerified : null,
-    reviewEveryDays: 14,
   },
   {
     dataset: 'Legislation',

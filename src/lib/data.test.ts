@@ -10,7 +10,6 @@ import { SITE_NAME } from '../config/site'
 import { cityElections } from '../features/government/shared/data/elections'
 import { faqs } from '../features/info/faq-page/data/faqs'
 import { hotlines } from '../features/government/shared/data/hotlines'
-import { news } from '../features/news/shared/data/news'
 import { offices } from '../features/government/shared/data/offices'
 import { officials } from '../features/government/shared/data/officials'
 import { onlineServiceSlugs, onlineServices } from '../features/services/shared/data/onlineServices'
@@ -59,7 +58,7 @@ describe('LGU identity', () => {
 
   it('contains no leftover content from the template LGUs', () => {
     const datasets = {
-      city, services, offices, officials, barangays, barangayMap, hotlines, news, legislation, legislationSources,
+      city, services, offices, officials, barangays, barangayMap, hotlines, legislation, legislationSources,
       places, placeCategories, dpwhProjects, budgetDocs, bidResults, bidBulletins, cityElections, onlineServices,
       openDataSources, sources, faqs, stats, timeline, categories,
     }
@@ -185,18 +184,7 @@ describe('government', () => {
   })
 })
 
-describe('news, documents and projects', () => {
-  it('has well-formed, newest-first news with official links', () => {
-    expect(unique(news.map((item) => item.slug))).toBe(true)
-    expect([...news].sort((a, b) => b.date.localeCompare(a.date))).toEqual(news)
-    for (const item of news) {
-      expect(item.slug).toMatch(slugPattern)
-      expect(isDate(item.date)).toBe(true)
-      expect(item.excerpt.trim()).not.toBe('')
-      expect(item.sourceUrl).toMatch(http)
-    }
-  })
-
+describe('documents and projects', () => {
   it('has valid budget and procurement document links', () => {
     for (const doc of budgetDocs) expect(doc.url).toMatch(http)
     for (const result of bidResults) {
@@ -241,8 +229,8 @@ describe('route metadata', () => {
   it('covers every static and data-driven route exactly once', () => {
     const pages = buildRouteMetadata()
     expect(unique(pages.map((page) => page.path))).toBe(true)
-    expect(pages.some((page) => page.path === '/search')).toBe(false)
-    expect(pages).toHaveLength(27 + categories.length + services.length + offices.length + barangays.length + news.length)
+    expect(pages.some((page) => page.path === '/search' || page.path.startsWith('/news'))).toBe(false)
+    expect(pages).toHaveLength(25 + categories.length + services.length + offices.length + barangays.length)
     expect(pages.some((page) => page.path === '/town')).toBe(true)
     expect(pages.some((page) => page.path.startsWith('/city'))).toBe(false)
   })

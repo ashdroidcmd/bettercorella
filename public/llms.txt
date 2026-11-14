@@ -12,7 +12,6 @@ Information is published only after it is checked against an official source (th
 - [Emergency hotlines](/government/hotlines): The national 911 and 8888 hotlines; local numbers once verified.
 - [Town profile](/town): Facts about Corella from official sources.
 - [Transparency](/transparency): Budget, procurement, infrastructure projects and open datasets.
-- [News](/news): Municipal announcements linked to their official source.
 - [About](/about): How the project works and where its data comes from.
 
 ## Project

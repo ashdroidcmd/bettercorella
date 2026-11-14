@@ -2,7 +2,6 @@ import { barangays } from '../../features/government/shared/data/barangays.ts'
 import { categories } from '../../features/services/shared/data/categories.ts'
 import { city } from '../../config/city.ts'
 import { faqs } from '../../features/info/faq-page/data/faqs.ts'
-import { news } from '../../features/news/shared/data/news.ts'
 import { offices } from '../../features/government/shared/data/offices.ts'
 import { services } from '../../features/services/shared/data/services.ts'
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL as DEFAULT_ORIGIN } from '../../config/site.ts'
@@ -223,22 +222,6 @@ const staticRoutes: RouteMetadata[] = [
     jsonLd: makeBreadcrumbs([home, transparency, { name: 'Open Data', path: '/transparency/open-data' }]),
   },
   {
-    path: '/news',
-    title: 'News',
-    description: `Announcements and advisories for ${PLACE}, each linked to its official source.`,
-    priority: 0.8,
-    changefreq: 'weekly',
-    jsonLd: makeBreadcrumbs([home, { name: 'News', path: '/news' }]),
-  },
-  {
-    path: '/news/archive',
-    title: 'News archive',
-    description: `All news items tracked by ${SITE_NAME}, with links to the official source.`,
-    priority: 0.7,
-    changefreq: 'weekly',
-    jsonLd: makeBreadcrumbs([home, { name: 'News', path: '/news' }, { name: 'Archive', path: '/news/archive' }]),
-  },
-  {
     path: '/about',
     title: 'About this project',
     description: `${SITE_NAME} is an independent civic guide to municipal services, officials, barangays, budgets and public records in ${PLACE}.`,
@@ -276,7 +259,7 @@ const staticRoutes: RouteMetadata[] = [
   {
     path: '/sitemap',
     title: 'Sitemap',
-    description: `Every section of ${SITE_NAME}: services, government, town guide, transparency, news and site information.`,
+    description: `Every section of ${SITE_NAME}: services, government, barangays, town guide, transparency and site information.`,
     priority: 0.5,
     changefreq: 'monthly',
     jsonLd: makeBreadcrumbs([home, { name: 'Sitemap', path: '/sitemap' }]),
@@ -405,34 +388,5 @@ export function buildRouteMetadata(): RouteMetadata[] {
     ],
   }))
 
-  const newsRoutes: RouteMetadata[] = news.map((item) => ({
-    path: `/news/${item.slug}`,
-    title: item.title,
-    description: item.excerpt,
-    image: item.image,
-    type: 'article' as const,
-    priority: 0.7,
-    changefreq: 'monthly',
-    lastmod: item.date ? item.date.split('T')[0] : undefined,
-    jsonLd: [
-      {
-        '@context': 'https://schema.org',
-        '@type': 'NewsArticle',
-        headline: item.title,
-        description: item.excerpt,
-        image: `${DEFAULT_ORIGIN}${item.image}`,
-        datePublished: item.date,
-        url: `${DEFAULT_ORIGIN}/news/${item.slug}`,
-        author: { '@type': 'Organization', name: LGU },
-        publisher: {
-          '@type': 'Organization',
-          name: SITE_NAME,
-          logo: { '@type': 'ImageObject', url: `${DEFAULT_ORIGIN}/pwa-512.png` },
-        },
-      },
-      makeBreadcrumbs([home, { name: 'News', path: '/news' }, { name: item.title, path: `/news/${item.slug}` }]),
-    ],
-  }))
-
-  return [...staticRoutes, ...categoryRoutes, ...serviceRoutes, ...officeRoutes, ...barangayRoutes, ...newsRoutes]
+  return [...staticRoutes, ...categoryRoutes, ...serviceRoutes, ...officeRoutes, ...barangayRoutes]
 }

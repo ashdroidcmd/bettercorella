@@ -78,8 +78,6 @@ export function SiteFooter() {
                   { label: 'Business and investment', href: '/town/business' },
                   { label: 'Transparency', href: '/transparency' },
                   { label: 'Infrastructure projects', href: '/transparency/projects' },
-                  { label: 'News', href: '/news' },
-                  { label: 'News archive', href: '/news/archive' },
                 ].map(({ label, href }) => (
                   <li key={href}>
                     <Link href={href} className="text-white/70 transition hover:text-white">

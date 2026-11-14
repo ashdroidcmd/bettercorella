@@ -14,8 +14,6 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { CategoryCard } from '../../services/shared/components/CategoryCard'
-import { ComingSoon } from '../../../components/ui/ComingSoon'
-import { NewsCard } from '../../news/shared/components/NewsCard'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
@@ -23,13 +21,11 @@ import { StatCard } from '../../../components/ui/StatCard'
 import logoMark from '../../../assets/logo-1x1.png'
 import { categories } from '../../services/shared/data/categories'
 import { city } from '../../../config/city'
-import { news } from '../../news/shared/data/news'
 import { stats } from '../../town/shared/data/stats'
 import { removeSavedService, useSavedServices } from '../../services/shared/utils/savedServices'
 import { telHref } from '../../../lib/utils'
 
 const featuredCategories = categories.slice(0, 6)
-const latestNews = news.slice(0, 3)
 const popularServices = [
   { label: 'Business permit', href: '/services/business/bplo-service-issuance-of-business-permits-licenses-for-new' },
   { label: 'Birth, marriage and death certificates', href: '/services/certificates/issuance-of-certification-certified-true-copy' },
@@ -121,13 +117,6 @@ export function HomePage() {
                   className="inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-bold text-ink-950 transition hover:bg-white"
                 >
                   {'Browse services'}
-                  <ArrowRight aria-hidden="true" className="size-4" />
-                </a>
-                <a
-                  href="#news"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-white/70 transition hover:text-white"
-                >
-                  {'Latest updates'}
                   <ArrowRight aria-hidden="true" className="size-4" />
                 </a>
               </div>
@@ -281,35 +270,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="border-y border-line bg-surface">
-        <div className="container-page py-16 sm:py-20">
-          <div id="news" className="scroll-mt-24">
-            <Reveal>
-              <SectionHeading
-                eyebrow="From Municipal Hall"
-                title="Latest updates"
-                description={`Recent announcements from the Municipal Government of ${city.name}, linked to the official source.`}
-              />
-            </Reveal>
-          </div>
-
-          {latestNews.length ? (
-            <div className="mt-9 grid gap-5 md:grid-cols-3">
-              {latestNews.map((item, index) => (
-                <Reveal key={item.slug} delay={index * 0.06} className="h-full">
-                  <NewsCard item={item} compact />
-                </Reveal>
-              ))}
-            </div>
-          ) : (
-            <div className="mt-9">
-              <ComingSoon topic="Municipal news and advisories" source="Each item will link to the official announcement." />
-            </div>
-          )}
-        </div>
-      </section>
-
-      <section className="scroll-mt-24">
+      <section className="scroll-mt-24 border-t border-line bg-surface">
         <div className="container-page py-16 sm:py-20">
           <Reveal>
             <SectionHeading
