@@ -1,6 +1,7 @@
 import type { ServiceCategory } from '../types/index.ts';
+import { services } from './services.ts';
 
-export const categories: ServiceCategory[] = [
+const categoryList: ServiceCategory[] = [
   {
     "slug": "business",
     "name": "Business & permits",
@@ -12,7 +13,7 @@ export const categories: ServiceCategory[] = [
       "Mayor's permit",
       "Zoning clearance"
     ],
-    "serviceCount": 18
+    "serviceCount": 0
   },
   {
     "slug": "taxes",
@@ -25,7 +26,7 @@ export const categories: ServiceCategory[] = [
       "Real property tax",
       "Tax declaration"
     ],
-    "serviceCount": 16
+    "serviceCount": 0
   },
   {
     "slug": "certificates",
@@ -38,20 +39,20 @@ export const categories: ServiceCategory[] = [
       "Marriage certificate",
       "Death certificate"
     ],
-    "serviceCount": 11
+    "serviceCount": 0
   },
   {
     "slug": "health",
     "name": "Health & wellness",
     "shortName": "Health",
     "icon": "HeartPulse",
-    "description": "City health programs, clinics, sanitation, and medical support.",
+    "description": "Municipal health programs, clinics, sanitation, and medical support.",
     "examples": [
       "Health certificate",
       "Vaccination",
       "Medical assistance"
     ],
-    "serviceCount": 32
+    "serviceCount": 0
   },
   {
     "slug": "social",
@@ -64,7 +65,7 @@ export const categories: ServiceCategory[] = [
       "PWD assistance",
       "Solo parent ID"
     ],
-    "serviceCount": 33
+    "serviceCount": 0
   },
   {
     "slug": "agriculture",
@@ -77,7 +78,7 @@ export const categories: ServiceCategory[] = [
       "Seedlings",
       "Animal health"
     ],
-    "serviceCount": 25
+    "serviceCount": 0
   },
   {
     "slug": "infrastructure",
@@ -90,20 +91,20 @@ export const categories: ServiceCategory[] = [
       "Occupancy certificate",
       "Excavation permit"
     ],
-    "serviceCount": 23
+    "serviceCount": 0
   },
   {
     "slug": "environment",
     "name": "Environment",
     "shortName": "Environment",
     "icon": "Leaf",
-    "description": "Permits, inspections, and programs for a cleaner, greener city.",
+    "description": "Permits, inspections, and programs for a cleaner, greener town.",
     "examples": [
       "Environmental permit",
       "Tree cutting",
       "Waste management"
     ],
-    "serviceCount": 14
+    "serviceCount": 0
   },
   {
     "slug": "safety",
@@ -116,7 +117,7 @@ export const categories: ServiceCategory[] = [
       "Disaster training",
       "Safety clearance"
     ],
-    "serviceCount": 15
+    "serviceCount": 0
   },
   {
     "slug": "employment",
@@ -129,7 +130,7 @@ export const categories: ServiceCategory[] = [
       "SPES",
       "Livelihood assistance"
     ],
-    "serviceCount": 15
+    "serviceCount": 0
   },
   {
     "slug": "youth",
@@ -142,19 +143,25 @@ export const categories: ServiceCategory[] = [
       "Scholarship",
       "Youth programs"
     ],
-    "serviceCount": 12
+    "serviceCount": 0
   },
   {
     "slug": "governance",
     "name": "Governance & administration",
     "shortName": "Governance",
     "icon": "Landmark",
-    "description": "Records, personnel, legal, and general city administration services.",
+    "description": "Records, personnel, legal, and general municipal administration services.",
     "examples": [
       "Records request",
       "Employment verification",
       "Legal assistance"
     ],
-    "serviceCount": 35
+    "serviceCount": 0
   }
 ];
+
+/** Categories with `serviceCount` computed from the verified services in services.ts. */
+export const categories: ServiceCategory[] = categoryList.map((category) => ({
+  ...category,
+  serviceCount: services.filter((service) => service.category === category.slug).length,
+}));

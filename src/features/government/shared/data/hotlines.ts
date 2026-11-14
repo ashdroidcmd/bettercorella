@@ -1,83 +1,50 @@
 import type { Hotline } from '../types/index.ts';
 
+// 911 and 8888 are national lines. Corella numbers come from the "List of Offices" in the Citizen's
+// Charter 2026 (checked 2026-11-14). Police (PNP), fire (BFP) and 24/7 rescue numbers are still pending:
+// the official site shows them only as images. Entries with `short` appear in the header hotline bar
+// (add e.g. "short": "PNP" when a verified police number is added).
 export const hotlines: Hotline[] = [
   {
-    "label": "MDRRMO Inabanga Emergency Response",
+    "label": "National Emergency Hotline",
     "numbers": [
-      "(038) 510-8164",
-      "0917-814-4117",
-      "0920-945-8164"
+      "911"
     ],
-    "email": "mdrrmo@inabanga.gov.ph",
-    "note": "24/7 Municipal Disaster Risk Reduction & Management Council emergency rescue, flood monitoring, and ambulance dispatch.",
-    "primary": true
+    "note": "24/7 nationwide emergency line for police, fire, and medical emergencies. Free to call from any mobile or landline.",
+    "primary": true,
+    "short": "Emergency"
   },
   {
-    "label": "Inabanga Municipal Police Station (PNP)",
+    "label": "Corella Municipal Hall (Office of the Mayor)",
     "numbers": [
-      "(038) 512-9039",
-      "0998-598-6395"
+      "(038) 422-3865"
     ],
-    "email": "inabangamps@yahoo.com",
-    "note": "24/7 Law enforcement, public safety, and immediate emergency response.",
-    "primary": true
+    "email": "municipality.corella@gmail.com",
+    "note": "Municipal Hall trunkline, also used for public assistance and complaints. Office hours; not a 24/7 line. Source: Citizen's Charter 2026.",
+    "short": "Municipal Hall"
   },
   {
-    "label": "Bureau of Fire Protection (BFP Inabanga)",
+    "label": "MDRRMO Corella",
     "numbers": [
-      "0927-528-1232",
-      "(038) 510-8111"
+      "0920-378-8788"
     ],
-    "note": "24/7 Fire suppression, vehicular accident extrication, and rescue operations.",
-    "primary": true
+    "email": "corella.drrm@gmail.com",
+    "note": "Municipal Disaster Risk Reduction and Management Office. Office number from the Citizen's Charter 2026; 24/7 availability not yet confirmed.",
+    "short": "MDRRMO"
   },
   {
-    "label": "Bohol TaRSIER 117 (Provincial Emergency)",
+    "label": "Municipal Health Office",
     "numbers": [
-      "117",
-      "(038) 411-0117",
-      "0949-795-5530"
+      "0932-843-6516"
     ],
-    "note": "Bohol Provincial Telephone and Radio System Integrated Emergency Response 24/7 dispatch."
+    "email": "corellamho@yahoo.com",
+    "note": "Rural health unit services. Office number from the Citizen's Charter 2026; for medical emergencies call 911."
   },
   {
-    "label": "Inabanga Rural Health Unit (RHU / MHO)",
+    "label": "Citizens' Complaint Hotline",
     "numbers": [
-      "(038) 510-8118",
-      "0917-703-2415"
+      "8888"
     ],
-    "email": "rhu@inabanga.gov.ph",
-    "note": "Municipal Health Office, birthing clinic, maternal care, and emergency clinic triage."
-  },
-  {
-    "label": "Inabanga Municipal Hall Trunkline",
-    "numbers": [
-      "(038) 510-8164",
-      "(038) 512-9035"
-    ],
-    "email": "lguinabangabohol@yahoo.com",
-    "note": "Municipal Mayor's Office, departments, and general citizen inquiries (Mon-Fri 8am-5pm)."
-  },
-  {
-    "label": "Philippine Coast Guard (PCG Sub-Station Inabanga)",
-    "numbers": [
-      "0917-842-8324"
-    ],
-    "note": "Maritime safety, coastal fisheries enforcement, Port of U-og and island route advisories."
-  },
-  {
-    "label": "BOHECO I Electric Cooperative (Inabanga Sub-Office)",
-    "numbers": [
-      "(038) 503-9005",
-      "0917-720-0014"
-    ],
-    "note": "Power outages, fallen lines, and electrical distribution emergencies."
-  },
-  {
-    "label": "Inabanga Municipal Waterworks System",
-    "numbers": [
-      "(038) 510-8164"
-    ],
-    "note": "Water service interruptions, pipeline leaks, and billing assistance."
+    "note": "National hotline for reporting red tape, corruption, and complaints about government services."
   }
 ];

@@ -18,12 +18,13 @@ Read `AGENTS.md` first. It holds the project rules. This file adds Claude-specif
   - `src/components/{layout,ui,seo}`: feature-agnostic UI (site shell, building blocks, JSON-LD).
   - `src/config/`: `site.ts` (site name/URL) and `city.ts` (LGU identity).
   - `src/lib/`: `utils.ts`, `seo/` (metadata + route list), `dataFreshness.ts` and cross-feature data tests.
-  - Features: `home`, `services`, `government`, `town`, `transparency`, `news`, `search`, `info`.
+  - Features: `home`, `services`, `government`, `town`, `transparency`, `info`. There is no global site search or news section (both removed on purpose).
   - Import with relative paths inside `src/features` and `src/lib` (the data files must also load in plain Node for `scripts/data-freshness.ts`). Files in `src/app/` use `@/`.
 - **SEO:** `src/lib/seo/routeMetadata.ts` is the single list of routes. It drives `generateMetadata` (`src/lib/seo/metadata.ts`), JSON-LD (`RouteJsonLd`), `/sitemap.xml` and static params. Add new routes there.
 - **PWA:** Serwist (`@serwist/turbopack`). The worker source is `src/sw.ts`, served at `/serwist/sw.js`.
 - **Site URL:** `NEXT_PUBLIC_SITE_URL` (default `https://bettercorella.vercel.app`), set in `src/config/site.ts`.
-- **Status:** forked from BetterInabanga, so the content still says Inabanga and the rebrand is pending.
+- **Status:** rebranded to Corella, Bohol (logo, palette `#0038A8`/`#FCD116`, Plus Jakarta Sans). Live data: LGU profile, 86 charter services, 14 offices, officials, 8 barangays (PSA population and boundaries), hotlines, town history. Legislation, budget, procurement, projects and places still render `ComingSoon` / `PendingPage` (`src/components/ui/`) until verified records are added. The source research lives in `../rebranding/` (outside git).
+- **Adding data:** fill the feature's `data/` file with records that cite an official `sourceUrl` and a `lastVerified` date, and set verified fields in `src/config/city.ts`. Pages switch from the coming-soon state to the full layout automatically.
 
 ## Commands
 
@@ -42,6 +43,10 @@ Read `AGENTS.md` first. It holds the project rules. This file adds Claude-specif
 
 `.github/workflows/ci.yml` runs lint, typecheck, unit tests, build and e2e on every PR and every push to `main`. A deploy to Vercel (a preview for PRs, production for `main`) happens only after all of them pass. After a production deploy, the merged PR's branch is deleted. Vercel's Git auto-deploy is disabled in `vercel.json`. Keep the workflow passing: don't merge red PRs.
 
+## Rebrand checklist
+
+The remaining rebrand and data work is tracked in `../TODO.md` (workspace root, next to `../docs/`; not in git). Read it before picking up rebrand or data tasks, and tick items off when done.
+
 ## Skills
 
 Project skills live in `.claude/skills/`: `development-workflow`, `playwright`, `documentation`, `changelog`.
@@ -50,7 +55,7 @@ Project skills live in `.claude/skills/`: `development-workflow`, `playwright`, 
 
 - Tests: `e2e/`. Config: `playwright.config.ts`. It builds and starts the production server on port 3000 automatically, or reuses one already running there.
 - Prefer `getByRole`, `getByLabel` and `getByText`. Avoid CSS-class selectors, since Tailwind classes change often.
-- Keep assertions brand-neutral where possible. Don't assert on "Inabanga" or "Corella" unless the test is about branding.
+- Keep assertions brand-neutral where possible. Only the `Corella rebrand` block in `e2e/smoke.spec.ts` asserts on branding.
 
 ## Style
 

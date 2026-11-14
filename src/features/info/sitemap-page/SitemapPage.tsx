@@ -12,20 +12,17 @@ const mainLinks = [
   { label: 'Home', href: '/' },
   { label: 'All services', href: '/services' },
   { label: 'Municipal government', href: '/government' },
-  { label: 'Places directory', href: '/city/places' },
+  { label: 'Barangays', href: '/barangays' },
+  { label: 'Places directory', href: '/town/places' },
   { label: 'Transparency', href: '/transparency' },
-  { label: 'News', href: '/news' },
-  { label: 'News archive', href: '/news/archive' },
   { label: 'About this project', href: '/about' },
   { label: 'Contact and sources', href: '/contact' },
   { label: 'Frequently asked questions', href: '/faq' },
-  { label: 'Search', href: '/search' },
 ]
 
 const governmentLinks = [
-  { label: 'City officials', href: '/government/officials' },
+  { label: 'Municipal officials', href: '/government/officials' },
   { label: 'Offices and departments', href: '/government/offices' },
-  { label: 'Barangays', href: '/government/barangays' },
   { label: 'Emergency hotlines', href: '/government/hotlines' },
   { label: 'Ordinances and executive orders', href: '/government/legislation' },
 ]
@@ -39,10 +36,10 @@ const transparencyLinks = [
 ]
 
 const cityLinks = [
-  { label: 'City profile', href: '/city' },
-  { label: 'Life and tourism', href: '/city/life' },
-  { label: 'Places directory', href: '/city/places' },
-  { label: 'Business and investment', href: '/city/business' },
+  { label: 'Town profile', href: '/town' },
+  { label: 'Life and tourism', href: '/town/life' },
+  { label: 'Places directory', href: '/town/places' },
+  { label: 'Business and investment', href: '/town/business' },
   { label: 'Online services', href: '/online-services' },
 ]
 
@@ -124,7 +121,7 @@ export function SitemapPage() {
             <LinkList title="Transparency" links={transparencyLinks} />
           </div>
           <div className="flex flex-col gap-6">
-            <LinkList title="City and life" links={cityLinks} />
+            <LinkList title="Town and life" links={cityLinks} />
             <LinkList title="Site information" links={siteLinks} />
           </div>
         </div>
@@ -141,7 +138,7 @@ export function SitemapPage() {
               .map((barangay) => (
                 <li key={barangay.slug}>
                   <Link
-                    href={`/government/barangays/${barangay.slug}`}
+                    href={`/barangays/${barangay.slug}`}
                    
                     className="group flex min-h-10 items-center justify-between gap-2 rounded-lg border border-transparent bg-white/60 px-3 py-2 text-sm text-ink-700 transition hover:border-line hover:bg-white hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-600"
                   >

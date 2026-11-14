@@ -1,9 +1,8 @@
 'use client'
 
-import { ExternalLink, ShieldCheck } from 'lucide-react'
 import { Suspense, type ReactNode } from 'react'
-import { city } from '../../config/city'
 import { ErrorBoundary } from './ErrorBoundary'
+import { HotlineBar } from './HotlineBar'
 import { PageFallback } from './PageFallback'
 import { ScrollProgress } from './ScrollProgress'
 import { SiteFooter } from './SiteFooter'
@@ -19,31 +18,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       >
         {'Skip to content'}
       </a>
-      <div className="relative z-[60] bg-ink-950 text-white">
-        <div className="container-page flex flex-col gap-y-1 py-1.5 text-[11px] sm:text-xs lg:flex-row lg:items-center lg:justify-between lg:gap-x-6">
-          <p className="inline-flex items-center gap-1.5 text-white/65">
-            <ShieldCheck aria-hidden="true" className="size-3.5 text-accent" />
-            {'An independent civic project, not the official city website'}
-          </p>
-          <div className="flex items-center justify-between gap-x-3 lg:justify-end lg:gap-x-4">
-            <a
-              href={city.website}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Official city website"
-              className="inline-flex items-center gap-1 text-white/70 transition hover:text-white"
-            >
-              <span className="lg:hidden">City website</span>
-              <span className="hidden lg:inline">Official city website</span>
-              <ExternalLink aria-hidden="true" className="size-3" />
-            </a>
-            <a href="tel:911" aria-label="Emergency: 911" className="font-bold text-accent transition hover:text-white">
-              <span aria-hidden="true" className="lg:hidden">911</span>
-              <span className="hidden lg:inline">Emergency: 911</span>
-            </a>
-          </div>
-        </div>
-      </div>
+      <HotlineBar />
 
       <SiteHeader />
 

@@ -19,6 +19,8 @@ export interface OpenDataSource {
 
 export const openDataPortalUrl = 'https://data.bettergov.ph/datasets'
 
+// National open datasets that cover Corella. Entries move to the 'integrated' group (with a
+// localHref) once a Corella extract has been checked and published on this site.
 export const openDataSources: OpenDataSource[] = [
   {
     id: 'blgf',
@@ -26,14 +28,11 @@ export const openDataSources: OpenDataSource[] = [
     publisher: 'Bureau of Local Government Finance',
     description:
       'Statements of receipts and expenditures, regular income, disaster funds, and special education fund reports for every LGU.',
-    coverage: 'Local annual analysis: FY2024; BLGF also lists FY2025 quarterly reports',
+    coverage: 'All LGUs, annual and quarterly reports',
     formats: 'XLSX, PDF',
     license: 'Public domain',
     href: 'https://data.bettergov.ph/datasets/9',
-    localHref: '/transparency/budget',
-    localLabel: 'See the Inabanga fiscal profile',
-    group: 'integrated',
-    note: 'The local annual analysis uses the FY2024 SRE and ARI snapshots. BLGF now lists an FY2025 quarterly SRE workbook; because it is partial-year and its city row has not been validated here, it is linked separately rather than substituted for annual figures.',
+    group: 'reference',
   },
   {
     id: 'barangay-boundaries',
@@ -45,10 +44,7 @@ export const openDataSources: OpenDataSource[] = [
     formats: 'GeoJSON, ZIP',
     license: 'MIT',
     href: 'https://data.bettergov.ph/datasets/23',
-    localHref: '/government/barangays',
-    localLabel: 'Open the barangay map',
-    group: 'integrated',
-    note: 'The BetterGov package metadata was refreshed June 16, 2026, but its source geometry remains the PSA PSGC snapshot dated October 24, 2023 and NAMRIA boundary release dated November 6, 2023. Current barangay names and count were checked against the PSA PSGC page (September 30, 2026); this does not update the geometry vintage.',
+    group: 'reference',
   },
   {
     id: 'openhalalan',
@@ -60,10 +56,7 @@ export const openDataSources: OpenDataSource[] = [
     formats: 'CSV',
     license: 'ODbL 1.0',
     href: 'https://data.bettergov.ph/datasets/25',
-    localHref: '/government/officials',
-    localLabel: 'See Inabanga election history',
-    group: 'integrated',
-    note: 'The source dataset page was refreshed July 15, 2026. The local extract lists city mayors and vice mayors in cycles present in the source data; 2025 candidate middle names are incomplete in the upstream dataset.',
+    group: 'reference',
   },
   {
     id: 'dpwh',
@@ -71,14 +64,11 @@ export const openDataSources: OpenDataSource[] = [
     publisher: 'Department of Public Works and Highways',
     description:
       'Contract-level records for national roads, bridges, flood control, buildings, and other public works.',
-    coverage: 'Inabanga-tagged projects, 2016–2025',
+    coverage: 'Nationwide, 2016–2025',
     formats: 'Parquet',
     license: 'CC0 1.0',
     href: 'https://data.bettergov.ph/datasets/19',
-    localHref: '/transparency/procurement',
-    localLabel: 'See local DPWH projects',
-    group: 'integrated',
-    note: 'The upstream dataset was last updated December 3, 2025. Project tagging relies on DPWH descriptions that reference Inabanga and Bohol engineering districts; no newer snapshot was listed when checked.',
+    group: 'reference',
   },
   {
     id: 'philgeps',
@@ -86,14 +76,12 @@ export const openDataSources: OpenDataSource[] = [
     publisher: 'Philippine Government Electronic Procurement System',
     description:
       'Award notices, suppliers, contract amounts, and award dates from the government procurement portal.',
-    coverage: 'Municipal government awards, 2016–2025',
+    coverage: 'Nationwide, 2016–2025',
     formats: 'Parquet',
     license: 'CC0 1.0',
     href: 'https://data.bettergov.ph/datasets/5',
-    localHref: '/transparency/procurement',
-    localLabel: 'See municipal contract awards',
-    group: 'integrated',
-    note: 'The upstream dataset was last updated November 29, 2025. The extract covers awards recorded under “MUNICIPALITY OF INABANGA, BOHOL”; it is not a payment ledger, and no newer snapshot was listed when checked.',
+    group: 'reference',
+    note: 'Award notices are not a payment ledger.',
   },
   {
     id: 'noah',
@@ -105,8 +93,6 @@ export const openDataSources: OpenDataSource[] = [
     formats: 'PMTiles',
     license: 'ODC-ODbL',
     href: 'https://data.bettergov.ph/datasets/22',
-    localHref: '/government/barangays',
-    localLabel: 'Open the barangay map',
     group: 'reference',
     note: 'The national tile archive is about 5.2 GB, so the site links to it instead of embedding it.',
   },
@@ -125,34 +111,5 @@ export const openDataSources: OpenDataSource[] = [
     resourceLabel: 'Local government audit agencies',
     group: 'reference',
     note: 'The dataset indexes audit agencies; it does not contain the full audit reports.',
-  },
-  {
-    id: 'coa-inabanga-2024',
-    name: 'Inabanga City Annual Audit Report 2024',
-    publisher: 'Commission on Audit',
-    description:
-      'Annual audit report for the Municipal Government of Inabanga, Bohol.',
-    coverage: 'City annual audit report, CY2024',
-    formats: 'Web page, PDF',
-    license: 'Public domain',
-    href: 'https://www.coa.gov.ph/wpfd_file/inabanga-municipality-annual-audit-report-2024/',
-    group: 'reference',
-    note: 'COA has published the city’s 2024 report; the local fiscal charts remain FY2024 city and BLGF figures with separate reporting bases.',
-  },
-  {
-    id: 'bir',
-    name: 'BIR zonal values',
-    publisher: 'Bureau of Internal Revenue',
-    description:
-      'Zonal values used as the base for taxes on the sale, transfer, or lease of real property, organized by revenue district.',
-    coverage: 'Inabanga City, Bohol (RDO No. 3)',
-    formats: 'ZIP, XLS',
-    license: 'Public domain',
-    href: 'https://data.bettergov.ph/datasets/17',
-    resourceHref:
-      'https://bir-cdn.bir.gov.ph/local/pdf/RDO No. 3 - Inabanga City Bohol_copy_copy_copy_copy_copy_copy.zip',
-    resourceLabel: 'Download RDO No. 3 zonal values',
-    group: 'reference',
-    note: 'Zonal values are assessment references, not actual market prices or tax bills.',
   },
 ]

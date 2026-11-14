@@ -1,391 +1,49 @@
 'use client'
 
-import {
-  ArrowRight,
-  Building2,
-  Cpu,
-  Download,
-  ExternalLink,
-  Factory,
-  HeartPulse,
-  Landmark,
-  Recycle,
-  ShieldCheck,
-  Sprout,
-  Trophy,
-  TrendingUp,
-  Wallet,
-  Zap,
-} from 'lucide-react'
-import Link from 'next/link'
 import { PageHero } from '../../../components/ui/PageHero'
-import { Reveal } from '../../../components/ui/Reveal'
-import { SectionHeading } from '../../../components/ui/SectionHeading'
-import { SourceNote } from '../../../components/ui/SourceNote'
-import { StatCard } from '../../../components/ui/StatCard'
-
-const highlights = [
-  {
-    title: 'Raffia weaving capital of Bohol',
-    icon: Landmark,
-    text: 'Inabanga is world-renowned for its handloom weaving industry, producing natural buri palm raffia textiles, artisanal home decor, and sustainable fashion accessories exported globally.',
-  },
-  {
-    title: 'Agricultural basin & marine gateway',
-    icon: Sprout,
-    text: 'Blessed by the fertile Inabanga River delta, the town is a leading producer of irrigated rice, inland aquaculture, Danajon Bank seaweeds, and coastal fisheries.',
-  },
-  {
-    title: 'Port of U-og commercial hub',
-    icon: Trophy,
-    text: 'The Port of U-og provides seamless maritime connectivity between mainland Bohol, the bustling island communities of Cuaming and Hambongan, and nearby Cebu markets.',
-  },
-  {
-    title: 'Eco-tourism & heritage destination',
-    icon: TrendingUp,
-    text: 'Home to the Inabanga River Nature Park, historic 1744 Saint Paul Parish, Macaban Cave, and rolling eco-trails drawing visitors and eco-cultural investors.',
-  },
-  {
-    title: 'Business-friendly LGU & one-stop shop',
-    icon: ShieldCheck,
-    text: 'Streamlined Business One-Stop Shop (BOSS) with transparent licensing, micro-enterprise support, and investor incentives under the Municipal Government of Inabanga.',
-  },
-]
-
-const sectors = [
-  { title: 'Agriculture, agribusiness, and fishery', icon: Sprout },
-  { title: 'Support facilities: irrigation, post-harvest, cold storage, blast freezing, fertilizers, and pesticides', icon: Factory },
-  { title: 'Tourism and transportation', icon: Building2 },
-  { title: 'Information and communication technology', icon: Cpu },
-  { title: 'Manufacturing and processing', icon: Factory },
-  { title: 'Infrastructure, water and sanitation, and property development', icon: Building2 },
-  { title: 'Ecological solid waste management', icon: Recycle },
-]
-
-const businessProcess = [
-  {
-    label: 'Granting of Building Permits',
-    url: 'https://drive.google.com/file/d/1DloBykQcchM_UEEnc2lz6LyAoir6QOjx/view?usp=drive_link',
-  },
-  {
-    label: 'Granting of Certificate of Occupancy',
-    url: 'https://drive.google.com/file/d/1ZE53YIu8rp3oV7-OodebVfu2xn2o8ClY/view?usp=drive_link',
-  },
-  {
-    label: 'Issuance of Business Permits',
-    url: 'https://drive.google.com/file/d/1Qz_wQBGbFNXBS4AOtjrAZhETPMOPFOXQ/view?usp=drive_link',
-  },
-  {
-    label: 'Issuance of Business Permits (Online Application)',
-    url: 'https://drive.google.com/file/d/16xVoUMdnBWc9YcmWHV_hl6FooQKf9sSs/view?usp=drive_link',
-  },
-  {
-    label: 'Issuance of Individual Work Permit',
-    url: 'https://drive.google.com/file/d/1JANXE1aKykLYTFXV-4-ziP1QoNNFz880/view?usp=drive_link',
-  },
-]
+import { PendingSection } from '../../../components/ui/PendingSection'
+import { city } from '../../../config/city'
 
 export function BusinessPage() {
-
   return (
     <>
       <PageHero
-        eyebrow="Business and investment"
-        title="Why Inabanga"
-        description="A reliable, dependable, and caring partner for investors — with a balance of progress, sustainability, and genuine hospitality in the heart of Northern Luzon."
-        crumbs={[{ label: 'City', href: '/city' }, { label: 'Business and investment' }]}
-      >
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard value="9th of 112" label="CMCI 2024 rank" note="Component cities nationwide" />
-          <StatCard value="No. 1" label="In Region I" note="2024 competitiveness index" />
-          <StatCard value="1st nationwide" label="Government efficiency" note="CMCI 2024 pillar" />
-          <StatCard value="₱505.00" label="Minimum daily wage" note="Non-agriculture, 10+ employees (RB1-24)" />
-        </div>
-      </PageHero>
-
-      <section>
-        <div className="container-page py-12 sm:py-16">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Why invest"
-              title="A competitive, well-governed city"
-              description="Recognitions published by the city government and the Cities and Municipalities Competitiveness Index."
-            />
-          </Reveal>
-
-          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {highlights.map((highlight, index) => {
-              const Icon = highlight.icon
-              return (
-                <Reveal key={highlight.title} delay={(index % 3) * 0.05} className="h-full">
-                  <div className="h-full rounded-2xl border border-line bg-white p-5 shadow-card">
-                    <span className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
-                      <Icon aria-hidden="true" className="size-5" />
-                    </span>
-                    <h3 className="mt-4 text-base font-extrabold tracking-tight text-ink-950">{highlight.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-ink-600">{highlight.text}</p>
-                  </div>
-                </Reveal>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-y border-line bg-surface">
-        <div className="container-page py-12 sm:py-16">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Priority sectors"
-              title="Where the city wants investment"
-              description="The investment priorities published by the city government."
-            />
-          </Reveal>
-
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {sectors.map((sector, index) => {
-              const Icon = sector.icon
-              return (
-                <li
-                  key={sector.title}
-                  className="flex items-center justify-start gap-3 rounded-2xl border border-line bg-white p-4 text-left text-sm font-semibold leading-6 text-ink-800 shadow-card"
-                >
-                  <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-700">
-                    <Icon aria-hidden="true" className="size-4" />
-                  </span>
-                  <span className="min-w-0 text-left">{sector.title}</span>
-                  <span className="sr-only">{"Priority sector"}{' '}{index + 1}</span>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      </section>
-
-      <section>
-        <div className="container-page py-12 sm:py-16">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Cost of doing business"
-              title="What it costs to operate here"
-              description="The city’s published rental estimates are undated. Wage floors follow the current regional wage order; electricity tariffs change by billing period."
-            />
-          </Reveal>
-
-          <div className="mt-8 grid gap-4 lg:grid-cols-3">
-            <Reveal className="h-full">
-              <div className="h-full rounded-2xl border border-line bg-white p-5 shadow-card">
-                <span className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
-                  <Wallet aria-hidden="true" className="size-5" />
-                </span>
-                <h3 className="mt-4 text-base font-extrabold tracking-tight text-ink-950">{"Wage rates"}</h3>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.1em] text-ink-400">
-                  {"Wage Order No. RB1-24 · effective November 19, 2025"}</p>
-                <ul className="mt-3 space-y-2 text-sm leading-6 text-ink-600">
-                  <li>{"₱505.00 per day — non-agriculture, 10 or more employees"}</li>
-                  <li>{"₱480.00 per day — agriculture and non-agriculture, fewer than 10 employees"}</li>
-                </ul>
-                <a
-                  href="https://nwpc.dole.gov.ph/region-i/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 hover:text-brand-800"
-                >
-                  {"See the current Region I wage order"}<ExternalLink aria-hidden="true" className="size-3.5" />
-                </a>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.05} className="h-full">
-              <div className="h-full rounded-2xl border border-line bg-white p-5 shadow-card">
-                <span className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
-                  <Building2 aria-hidden="true" className="size-5" />
-                </span>
-                <h3 className="mt-4 text-base font-extrabold tracking-tight text-ink-950">{"Rental and lease rates"}</h3>
-                <p className="mt-1 text-xs leading-5 text-ink-500">
-                  {"City-published reference ranges; no effective date or rental period is stated."}</p>
-                <ul className="mt-3 space-y-2 text-sm leading-6 text-ink-600">
-                  <li>{"Commercial space: ₱200 to ₱550 per square meter"}</li>
-                  <li>{"1-bedroom condo or apartment: ₱5,000 to ₱8,000"}</li>
-                  <li>{"2–3 bedroom condo or apartment: ₱7,000 to ₱10,000"}</li>
-                  <li>{"4-bedroom house: ₱8,000 to ₱15,000"}</li>
-                  <li>{"Land: ₱4,000 to ₱60,000 per square meter"}</li>
-                </ul>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.1} className="h-full">
-              <div className="h-full rounded-2xl border border-line bg-white p-5 shadow-card">
-                <span className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
-                  <Zap aria-hidden="true" className="size-5" />
-                </span>
-                <h3 className="mt-4 text-base font-extrabold tracking-tight text-ink-950">{"Electricity tariffs"}</h3>
-                <p className="mt-2 text-sm leading-6 text-ink-600">
-                  {"BOHECO I publishes monthly power rate advisories and tariff schedules for residential and commercial connections in Inabanga."}</p>
-                <a
-                  href="https://boheco1.com.ph"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-brand-700 hover:text-brand-800"
-                >
-                  {"View BOHECO I power rates"}<ExternalLink aria-hidden="true" className="size-3.5" />
-                </a>
-              </div>
-            </Reveal>
-          </div>
-
-          <p className="mt-4 text-xs leading-5 text-ink-500">
-            {"Confirm the city’s undated rental estimates with the provider before making a decision. Water and telecommunications prices are not listed in the city profile."}</p>
-        </div>
-      </section>
-
-      <section className="border-y border-line bg-surface">
-        <div className="container-page py-12 sm:py-16">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Setting up"
-              title="Permits and requirements"
-              description="Official process guides and forms published by the Municipal Government of Inabanga."
-              action={
-                <a
-                  href="https://www.inabanga.gov.ph/business-in-the-city/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-bold text-brand-700 transition hover:text-brand-800"
-                >
-                  {"All forms on the official page"}<ExternalLink aria-hidden="true" className="size-4" />
-                </a>
-              }
-            />
-          </Reveal>
-
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {businessProcess.map((process) => (
-              <a
-                key={process.url}
-                href={process.url}
-                target="_blank"
-                rel="noreferrer"
-                className="group flex items-center justify-between gap-3 rounded-2xl border border-line bg-white p-4 text-sm font-semibold text-ink-800 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:text-brand-700 hover:shadow-float"
-              >
-                {process.label}
-                <ExternalLink
-                  aria-hidden="true"
-                  className="size-3.5 shrink-0 text-ink-400 transition group-hover:text-brand-700"
-                />
-              </a>
-            ))}
-            <a
-              href="https://drive.google.com/file/d/1fJzaahmyEG_YKI5Y-p04NrF1m1PvekiC/view?usp=sharing"
-              target="_blank"
-              rel="noreferrer"
-              className="group flex items-center justify-between gap-3 rounded-2xl border border-line bg-white p-4 text-sm font-semibold text-ink-800 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:text-brand-700 hover:shadow-float"
-            >
-              {"Business Permit: Unified Application Form"}<ExternalLink
-                aria-hidden="true"
-                className="size-3.5 shrink-0 text-ink-400 transition group-hover:text-brand-700"
-              />
-            </a>
-          </div>
-
-          <div className="mt-4">
-            <Link
-              href="/online-services"
-             
-              className="inline-flex items-center gap-2 text-sm font-bold text-brand-700 transition hover:text-brand-800"
-            >
-              {"Apply online through the e-Business Permits and Licensing System"}<ArrowRight aria-hidden="true" className="size-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div className="container-page py-12 sm:py-16">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Opportunities"
-              title="Investment destinations"
-              description="Flagship areas highlighted in the city’s investment profile."
-            />
-          </Reveal>
-
-          <div className="mt-8 grid gap-4 lg:grid-cols-3">
-            <Reveal className="h-full">
-              <div className="h-full rounded-2xl border border-line bg-white p-5 shadow-card">
-                <h3 className="text-base font-extrabold tracking-tight text-ink-950">{"Port of U-og Trade and Maritime Gateway"}</h3>
-                <p className="mt-2 text-sm leading-6 text-ink-600">
-                  {"A strategic municipal seaport in Barangay U-og connecting Inabanga across the Camotes Sea to Cebu and neighboring coastal islands for cargo and passenger craft."}</p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.05} className="h-full">
-              <div className="h-full rounded-2xl border border-line bg-white p-5 shadow-card">
-                <h3 className="text-base font-extrabold tracking-tight text-ink-950">{"Poblacion Commercial & Raffia Heritage Hub"}</h3>
-                <p className="mt-2 text-sm leading-6 text-ink-600">
-                  {"Barangay Poblacion serves as the commercial center anchored by the Inabanga Public Market, municipal government complex, rural banking, and the Raffia Weaving Demonstration Center."}</p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.1} className="h-full">
-              <div className="h-full rounded-2xl border border-line bg-white p-5 shadow-card">
-                <h3 className="text-base font-extrabold tracking-tight text-ink-950">{"Inabanga River Eco-Tourism Corridor"}</h3>
-                <p className="mt-2 text-sm leading-6 text-ink-600">
-                  {"The fertile Inabanga River basin and Danajon Bank coastal waters offer prime opportunities in community-based eco-tours, sustainable aquaculture, and high-value agriculture."}</p>
-              </div>
-            </Reveal>
-          </div>
-
-          <Reveal>
-            <div className="mt-8 flex flex-col gap-4 rounded-2xl border border-line bg-ink-950 p-6 text-white shadow-card sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/60">{"Incentives"}</p>
-                <h3 className="mt-1.5 text-lg font-extrabold tracking-tight">
-                  {"Inabanga Investments & Incentives Code — Ordinance No. 2024-41"}</h3>
-                <p className="mt-1.5 text-sm text-white/60">
-                  {"The municipality’s incentive framework for qualified local investments."}</p>
-              </div>
-              <a
-                href="https://drive.google.com/file/d/1S5q2HOklGy4O692uYMgHrZNNXOpYqZ69/view?usp=sharing"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white/10 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-white/15"
-              >
-                <Download aria-hidden="true" className="size-3.5" />
-                {"Download the code"}</a>
-            </div>
-          </Reveal>
-
-          <div className="mt-10">
-            <SourceNote
-              href="https://business.gov.ph"
-              linkLabel="Central Business Portal (eBPLS)"
-              links={[
-                { href: 'https://nwpc.dole.gov.ph/region-vii/', label: 'NWPC Region VII wage rates' },
-                { href: 'https://boheco1.com.ph', label: 'BOHECO I power rates' },
-                {
-                  href: 'https://bohol.gov.ph',
-                  label: 'Bohol Investment Promotion Center',
-                },
-              ]}
-            >
-              {"Investment priorities, business procedures, and commercial guidelines for the Municipality of Inabanga. Wage rates follow the current DOLE Region VII Regional Tripartite Wages and Productivity Board order; electric power rates follow BOHECO I monthly advisories."}</SourceNote>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t border-line bg-surface">
-        <div className="container-page py-8">
-          <div className="flex items-center gap-3 text-sm text-ink-600">
-            <HeartPulse aria-hidden="true" className="size-4 shrink-0 text-brand-700" />
-            <p>
-              {"Doing business in the city also means being part of its community. Explore"}{' '}
-              <Link href="/city/life" className="font-bold text-brand-700 hover:text-brand-800">
-                {"life and tourism in Inabanga"}</Link>{' '}
-              {"to see what makes the city livable."}</p>
-          </div>
-        </div>
-      </section>
+        eyebrow="Build and invest"
+        title="Business and investment"
+        description={`Starting and running a business in ${city.name}: permits, local guidance and national business portals.`}
+        crumbs={[{ label: 'Town', href: '/town' }, { label: 'Business and investment' }]}
+      />
+      <PendingSection
+        topic="Investment information and a local business guide"
+        source="Business permit services are already listed under Services from the Citizen's Charter; investment details will come from the municipal government."
+        links={[
+          {
+            label: 'Corella business permit services',
+            href: '/services/business',
+            description: "New and renewal business permit requirements from the Corella Citizen's Charter 2026.",
+          },
+          {
+            label: 'Corella Online Business Permit Application',
+            href: 'https://bpbc3.ibpls.com/corellabohol',
+            description: 'Apply for or renew a business permit online, linked from the official municipal website.',
+          },
+          {
+            label: 'Central Business Portal',
+            href: 'https://business.gov.ph/',
+            description: 'Register and renew businesses and access national business permits online.',
+          },
+          {
+            label: 'DTI Business Name Registration',
+            href: 'https://bnrs.dti.gov.ph',
+            description: 'Register a business name for a sole proprietorship with the Department of Trade and Industry.',
+          },
+          {
+            label: 'Cities and Municipalities Competitiveness Index',
+            href: 'https://cmci.dti.gov.ph',
+            description: 'DTI rankings of LGU competitiveness: economy, government efficiency, infrastructure and resiliency.',
+          },
+        ]}
+      />
     </>
   )
 }

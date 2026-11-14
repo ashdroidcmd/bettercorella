@@ -15,6 +15,16 @@ const nextConfig: NextConfig = {
       { source: '/serwist/:path*', headers: [{ key: 'Cache-Control', value: 'no-cache' }] },
     ]
   },
+  // The town section moved from /city (template) to /town; keep old links working.
+  async redirects() {
+    return [
+      { source: '/city', destination: '/town', permanent: true },
+      { source: '/city/:path*', destination: '/town/:path*', permanent: true },
+      // Barangays moved out of the government section.
+      { source: '/government/barangays', destination: '/barangays', permanent: true },
+      { source: '/government/barangays/:path*', destination: '/barangays/:path*', permanent: true },
+    ]
+  },
 }
 
 export default withSerwist(nextConfig)

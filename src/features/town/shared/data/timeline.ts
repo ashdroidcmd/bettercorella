@@ -1,44 +1,38 @@
 import type { TimelineItem } from '../types';
 
+// Source: History page of the official municipal website, https://corella-bohol.gov.ph/history/
+// (checked 2026-11-14). Wording is summarized; see the source for the full account.
+export const timelineSourceUrl = 'https://corella-bohol.gov.ph/history/';
+
 export const timeline: TimelineItem[] = [
   {
-    "year": "Pre-Colonial",
-    "title": "Settlement of Inabangan",
-    "text": "Early Boholano communities flourished along the Inabanga River delta, living by fishing, agriculture, and trading with neighboring islands across the Danajon Bank and Cebu Strait."
+    year: 'Before 1884',
+    title: 'Nug-as, a sitio of Baclayon',
+    text: 'The area now called Corella was once known as Nug-as and was a sitio of the town of Baclayon.',
   },
   {
-    "year": "1744",
-    "title": "Saint Paul Parish established",
-    "text": "Jesuit missionaries officially founded the parish of Saint Paul the Apostle on the northern banks of the Inabanga River, establishing the permanent town center."
+    year: '1884',
+    title: 'Corella becomes a town',
+    text: 'The town was established and named Corella, after a town in Navarre, Spain. Its church is dedicated to Nuestra Señora del Villar, whose feast is celebrated every April 27.',
   },
   {
-    "year": "1744–1829",
-    "title": "Dagohoy Rebellion stronghold",
-    "text": "Inabanga served as a vital sanctuary during the 85-year Dagohoy revolt. The limestone chambers of Macaban Cave and the thick river forests gave Boholano freedom fighters shelter and strategic defense."
+    year: '1924',
+    title: 'A new church',
+    text: 'A new church was built for the parish of Nuestra Señora del Villar.',
   },
   {
-    "year": "1768",
-    "title": "Recollect administration",
-    "text": "Following the royal expulsion of the Jesuits from the Spanish realm, the Augustinian Recollect Fathers assumed pastoral leadership of the parish, building roads and stone structures."
+    year: '1935',
+    title: 'New Corella in Davao',
+    text: 'A group of residents settled in Davao del Norte, where they founded the town of New Corella.',
   },
   {
-    "year": "1879",
-    "title": "Coral stone church constructed",
-    "text": "The landmark Saint Paul the Apostle Church was erected out of quarried coral stone blocks, overlooking the calm waters of the Inabanga River."
+    year: '1942–1945',
+    title: 'Guerrilla headquarters',
+    text: 'During the Second World War, Corella served as a guerrilla headquarters. Bohol was declared liberated on May 25, 1945.',
   },
   {
-    "year": "1942–1945",
-    "title": "World War II resistance",
-    "text": "Local volunteers and guerrillas of the Bohol Area Command protected Inabanga's rural food supplies and resisted Japanese patrols until liberation in 1945."
+    year: '1996',
+    title: 'Tarsier town of Bohol',
+    text: 'In April 1996, Corella was recognized as the tarsier town of Bohol, home of the Philippine Tarsier Foundation sanctuary.',
   },
-  {
-    "year": "1980s",
-    "title": "Raffia capital of Bohol",
-    "text": "With hundreds of skilled women weavers extracting buri palm fibers, Inabanga became celebrated across the country as the premier center for Philippine handwoven raffia textiles."
-  },
-  {
-    "year": "Modern",
-    "title": "Eco-tourism and civic progress",
-    "text": "The municipality inaugurated the Inabanga River Nature Park, expanded port facilities at Port of U-og, and advanced civic public transparency for all 50 barangays."
-  }
 ];

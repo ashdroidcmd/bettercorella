@@ -18,15 +18,15 @@ export function OpenDataPage() {
       <PageHero
         eyebrow="Transparency"
         title="Open data, clearly sourced"
-        description="National datasets that power this site, plus reference collections for anyone who wants to go deeper. Each source keeps its own publisher, license, and caveats."
+        description="National open datasets that cover local governments, for anyone who wants to go deeper. Each source keeps its own publisher, license, and caveats."
         crumbs={[{ label: 'Transparency', href: '/transparency' }, { label: 'Open data' }]}
       >
         <div className="flex flex-wrap gap-2 text-xs font-semibold">
-          <span className="rounded-full border border-line bg-white/80 px-3 py-1.5 text-ink-600 shadow-card">
+          <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-white/75">
             {openDataSources.length} {"datasets tracked"}</span>
-          <span className="rounded-full border border-line bg-white/80 px-3 py-1.5 text-ink-600 shadow-card">
+          <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-white/75">
             {integrated.length} {"built into the site"}</span>
-          <span className="rounded-full border border-line bg-white/80 px-3 py-1.5 text-ink-600 shadow-card">
+          <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-white/75">
             {reference.length} {"reference sources"}</span>
         </div>
       </PageHero>
@@ -40,6 +40,7 @@ export function OpenDataPage() {
           </div>
         </Reveal>
 
+        {integrated.length ? (
         <section className="mt-12">
           <Reveal>
             <SectionHeading
@@ -105,13 +106,14 @@ export function OpenDataPage() {
             ))}
           </div>
         </section>
+        ) : null}
 
-        <section className="mt-14 border-t border-line pt-10">
+        <section className={integrated.length ? 'mt-14 border-t border-line pt-10' : 'mt-12'}>
           <Reveal>
             <SectionHeading
               eyebrow="Reference"
               title="Go deeper into the source data"
-              description="Useful collections that are linked directly rather than copied. They cover hazards, audit institutions, and property valuations."
+              description="National collections linked directly rather than copied. Local extracts are built into the site once they have been checked."
             />
           </Reveal>
 

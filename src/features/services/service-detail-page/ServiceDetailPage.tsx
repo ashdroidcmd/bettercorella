@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { NotFoundPage } from '../../info/not-found-page'
 import { PageHero } from '../../../components/ui/PageHero'
+import { city } from '../../../config/city'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SourceNote } from '../../../components/ui/SourceNote'
 import { categories } from '../shared/data/categories'
@@ -25,7 +26,7 @@ function pdfLabel(url: string) {
 
 function resolvePdfUrl(url: string) {
   if (url.startsWith('/')) return url
-  if (url.includes('cc.inabanga.gov.ph') || url.includes('cc.sanfernandocity.gov.ph')) {
+  if (city.citizensCharter && url.startsWith(city.citizensCharter)) {
     const filename = url.split('/').pop()
     return `/forms/${filename}`
   }
@@ -65,17 +66,17 @@ export function ServiceDetailPage() {
           <span className="rounded-full bg-brand-700 px-3 py-1.5 text-xs font-bold text-white">
             {service.classification}
           </span>
-          <span className="rounded-full border border-line bg-white px-3 py-1.5 text-xs font-semibold text-ink-700">
+          <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/80">
             {service.transactionType}
           </span>
-          <span className="rounded-full border border-line bg-white px-3 py-1.5 text-xs font-semibold text-ink-700">
+          <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/80">
             {service.office}
           </span>
           {canDoOnline ? (
             <Link
               href="/online-services"
              
-              className="inline-flex items-center gap-1.5 rounded-full border border-brand-200 bg-brand-50 px-3 py-1.5 text-xs font-bold text-brand-700 transition hover:bg-brand-100"
+              className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 text-xs font-bold text-accent transition hover:bg-accent/20"
             >
               <MonitorSmartphone aria-hidden="true" className="size-3.5" />
               {'Available online'}

@@ -6,7 +6,7 @@ description: How to write, run and debug Playwright end-to-end tests in BetterCo
 # Playwright
 
 - Config: `playwright.config.ts`. Tests: `e2e/*.spec.ts`. Playwright runs `pnpm build && pnpm start` on port 3000 automatically, or reuses a server already running there.
-- Run with `pnpm test:e2e` (Chromium), `pnpm test:e2e:all` (Firefox, WebKit, mobile), `pnpm test:e2e:ui`, `pnpm test:e2e:headed`, or `pnpm exec playwright test e2e/smoke.spec.ts -g "/news"`.
+- Run with `pnpm test:e2e` (Chromium), `pnpm test:e2e:all` (Firefox, WebKit, mobile), `pnpm test:e2e:ui`, `pnpm test:e2e:headed`, or `pnpm exec playwright test e2e/smoke.spec.ts -g "/about"`.
 - Debug with `pnpm exec playwright test --debug` or `pnpm test:e2e:report`. Traces are kept on failure under `test-results/`.
 - Record a new test with `pnpm exec playwright codegen http://localhost:3000`, then clean it up.
 

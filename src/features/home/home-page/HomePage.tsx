@@ -14,47 +14,48 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { CategoryCard } from '../../services/shared/components/CategoryCard'
-import { NewsCard } from '../../news/shared/components/NewsCard'
 import { Reveal } from '../../../components/ui/Reveal'
-import { SearchBox } from '../../search/shared/components/SearchBox'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
-import { SourceNote } from '../../../components/ui/SourceNote'
 import { StatCard } from '../../../components/ui/StatCard'
 import logoMark from '../../../assets/logo-1x1.png'
 import { categories } from '../../services/shared/data/categories'
 import { city } from '../../../config/city'
-import { news } from '../../news/shared/data/news'
 import { stats } from '../../town/shared/data/stats'
 import { removeSavedService, useSavedServices } from '../../services/shared/utils/savedServices'
 import { telHref } from '../../../lib/utils'
 
 const featuredCategories = categories.slice(0, 6)
-const latestNews = news.slice(0, 3)
-const popularSearches = ['Business permit', 'Birth certificate', 'Real property tax', 'Senior citizen ID']
+const popularServices = [
+  { label: 'Business permit', href: '/services/business/bplo-service-issuance-of-business-permits-licenses-for-new' },
+  { label: 'Birth, marriage and death certificates', href: '/services/certificates/issuance-of-certification-certified-true-copy' },
+  { label: 'Real property tax', href: '/services/taxes/real-property-tax' },
+  { label: 'Cedula', href: '/services/taxes/community-tax-certificate' },
+  { label: 'Senior citizen, PWD and solo parent ID', href: '/services/social/securing-certificates-at-the-municipal-social-welfare-and' },
+]
 
 const exploreLinks = [
   {
-    title: 'City profile',
-    href: '/city',
-    description: 'Facts, history, maps, and figures about Inabanga.',
+    title: 'Town profile',
+    href: '/town',
+    description: `Facts, history, maps, and figures about ${city.name}.`,
     icon: Landmark,
   },
   {
     title: 'Life and tourism',
-    href: '/city/life',
-    description: 'Beaches, surf breaks, festivals, and getting here.',
+    href: '/town/life',
+    description: 'Culture, festivals, and things to do.',
     icon: TreePalm,
   },
   {
     title: 'Business and investment',
-    href: '/city/business',
-    description: 'Rankings, costs, permits, and opportunities.',
+    href: '/town/business',
+    description: 'Permits, guidance, and national business portals.',
     icon: Briefcase,
   },
   {
     title: 'Online services',
     href: '/online-services',
-    description: 'Official portals for permits, jobs, and records.',
+    description: 'National portals for permits, jobs, and records.',
     icon: MonitorSmartphone,
   },
 ]
@@ -81,38 +82,30 @@ export function HomePage() {
 
             <Reveal delay={0.06}>
               <h1 className="mt-6 max-w-3xl text-balance text-4xl font-extrabold leading-[1.02] tracking-[-0.04em] sm:text-5xl lg:text-6xl">
-                {'Inabanga, made clearer.'}
+                {`${city.name}, made clearer.`}
               </h1>
             </Reveal>
 
             <Reveal delay={0.12}>
               <p className="mt-5 max-w-2xl text-pretty text-base leading-7 text-white/65 sm:text-lg">
-                {'Find city services, meet your officials, explore all 50 barangays, and follow public money — with links back to the official sources.'}
+                {'Find municipal services, meet your officials, explore the barangays, and follow public money — with links back to the official sources.'}
               </p>
             </Reveal>
 
             <Reveal delay={0.18}>
-              <div className="mt-8 max-w-xl">
-                <SearchBox
-                  large
-                  placeholder="Search services, offices, barangays…"
-                  defaultSuggestions={popularSearches}
-                />
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.24}>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {popularSearches.map((term) => (
-                  <Link
-                    key={term}
-                    href={`/search?q=${encodeURIComponent(term)}`}
-                   
-                    className="rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white/65 transition hover:border-white/30 hover:text-white"
-                  >
-                    {term}
-                  </Link>
-                ))}
+              <div className="mt-8">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/50">{'Popular services'}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {popularServices.map((service) => (
+                    <Link
+                      key={service.href}
+                      href={service.href}
+                      className="rounded-full border border-white/15 bg-white/5 px-3.5 py-2 text-sm font-semibold text-white/80 transition hover:border-white/35 hover:bg-white/10 hover:text-white"
+                    >
+                      {service.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </Reveal>
 
@@ -125,13 +118,6 @@ export function HomePage() {
                   {'Browse services'}
                   <ArrowRight aria-hidden="true" className="size-4" />
                 </a>
-                <a
-                  href="#news"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-white/70 transition hover:text-white"
-                >
-                  {'Latest updates'}
-                  <ArrowRight aria-hidden="true" className="size-4" />
-                </a>
               </div>
             </Reveal>
           </div>
@@ -141,8 +127,8 @@ export function HomePage() {
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/60">
-                    {"Inabanga, Bohol"}</p>
-                  <p className="mt-1 text-xl font-extrabold tracking-tight">City at a glance</p>
+                    {`${city.name}, ${city.province}`}</p>
+                  <p className="mt-1 text-xl font-extrabold tracking-tight">Town at a glance</p>
                 </div>
                 <img
                   src={logoMark.src}
@@ -154,26 +140,43 @@ export function HomePage() {
               </div>
 
               <div className="mt-6 grid grid-cols-2 gap-3">
-                {stats.map((stat) => (
-                  <StatCard key={stat.label} {...stat} tone="dark" />
-                ))}
+                {stats.length ? (
+                  stats.map((stat) => <StatCard key={stat.label} {...stat} tone="dark" />)
+                ) : (
+                  <>
+                    <StatCard value={city.province} label="Province" note={city.region} tone="dark" />
+                    <StatCard value={city.type} label="LGU type" note="Local government unit" tone="dark" />
+                  </>
+                )}
               </div>
 
               <div className="mt-6 space-y-3 border-t border-white/10 pt-5 text-sm text-white/60">
-                <p className="flex gap-2.5">
-                  <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
-                  <span>{city.address}</span>
-                </p>
-                <p className="flex gap-2.5">
-                  <Phone aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
-                  <a href={telHref(city.trunkline)} className="transition hover:text-white">
-                    {city.trunkline}
-                  </a>
-                </p>
-                <p className="flex gap-2.5">
-                  <Clock aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
-                  <span>{city.hours}</span>
-                </p>
+                {city.address ? (
+                  <p className="flex gap-2.5">
+                    <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
+                    <span>{city.address}</span>
+                  </p>
+                ) : null}
+                {city.trunkline ? (
+                  <p className="flex gap-2.5">
+                    <Phone aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
+                    <a href={telHref(city.trunkline)} className="transition hover:text-white">
+                      {city.trunkline}
+                    </a>
+                  </p>
+                ) : null}
+                {city.hours ? (
+                  <p className="flex gap-2.5">
+                    <Clock aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
+                    <span>{city.hours}</span>
+                  </p>
+                ) : null}
+                {!city.address && !city.trunkline ? (
+                  <p className="flex gap-2.5">
+                    <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
+                    <span>{'Town facts and Municipal Hall contacts are added as they are verified against official sources.'}</span>
+                  </p>
+                ) : null}
               </div>
             </aside>
           </Reveal>
@@ -239,7 +242,7 @@ export function HomePage() {
           <div id="services" className="scroll-mt-24">
             <Reveal>
               <SectionHeading
-                eyebrow="City services"
+                eyebrow="Municipal services"
                 title="What do you need today?"
                 description="Start with the services residents and businesses use most, grouped the way Municipal Hall organizes them."
                 action={
@@ -266,35 +269,13 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="border-y border-line bg-surface">
-        <div className="container-page py-16 sm:py-20">
-          <div id="news" className="scroll-mt-24">
-            <Reveal>
-              <SectionHeading
-                eyebrow="From Municipal Hall"
-                title="Latest updates"
-                description="Recent announcements from the Municipal Government of Inabanga, linked to the official source."
-              />
-            </Reveal>
-          </div>
-
-          <div className="mt-9 grid gap-5 md:grid-cols-3">
-            {latestNews.map((item, index) => (
-              <Reveal key={item.slug} delay={index * 0.06} className="h-full">
-                <NewsCard item={item} compact />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="scroll-mt-24">
+      <section className="scroll-mt-24 border-t border-line bg-surface">
         <div className="container-page py-16 sm:py-20">
           <Reveal>
             <SectionHeading
-              eyebrow="Get to know the city"
-              title="Explore Inabanga"
-              description="Beyond transactions: the city’s profile, its life and tourism, doing business here, and the portals that save you a trip."
+              eyebrow="Get to know the town"
+              title={`Explore ${city.name}`}
+              description="Beyond transactions: the town’s profile, its life and tourism, doing business here, and the portals that save you a trip."
             />
           </Reveal>
 
@@ -327,13 +308,6 @@ export function HomePage() {
           </div>
         </div>
       </section>
-
-      <div className="container-page py-10 sm:py-12">
-        <Reveal>
-          <SourceNote href={city.website} linkLabel="Visit the official city website">
-            {"This is an independent guide. Population figures use the 2024 Census; dataset dates vary."}</SourceNote>
-        </Reveal>
-      </div>
     </>
   )
 }

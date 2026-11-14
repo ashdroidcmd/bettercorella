@@ -1,12 +1,12 @@
 'use client'
 
-import { ArrowRight, Fingerprint, Globe2, Search, ShieldCheck } from 'lucide-react'
+import { ArrowRight, Bookmark, Fingerprint, Globe2, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
 import { InfoPageLayout } from '../shared/components/InfoPageLayout'
 import { PageHero } from '../../../components/ui/PageHero'
 
 const sections = [
-  { id: 'search-and-forms', label: 'Search and forms' },
+  { id: 'search-and-forms', label: 'Saved services and forms' },
   { id: 'hosting-logs', label: 'Hosting and technical logs' },
   { id: 'third-party-services', label: 'Third-party services and links' },
   { id: 'your-choices', label: 'Your choices' },
@@ -20,9 +20,9 @@ const privacyHighlights = [
     text: 'There are no sign-ups, comments, or forms that send personal data to this project.',
   },
   {
-    icon: Search,
-    title: 'Search stays in your browser',
-    text: 'Search matches against information bundled with the site.',
+    icon: Bookmark,
+    title: 'Saved services stay on your device',
+    text: 'Bookmarked services are stored only in your browser.',
   },
   {
     icon: ShieldCheck,
@@ -68,9 +68,9 @@ export function PrivacyPage() {
 
         <section id="search-and-forms" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"01 · On this site"}</p>
-          <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Search and forms"}</h2>
+          <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Saved services and forms"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
-            {"Search terms are read from the page address and matched against local data in your browser. They are not sent to a server operated by this project. The site does not include a transaction form, payment flow, or user account system."}</p>
+            {"Services you bookmark are saved in your browser's local storage and are never sent to a server operated by this project. The site does not include a transaction form, payment flow, or user account system."}</p>
         </section>
 
         <section id="hosting-logs" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
@@ -84,21 +84,21 @@ export function PrivacyPage() {
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"03 · Off-site services"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Third-party services and links"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
-            {"The site loads the Figtree typeface from Google Fonts, which may receive your IP address when the font is requested. Links to the official city website, Google Drive, and other public records take you to services with their own privacy policies. This guide does not control those services."}</p>
+            {"The Plus Jakarta Sans typeface is served from this site itself, so your browser does not contact Google Fonts. Some pages (town profile, barangays, contact) embed a Google Maps map; when it loads, Google may receive your IP address and set cookies under Google's privacy policy. Links to official government websites and other public records take you to services with their own privacy policies. This guide does not control those services."}</p>
         </section>
 
         <section id="your-choices" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"04 · Your control"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Your choices"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
-            {"You can block third-party fonts, scripts, or cookies through your browser settings. Doing so may change the site’s appearance but should not prevent access to the written content. For city transactions, use the official channels listed on the contact page."}</p>
+            {"You can block third-party fonts, scripts, or cookies through your browser settings. Doing so may change the site’s appearance but should not prevent access to the written content. For municipal transactions, use the official channels listed on the contact page."}</p>
         </section>
 
         <section id="changes-and-contact" className="scroll-mt-28 rounded-2xl border border-line bg-surface p-5 sm:p-7">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"05 · Policy details"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Changes and contact"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
-            {"This policy may be updated as the site’s practices change. It describes this independent guide, not the Municipal Government of Inabanga’s official website. The city-data review date shown elsewhere does not indicate a revision to this policy."}</p>
+            {"This policy may be updated as the site’s practices change. It describes this independent guide, not the Municipal Government of Corella’s official website. The data review date shown elsewhere does not indicate a revision to this policy."}</p>
           <Link
             href="/contact"
            

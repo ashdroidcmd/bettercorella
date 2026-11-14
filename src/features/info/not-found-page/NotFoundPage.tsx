@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowLeft, Search } from 'lucide-react'
+import { ArrowLeft, LayoutGrid } from 'lucide-react'
 import Link from 'next/link'
 
 export function NotFoundPage() {
@@ -22,12 +22,12 @@ export function NotFoundPage() {
             <ArrowLeft aria-hidden="true" className="size-4" />
             {"Back to home"}</Link>
           <Link
-            href="/search"
+            href="/services"
            
             className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
           >
-            <Search aria-hidden="true" className="size-4" />
-            {"Search the guide"}</Link>
+            <LayoutGrid aria-hidden="true" className="size-4" />
+            {"Browse services"}</Link>
         </div>
       </div>
     </section>

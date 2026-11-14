@@ -2,6 +2,7 @@
 
 import { OfficialCard } from '../shared/components/OfficialCard'
 import { PageHero } from '../../../components/ui/PageHero'
+import { PendingPage } from '../../../components/ui/PendingPage'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
@@ -9,7 +10,7 @@ import { city } from '../../../config/city'
 import { cityElections, electionSourceUrl, electionSupplementSources } from '../shared/data/elections'
 import { officials } from '../shared/data/officials'
 
-export function OfficialsPage() {
+function OfficialsPageContent() {
 
   const mayor = officials.find((official) => official.role === 'Municipal Mayor')
   const viceMayor = officials.find((official) => official.role === 'Municipal Vice Mayor')
@@ -23,7 +24,7 @@ export function OfficialsPage() {
       <PageHero
         eyebrow="Municipal officials"
         title="The people in municipal hall"
-        description="The elected leadership of Inabanga: the mayor, vice mayor, 8 Sangguniang Bayan members, the Liga ng mga Barangay (ABC) president, and the SK Federation representative. Profiles link to the official municipal website."
+        description={`The elected leadership of ${city.name}: the mayor, vice mayor, Sangguniang Bayan members, the Liga ng mga Barangay (ABC) president, and the SK Federation representative.`}
         crumbs={[{ label: 'Government', href: '/government' }, { label: 'Officials' }]}
       />
 
@@ -68,12 +69,13 @@ export function OfficialsPage() {
             ))}
           </div>
 
+          {cityElections.length ? (
           <div className="mt-10 overflow-hidden rounded-2xl border border-line bg-white shadow-card">
             <div className="border-b border-line p-5 sm:p-6">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-700">Election history</p>
-              <h3 className="mt-2 text-xl font-extrabold tracking-tight text-ink-950">City mayors and vice mayors</h3>
+              <h3 className="mt-2 text-xl font-extrabold tracking-tight text-ink-950">Mayors and vice mayors</h3>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-600">
-                {'Winning candidates by city election year. Records combine OpenHalalan and COMELEC lists where needed. Party labels follow each source.'}{' '}
+                {'Winning candidates by election year. Records combine OpenHalalan and COMELEC lists where needed. Party labels follow each source.'}{' '}
                 <a
                   href={electionSupplementSources[0]?.url}
                   target="_blank"
@@ -87,12 +89,12 @@ export function OfficialsPage() {
             <p className="mb-2 text-xs text-ink-600 sm:hidden">Swipe the table horizontally to view all columns.</p>
             <div
               role="region"
-              aria-label="City mayors and vice mayors by election year"
+              aria-label="Mayors and vice mayors by election year"
               tabIndex={0}
               className="overflow-x-auto focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
             >
               <table className="w-full min-w-[620px] text-left text-sm">
-                <caption className="sr-only">Mayors and vice mayors of Inabanga, Bohol, by election year</caption>
+                <caption className="sr-only">Mayors and vice mayors of {city.name}, {city.province}, by election year</caption>
                 <thead className="bg-surface text-[11px] font-bold uppercase tracking-[0.1em] text-ink-500">
                   <tr>
                     <th scope="col" className="px-5 py-3">
@@ -146,10 +148,11 @@ export function OfficialsPage() {
                   label: `${source.year} ${'COMELEC list'}`,
                 }))}
               >
-                {'Election records use OpenHalalan for 2001, 2004, and 2016–2025, with COMELEC lists filling 2007, 2010, and 2013. Missing names do not mean no election was held.'}
+                {'Election records use OpenHalalan and COMELEC lists. Missing names do not mean no election was held.'}
               </SourceNote>
             </div>
           </div>
+          ) : null}
         </div>
       </section>
 
@@ -175,10 +178,30 @@ export function OfficialsPage() {
       <section className="border-t border-line">
         <div className="container-page py-8">
           <SourceNote href={city.website} linkLabel="View official profiles">
-            {'The city government supplies these portraits, roles, and profile links. This guide does not publish personal contact details. Check official profiles for current roles and news.'}
+            {'Names and roles come from the Municipal Officials page of the official municipal website (term 2025–2028). Portraits are not shown. This guide does not publish personal contact details.'}
           </SourceNote>
         </div>
       </section>
     </>
   )
+}
+
+export function OfficialsPage() {
+  if (!officials.length) {
+    return (
+      <PendingPage
+      eyebrow="Municipal officials"
+      title="The people in Municipal Hall"
+      description={`The elected leadership of ${city.name}: the mayor, vice mayor and Sangguniang Bayan members.`}
+      crumbs={[{ label: 'Government', href: '/government' }, { label: 'Officials' }]}
+      topic="Elected municipal officials"
+      source="They will come from official municipal sources and COMELEC election results."
+      links={[
+        { label: 'COMELEC', href: 'https://comelec.gov.ph', description: 'Official election results and lists of elected local officials.' },
+        { label: 'Election winners dataset', href: 'https://data.bettergov.ph/datasets/25', description: 'OpenHalalan dataset of winning candidates in national and local elections.' },
+      ]}
+      />
+    )
+  }
+  return <OfficialsPageContent />
 }

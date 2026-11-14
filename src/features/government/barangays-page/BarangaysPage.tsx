@@ -1,51 +1,30 @@
 'use client'
 
-import { ArrowRight, MapPin, Search, X } from 'lucide-react'
-import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { BarangayMap } from './components/BarangayMap'
-import { EmptyState } from '../../../components/ui/EmptyState'
+import { ComingSoon } from '../../../components/ui/ComingSoon'
+import { MapEmbed } from '../../../components/ui/MapEmbed'
 import { PageHero } from '../../../components/ui/PageHero'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
 import { StatCard } from '../../../components/ui/StatCard'
+import { barangayMap } from '../shared/data/barangayMap'
 import { barangayDilgSourceUrl, barangays } from '../shared/data/barangays'
 import { city } from '../../../config/city'
-import { formatNumber, normalize } from '../../../lib/utils'
+import { formatNumber } from '../../../lib/utils'
 
 export function BarangaysPage() {
   const router = useRouter()
 
-  const [query, setQuery] = useState('')
-  const [activeSuggestion, setActiveSuggestion] = useState(0)
-  const normalizedQuery = normalize(query)
-  const filtered = barangays.filter((barangay) => {
-    if (!normalizedQuery) return true
-    return [barangay.name, barangay.district, barangay.punongBarangay, barangay.skChairperson ?? ''].some(
-      (value) => normalize(value).includes(normalizedQuery),
-    )
-  })
-  const suggestions = normalizedQuery
-    ? [...filtered]
-        .sort((a, b) => {
-          const rank = (name: string) => {
-            const normalizedName = normalize(name)
-            if (normalizedName === normalizedQuery) return 0
-            return normalizedName.startsWith(normalizedQuery) ? 1 : 2
-          }
-          return rank(a.name) - rank(b.name) || a.name.localeCompare(b.name)
-        })
-        .slice(0, 6)
-    : []
   const districtNumbers = Array.from(new Set(barangays.map((barangay) => barangay.districtNumber))).sort(
     (a, b) => a - b,
   )
   const grouped = districtNumbers
     .map((districtNumber) => ({
       districtNumber,
-      items: filtered.filter((barangay) => barangay.districtNumber === districtNumber),
+      items: barangays.filter((barangay) => barangay.districtNumber === districtNumber),
     }))
     .filter((group) => group.items.length > 0)
   const poblacionCount = barangays.filter((barangay) => barangay.poblacion).length
@@ -54,125 +33,18 @@ export function BarangaysPage() {
     <>
       <PageHero
         eyebrow="Barangays"
-        title="50 barangays, 8 districts"
-        description="Every community in Inabanga, with 2024 population, share of the city, change since 2020, rank, and elected barangay officials."
-        crumbs={[{ label: 'Government', href: '/government' }, { label: 'Barangays' }]}
-        overflowVisible
-      >
-        <div className="relative z-30 max-w-md">
-          <label htmlFor="barangay-search" className="sr-only">
-            {'Search barangays'}
-          </label>
-          <div className="flex items-center gap-2 rounded-2xl border border-line bg-white p-1.5 shadow-float focus-within:ring-2 focus-within:ring-brand-300">
-            <Search aria-hidden="true" className="ml-2 size-5 shrink-0 text-ink-400" />
-            <input
-              id="barangay-search"
-              type="text"
-              value={query}
-              onChange={(event) => {
-                setQuery(event.target.value)
-                setActiveSuggestion(0)
-              }}
-              onKeyDown={(event) => {
-                if (event.key === 'ArrowDown' && suggestions.length) {
-                  event.preventDefault()
-                  setActiveSuggestion((index) => Math.min(index + 1, suggestions.length - 1))
-                } else if (event.key === 'ArrowUp' && suggestions.length) {
-                  event.preventDefault()
-                  setActiveSuggestion((index) => Math.max(index - 1, 0))
-                } else if (event.key === 'Enter' && suggestions.length) {
-                  event.preventDefault()
-                  const suggestion = suggestions[activeSuggestion] ?? suggestions[0]
-                  if (suggestion) router.push(`/government/barangays/${suggestion.slug}`)
-                } else if (event.key === 'Escape' && query) {
-                  setQuery('')
-                  setActiveSuggestion(0)
-                }
-              }}
-              placeholder="Search barangay or punong barangay…"
-              autoComplete="off"
-              role="combobox"
-              aria-autocomplete="list"
-              aria-expanded={Boolean(normalizedQuery)}
-              aria-controls="barangay-search-results"
-              aria-activedescendant={
-                suggestions[activeSuggestion] ? `barangay-result-${suggestions[activeSuggestion].slug}` : undefined
-              }
-              className="min-w-0 flex-1 bg-transparent py-2 text-base text-ink-900 outline-none placeholder:text-ink-400"
-            />
-            {query ? (
-              <button
-                type="button"
-                onClick={() => {
-                  setQuery('')
-                  setActiveSuggestion(0)
-                }}
-                aria-label="Clear barangay search"
-                className="inline-flex size-11 shrink-0 items-center justify-center rounded-lg text-ink-600 transition hover:bg-surface hover:text-ink-700"
-              >
-                <X aria-hidden="true" className="size-4" />
-              </button>
-            ) : null}
-          </div>
-          {normalizedQuery ? (
-            <ul
-              id="barangay-search-results"
-              role="listbox"
-              aria-label="Barangay search results"
-              data-lenis-prevent
-              className="scrollbar-slim absolute left-0 right-0 top-full z-40 mt-2 max-h-80 overflow-y-auto overscroll-contain rounded-2xl border border-line bg-white p-2 shadow-hero"
-            >
-              {suggestions.length ? (
-                suggestions.map((barangay, index) => (
-                  <li key={barangay.slug} role="presentation">
-                    <button
-                      type="button"
-                      id={`barangay-result-${barangay.slug}`}
-                      role="option"
-                      aria-selected={index === activeSuggestion}
-                      onMouseEnter={() => setActiveSuggestion(index)}
-                      onClick={() => router.push(`/government/barangays/${barangay.slug}`)}
-                      className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition ${
-                        index === activeSuggestion ? 'bg-brand-50' : 'hover:bg-surface'
-                      }`}
-                    >
-                      <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
-                        <MapPin aria-hidden="true" className="size-4" />
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="flex flex-wrap items-center gap-2">
-                          <span className="truncate text-sm font-bold text-ink-950">{barangay.name}</span>
-                          {barangay.poblacion ? (
-                            <span className="rounded-full bg-white px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.08em] text-brand-700">
-                              {"Poblacion"}</span>
-                          ) : null}
-                        </span>
-                        <span className="mt-0.5 block truncate text-xs text-ink-500">
-                          {barangay.district} · {formatNumber(barangay.population2024)} {"residents in 2024"}</span>
-                        <span className="mt-0.5 block truncate text-xs text-ink-500">
-                          {'Punong Barangay'}: {barangay.punongBarangay}
-                        </span>
-                      </span>
-                      <ArrowRight aria-hidden="true" className="size-4 shrink-0 text-ink-400" />
-                    </button>
-                  </li>
-                ))
-              ) : (
-                <li className="px-3 py-4 text-sm text-ink-500" role="status">
-                  {'No barangays found for'} “{query.trim()}”. {'Try a name, district, or barangay official.'}
-                </li>
-              )}
-            </ul>
-          ) : null}
-        </div>
-      </PageHero>
+        title={city.barangayCount ? `${city.barangayCount} barangays` : 'Barangays'}
+        description={`Every community in ${city.name}, with PSA population figures and elected barangay officials, added as they are verified.`}
+        crumbs={[{ label: 'Barangays' }]}
+      />
 
       <section>
         <div className="container-page py-8 sm:py-16">
+          {barangayMap.features.length ? (
           <section>
             <Reveal delay={0.06}>
               <SectionHeading
-                eyebrow="City map"
+                eyebrow="Barangay map"
                 title="See where every barangay sits"
                 description="Click a barangay to zoom in and raise it above the map. Drag to explore nearby boundaries, or open its profile for full details."
               />
@@ -181,34 +53,50 @@ export function BarangaysPage() {
               </div>
               <div className="mt-4">
                 <SourceNote
-                  href="https://data.bettergov.ph/datasets/23"
-                  linkLabel="Barangay boundary data on data.bettergov.ph"
+                  href="https://github.com/faeldon/philippines-psgc-shapefiles"
+                  linkLabel="2023 PSA/NAMRIA boundary archive"
                   links={[
                     {
-                      href: 'https://github.com/altcoder/philippines-psgc-shapefiles',
-                      label: '2023 PSA/NAMRIA boundary archive',
+                      href: 'https://data.bettergov.ph/datasets/23',
+                      label: 'Barangay boundary data on data.bettergov.ph',
                     },
                   ]}
                 >
-                  {'Boundaries are simplified from the PSA/NAMRIA barangay boundary release and are approximate. Use them to explore, not to determine legal property lines.'}
+                  {'Boundaries come from the PSA/NAMRIA administrative boundary release (2023) and are approximate. Use them to explore, not to determine legal property lines.'}
                 </SourceNote>
               </div>
             </Reveal>
           </section>
+          ) : (
+            <Reveal>
+              <SectionHeading
+                eyebrow="Map"
+                title={`Where ${city.name} is`}
+                description="An interactive map of each barangay's boundary will be added once verified boundary data is in place."
+              />
+              <MapEmbed className="mt-6" title={`Map of ${city.officialName}`} query={`${city.name}, ${city.province}, Philippines`} zoom={13} />
+            </Reveal>
+          )}
 
+          {barangays.length ? (
+          <>
           <Reveal className="mt-8 sm:mt-10">
             <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-              <StatCard value={formatNumber(city.barangayCount)} label="Barangays" note="Across the city" />
+              <StatCard value={formatNumber(barangays.length)} label="Barangays" note={`Across ${city.name}`} />
               <StatCard
-                value={formatNumber(city.population2024)}
+                value={formatNumber(barangays.reduce((total, barangay) => total + barangay.population2024, 0))}
                 label="Residents"
-                note="2024 Census of Population"
+                note="PSA Census of Population"
               />
-              <StatCard value={formatNumber(city.districtCount)} label="Districts" note="Administrative districts" />
+              {districtNumbers.length > 1 ? (
+                <StatCard value={formatNumber(districtNumbers.length)} label="Districts" note="Administrative districts" />
+              ) : (
+                <StatCard value={city.incomeClass ?? '—'} label="Income class" note="Municipal income class (PSA)" />
+              )}
               <StatCard
                 value={formatNumber(poblacionCount)}
                 label="Poblacion barangays"
-                note="Barangays I to IV"
+                note="Town-center barangays"
               />
             </div>
           </Reveal>
@@ -217,27 +105,15 @@ export function BarangaysPage() {
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-700">Directory</p>
               <h2 className="mt-2 text-2xl font-extrabold tracking-[-0.025em] text-ink-950 sm:text-3xl">
-                {(normalizedQuery ? 'Search results' : 'Browse by district')}
+                {(districtNumbers.length > 1 ? 'Browse by district' : 'All barangays')}
               </h2>
               <p className="mt-2 text-sm text-ink-600">
-                {normalizedQuery
-                  ? 'Showing filtered barangay results'
-                  : 'Population figures use the 2024 Census of Population. Change compares 2020 with 2024.'}
+                {'Population figures use the 2024 Census of Population. Change compares 2020 with 2024.'}
               </p>
             </div>
-            {normalizedQuery ? (
-              <button
-                type="button"
-                onClick={() => setQuery('')}
-                className="rounded-xl border border-line bg-white px-3.5 py-2 text-sm font-semibold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
-              >
-                {'Clear search'}
-              </button>
-            ) : null}
           </div>
 
-          {grouped.length ? (
-            <div className="mt-8 space-y-10">
+          <div className="mt-8 space-y-10">
               {grouped.map((group) => {
                 const districtName = group.items[0]?.district ?? `District ${group.districtNumber}`
                 const districtPopulation = group.items.reduce(
@@ -264,7 +140,7 @@ export function BarangaysPage() {
                     >
                       <table className="min-w-[760px] w-full text-left text-sm">
                         <caption className="sr-only">
-                          {"Barangays in"}{' '}{districtName}{", Inabanga, Bohol"}</caption>
+                          {"Barangays in"}{' '}{districtName}{`, ${city.name}, ${city.province}`}</caption>
                         <thead className="bg-surface text-[11px] font-bold uppercase tracking-[0.1em] text-ink-500">
                           <tr>
                             <th scope="col" className="px-4 py-3">
@@ -293,13 +169,13 @@ export function BarangaysPage() {
                               key={barangay.slug}
                               onClick={(event) => {
                                 if (event.target instanceof Element && event.target.closest('a, button')) return
-                                router.push(`/government/barangays/${barangay.slug}`)
+                                router.push(`/barangays/${barangay.slug}`)
                               }}
                               className="cursor-pointer transition hover:bg-surface"
                             >
                               <th scope="row" className="px-4 py-3 font-normal">
                                 <Link
-                                  href={`/government/barangays/${barangay.slug}`}
+                                  href={`/barangays/${barangay.slug}`}
                                  
                                   className="inline-flex flex-wrap items-center gap-2 font-bold text-ink-950 hover:text-brand-700"
                                 >
@@ -317,7 +193,7 @@ export function BarangaysPage() {
                               <td className="px-4 py-3 text-right tabular-nums text-ink-600">{barangay.share}</td>
                               <td className="px-4 py-3 text-right tabular-nums text-ink-600">{barangay.change}</td>
                               <td className="px-4 py-3 text-right tabular-nums text-ink-600">#{barangay.rank}</td>
-                              <td className="px-4 py-3 text-ink-600">{barangay.punongBarangay}</td>
+                              <td className="px-4 py-3 text-ink-600">{barangay.punongBarangay || 'Not yet listed'}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -327,35 +203,24 @@ export function BarangaysPage() {
                 )
               })}
             </div>
+          </>
           ) : (
-            <div className="mt-8">
-              <EmptyState
-                title="No barangays found"
-                description="Try a different barangay name, district, or punong barangay."
-                action={
-                  <button
-                    type="button"
-                    onClick={() => setQuery('')}
-                    className="rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800"
-                  >
-                    {'Show all barangays'}
-                  </button>
-                }
-              />
-            </div>
+            <ComingSoon
+              topic="Barangay names, populations and officials"
+              source="Names and populations will come from the PSA Philippine Standard Geographic Code and census; officials from the DILG barangay officials directory."
+            />
           )}
 
           <div className="mt-10">
             <SourceNote
-              href="https://psa.gov.ph/classification/psgc/barangays/0103314000"
-              linkLabel="PSA barangay list and 2024 population"
+              href="https://psa.gov.ph/classification/psgc"
+              linkLabel="PSA Philippine Standard Geographic Code"
               links={[
-                { href: 'https://www.inabanga.gov.ph/vision-and-mission-2-3/', label: 'city barangay directory' },
                 { href: barangayDilgSourceUrl, label: 'DILG barangay officials directory' },
                 { href: 'https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/103013', label: 'Republic Act No. 12326' },
               ]}
             >
-              {'Barangay names and populations follow the PSA 2024 Census. Shares, changes, and ranks are calculated from those counts. Official names follow the PSA spelling. Barangay officials follow the city roster. SK chairperson entries should be confirmed with DILG. The next regular barangay and SK elections are scheduled for November 2028 under Republic Act No. 12326. Boundaries use the 2023 release.'}
+              {'Barangay names and 2024 populations follow the PSA PSGC. Barangay officials come from each barangay’s page on the official municipal website; most are published as photos, so names are added once confirmed. The next regular barangay and SK elections are scheduled for November 2028 under Republic Act No. 12326.'}
             </SourceNote>
           </div>
         </div>

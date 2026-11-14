@@ -6,7 +6,7 @@
 **Live site:** [bettercorella.vercel.app](https://bettercorella.vercel.app) · **Repository:** [ashdroidcmd/bettercorella](https://github.com/ashdroidcmd/bettercorella)
 
 > [!NOTE]
-> **Rebrand in progress.** This project was started from the BetterInabanga template. Pages are being switched over to Corella, and some still show template content. Corella data is added only after it has been checked against an official source. Until then, a page shows an "information coming soon" notice instead of guessing.
+> **Rebranded to Corella, with official data.** The town profile, 86 Citizen's Charter services, 14 offices, elected officials, the 8 barangays (with PSA population and boundaries) and local hotlines come from official sources: the municipal website, the Citizen's Charter 2026, the PSA and the Provincial Government of Bohol. Legislation, budget and procurement records are still being collected, so those sections show an "information coming soon" notice instead of guessing. Have an official document or link? [Share it](https://github.com/ashdroidcmd/bettercorella/issues).
 
 ---
 
@@ -18,7 +18,6 @@
 - who the elected officials and office heads are, and how to reach them
 - barangay information and emergency hotlines
 - where public money goes: budgets, procurement and infrastructure projects
-- news and advisories from official sources
 
 BetterCorella is **not** the official website of the Municipality of Corella. Every figure links to the official source it came from, so anyone can check it.
 
@@ -28,13 +27,11 @@ BetterCorella is **not** the official website of the Municipality of Corella. Ev
 
 | Area | Route | What it offers |
 | --- | --- | --- |
-| **Search** | `Ctrl+K` / `Cmd+K`, `/search` | Search across services, offices, barangays and news from any page |
-| **Services** | `/services`, `/services/:category/:slug` | Citizen's Charter services in 12 categories, with requirements, fees, processing time and downloadable forms. Services can be bookmarked on your device |
+| **Services** | `/services`, `/services/:category/:slug` | The 86 services of the Corella Citizen's Charter 2026 in 12 categories, with the issuing office, who may avail, processing time, listed fees and a link to the charter page. Services can be bookmarked on your device |
 | **Online services** | `/online-services` | Links to national e-government services (eGov PH, PSA, SSS, PhilHealth, Pag-IBIG, DTI and more) |
 | **Government** | `/government` | Elected officials, municipal offices, barangays, legislation, and **24/7 emergency hotlines** |
-| **Town guide** | `/city` | Town profile, life and culture, places to visit, and doing business in Corella |
+| **Town guide** | `/town` | Town profile, history and map, life and culture, places to visit, and doing business in Corella |
 | **Transparency** | `/transparency` | Budget, procurement and bids, infrastructure projects, and open data downloads |
-| **News** | `/news` | Announcements and advisories, each linked to its official source |
 | **Offline use** | (whole site) | Installable as an app (PWA). Pages you've visited still open without a connection, which helps during emergencies |
 
 ---
@@ -45,7 +42,7 @@ BetterCorella is **not** the official website of the Municipality of Corella. Ev
 | --- | --- |
 | Framework | [Next.js 16](https://nextjs.org/) (App Router) + [React 19](https://react.dev/) + TypeScript |
 | Rendering | Every page is prerendered to static HTML at build time, so content is readable by search engines without JavaScript |
-| Styling | [Tailwind CSS v4](https://tailwindcss.com/), Figtree font |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com/), Plus Jakarta Sans font |
 | Icons & motion | [Lucide](https://lucide.dev/), [Motion](https://motion.dev/), [Lenis](https://lenis.darkroom.engineering/) smooth scrolling |
 | Maps | [MapLibre GL](https://maplibre.org/) |
 | Offline / PWA | [Serwist](https://serwist.pages.dev/) service worker |
@@ -71,8 +68,6 @@ src/
 │   ├── government/      government-page/, officials-page/, offices-page/, barangays-page/, hotlines-page/, ... shared/
 │   ├── town/            town-profile-page/, life-page/, places-page/, business-page/, shared/
 │   ├── transparency/    transparency-page/, budget-page/, procurement-page/, open-data-page/, projects-page/, shared/
-│   ├── news/            news-page/, news-archive-page/, news-detail-page/, shared/
-│   ├── search/          search-page/, shared/
 │   └── info/            about-page/, contact-page/, faq-page/, privacy-page/, terms-page/, ... shared/
 ├── components/          # layout/ (site shell), ui/ (building blocks), seo/
 ├── config/              # site.ts (site name and URL), city.ts (LGU identity)

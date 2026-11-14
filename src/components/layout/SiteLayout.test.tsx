@@ -109,20 +109,24 @@ describe('SiteLayout navigation', () => {
     else Reflect.deleteProperty(window, 'matchMedia')
   })
 
-  it('opens the desktop menu and closes it after navigating to its overview', () => {
-    const servicesButton = Array.from(container.querySelectorAll('nav[aria-label="Main navigation"] button'))
-      .find((button) => button.textContent?.trim() === 'Services')
-    expect(servicesButton).toBeDefined()
+  it('shows six plain nav links with no dropdowns and marks the current page', () => {
+    const nav = container.querySelector('nav[aria-label="Main"]')
+    expect(nav).not.toBeNull()
+    expect(nav!.querySelectorAll('button')).toHaveLength(0)
+    const links = Array.from(nav!.querySelectorAll('a'))
+    expect(links.map((link) => link.textContent?.trim())).toEqual([
+      'Home', 'Services', 'Government', 'Transparency', 'Barangays', 'Hotlines & Contact',
+    ])
 
-    act(() => servicesButton!.dispatchEvent(new MouseEvent('click', { bubbles: true })))
-    expect(servicesButton?.getAttribute('aria-expanded')).toBe('true')
-
-    const overviewLink = Array.from(container.querySelectorAll('a'))
-      .find((link) => link.textContent?.trim().startsWith('View services overview'))
-    expect(overviewLink).toBeDefined()
-
-    act(() => overviewLink!.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true })))
+    const services = links.find((link) => link.textContent?.trim() === 'Services')!
+    act(() => services.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true })))
     expect(container.textContent).toContain('Services route content')
-    expect(servicesButton?.getAttribute('aria-expanded')).toBe('false')
+    expect(services.getAttribute('aria-current')).toBe('page')
+  })
+
+  it('shows the hotline bar and the citizen feedback link', () => {
+    expect(container.querySelector('a[href="tel:911"]')).not.toBeNull()
+    const feedback = Array.from(container.querySelectorAll('a')).find((link) => link.textContent?.includes('Citizen Feedback'))
+    expect(feedback?.getAttribute('href')).toBe('/contact#feedback')
   })
 })

@@ -8,19 +8,34 @@ import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
 import { StatCard } from '../../../components/ui/StatCard'
 import { city } from '../../../config/city'
+import { ISSUES_URL, SITE_NAME } from '../../../config/site'
 import { sources } from './data/sources'
 import { stats } from '../../town/shared/data/stats'
 import { timeline } from '../../town/shared/data/timeline'
 import { formatNumber } from '../../../lib/utils'
 
+const PENDING = 'Pending verification'
+
 export function AboutPage() {
+  const facts: Array<[string, string]> = [
+    ['Official name', city.officialName],
+    ['LGU type', city.type],
+    ['Province', city.province],
+    ['Region', city.region],
+    ['Congressional district', city.district ?? PENDING],
+    ['Barangays', city.barangayCount === null ? PENDING : `${city.barangayCount} barangays`],
+    ['Land area', city.landAreaKm2 === null ? PENDING : `${city.landAreaKm2} km²`],
+    ['Population', city.population2024 === null ? PENDING : `${formatNumber(city.population2024)} (${city.populationYear ?? 2024})`],
+    ['Income class', city.incomeClass ? `${city.incomeClass} class` : PENDING],
+    ['ZIP code', city.zip ?? PENDING],
+  ]
 
   return (
     <>
       <PageHero
         eyebrow="About"
-        title="A clearer civic guide to Inabanga"
-        description="Better Inabanga turns public records into a readable guide for residents, businesses, and anyone who wants to understand how the city works."
+        title={`A clearer civic guide to ${city.name}`}
+        description={`${SITE_NAME} turns public records into a readable guide for residents, businesses, and anyone who wants to understand how the Municipality of ${city.name} works.`}
         crumbs={[{ label: 'About' }]}
       />
 
@@ -32,37 +47,43 @@ export function AboutPage() {
                 <SectionHeading
                   eyebrow="What this is"
                   title="Independent, source-linked, and built for clarity"
-                  description="This is not the official city website. It is an independent civic project that organizes public information and links back to the government sources behind every dataset."
+                  description="This is not the official municipal website. It is an independent volunteer project that organizes public information and links back to the government sources behind every dataset."
                 />
                 <p className="mt-5 text-[15px] leading-7 text-ink-600">
-                  {"The guide covers municipal services from the Citizens’ Charter, the elected mayor and Sangguniang Bayan, all 50 barangays, and the budget and procurement records published under the Full Disclosure Policy. It does not process transactions, issue permits, or speak for the municipal government."}</p>
+                  {"The guide covers municipal services from the Citizen’s Charter, elected officials, barangays, and the budget and procurement records published under the Full Disclosure Policy. It does not process transactions, issue permits, or speak for the municipal government."}
+                </p>
                 <p className="mt-4 text-[15px] leading-7 text-ink-600">
-                  {"Where records conflict or change, the official source takes precedence. Each dataset is dated so you can see when it was last checked."}</p>
+                  {"Information is added only after it is checked against an official source, and each dataset is dated so you can see when it was last checked. Where records conflict or change, the official source takes precedence. Sections still waiting for verified data say so instead of guessing."}
+                </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
                     href="/services"
-                   
                     className="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800"
                   >
-                    {"Browse services"}<ArrowRight aria-hidden="true" className="size-4" />
+                    {"Browse services"}
+                    <ArrowRight aria-hidden="true" className="size-4" />
                   </Link>
-                  <Link
-                    href="/contact"
-                   
+                  <a
+                    href={ISSUES_URL}
+                    target="_blank"
+                    rel="noreferrer"
                     className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
                   >
-                    {"Contact and sources"}</Link>
+                    {"Share an official source"}
+                  </a>
                 </div>
               </div>
             </Reveal>
 
-            <Reveal delay={0.06}>
-              <div className="grid grid-cols-2 gap-4">
-                {stats.map((stat) => (
-                  <StatCard key={stat.label} {...stat} />
-                ))}
-              </div>
-            </Reveal>
+            {stats.length ? (
+              <Reveal delay={0.06}>
+                <div className="grid grid-cols-2 gap-4">
+                  {stats.map((stat) => (
+                    <StatCard key={stat.label} {...stat} />
+                  ))}
+                </div>
+              </Reveal>
+            ) : null}
           </div>
 
           <div className="mt-12 grid gap-4 sm:grid-cols-3">
@@ -70,19 +91,22 @@ export function AboutPage() {
               <Database aria-hidden="true" className="size-5 text-brand-700" />
               <h2 className="mt-3 text-base font-extrabold text-ink-950">{"Structured public data"}</h2>
               <p className="mt-2 text-sm leading-6 text-ink-600">
-                {"242 services, 38 offices, 50 barangays, 15 officials, and the city’s budget and procurement documents."}</p>
+                {"Services, offices, barangays, officials, and budget and procurement records, organized so they are easy to search and compare."}
+              </p>
             </div>
             <div className="rounded-2xl border border-line bg-white p-5 shadow-card">
               <ExternalLink aria-hidden="true" className="size-5 text-brand-700" />
               <h2 className="mt-3 text-base font-extrabold text-ink-950">{"Links to the source"}</h2>
               <p className="mt-2 text-sm leading-6 text-ink-600">
-                {"Every service, office, barangay, news item, and financial document points back to an official city or national source."}</p>
+                {"Every service, office, barangay, news item, and financial document points back to an official municipal or national source."}
+              </p>
             </div>
             <div className="rounded-2xl border border-line bg-white p-5 shadow-card">
               <MapPin aria-hidden="true" className="size-5 text-brand-700" />
               <h2 className="mt-3 text-base font-extrabold text-ink-950">{"Local by design"}</h2>
               <p className="mt-2 text-sm leading-6 text-ink-600">
-                {"Written around the way people actually use Municipal Hall: by transaction, office, barangay, and public record."}</p>
+                {"Written around the way people actually use Municipal Hall: by transaction, office, barangay, and public record."}
+              </p>
             </div>
           </div>
         </div>
@@ -93,66 +117,50 @@ export function AboutPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Town profile"
-              title="Inabanga at a glance"
-              description="The Raffia Capital of Bohol and home of the historic Inabanga River."
+              title={`${city.name} at a glance`}
+              description="Figures marked pending are added once they are checked against PSA and other official sources."
             />
           </Reveal>
           <dl className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              ['Official name', city.officialName],
-              ['Established', '1744 (Saint Paul Parish founded)'],
-              ['LGU type', city.type],
-              ['Province', city.province],
-              ['Region', city.region],
-              ['Congressional district', city.district],
-              ['Barangays', `${city.barangayCount} barangays (8 districts)`],
-              ['Land area', `${city.landAreaKm2} km² (PSA/PhilAtlas)`],
-              ['Population (2024)', formatNumber(city.population2024)],
-              ['Households (2024)', formatNumber(city.households2024)],
-              ['Average household size', String(city.averageHouseholdSize)],
-              ['Elevation', `${city.elevationM} m`],
-              ['Major languages (city profile)', 'Ilokano, Bisaya, Bicol, Ilonggo, Cebuano, Chinese, Bago'],
-              ['ZIP code', city.zip],
-              ['Coordinates', `${city.coordinates.lat}° N, ${city.coordinates.lng}° E`],
-            ].map(([label, value]) => (
+            {facts.map(([label, value]) => (
               <div key={label} className="border-b border-line pb-4">
                 <dt className="text-xs font-bold uppercase tracking-[0.12em] text-ink-400">{label}</dt>
-                <dd className="mt-1 text-[15px] font-semibold leading-6 text-ink-900">{value}</dd>
+                <dd className={`mt-1 text-[15px] font-semibold leading-6 ${value === PENDING ? 'text-ink-400' : 'text-ink-900'}`}>
+                  {value}
+                </dd>
               </div>
             ))}
           </dl>
         </div>
       </section>
 
-      <section>
-        <div className="container-page py-12 sm:py-16">
-          <Reveal>
-            <SectionHeading
-              eyebrow="History"
-              title="From Jesuit Mission to Thriving Historic Town"
-              description="A short timeline of Inabanga's founding in 1744, Dagohoy revolt ties, and modern development."
-            />
-          </Reveal>
-          <ol className="mt-8 space-y-0">
-            {timeline.map((item) => (
-              <li
-                key={item.year}
-                className="relative grid gap-2 border-l border-line pb-8 pl-6 last:pb-0 sm:grid-cols-[8rem_1fr] sm:gap-6"
-              >
-                <span
-                  aria-hidden="true"
-                  className="absolute -left-[7px] top-1.5 size-3 rounded-full border-2 border-white bg-brand-600 ring-1 ring-brand-200"
-                />
-                <p className="text-sm font-extrabold text-brand-700">{item.year}</p>
-                <div>
-                  <h3 className="text-base font-bold text-ink-950">{item.title}</h3>
-                <p className="mt-1 max-w-3xl text-sm leading-6 text-ink-600">{item.text}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      {timeline.length ? (
+        <section>
+          <div className="container-page py-12 sm:py-16">
+            <Reveal>
+              <SectionHeading eyebrow="History" title={`A short history of ${city.name}`} />
+            </Reveal>
+            <ol className="mt-8 space-y-0">
+              {timeline.map((item) => (
+                <li
+                  key={item.year}
+                  className="relative grid gap-2 border-l border-line pb-8 pl-6 last:pb-0 sm:grid-cols-[8rem_1fr] sm:gap-6"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="absolute -left-[7px] top-1.5 size-3 rounded-full border-2 border-white bg-brand-600 ring-1 ring-brand-200"
+                  />
+                  <p className="text-sm font-extrabold text-brand-700">{item.year}</p>
+                  <div>
+                    <h3 className="text-base font-bold text-ink-950">{item.title}</h3>
+                    <p className="mt-1 max-w-3xl text-sm leading-6 text-ink-600">{item.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      ) : null}
 
       <section className="border-t border-line bg-surface">
         <div className="container-page py-12 sm:py-16">
@@ -173,9 +181,7 @@ export function AboutPage() {
                 className="group flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
               >
                 <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-sm font-bold leading-6 text-ink-950 group-hover:text-brand-700">
-                    {source.name}
-                  </h3>
+                  <h3 className="text-sm font-bold leading-6 text-ink-950 group-hover:text-brand-700">{source.name}</h3>
                   <ArrowUpRight
                     aria-hidden="true"
                     className="size-4 shrink-0 text-ink-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand-700"
@@ -187,18 +193,9 @@ export function AboutPage() {
           </div>
 
           <div className="mt-8">
-            <SourceNote
-              href={city.website}
-              linkLabel="Visit the official city website"
-              links={[
-                { href: 'https://psa.gov.ph/system/files/psy/2025%20PSY%20Final_signed.pdf', label: 'PSA Statistical Yearbook: population and land area' },
-                { href: 'https://rsso07.psa.gov.ph', label: 'PSA Region VII: Bohol Census figures' },
-                { href: 'https://data.bettergov.ph', label: 'BetterGov.ph open data catalog' },
-                { href: 'https://www.philatlas.com/visayas/r07/bohol/inabanga.html', label: 'PhilAtlas Inabanga municipal profile' },
-                { href: 'https://www.bohol.gov.ph', label: 'Bohol provincial government portal' },
-              ]}
-            >
-              {"Better Inabanga is an independent project, not affiliated with the Municipal Government of Inabanga. The displayed land area is the PSA/PhilAtlas figure (168.49 km²) covering all 50 barangays. Core municipal profile facts were checked against cited public records on October 24, 2026; each dataset has its own source date. For official transactions, always use the municipality’s own channels."}</SourceNote>
+            <SourceNote href={city.website} linkLabel="Visit the official municipal website">
+              {`${SITE_NAME} is an independent project, not affiliated with the Municipal Government of ${city.name}. Each dataset has its own source date. For official transactions, always use the municipality’s own channels.`}
+            </SourceNote>
           </div>
         </div>
       </section>

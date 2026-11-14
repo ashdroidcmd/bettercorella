@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return {
       url: new URL(page.path, SITE_URL).toString(),
       lastModified: page.lastmod ?? today,
-      changeFrequency: page.changefreq ?? (page.path === '/' ? 'daily' : page.path.startsWith('/news') ? 'weekly' : 'monthly'),
+      changeFrequency: page.changefreq ?? (page.path === '/' ? 'daily' : 'monthly'),
       priority: page.priority ?? (page.path === '/' ? 1 : depth === 2 ? 0.8 : 0.6),
     }
   })

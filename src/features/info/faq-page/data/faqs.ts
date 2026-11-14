@@ -1,52 +1,36 @@
 import type { Faq } from '../types/index.ts';
 
+// Questions about the project itself. Service-specific answers (cedula, business permits, civil
+// registry…) return once Corella's Citizen's Charter has been verified.
 export const faqs: Faq[] = [
   {
-    "q": "How do I get a community tax certificate (cedula)?",
-    "a": "The City Treasurer issues the cedula. Bring a valid ID and proof of income or property if applicable. The official Citizens' Charter lists the requirements, fees, and steps.",
-    "link": "/services/taxes/issuance-of-community-tax-certificate-cedula",
-    "source": "Citizens' Charter"
+    "q": "Is this the official website of the Municipality of Corella?",
+    "a": "No. BetterCorella is an independent, volunteer civic project. It does not speak for the municipal government. Every dataset links to the official source it came from, so you can check it.",
+    "link": "/about",
+    "source": "Project disclosure"
   },
   {
-    "q": "How do I apply for or renew a business permit?",
-    "a": "The Local Economic and Business Development Office handles business permits. New applications are accepted from January 21; renewals are due by January 20. Requirements and steps are in the official Citizens' Charter.",
-    "link": "/services/business/issuance-of-business-permits-online-application",
-    "source": "Citizens' Charter"
-  },
-  {
-    "q": "How do I get a birth, marriage, or death certificate?",
-    "a": "The Civil Registrar's Office issues civil registry records. Bring a valid ID and the details of the record. Some requests may be endorsed to the PSA.",
-    "link": "/services/certificates",
-    "source": "Citizens' Charter"
-  },
-  {
-    "q": "How do I request medical or financial assistance?",
-    "a": "The City Social Welfare and Development Office handles crisis assistance, including medical and burial aid. Contact the office or visit Municipal Hall with supporting documents.",
-    "link": "/services/social",
-    "source": "Citizens' Charter"
-  },
-  {
-    "q": "How do I apply for a building permit?",
-    "a": "The Office of the City Engineer processes building permits, occupancy certificates, and related inspections. Requirements and steps are published in the Citizens' Charter.",
-    "link": "/services/infrastructure",
-    "source": "Citizens' Charter"
-  },
-  {
-    "q": "Where can I see the city budget and bids?",
-    "a": "Budget documents, the Local Expenditure Program, special fund reports, and procurement documents are linked from the transparency section.",
-    "link": "/transparency",
-    "source": "Full Disclosure Policy"
+    "q": "Why do some pages say information is coming soon?",
+    "a": "We only publish Corella information after checking it against an official source, such as the municipal Citizen's Charter, PSA, DILG or BLGF records. Until a dataset is verified, its page shows a notice instead of guessing.",
+    "link": "/about",
+    "source": "Project policy"
   },
   {
     "q": "How do I report an emergency?",
-    "a": "Call 911 for police, fire, or medical emergencies. For city disaster response, call the CDRRMO hotlines. The hotline page shows the source date for listed contacts; confirm older direct numbers before relying on them.",
+    "a": "Call 911 for police, fire, or medical emergencies anywhere in the Philippines. Corella's local emergency numbers will be listed on the hotlines page once they are verified.",
     "link": "/government/hotlines",
-    "source": "Municipal Government / 911"
+    "source": "National Emergency Hotline 911"
   },
   {
-    "q": "Is this the official city website?",
-    "a": "No. Better Inabanga is an independent civic project. The official website is inabanga.gov.ph. We link to official sources for every dataset and do not speak for the city government.",
-    "link": "/about",
-    "source": "Project disclosure"
+    "q": "Where can I find national government services online?",
+    "a": "The online services page links to national portals such as eGov PH, the Central Business Portal, PhilJobNet and PhilGEPS.",
+    "link": "/online-services",
+    "source": "National e-government portals"
+  },
+  {
+    "q": "How can I help or report wrong information?",
+    "a": "Open an issue on the project's GitHub page with the page address, what is wrong, and a link to the official source. You can also share official documents, such as the Citizen's Charter or barangay lists, so they can be added.",
+    "link": "https://github.com/ashdroidcmd/bettercorella/issues",
+    "source": "Project contribution guide"
   }
 ];

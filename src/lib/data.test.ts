@@ -6,23 +6,26 @@ import { bidBulletins, bidResults } from '../features/transparency/shared/data/b
 import { budgetDocs } from '../features/transparency/shared/data/budgetDocs'
 import { categories } from '../features/services/shared/data/categories'
 import { city } from '../config/city'
-import { factGroups, history, mapLinks, pillars } from '../features/town/shared/data/cityProfile'
-import { dpwhSanFernando, philgepsSanFernando } from '../features/transparency/shared/data/contracts'
-import { cityElections, electionSupplementSources } from '../features/government/shared/data/elections'
+import { SITE_NAME } from '../config/site'
+import { cityElections } from '../features/government/shared/data/elections'
 import { faqs } from '../features/info/faq-page/data/faqs'
-import { fiscal2024, boholMunicipalities2024, revenueSources2024 } from '../features/transparency/shared/data/fiscal'
-import { news, newsLastVerified } from '../features/news/shared/data/news'
+import { hotlines } from '../features/government/shared/data/hotlines'
 import { offices } from '../features/government/shared/data/offices'
 import { officials } from '../features/government/shared/data/officials'
 import { onlineServiceSlugs, onlineServices } from '../features/services/shared/data/onlineServices'
 import { openDataSources } from '../features/transparency/shared/data/openData'
 import { legislation, legislationSources } from '../features/government/shared/data/legislation'
-import { dpwhMapBounds, dpwhProjects } from '../features/transparency/shared/data/projects'
+import { placeCategories, places } from '../features/town/shared/data/places'
+import { dpwhProjects } from '../features/transparency/shared/data/projects'
 import { services } from '../features/services/shared/data/services'
 import { sources } from '../features/info/about-page/data/sources'
+import { stats } from '../features/town/shared/data/stats'
+import { timeline } from '../features/town/shared/data/timeline'
 import { buildRouteMetadata } from './seo/routeMetadata'
-import { searchIndex } from '../features/search/shared/utils/search'
 import { pageMetadata, paramsFor } from './seo/metadata'
+
+// These tests check invariants that must hold whether a dataset is empty, partial or complete,
+// so they keep passing as verified Corella data is added.
 
 const http = /^https?:\/\//
 const slugPattern = /^[a-z0-9-]+$/
@@ -35,77 +38,93 @@ function isDate(value: string) {
   return !Number.isNaN(Date.parse(value))
 }
 
-describe('cities and categories', () => {
-  it('has unique category slugs and accurate service counts', () => {
-    expect(categories).toHaveLength(12)
-    expect(unique(categories.map((category) => category.slug))).toBe(true)
-    for (const category of categories) {
-      const count = services.filter((service) => service.category === category.slug).length
-      expect(category.serviceCount).toBe(count)
-      expect(count).toBeGreaterThan(0)
-    }
+describe('LGU identity', () => {
+  it('describes Corella, Bohol', () => {
+    expect(city.name).toBe('Corella')
+    expect(city.province).toBe('Bohol')
+    expect(city.officialName).toBe('Municipality of Corella, Bohol')
+    expect(SITE_NAME).toBe('BetterCorella')
   })
 
-  it('has plausible city figures', () => {
-    expect(city.population2024).toBeGreaterThan(0)
-    expect(city.revenue2024).toBeGreaterThan(0)
-    expect(city.expenditures2024).toBeGreaterThan(0)
-    expect(http.test(city.website)).toBe(true)
-    expect(http.test(city.citizensCharter)).toBe(true)
+  it('only fills in figures and links that look valid', () => {
+    for (const value of [city.population2024, city.population2020, city.landAreaKm2, city.revenue2024, city.expenditures2024]) {
+      if (value !== null) expect(value).toBeGreaterThan(0)
+    }
+    for (const url of [city.website, city.citizensCharter, city.sanggunian, city.archives, city.facebook]) {
+      if (url !== null) expect(url).toMatch(http)
+    }
+    if (city.lastVerified !== null) expect(isDate(city.lastVerified)).toBe(true)
+  })
+
+  it('contains no leftover content from the template LGUs', () => {
+    const datasets = {
+      city, services, offices, officials, barangays, barangayMap, hotlines, legislation, legislationSources,
+      places, placeCategories, dpwhProjects, budgetDocs, bidResults, bidBulletins, cityElections, onlineServices,
+      openDataSources, sources, faqs, stats, timeline, categories,
+    }
+    const leftovers = /inabanga|inabangnon|san fernando|sanfernando|la union/i
+    for (const [name, data] of Object.entries(datasets)) {
+      expect(JSON.stringify(data), `dataset "${name}"`).not.toMatch(leftovers)
+    }
   })
 })
 
-describe('services', () => {
-  it('has 249 services with unique category and slug pairs', () => {
-    expect(services).toHaveLength(249)
-    expect(unique(services.map((service) => `${service.category}/${service.slug}`))).toBe(true)
+describe('services and categories', () => {
+  it('has 12 unique categories whose counts match the services', () => {
+    expect(categories).toHaveLength(12)
+    expect(unique(categories.map((category) => category.slug))).toBe(true)
+    for (const category of categories) {
+      expect(category.serviceCount).toBe(services.filter((service) => service.category === category.slug).length)
+    }
   })
 
-  it('has complete, well-formed service records', () => {
+  it('has unique, complete, sourced service records', () => {
+    expect(unique(services.map((service) => `${service.category}/${service.slug}`))).toBe(true)
+    const categorySlugs = new Set(categories.map((category) => category.slug))
     for (const service of services) {
-      expect(service.title.trim()).not.toBe('')
+      expect(categorySlugs.has(service.category)).toBe(true)
       expect(service.slug).toMatch(slugPattern)
+      expect(service.title.trim()).not.toBe('')
       expect(service.office.trim()).not.toBe('')
-      expect(service.officeCode.trim()).not.toBe('')
       expect(service.summary.trim()).not.toBe('')
+      expect(service.classification.trim()).not.toBe('')
       expect(isDate(service.lastVerified)).toBe(true)
-      expect(http.test(service.sourceUrl)).toBe(true)
-      for (const pdf of service.pdfs) expect(http.test(pdf) || pdf.startsWith('/forms/')).toBe(true)
+      expect(service.sourceUrl).toMatch(http)
+      for (const pdf of service.pdfs) expect(http.test(pdf) || pdf.startsWith('/')).toBe(true)
     }
   })
 
   it('resolves every service to a known office', () => {
     const officeCodes = new Set(offices.map((office) => office.code).filter(Boolean))
-    const unresolved = services.filter((service) => !officeCodes.has(service.officeCode))
-    expect(unresolved).toEqual([])
+    expect(services.filter((service) => !officeCodes.has(service.officeCode))).toEqual([])
   })
 
-  it('has no gaps in service classification', () => {
-    const missing = services
-      .filter((service) => !service.classification.trim())
-      .map((service) => service.slug)
-    expect(missing).toEqual([])
-  })
-
-  it('lists only real services in the online slug allowlist', () => {
+  it('lists only real services as available online', () => {
     const serviceSlugs = new Set(services.map((service) => service.slug))
     for (const slug of onlineServiceSlugs) expect(serviceSlugs.has(slug)).toBe(true)
   })
+
+  it('links online services to official portals', () => {
+    expect(onlineServices.length).toBeGreaterThan(0)
+    expect(unique(onlineServices.map((service) => service.slug))).toBe(true)
+    for (const service of onlineServices) {
+      expect(service.name.trim()).not.toBe('')
+      expect(service.url).toMatch(http)
+    }
+  })
 })
 
-describe('offices and officials', () => {
-  it('has unique office slugs and codes', () => {
+describe('government', () => {
+  it('has unique office slugs and codes with source links', () => {
     expect(unique(offices.map((office) => office.slug))).toBe(true)
-    const codes = offices.flatMap((office) => (office.code ? [office.code] : []))
-    expect(unique(codes)).toBe(true)
+    expect(unique(offices.flatMap((office) => (office.code ? [office.code] : [])))).toBe(true)
     for (const office of offices) {
       expect(office.ccUrl === '' || http.test(office.ccUrl)).toBe(true)
-      expect(http.test(office.sourceUrl)).toBe(true)
+      expect(office.sourceUrl).toMatch(http)
     }
   })
 
-  it('has 12 officials with valid profile links', () => {
-    expect(officials).toHaveLength(12)
+  it('has officials with known roles', () => {
     expect(unique(officials.map((official) => official.slug))).toBe(true)
     const roles = new Set([
       'Municipal Mayor',
@@ -119,310 +138,122 @@ describe('offices and officials', () => {
       expect(official.bioUrl === '' || http.test(official.bioUrl)).toBe(true)
     }
   })
-})
 
-describe('barangays', () => {
-  it('has 50 barangays with complete council records', () => {
-    expect(barangays).toHaveLength(50)
+  it('has complete barangay records', () => {
     expect(unique(barangays.map((barangay) => barangay.slug))).toBe(true)
     for (const barangay of barangays) {
+      expect(barangay.slug).toMatch(slugPattern)
       expect(barangay.population2024).toBeGreaterThan(0)
-      expect(barangay.districtNumber).toBeGreaterThanOrEqual(1)
-      expect(barangay.districtNumber).toBeLessThanOrEqual(8)
-      expect(barangay.punongBarangay.trim()).not.toBe('')
-      expect(barangay.kagawads.length).toBeGreaterThanOrEqual(7)
-      expect(barangay.kagawads.length).toBeLessThanOrEqual(8)
-      expect(http.test(barangay.sourceUrl)).toBe(true)
-      expect(http.test(barangay.dilgSourceUrl)).toBe(true)
-      if (barangay.skChairperson) expect(barangay.skChairperson.trim()).not.toBe('')
+      if (barangay.kagawads.length) expect(barangay.punongBarangay.trim()).not.toBe('')
+      expect(barangay.sourceUrl).toMatch(http)
+      expect(barangay.dilgSourceUrl).toMatch(http)
     }
-    expect(barangays.filter((barangay) => barangay.skChairperson)).toHaveLength(50)
-  })
-})
-
-describe('news', () => {
-  it('has well-formed stories with local images and official links', () => {
-    expect(isDate(newsLastVerified)).toBe(true)
-    expect(unique(news.map((item) => item.slug))).toBe(true)
-    expect([...news].sort((a, b) => b.date.localeCompare(a.date))).toEqual(news)
-    for (const item of news) {
-      expect(item.slug).toMatch(slugPattern)
-      expect(isDate(item.date)).toBe(true)
-      expect(item.excerpt.trim()).not.toBe('')
-      expect(item.excerpt).toMatch(/[.!?]$/)
-      expect(item.excerpt.startsWith(item.title)).toBe(false)
-      expect(item.excerpt).not.toContain('\uFFFD')
-      expect(item.image.startsWith('/news/')).toBe(true)
-      expect(http.test(item.sourceUrl)).toBe(true)
-    }
-  })
-})
-
-describe('documents and links', () => {
-  it('has valid budget and procurement document links', () => {
-    for (const doc of budgetDocs) {
-      expect(doc.title.trim()).not.toBe('')
-      expect(http.test(doc.url)).toBe(true)
-    }
-    for (const result of bidResults) {
-      expect(result.reference.trim()).not.toBe('')
-      expect(isDate(result.date)).toBe(true)
-      expect(http.test(result.url)).toBe(true)
-    }
-    for (const bulletin of bidBulletins) {
-      expect(bulletin.label.trim()).not.toBe('')
-      expect(http.test(bulletin.url)).toBe(true)
-    }
+    if (city.barangayCount !== null && barangays.length) expect(barangays).toHaveLength(city.barangayCount)
   })
 
-  it('has valid online services and city profile links', () => {
-    for (const service of onlineServices) {
-      expect(service.name.trim()).not.toBe('')
-      expect(http.test(service.url)).toBe(true)
-    }
-    for (const map of mapLinks) {
-      expect(map.label.trim()).not.toBe('')
-      expect(http.test(map.url)).toBe(true)
-    }
-    for (const source of sources) {
-      expect(source.name.trim()).not.toBe('')
-      expect(http.test(source.url)).toBe(true)
-    }
-  })
-
-  it('has complete FAQ entries and profile content', () => {
-    expect(faqs.length).toBeGreaterThanOrEqual(8)
-    for (const faq of faqs) {
-      expect(faq.q.trim()).not.toBe('')
-      expect(faq.a.trim()).not.toBe('')
-      expect(faq.link.startsWith('/')).toBe(true)
-      expect(faq.source.trim()).not.toBe('')
-    }
-    expect(pillars.length).toBeGreaterThan(0)
-    expect(factGroups.length).toBeGreaterThan(0)
-    expect(history.length).toBeGreaterThan(0)
-  })
-})
-
-describe('open data extracts', () => {
-  it('reconciles the city fiscal figures', () => {
-    expect(fiscal2024.totalLocalSources).toBeCloseTo(
-      fiscal2024.totalTaxRevenue + fiscal2024.totalNonTaxRevenue,
-      2,
-    )
-    expect(revenueSources2024.reduce((total, source) => total + source.amount, 0)).toBeCloseTo(
-      fiscal2024.totalIncome,
-      2,
-    )
-    expect(fiscal2024.netOperatingIncome).toBeCloseTo(
-      fiscal2024.totalIncome - fiscal2024.totalOperatingExpenditures,
-      2,
-    )
-    expect(fiscal2024.disasterFund.spent).toBeGreaterThan(0)
-    expect(fiscal2024.disasterFund.spent).toBeLessThanOrEqual(fiscal2024.disasterFund.appropriation)
-    expect(fiscal2024.specialEducationFund).toBeGreaterThan(0)
-  })
-
-  it('has nine comparable Bohol municipalities with valid shares', () => {
-    expect(boholMunicipalities2024).toHaveLength(9)
-    expect(unique(boholMunicipalities2024.map((city) => `${city.province}/${city.name}`))).toBe(true)
-    expect(boholMunicipalities2024.some((city) => city.name === 'Inabanga' && city.province === 'Bohol')).toBe(true)
-    for (const city of boholMunicipalities2024) {
-      expect(city.annualRegularIncome).toBeGreaterThan(0)
-      expect(city.localSources).toBeGreaterThan(0)
-      expect(city.localSources).toBeLessThanOrEqual(city.annualRegularIncome)
-      expect(city.ownSourceShare).toBeGreaterThan(0)
-      expect(city.ownSourceShare).toBeLessThan(1)
-      expect(city.ownSourceShare).toBeCloseTo(city.localSources / city.annualRegularIncome, 3)
-      expect(city.ntaShare).toBeGreaterThan(0)
-      expect(city.ntaShare).toBeLessThan(1)
-    }
-  })
-
-  it('has a complete election history extract', () => {
-    expect(cityElections).toHaveLength(9)
-    expect(unique(cityElections.map((election) => String(election.year)))).toBe(true)
-    expect(
-      cityElections.some((election) => election.year === 2025 && election.mayor?.name.includes('Ancla')),
-    ).toBe(true)
-    expect(cityElections.find((election) => election.year === 2007)?.mayor).toEqual({
-      name: 'Jose Jono Jumamoy',
-      party: 'Lakas-CMD',
-    })
-    expect(cityElections.find((election) => election.year === 2010)?.mayor?.name).toBe('Jose Jono Jumamoy')
-    expect(cityElections.find((election) => election.year === 2013)?.viceMayor?.name).toBe(
-      'Wenceslao Lao',
-    )
-    expect(electionSupplementSources.map((source) => source.year)).toEqual([2007, 2010, 2013])
-    for (const election of cityElections) {
-      expect(election.year).toBeGreaterThanOrEqual(2000)
-      for (const winner of [election.mayor, election.viceMayor]) {
-        if (winner) {
-          expect(winner.name.trim()).not.toBe('')
-          expect(winner.party.trim()).not.toBe('')
-        }
-      }
-    }
-  })
-
-  it('has a complete DPWH project extract', () => {
-    expect(dpwhProjects).toHaveLength(249)
-    expect(unique(dpwhProjects.map((project) => project.contractId))).toBe(true)
-    expect(dpwhProjects.filter((project) => project.latitude !== null && project.longitude !== null)).toHaveLength(246)
-    expect(dpwhProjects.filter((project) => project.barangay !== null).length).toBeGreaterThan(100)
-    expect(dpwhProjects.reduce((total, project) => total + project.budget, 0)).toBeCloseTo(3528676621.06, 2)
-    expect(dpwhProjects.filter((project) => project.budget > 0).length).toBeGreaterThan(240)
-    expect(dpwhProjects.filter((project) => project.status === 'Completed')).toHaveLength(230)
-    expect(dpwhProjects.filter((project) => project.status === 'Ongoing')).toHaveLength(16)
-    expect(dpwhProjects.filter((project) => project.status === 'For procurement')).toHaveLength(3)
-    expect(dpwhMapBounds.minLat).toBeLessThan(dpwhMapBounds.maxLat)
-    expect(dpwhMapBounds.minLng).toBeLessThan(dpwhMapBounds.maxLng)
-    for (const project of dpwhProjects) {
-      expect(project.contractId.trim()).not.toBe('')
-      expect(project.title.trim()).not.toBe('')
-      expect(project.year).toBeGreaterThanOrEqual(2016)
-      expect(project.year).toBeLessThanOrEqual(2025)
-      expect(project.budget).toBeGreaterThanOrEqual(0)
-      if (project.budget === 0) expect(project.status).toBe('For procurement')
-      expect(project.progress).toBeGreaterThanOrEqual(0)
-      expect(project.progress).toBeLessThanOrEqual(100)
-      if (project.contractor.trim() === '') expect(project.status).toBe('For procurement')
-      expect(project.category.trim()).not.toBe('')
-    }
-  })
-
-  it('has a verified legislation extract', () => {
-    expect(legislation).toHaveLength(14)
-    expect(legislationSources).toHaveLength(5)
-    expect(unique(legislation.map((item) => item.id))).toBe(true)
-    expect(unique(legislation.map((item) => item.number))).toBe(true)
-    expect(legislation.filter((item) => item.status === 'Enacted')).toHaveLength(5)
-    expect(legislation.filter((item) => item.status === 'Issued')).toHaveLength(8)
-    expect(legislation.filter((item) => item.status === 'Proposed')).toHaveLength(1)
-    for (const item of legislation) {
-      expect(item.number.trim()).not.toBe('')
-      expect(item.title.trim()).not.toBe('')
-      expect(item.summary.trim()).not.toBe('')
-      expect(item.year).toBeGreaterThanOrEqual(2025)
-      expect(item.year).toBeLessThanOrEqual(2026)
-      expect(http.test(item.sourceUrl)).toBe(true)
-    }
-    for (const source of legislationSources) {
-      expect(source.label.trim()).not.toBe('')
-      expect(source.coverage.trim()).not.toBe('')
-      expect(http.test(source.href)).toBe(true)
-    }
-  })
-
-  it('has contract aggregates that reconcile', () => {
-    expect(dpwhSanFernando.completed + dpwhSanFernando.ongoing + dpwhSanFernando.forProcurement).toBe(
-      dpwhSanFernando.totalProjects,
-    )
-    expect(unique(dpwhSanFernando.recentYears.map((year) => String(year.year)))).toBe(true)
-    expect(dpwhSanFernando.largestProjects.length).toBeGreaterThan(0)
-    for (const year of dpwhSanFernando.recentYears) {
-      expect(year.projects).toBeGreaterThan(0)
-      expect(year.amount).toBeGreaterThan(0)
-    }
-    for (const project of dpwhSanFernando.largestProjects) {
-      expect(project.budget).toBeGreaterThanOrEqual(0)
-      if (project.budget === 0) expect(project.status).toBe('For procurement')
-      expect(project.contractId.trim()).not.toBe('')
-      expect(project.title.trim()).not.toBe('')
-    }
-    expect(philgepsSanFernando.totalAwards).toBeGreaterThan(0)
-    expect(philgepsSanFernando.totalAmount).toBeGreaterThan(0)
-    expect(philgepsSanFernando.topAwardees.length).toBeGreaterThan(0)
-    expect(philgepsSanFernando.topAward.amount).toBeLessThanOrEqual(philgepsSanFernando.totalAmount)
-  })
-
-  it('maps every site barangay exactly once', () => {
-    expect(barangayMap.features).toHaveLength(barangays.length)
+  it('maps each barangay at most once', () => {
     expect(unique(barangayMap.features.map((feature) => feature.slug))).toBe(true)
-    expect(barangayMap.viewBox.trim()).not.toBe('')
     const siteSlugs = new Set(barangays.map((barangay) => barangay.slug))
     for (const feature of barangayMap.features) {
       expect(siteSlugs.has(feature.slug)).toBe(true)
-      expect(feature.name.trim()).not.toBe('')
-      expect(feature.areaSqKm).toBeGreaterThan(0)
       expect(feature.path.startsWith('M')).toBe(true)
-      expect(feature.path.endsWith('Z')).toBe(true)
+    }
+  })
+
+  it('lists hotlines with dialable numbers, led by the national 911 line', () => {
+    expect(hotlines[0]?.numbers).toContain('911')
+    for (const hotline of hotlines) {
+      expect(hotline.label.trim()).not.toBe('')
+      expect(hotline.numbers.length).toBeGreaterThan(0)
+      for (const number of hotline.numbers) expect(number).toMatch(/\d/)
+    }
+  })
+
+  it('has sourced legislation records', () => {
+    expect(unique(legislation.map((item) => item.id))).toBe(true)
+    for (const item of legislation) {
+      expect(item.title.trim()).not.toBe('')
+      expect(item.sourceUrl).toMatch(http)
+    }
+    for (const source of legislationSources) expect(source.href).toMatch(http)
+  })
+
+  it('has well-formed election records', () => {
+    expect(unique(cityElections.map((election) => String(election.year)))).toBe(true)
+    for (const election of cityElections) expect(election.year).toBeGreaterThanOrEqual(2000)
+  })
+})
+
+describe('documents and projects', () => {
+  it('has valid budget and procurement document links', () => {
+    for (const doc of budgetDocs) expect(doc.url).toMatch(http)
+    for (const result of bidResults) {
+      expect(isDate(result.date)).toBe(true)
+      expect(result.url).toMatch(http)
+    }
+    for (const bulletin of bidBulletins) expect(bulletin.url).toMatch(http)
+  })
+
+  it('has unique, plausible DPWH project records', () => {
+    expect(unique(dpwhProjects.map((project) => project.contractId))).toBe(true)
+    for (const project of dpwhProjects) {
+      expect(project.title.trim()).not.toBe('')
+      expect(project.budget).toBeGreaterThanOrEqual(0)
+      expect(project.progress).toBeGreaterThanOrEqual(0)
+      expect(project.progress).toBeLessThanOrEqual(100)
     }
   })
 
   it('has a well-formed open data catalog', () => {
-    expect(openDataSources).toHaveLength(9)
+    expect(openDataSources.length).toBeGreaterThan(0)
     expect(unique(openDataSources.map((source) => source.id))).toBe(true)
-    expect(openDataSources.some((source) => source.group === 'integrated')).toBe(true)
-    expect(openDataSources.some((source) => source.group === 'reference')).toBe(true)
     for (const source of openDataSources) {
-      expect(source.name.trim()).not.toBe('')
-      expect(source.publisher.trim()).not.toBe('')
-      expect(source.license.trim()).not.toBe('')
-      expect(source.coverage.trim()).not.toBe('')
-      expect(source.formats.trim()).not.toBe('')
-      expect(http.test(source.href)).toBe(true)
-      if (source.resourceHref) expect(http.test(source.resourceHref)).toBe(true)
+      expect(source.href).toMatch(http)
+      if (source.resourceHref) expect(source.resourceHref).toMatch(http)
       if (source.group === 'integrated') expect(source.localHref?.startsWith('/')).toBe(true)
     }
   })
-})
 
-describe('search index', () => {
-  it('indexes services, offices, barangays, and news with valid hrefs', () => {
-    const kinds = new Set(searchIndex.map((result) => result.kind))
-    for (const kind of ['Service', 'Office', 'Barangay', 'News', 'Page'] as const) expect(kinds.has(kind)).toBe(true)
-    expect(searchIndex.filter((result) => result.kind === 'Service')).toHaveLength(services.length)
-    expect(searchIndex.filter((result) => result.kind === 'Office')).toHaveLength(offices.length)
-    expect(searchIndex.filter((result) => result.kind === 'Barangay')).toHaveLength(barangays.length)
-    for (const result of searchIndex) {
-      expect(result.href.startsWith('/')).toBe(true)
-      expect(result.title.trim()).not.toBe('')
-      expect(result.meta.trim()).not.toBe('')
-      expect(result.keywords.trim()).not.toBe('')
+  it('has valid sources and FAQ entries', () => {
+    for (const source of sources) expect(source.url).toMatch(http)
+    expect(faqs.length).toBeGreaterThan(0)
+    for (const faq of faqs) {
+      expect(faq.q.trim()).not.toBe('')
+      expect(faq.a.trim()).not.toBe('')
+      expect(faq.link.startsWith('/') || http.test(faq.link)).toBe(true)
     }
-    expect(searchIndex.some((result) => result.href === '/transparency/open-data')).toBe(true)
-    expect(searchIndex.some((result) => result.href === '/transparency/projects')).toBe(true)
   })
 })
 
-describe('prerender metadata', () => {
+describe('route metadata', () => {
   it('covers every static and data-driven route exactly once', () => {
     const pages = buildRouteMetadata()
-    const firstService = services[0]
     expect(unique(pages.map((page) => page.path))).toBe(true)
-    expect(pages).toHaveLength(28 + categories.length + services.length + offices.length + barangays.length + news.length)
-    expect(pages.find((page) => page.path === '/services')?.description).toContain(`${services.length} city services`)
-    expect(firstService).toBeDefined()
-    if (!firstService) throw new Error('Service catalog must contain at least one service.')
-    expect(pages.find((page) => page.path === `/services/${firstService.category}/${firstService.slug}`)?.title).toBe(
-      firstService.title,
-    )
+    expect(pages.some((page) => page.path === '/search' || page.path.startsWith('/news'))).toBe(false)
+    expect(pages).toHaveLength(25 + categories.length + services.length + offices.length + barangays.length)
+    expect(pages.some((page) => page.path === '/town')).toBe(true)
+    expect(pages.some((page) => page.path.startsWith('/city'))).toBe(false)
   })
 
   it('builds Next.js metadata and static params from the route list', () => {
-    const service = services[0]
-    if (!service) throw new Error('Service catalog must contain at least one service.')
-    const path = `/services/${service.category}/${service.slug}`
-    const meta = pageMetadata(path)
-
-    expect(meta.title).toEqual({ absolute: `${service.title} | Better Inabanga` })
-    expect(meta.alternates?.canonical).toBe(path)
-    expect(meta.openGraph?.url).toBe(path)
+    const meta = pageMetadata('/about')
+    expect(meta.title).toEqual({ absolute: 'About this project | BetterCorella' })
+    expect(meta.alternates?.canonical).toBe('/about')
+    expect(meta.openGraph?.url).toBe('/about')
     expect(pageMetadata('/does-not-exist')).toEqual({})
 
-    const params = paramsFor('/services/[category]/[slug]')
-    expect(params).toHaveLength(services.length)
-    expect(params).toContainEqual({ category: service.category, slug: service.slug })
+    expect(paramsFor('/services/[category]')).toHaveLength(categories.length)
+    expect(paramsFor('/services/[category]/[slug]')).toHaveLength(services.length)
   })
 })
 
-describe('manual data freshness', () => {
-  it('reports current verification dates for manually maintained data', () => {
-    const report = getDataFreshness(new Date('2026-10-23T00:00:00Z'))
-    expect(report.find((row) => row.dataset === 'Service charter records')?.status).toBe('current')
-    expect(report.find((row) => row.dataset === 'City office directory')?.status).toBe('current')
-    expect(report.find((row) => row.dataset === 'Elected officials')?.status).toBe('current')
-    expect(formatDataFreshnessReport(new Date('2026-10-23T00:00:00Z'))).toContain('Barangay names and population')
+describe('data freshness', () => {
+  it('marks empty datasets as pending and verified ones as current', () => {
+    const report = getDataFreshness(new Date('2026-11-14T00:00:00Z'))
+    for (const row of report) {
+      if (row.recordCount === 0) expect(row.status).toBe('pending')
+    }
+    expect(report.find((row) => row.dataset === 'Emergency hotlines')?.status).toBe('current')
+    expect(formatDataFreshnessReport(new Date('2026-11-14T00:00:00Z'))).toContain('Manual data freshness')
   })
 })

@@ -10,26 +10,25 @@ import { barangays } from '../../shared/data/barangays'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 const workerUrl = '/vendor/maplibre-gl-worker.mjs'
-const boundaryUrl = '/data/inabanga-barangays.geojson'
+// Corella barangay boundaries (PSA/NAMRIA ADM4, 2023), matched to barangayMap.ts by ADM4_EN name.
+const boundaryUrl = '/data/barangay-boundaries.geojson'
 
 setWorkerUrl(workerUrl)
 
 const mapFeaturesByName = new Map<string, (typeof barangayMap.features)[number]>(
   barangayMap.features.map((feature) => [feature.name, feature]),
 )
-const boundaryNameAliases: Record<string, string> = {
-  'Ilaud (Pob.)': 'Ilaud',
-  'Ilaud (Poblacion)': 'Ilaud',
-  'Santo Nino': 'Santo Niño',
-}
+// Boundary-file names that differ from the PSA barangay names (none for Corella's 2023 release).
+const boundaryNameAliases: Record<string, string> = {}
 const barangaysBySlug = new Map<string, (typeof barangays)[number]>(barangays.map((barangay) => [barangay.slug, barangay]))
-const populationColors = ['#dcecf7', '#b6d8ed', '#83b9dd', '#4f95c3', '#246889']
+// Same bands and colors as the legend in BarangayMap.tsx.
+const populationColors = ['#dce6ff', '#b9cdff', '#8aa9f7', '#4f7be6', '#0038a8']
 
 function getPopulationColor(population: number) {
-  if (population > 8_000) return populationColors[4]
-  if (population > 5_000) return populationColors[3]
-  if (population > 2_500) return populationColors[2]
-  if (population > 1_000) return populationColors[1]
+  if (population > 1_800) return populationColors[4]
+  if (population > 1_400) return populationColors[3]
+  if (population > 1_100) return populationColors[2]
+  if (population > 900) return populationColors[1]
   return populationColors[0]
 }
 
@@ -114,8 +113,8 @@ function loadBoundaryData(): Promise<PreparedBoundaryData> {
 
 const mapColors = {
   population: populationColors,
-  hover: '#f4c36e',
-  selected: '#e29a45',
+  hover: '#ffe27a',
+  selected: '#fcd116',
 }
 
 interface BarangayMapCanvasProps {
@@ -166,8 +165,8 @@ export function BarangayMapCanvas({ resetToken, onSelect, onHover }: BarangayMap
           paint: { 'background-color': '#e9eff1' },
         }],
       },
-      center: [124.0722, 10.0314],
-      zoom: 11,
+      center: [123.925, 9.69], // Corella, Bohol
+      zoom: 12,
       pitch: 0,
       bearing: 0,
       minZoom: 10,
@@ -185,7 +184,7 @@ export function BarangayMapCanvas({ resetToken, onSelect, onHover }: BarangayMap
     map.addControl(new NavigationControl({ showCompass: false }), 'top-right')
 
     const label = document.createElement('div')
-    label.className = 'rounded-full bg-[#0284c7] px-3 py-1 text-xs font-bold text-white shadow-lg ring-2 ring-white/90'
+    label.className = 'rounded-full bg-brand-600 px-3 py-1 text-xs font-bold text-white shadow-lg ring-2 ring-white/90'
     label.style.pointerEvents = 'none'
     const labelMarker = new Marker({ element: label, anchor: 'center' })
     labelMarkerRef.current = labelMarker
@@ -382,7 +381,7 @@ export function BarangayMapCanvas({ resetToken, onSelect, onHover }: BarangayMap
           className="h-full w-full"
           data-lenis-prevent-wheel
           role="application"
-          aria-label="Interactive 3D map of Inabanga barangays. Scroll to zoom, drag to pan, click a barangay to select it."
+          aria-label="Interactive 3D map of the barangays. Scroll to zoom, drag to pan, click a barangay to select it."
         />
       </div>
       <div className="pointer-events-none absolute bottom-3 left-3 z-10 rounded-lg bg-white/90 px-2.5 py-1.5 text-[10px] font-semibold text-ink-600 shadow-sm backdrop-blur-sm">

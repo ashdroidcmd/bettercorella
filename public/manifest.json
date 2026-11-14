@@ -1,11 +1,14 @@
 {
-  "name": "Better Inabanga, Bohol",
-  "short_name": "Better Inabanga",
-  "description": "Civic Transparency and Public Services Portal for Municipality of Inabanga, Bohol",
+  "name": "BetterCorella, Bohol",
+  "short_name": "BetterCorella",
+  "description": "An independent civic guide to the services, officials, barangays, budgets and public records of the Municipality of Corella, Bohol.",
+  "lang": "en",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#0284c7",
+  "theme_color": "#0038A8",
+  "categories": ["government", "reference"],
   "icons": [
     {
       "src": "/favicon.svg",

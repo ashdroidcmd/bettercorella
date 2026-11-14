@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-figtree), "Figtree", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-  --color-brand-50: #f0f9ff;
-  --color-brand-100: #e0f2fe;
-  --color-brand-200: #bae6fd;
-  --color-brand-300: #7dd3fc;
-  --color-brand-400: #38bdf8;
-  --color-brand-500: #0ea5e9;
-  --color-brand-600: #0284c7;
-  --color-brand-700: #0369a1;
-  --color-brand-800: #075985;
-  --color-brand-900: #0c4a6e;
-  --color-brand-950: #082f49;
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dce6ff;
+  --color-brand-200: #b9cdff;
+  --color-brand-300: #8aa9f7;
+  --color-brand-400: #4f7be6;
+  --color-brand-500: #1f56d1;
+  --color-brand-600: #0038a8;
+  --color-brand-700: #002f8e;
+  --color-brand-800: #032772;
+  --color-brand-900: #06205a;
+  --color-brand-950: #04153b;
 
   --color-ink-950: #071321;
   --color-ink-900: #0e1e33;
@@ -23,9 +23,9 @@
   --color-ink-500: #627794;
   --color-ink-400: #889bb4;
 
-  --color-accent: #f59e0b;
-  --color-accent-dark: #d97706;
-  --color-surface: #f8fafc;
+  --color-accent: #fcd116;
+  --color-accent-dark: #c79a00;
+  --color-surface: #f7f9fc;
   --color-line: #e2e8f0;
   --color-line-dark: #cbd5e1;
 

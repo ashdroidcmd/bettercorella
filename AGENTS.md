@@ -2,10 +2,11 @@
 
 ## Project
 
-**BetterCorella** is a volunteer-run, open-source civic portal for the **Municipality of Corella, Bohol, Philippines**. It shows the LGU's services, officials, barangays, hotlines, budget and news.
+**BetterCorella** is a volunteer-run, open-source civic portal for the **Municipality of Corella, Bohol, Philippines**. It shows the LGU's services, officials, barangays, hotlines and budget.
 
 - Frontend only. There is no backend or database; typed data lives in each feature's `data/` folder under `src/features/`.
-- It is derived from BetterInabanga (ISC). The content still describes **Inabanga** until the Corella rebrand is done. Never mix data from the two towns in a single change.
+- It is derived from BetterInabanga (ISC). The site is rebranded to Corella. Datasets without verified Corella records (legislation, budget, procurement, projects, places) stay empty and show `ComingSoon`; source notes and conflicts are in `../rebranding/` (outside git). Never add data from another LGU — `src/lib/data.test.ts` fails if Inabanga, San Fernando or La Union content appears.
+- LGU identity lives in `src/config/city.ts`. Unverified fields are `null`; components must handle `null` (hide the item or show "Pending").
 
 ## Core Rules
 
@@ -54,6 +55,7 @@ Update only what the change affects:
 - `../user-manual/` for changes to what residents see or do
 - `CHANGELOG.md` for any meaningful change
 - `graphify update .` after code changes (AST only, no API cost)
+- `../TODO.md`: tick off rebrand checklist items you complete (workspace folder, not in git)
 
 ## Final Report
 

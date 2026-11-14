@@ -10,7 +10,7 @@ interface SourceLink {
 
 interface SourceNoteProps {
   children: ReactNode
-  href?: string
+  href?: string | null
   linkLabel?: string
   links?: SourceLink[]
 }

@@ -1,22 +1,20 @@
-# Better San Fernando, La Union
+# BetterCorella, Bohol
 
-> An independent civic guide to the City of San Fernando, La Union. It helps residents find city services, government contacts, barangay information, public records, and local places. It is not the official city government website.
+> An independent civic guide to the Municipality of Corella, Bohol, Philippines. It helps residents find municipal services, government contacts, barangay information, public records and national e-government portals. It is not the official municipal government website.
 
-Information comes from published city and government sources. Source dates vary by dataset; follow the linked source and verify time-sensitive details directly before acting.
+Information is published only after it is checked against an official source (the municipal government, PSA, DILG, BLGF, PhilGEPS, DPWH). Sections without verified data say so instead of guessing. Source dates vary by dataset; follow the linked source and verify time-sensitive details directly before acting.
 
 ## Main sections
 
-- [City services](/services): Requirements, fees, and official forms from the Citizens’ Charter.
-- [City offices](/government/offices): Departments, contacts, and the services they handle.
-- [City officials](/government/officials): Elected city officials and election history.
-- [Barangays](/government/barangays): All 59 barangays, population data, and an interactive map.
-- [Emergency hotlines](/government/hotlines): Published emergency and public-service contacts.
-- [Ordinances and executive orders](/government/legislation): Recent city legislation with links to source documents.
-- [Transparency](/transparency): Budgets, audit reports, procurement records, and open datasets.
-- [Projects and public spending](/transparency/projects): Published city projects and related records.
-- [News and updates](/news): Recent local updates and announcements.
-- [Places directory](/city/places): Public services, health facilities, schools, businesses, and visitor destinations.
+- [Municipal services](/services): Requirements, fees and official forms from the Citizen's Charter, as they are verified.
+- [Online services](/online-services): National e-government portals (eGov PH, Central Business Portal, PhilJobNet, PhilGEPS).
+- [Municipal government](/government): Officials, offices, barangays and legislation.
+- [Emergency hotlines](/government/hotlines): The national 911 and 8888 hotlines; local numbers once verified.
+- [Town profile](/town): Facts about Corella from official sources.
+- [Transparency](/transparency): Budget, procurement, infrastructure projects and open datasets.
+- [About](/about): How the project works and where its data comes from.
 
-## Official source
+## Project
 
-- [City of San Fernando official website](https://www.sanfernandocity.gov.ph/): Verify government announcements, services, and source records.
+- Source code: https://github.com/ashdroidcmd/bettercorella
+- Report corrections: https://github.com/ashdroidcmd/bettercorella/issues
