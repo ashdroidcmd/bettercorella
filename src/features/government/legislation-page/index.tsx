@@ -1,0 +1,1 @@
+export { LegislationPage } from './LegislationPage'

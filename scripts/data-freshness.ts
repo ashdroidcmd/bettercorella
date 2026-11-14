@@ -1,7 +1,7 @@
 // Prints the data-freshness table before each build and flags stale datasets in GitHub Actions.
 // Runs with Node's built-in TypeScript type stripping (Node 22.18+ / 24).
 import { appendFile } from 'node:fs/promises'
-import { formatDataFreshnessReport, getDataFreshness } from '../src/data/dataFreshness.ts'
+import { formatDataFreshnessReport, getDataFreshness } from '../src/lib/dataFreshness.ts'
 
 const report = formatDataFreshnessReport()
 console.info(`\n${report}`)

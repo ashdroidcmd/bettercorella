@@ -37,7 +37,7 @@ If you find a broken link, outdated hotline, incorrect official information, or 
    ```
 
 ## 📜 Verifying Citations and Sources
-- Every dataset in `src/data/` should reference a valid, accessible source URL or local archive in `/forms/`.
+- Every dataset in `src/features/*/**/data/` should reference a valid, accessible source URL or local archive in `/forms/`.
 - Ensure all municipality references reflect **Inabanga, Bohol** (not other LGUs).
 
 Thank you for helping build a more transparent and connected Inabanga!

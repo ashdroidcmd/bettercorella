@@ -1,6 +1,6 @@
-import { RouteJsonLd } from '@/components/RouteJsonLd'
-import { pageMetadata } from '@/lib/metadata'
-import { TransparencyPage } from '@/views/TransparencyPage'
+import { RouteJsonLd } from '@/components/seo/RouteJsonLd'
+import { pageMetadata } from '@/lib/seo/metadata'
+import { TransparencyPage } from '@/features/transparency/transparency-page'
 
 export const metadata = pageMetadata('/transparency')
 

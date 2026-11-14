@@ -6,6 +6,7 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Changed
 
+- Reorganized `src/` into feature-based folders (`src/features/<feature>/<x>-page/` with a `shared/` folder per feature), matching the team's frontend structure.
 - Migrated from Vite + React Router to Next.js 16 (App Router). Every page is now prerendered with its full content in the HTML, which search engines and AI crawlers can read without running JavaScript.
 - Service worker moved from vite-plugin-pwa to Serwist.
 

@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from 'next'
 import { Figtree } from 'next/font/google'
 import type { ReactNode } from 'react'
-import { SiteLayout } from '@/components/SiteLayout'
-import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, THEME_COLOR } from '@/lib/site'
-import { Providers } from './providers'
-import '../index.css'
+import { SiteLayout } from '@/components/layout/SiteLayout'
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, THEME_COLOR } from '@/config/site'
+import { Providers } from '@/app/providers'
+import '@/index.css'
 
 const figtree = Figtree({ subsets: ['latin'], variable: '--font-figtree', display: 'swap' })
 

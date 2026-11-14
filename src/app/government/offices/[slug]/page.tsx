@@ -1,6 +1,6 @@
-import { RouteJsonLd } from '@/components/RouteJsonLd'
-import { pageMetadata, paramsFor } from '@/lib/metadata'
-import { OfficeDetailPage } from '@/views/OfficeDetailPage'
+import { RouteJsonLd } from '@/components/seo/RouteJsonLd'
+import { pageMetadata, paramsFor } from '@/lib/seo/metadata'
+import { OfficeDetailPage } from '@/features/government/office-detail-page'
 
 type Props = { params: Promise<{ slug: string }> }
 

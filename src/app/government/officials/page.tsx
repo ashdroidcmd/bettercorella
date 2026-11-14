@@ -1,6 +1,6 @@
-import { RouteJsonLd } from '@/components/RouteJsonLd'
-import { pageMetadata } from '@/lib/metadata'
-import { OfficialsPage } from '@/views/OfficialsPage'
+import { RouteJsonLd } from '@/components/seo/RouteJsonLd'
+import { pageMetadata } from '@/lib/seo/metadata'
+import { OfficialsPage } from '@/features/government/officials-page'
 
 export const metadata = pageMetadata('/government/officials')
 

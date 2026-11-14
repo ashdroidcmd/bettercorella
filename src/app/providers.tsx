@@ -3,8 +3,8 @@
 import { SerwistProvider, useSerwist } from '@serwist/turbopack/react'
 import { MotionConfig } from 'motion/react'
 import { useEffect, type ReactNode } from 'react'
-import { ScrollToTop } from '@/components/ScrollToTop'
-import { SmoothScroll } from '@/components/SmoothScroll'
+import { ScrollToTop } from '@/components/layout/ScrollToTop'
+import { SmoothScroll } from '@/components/layout/SmoothScroll'
 
 const UPDATE_CHECK_INTERVAL = 60 * 60 * 1000
 

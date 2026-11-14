@@ -1,0 +1,1 @@
+export { BarangaysPage } from './BarangaysPage'

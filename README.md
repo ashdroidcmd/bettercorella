@@ -51,6 +51,39 @@
 
 ---
 
+## 🗂️ Project Structure
+
+The code is organized by feature. Each page has its own folder; code shared by several pages of a feature lives in that feature's `shared/` folder.
+
+```
+src/
+├── app/                 # Next.js routes (metadata + static params; render a feature page)
+├── features/
+│   ├── home/            home-page/
+│   ├── services/        services-page/, service-category-page/, service-detail-page/, online-services-page/, shared/
+│   ├── government/      government-page/, officials-page/, offices-page/, barangays-page/, hotlines-page/, ... shared/
+│   ├── town/            town-profile-page/, life-page/, places-page/, business-page/, shared/
+│   ├── transparency/    transparency-page/, budget-page/, procurement-page/, open-data-page/, projects-page/, shared/
+│   ├── news/            news-page/, news-archive-page/, news-detail-page/, shared/
+│   ├── search/          search-page/, shared/
+│   └── info/            about-page/, contact-page/, faq-page/, privacy-page/, terms-page/, ... shared/
+├── components/          # layout/ (site shell), ui/ (building blocks), seo/
+├── config/              # site.ts, city.ts
+└── lib/                 # utils, seo/ (metadata + route list), data freshness
+```
+
+A page folder looks like:
+
+```
+services-page/
+├── components/          # components used only by this page (when needed)
+├── hooks/  types/  utils/  data/
+├── ServicesPage.tsx
+└── index.tsx            # export { ServicesPage } from './ServicesPage'
+```
+
+---
+
 ## 💻 Getting Started Locally
 
 1. **Install dependencies:**

@@ -1,6 +1,6 @@
-import { RouteJsonLd } from '@/components/RouteJsonLd'
-import { pageMetadata, paramsFor } from '@/lib/metadata'
-import { ServiceDetailPage } from '@/views/ServiceDetailPage'
+import { RouteJsonLd } from '@/components/seo/RouteJsonLd'
+import { pageMetadata, paramsFor } from '@/lib/seo/metadata'
+import { ServiceDetailPage } from '@/features/services/service-detail-page'
 
 type Props = { params: Promise<{ category: string; slug: string }> }
 

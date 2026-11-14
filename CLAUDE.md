@@ -7,13 +7,21 @@ Read `AGENTS.md` first. It holds the project rules. This file adds Claude-specif
 - **Name:** BetterCorella, the civic portal for the Municipality of Corella, Bohol
 - **Maintainer:** ashdroidcmd (GitHub)
 - **Frontend:** Next.js 16 (App Router), React 19, TypeScript 6, Tailwind CSS 4, Motion and Lenis, Lucide icons, MapLibre GL
-- **Backend / Database:** none (static site; data in `src/data/*.ts`)
+- **Backend / Database:** none (static site; typed data in each feature's `data/` folder)
 - **Language:** English only (language switching was removed; no i18n layer)
 - **Rendering:** every route is prerendered to static HTML at build time (`generateStaticParams` for dynamic routes), so page content is in the HTML for search engines.
-- **Layout:** routes in `src/app/` are thin server files (metadata + static params) that render a client view from `src/views/`. Shared UI is in `src/components/`, data in `src/data/`.
-- **SEO:** `src/data/routeMetadata.ts` is the single list of routes. It drives `generateMetadata` (`src/lib/metadata.ts`), JSON-LD (`RouteJsonLd`), `/sitemap.xml` and static params. Add new routes there.
+- **Structure (feature-based):**
+  - `src/app/`: Next.js routes only. Each `page.tsx` sets metadata and static params, then renders a feature page.
+  - `src/features/<feature>/<x>-page/`: one folder per page, holding the page component, `index.tsx` (re-export) and, when needed, `components/`, `hooks/`, `types/`, `utils/` and `data/`.
+  - `src/features/<feature>/shared/`: code used by more than one page of that feature (`components/`, `data/`, `types/`, `utils/`).
+  - `src/components/{layout,ui,seo}`: feature-agnostic UI (site shell, building blocks, JSON-LD).
+  - `src/config/`: `site.ts` (site name/URL) and `city.ts` (LGU identity).
+  - `src/lib/`: `utils.ts`, `seo/` (metadata + route list), `dataFreshness.ts` and cross-feature data tests.
+  - Features: `home`, `services`, `government`, `town`, `transparency`, `news`, `search`, `info`.
+  - Import with relative paths inside `src/features` and `src/lib` (the data files must also load in plain Node for `scripts/data-freshness.ts`). Files in `src/app/` use `@/`.
+- **SEO:** `src/lib/seo/routeMetadata.ts` is the single list of routes. It drives `generateMetadata` (`src/lib/seo/metadata.ts`), JSON-LD (`RouteJsonLd`), `/sitemap.xml` and static params. Add new routes there.
 - **PWA:** Serwist (`@serwist/turbopack`). The worker source is `src/sw.ts`, served at `/serwist/sw.js`.
-- **Site URL:** `NEXT_PUBLIC_SITE_URL` (default `https://bettercorella.vercel.app`), set in `src/lib/site.ts`.
+- **Site URL:** `NEXT_PUBLIC_SITE_URL` (default `https://bettercorella.vercel.app`), set in `src/config/site.ts`.
 - **Status:** forked from BetterInabanga, so the content still says Inabanga and the rebrand is pending.
 
 ## Commands

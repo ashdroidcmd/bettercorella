@@ -4,7 +4,7 @@
 
 **BetterCorella** is a volunteer-run, open-source civic portal for the **Municipality of Corella, Bohol, Philippines**. It shows the LGU's services, officials, barangays, hotlines, budget and news.
 
-- Frontend only. There is no backend or database; all data lives in `src/data/*.ts`.
+- Frontend only. There is no backend or database; typed data lives in each feature's `data/` folder under `src/features/`.
 - It is derived from BetterInabanga (ISC). The content still describes **Inabanga** until the Corella rebrand is done. Never mix data from the two towns in a single change.
 
 ## Core Rules
@@ -12,7 +12,7 @@
 1. Understand the task before you change code.
 2. Use Graphify (`graphify query "..."`) to find the relevant code. Do not scan the whole repo.
 3. Read only the docs, source files and tests the task needs.
-4. Follow the existing patterns: React function components, Tailwind classes, typed data in `src/data/`, and `translate()` / `LocalizedText` for UI strings.
+4. Follow the existing patterns: React function components, Tailwind classes, feature-based folders (`src/features/<feature>/<x>-page/` plus `shared/`). The site is English only.
 5. Make the smallest correct change. No unrelated refactors, dependency bumps or mass reformatting.
 6. Test what you changed, and update the docs and `CHANGELOG.md` to match.
 7. Review `git status` and `git diff` before you report completion.
@@ -27,8 +27,8 @@
 
 ## Before Coding, Identify
 
-- The affected route (`src/app/<route>/page.tsx`) and its view (`src/views/`)
-- Affected components (`src/components/`) and data files (`src/data/`)
+- The affected route (`src/app/<route>/page.tsx`) and its feature page (`src/features/<feature>/<x>-page/`)
+- Affected components and data (the page folder, the feature's `shared/`, or `src/components/`)
 - Affected tests, docs, screenshots and user-manual pages
 
 ## Data Rules

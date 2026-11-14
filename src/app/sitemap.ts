@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
-import { buildRouteMetadata } from '@/data/routeMetadata'
-import { SITE_URL } from '@/lib/site'
+import { buildRouteMetadata } from '@/lib/seo/routeMetadata'
+import { SITE_URL } from '@/config/site'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const today = new Date().toISOString().split('T')[0]
