@@ -1,10 +1,8 @@
-import { LocalizedText } from '../i18n/LocalizedText'
 import { ArrowRight, Search, X } from 'lucide-react'
 import { useLenis } from 'lenis/react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useLanguage } from '../i18n/language'
 import { searchAll } from '../lib/search'
 
 interface CommandPaletteProps {
@@ -32,7 +30,6 @@ export function CommandPalette({ open, onClose }: CommandPaletteProps) {
 }
 
 function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
-  const { language, translate, hasTranslation } = useLanguage()
   const navigate = useNavigate()
   const inputRef = useRef<HTMLInputElement>(null)
   const dialogRef = useRef<HTMLDivElement>(null)
@@ -118,7 +115,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-label={translate('Search the site')}
+        aria-label="Search the site"
         className="w-full max-w-xl overflow-hidden rounded-2xl border border-line bg-white shadow-hero"
         initial={{ opacity: 0, y: -8, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -147,15 +144,15 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
                 choose(active)
               }
             }}
-            placeholder={translate('Search services, offices, barangays…')}
-            aria-label={translate('Search query')}
+            placeholder="Search services, offices, barangays…"
+            aria-label="Search query"
             autoComplete="off"
             className="h-14 min-w-0 flex-1 bg-transparent text-[15px] font-medium text-ink-950 outline-none placeholder:text-ink-400"
           />
           <button
             type="button"
             onClick={onClose}
-            aria-label={translate('Close search')}
+            aria-label="Close search"
             className="inline-flex size-11 shrink-0 items-center justify-center rounded-lg text-ink-600 transition hover:bg-surface hover:text-ink-700"
           >
             <X aria-hidden="true" className="size-4" />
@@ -175,8 +172,8 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
                   }`}
                 >
                   <span className="min-w-0">
-                    <span lang={hasTranslation(item.title) ? language : 'en'} className="block truncate text-sm font-semibold">{translate(item.title)}</span>
-                    <span lang={hasTranslation(item.meta) ? language : 'en'} className="block truncate text-xs text-ink-500">{translate(item.meta)}</span>
+                    <span className="block truncate text-sm font-semibold">{item.title}</span>
+                    <span className="block truncate text-xs text-ink-500">{item.meta}</span>
                   </span>
                   <ArrowRight aria-hidden="true" className="size-4 shrink-0 text-ink-400" />
                 </button>
@@ -184,7 +181,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
             ))
           ) : (
             <li className="px-3 py-6 text-sm leading-6 text-ink-500">
-              {translate('No results for')} “{query.trim()}”. {translate('Try a shorter word, or')}{' '}
+              {'No results for'} “{query.trim()}”. {'Try a shorter word, or'}{' '}
               <button
                 type="button"
                 onClick={() => {
@@ -193,7 +190,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
                 }}
                 className="font-bold text-brand-700 hover:text-brand-800"
               >
-                {translate('See all results')}
+                {'See all results'}
               </button>
               .
             </li>
@@ -202,13 +199,13 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
 
         <div className="flex items-center justify-between gap-3 border-t border-line bg-surface px-4 py-2.5 text-[11px] text-ink-500">
           <span className="hidden sm:inline">
-            {hasQuery ? translate('↑↓ to navigate · Enter to open · Esc to close') : translate('Type to search all 242 services')}
+            {hasQuery ? '↑↓ to navigate · Enter to open · Esc to close' : 'Type to search all 242 services'}
           </span>
           <span className="sm:hidden">
-            {hasQuery ? translate('Tap a result to open') : translate('Popular pages · Type to search')}
+            {hasQuery ? 'Tap a result to open' : 'Popular pages · Type to search'}
           </span>
           <kbd className="hidden rounded border border-line bg-white px-1.5 py-0.5 font-mono text-[10px] sm:inline">
-            <LocalizedText text={"Ctrl K"} /></kbd>
+            {"Ctrl K"}</kbd>
         </div>
       </motion.div>
     </motion.div>

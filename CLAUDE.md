@@ -8,7 +8,7 @@ Read `AGENTS.md` first. It holds the project rules. This file adds Claude-specif
 - **Maintainer:** ashdroidcmd (GitHub)
 - **Frontend:** Vite 8, React 19, TypeScript 6, React Router 7, Tailwind CSS 4, Motion and Lenis, Lucide icons, MapLibre GL
 - **Backend / Database:** none (static site; data in `src/data/*.ts`)
-- **i18n:** English (`en`), Filipino (`fil`), Cebuano (`ceb`) in `src/i18n/`
+- **Language:** English only (language switching was removed; no i18n layer)
 - **PWA:** vite-plugin-pwa. A build plugin in `vite.config.ts` prerenders route metadata, `sitemap.xml` and `robots.txt`.
 - **Status:** forked from BetterInabanga, so the content still says Inabanga and the rebrand is pending.
 

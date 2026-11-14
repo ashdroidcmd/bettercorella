@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ScrollToTop } from './components/ScrollToTop'
 import { SiteLayout } from './components/SiteLayout'
 import { SmoothScroll } from './components/SmoothScroll'
-import { LanguageProvider } from './i18n/language'
 import { HomePage } from './pages/HomePage'
 import { NotFoundPage } from './pages/NotFoundPage'
 
@@ -78,7 +77,6 @@ const TransparencyPage = lazy(() =>
 export default function App() {
   return (
     <MotionConfig reducedMotion="user">
-      <LanguageProvider>
         <SmoothScroll>
           <BrowserRouter>
             <ScrollToTop />
@@ -122,7 +120,6 @@ export default function App() {
             </Routes>
           </BrowserRouter>
         </SmoothScroll>
-      </LanguageProvider>
     </MotionConfig>
   )
 }

@@ -1,4 +1,3 @@
-import { LocalizedText } from '../i18n/LocalizedText'
 import { ArrowRight, MapPin, Search, X } from 'lucide-react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -11,13 +10,11 @@ import { SourceNote } from '../components/SourceNote'
 import { StatCard } from '../components/StatCard'
 import { barangayDilgSourceUrl, barangays } from '../data/barangays'
 import { city } from '../data/city'
-import { useLanguage } from '../i18n/language'
 import { formatNumber, normalize } from '../lib/utils'
 import { usePageMeta } from '../lib/usePageMeta'
 
 export function BarangaysPage() {
   const navigate = useNavigate()
-  const { translate } = useLanguage()
   usePageMeta(
     'Barangays',
     'All 50 barangays of Inabanga, Bohol, with an interactive boundary map, 2024 population, city share, change since 2020, rank, and elected barangay officials.',
@@ -66,7 +63,7 @@ export function BarangaysPage() {
       >
         <div className="relative z-30 max-w-md">
           <label htmlFor="barangay-search" className="sr-only">
-            {translate('Search barangays')}
+            {'Search barangays'}
           </label>
           <div className="flex items-center gap-2 rounded-2xl border border-line bg-white p-1.5 shadow-float focus-within:ring-2 focus-within:ring-brand-300">
             <Search aria-hidden="true" className="ml-2 size-5 shrink-0 text-ink-400" />
@@ -94,7 +91,7 @@ export function BarangaysPage() {
                   setActiveSuggestion(0)
                 }
               }}
-              placeholder={translate('Search barangay or punong barangay…')}
+              placeholder="Search barangay or punong barangay…"
               autoComplete="off"
               role="combobox"
               aria-autocomplete="list"
@@ -112,7 +109,7 @@ export function BarangaysPage() {
                   setQuery('')
                   setActiveSuggestion(0)
                 }}
-                aria-label={translate('Clear barangay search')}
+                aria-label="Clear barangay search"
                 className="inline-flex size-11 shrink-0 items-center justify-center rounded-lg text-ink-600 transition hover:bg-surface hover:text-ink-700"
               >
                 <X aria-hidden="true" className="size-4" />
@@ -123,7 +120,7 @@ export function BarangaysPage() {
             <ul
               id="barangay-search-results"
               role="listbox"
-              aria-label={translate('Barangay search results')}
+              aria-label="Barangay search results"
               data-lenis-prevent
               className="scrollbar-slim absolute left-0 right-0 top-full z-40 mt-2 max-h-80 overflow-y-auto overscroll-contain rounded-2xl border border-line bg-white p-2 shadow-hero"
             >
@@ -149,13 +146,13 @@ export function BarangaysPage() {
                           <span className="truncate text-sm font-bold text-ink-950">{barangay.name}</span>
                           {barangay.poblacion ? (
                             <span className="rounded-full bg-white px-2 py-0.5 text-[9px] font-bold uppercase tracking-[0.08em] text-brand-700">
-                              <LocalizedText text={"Poblacion"} /></span>
+                              {"Poblacion"}</span>
                           ) : null}
                         </span>
                         <span className="mt-0.5 block truncate text-xs text-ink-500">
-                          {barangay.district} · {formatNumber(barangay.population2024)} <LocalizedText text={"residents in 2024"} /></span>
+                          {barangay.district} · {formatNumber(barangay.population2024)} {"residents in 2024"}</span>
                         <span className="mt-0.5 block truncate text-xs text-ink-500">
-                          {translate('Punong Barangay')}: {barangay.punongBarangay}
+                          {'Punong Barangay'}: {barangay.punongBarangay}
                         </span>
                       </span>
                       <ArrowRight aria-hidden="true" className="size-4 shrink-0 text-ink-400" />
@@ -164,7 +161,7 @@ export function BarangaysPage() {
                 ))
               ) : (
                 <li className="px-3 py-4 text-sm text-ink-500" role="status">
-                  {translate('No barangays found for')} “{query.trim()}”. {translate('Try a name, district, or barangay official.')}
+                  {'No barangays found for'} “{query.trim()}”. {'Try a name, district, or barangay official.'}
                 </li>
               )}
             </ul>
@@ -177,9 +174,9 @@ export function BarangaysPage() {
           <section>
             <Reveal delay={0.06}>
               <SectionHeading
-                eyebrow={translate('City map')}
-                title={translate('See where every barangay sits')}
-                description={translate('Click a barangay to zoom in and raise it above the map. Drag to explore nearby boundaries, or open its profile for full details.')}
+                eyebrow="City map"
+                title="See where every barangay sits"
+                description="Click a barangay to zoom in and raise it above the map. Drag to explore nearby boundaries, or open its profile for full details."
               />
               <div className="mt-6">
                 <BarangayMap />
@@ -187,15 +184,15 @@ export function BarangaysPage() {
               <div className="mt-4">
                 <SourceNote
                   href="https://data.bettergov.ph/datasets/23"
-                  linkLabel={translate('Barangay boundary data on data.bettergov.ph')}
+                  linkLabel="Barangay boundary data on data.bettergov.ph"
                   links={[
                     {
                       href: 'https://github.com/altcoder/philippines-psgc-shapefiles',
-                      label: translate('2023 PSA/NAMRIA boundary archive'),
+                      label: '2023 PSA/NAMRIA boundary archive',
                     },
                   ]}
                 >
-                  {translate('Boundaries are simplified from the PSA/NAMRIA barangay boundary release and are approximate. Use them to explore, not to determine legal property lines.')}
+                  {'Boundaries are simplified from the PSA/NAMRIA barangay boundary release and are approximate. Use them to explore, not to determine legal property lines.'}
                 </SourceNote>
               </div>
             </Reveal>
@@ -220,14 +217,14 @@ export function BarangaysPage() {
 
           <div className="mt-12 flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-700">{translate('Directory')}</p>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-700">Directory</p>
               <h2 className="mt-2 text-2xl font-extrabold tracking-[-0.025em] text-ink-950 sm:text-3xl">
-                {translate(normalizedQuery ? 'Search results' : 'Browse by district')}
+                {(normalizedQuery ? 'Search results' : 'Browse by district')}
               </h2>
               <p className="mt-2 text-sm text-ink-600">
                 {normalizedQuery
-                  ? translate('Showing filtered barangay results')
-                  : translate('Population figures use the 2024 Census of Population. Change compares 2020 with 2024.')}
+                  ? 'Showing filtered barangay results'
+                  : 'Population figures use the 2024 Census of Population. Change compares 2020 with 2024.'}
               </p>
             </div>
             {normalizedQuery ? (
@@ -236,7 +233,7 @@ export function BarangaysPage() {
                 onClick={() => setQuery('')}
                 className="rounded-xl border border-line bg-white px-3.5 py-2 text-sm font-semibold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
               >
-                {translate('Clear search')}
+                {'Clear search'}
               </button>
             ) : null}
           </div>
@@ -255,12 +252,12 @@ export function BarangaysPage() {
                     <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-line pb-3">
                       <h3 className="text-lg font-extrabold tracking-tight text-ink-950">{districtName}</h3>
                       <p className="text-xs font-semibold uppercase tracking-[0.1em] text-ink-400">
-                        {group.items.length} {translate(group.items.length === 1 ? 'barangay' : 'barangays')} ·{' '}
-                        {formatNumber(districtPopulation)} {translate('residents')}
+                        {group.items.length} {(group.items.length === 1 ? 'barangay' : 'barangays')} ·{' '}
+                        {formatNumber(districtPopulation)} {'residents'}
                       </p>
                     </div>
 
-                    <p className="mb-2 text-xs text-ink-600 sm:hidden">{translate('Swipe the table horizontally to view all columns.')}</p>
+                    <p className="mb-2 text-xs text-ink-600 sm:hidden">Swipe the table horizontally to view all columns.</p>
                     <div
                       role="region"
                       aria-label={`${districtName} barangay directory`}
@@ -269,26 +266,26 @@ export function BarangaysPage() {
                     >
                       <table className="min-w-[760px] w-full text-left text-sm">
                         <caption className="sr-only">
-                          <LocalizedText text={"Barangays in"} trailingSpace />{districtName}<LocalizedText text={", Inabanga, Bohol"} /></caption>
+                          {"Barangays in"}{' '}{districtName}{", Inabanga, Bohol"}</caption>
                         <thead className="bg-surface text-[11px] font-bold uppercase tracking-[0.1em] text-ink-500">
                           <tr>
                             <th scope="col" className="px-4 py-3">
-                              {translate('Barangay')}
+                              {'Barangay'}
                             </th>
                             <th scope="col" className="px-4 py-3 text-right">
-                              {translate('Population 2024')}
+                              {'Population 2024'}
                             </th>
                             <th scope="col" className="px-4 py-3 text-right">
-                              {translate('Share')}
+                              {'Share'}
                             </th>
                             <th scope="col" className="px-4 py-3 text-right">
-                              {translate('Change')}
+                              {'Change'}
                             </th>
                             <th scope="col" className="px-4 py-3 text-right">
-                              {translate('Rank')}
+                              {'Rank'}
                             </th>
                             <th scope="col" className="px-4 py-3">
-                              {translate('Punong Barangay')}
+                              {'Punong Barangay'}
                             </th>
                           </tr>
                         </thead>
@@ -311,7 +308,7 @@ export function BarangaysPage() {
                                   {barangay.name}
                                   {barangay.poblacion ? (
                                     <span className="rounded-full bg-brand-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.08em] text-brand-700">
-                                      {translate('Poblacion')}
+                                      {'Poblacion'}
                                     </span>
                                   ) : null}
                                 </Link>
@@ -335,15 +332,15 @@ export function BarangaysPage() {
           ) : (
             <div className="mt-8">
               <EmptyState
-                title={translate('No barangays found')}
-                description={translate('Try a different barangay name, district, or punong barangay.')}
+                title="No barangays found"
+                description="Try a different barangay name, district, or punong barangay."
                 action={
                   <button
                     type="button"
                     onClick={() => setQuery('')}
                     className="rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800"
                   >
-                    {translate('Show all barangays')}
+                    {'Show all barangays'}
                   </button>
                 }
               />
@@ -353,14 +350,14 @@ export function BarangaysPage() {
           <div className="mt-10">
             <SourceNote
               href="https://psa.gov.ph/classification/psgc/barangays/0103314000"
-              linkLabel={translate('PSA barangay list and 2024 population')}
+              linkLabel="PSA barangay list and 2024 population"
               links={[
-                { href: 'https://www.inabanga.gov.ph/vision-and-mission-2-3/', label: translate('city barangay directory') },
-                { href: barangayDilgSourceUrl, label: translate('DILG barangay officials directory') },
-                { href: 'https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/103013', label: translate('Republic Act No. 12326') },
+                { href: 'https://www.inabanga.gov.ph/vision-and-mission-2-3/', label: 'city barangay directory' },
+                { href: barangayDilgSourceUrl, label: 'DILG barangay officials directory' },
+                { href: 'https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/103013', label: 'Republic Act No. 12326' },
               ]}
             >
-              {translate('Barangay names and populations follow the PSA 2024 Census. Shares, changes, and ranks are calculated from those counts. Official names follow the PSA spelling. Barangay officials follow the city roster. SK chairperson entries should be confirmed with DILG. The next regular barangay and SK elections are scheduled for November 2028 under Republic Act No. 12326. Boundaries use the 2023 release.')}
+              {'Barangay names and populations follow the PSA 2024 Census. Shares, changes, and ranks are calculated from those counts. Official names follow the PSA spelling. Barangay officials follow the city roster. SK chairperson entries should be confirmed with DILG. The next regular barangay and SK elections are scheduled for November 2028 under Republic Act No. 12326. Boundaries use the 2023 release.'}
             </SourceNote>
           </div>
         </div>

@@ -1,6 +1,5 @@
 import { ArrowRight, CalendarDays } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { useLanguage } from '../i18n/language'
 import type { NewsItem } from '../data/types'
 import { formatShortDate } from '../lib/utils'
 
@@ -10,12 +9,11 @@ interface NewsCardProps {
 }
 
 export function NewsCard({ item, compact = false }: NewsCardProps) {
-  const { translate } = useLanguage()
   const href = `/news/${item.slug}`
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-card">
-      <Link to={href} viewTransition aria-label={`${translate('Read the story')}: ${item.title}`} className="relative block overflow-hidden">
+      <Link to={href} viewTransition aria-label={`${'Read the story'}: ${item.title}`} className="relative block overflow-hidden">
         <img
           src={item.image}
           alt=""
@@ -42,7 +40,7 @@ export function NewsCard({ item, compact = false }: NewsCardProps) {
           viewTransition
           className="mt-auto inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 hover:text-brand-800"
         >
-          {translate('Read the story')}
+          {'Read the story'}
           <ArrowRight aria-hidden="true" className="size-3" />
         </Link>
       </div>

@@ -1,4 +1,3 @@
-import { LocalizedText } from '../i18n/LocalizedText'
 import {
   ArrowDown,
   ArrowUpRight,
@@ -24,7 +23,6 @@ import { PageHero } from '../components/PageHero'
 import { PlaceMark } from '../components/PlaceMark'
 import { SourceNote } from '../components/SourceNote'
 import { placeCategories, places, type PlaceCategoryId, type PlaceRecord, categoryMapsSearch, googleMapsSearch } from '../data/places'
-import { useLanguage } from '../i18n/language'
 import { normalize } from '../lib/utils'
 import { usePageMeta } from '../lib/usePageMeta'
 
@@ -82,7 +80,6 @@ const logoSources = [
 ]
 
 function PlaceCard({ item }: { item: PlaceRecord }) {
-  const { language, translate, hasTranslation } = useLanguage()
   const category = placeCategories.find((entry) => entry.id === item.category)
 
   return (
@@ -91,8 +88,7 @@ function PlaceCard({ item }: { item: PlaceRecord }) {
         <figure className="relative mb-4 aspect-[16/8] overflow-hidden rounded-xl bg-surface">
           <img
             src={item.image.src}
-            alt={translate(item.image.alt)}
-            lang={hasTranslation(item.image.alt) ? language : 'en'}
+            alt={item.image.alt}
             loading="lazy"
             decoding="async"
             className="size-full object-cover"
@@ -102,10 +98,10 @@ function PlaceCard({ item }: { item: PlaceRecord }) {
               href={item.image.creditUrl}
               target="_blank"
               rel="noreferrer"
-              aria-label={`${translate('Photo credit')}: ${item.name} · ${item.image.credit}`}
+              aria-label={`${'Photo credit'}: ${item.name} · ${item.image.credit}`}
               className="rounded-md px-1.5 py-1 text-[10px] font-semibold text-white underline decoration-white/70 underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              {translate('Photo')}: {item.image.credit}
+              {'Photo'}: {item.image.credit}
             </a>
           </figcaption>
         </figure>
@@ -113,7 +109,7 @@ function PlaceCard({ item }: { item: PlaceRecord }) {
       <div className="flex items-start gap-3">
         {!item.image ? <PlaceMark item={item} /> : null}
         <div className="min-w-0 flex-1">
-          <p lang={category && hasTranslation(category.label) ? language : 'en'} className="text-[10px] font-bold uppercase tracking-[0.14em] text-brand-700">{category ? translate(category.label) : null}</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-brand-700">{category ? category.label : null}</p>
           <h3 className="mt-1 text-base font-extrabold leading-5 text-ink-950">{item.name}</h3>
         </div>
       </div>
@@ -121,7 +117,7 @@ function PlaceCard({ item }: { item: PlaceRecord }) {
         <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-ink-400" />
         <span>{item.address}</span>
       </p>
-      {item.note ? <p className="mt-2 text-xs leading-5 text-ink-500"><LocalizedText text={item.note} /></p> : null}
+      {item.note ? <p className="mt-2 text-xs leading-5 text-ink-500">{item.note}</p> : null}
       <div className="mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-line pt-4 mt-4">
         {item.sourceUrl.startsWith('/') ? (
           <Link
@@ -144,10 +140,10 @@ function PlaceCard({ item }: { item: PlaceRecord }) {
           href={googleMapsSearch(item)}
           target="_blank"
           rel="noreferrer"
-          aria-label={`${translate('Find on Google Maps')}: ${item.name}`}
+          aria-label={`${'Find on Google Maps'}: ${item.name}`}
           className="inline-flex min-h-9 shrink-0 items-center gap-1.5 rounded-lg bg-brand-50 px-3 text-xs font-bold text-brand-700 transition hover:bg-brand-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
         >
-          {translate('Directions')} <ArrowUpRight aria-hidden="true" className="size-3.5" />
+          {'Directions'} <ArrowUpRight aria-hidden="true" className="size-3.5" />
         </a>
       </div>
     </article>
@@ -155,7 +151,6 @@ function PlaceCard({ item }: { item: PlaceRecord }) {
 }
 
 export function PlacesPage() {
-  const { language, translate } = useLanguage()
   const [activeCategory, setActiveCategory] = useState<PlaceCategoryId | 'all'>('all')
   const [query, setQuery] = useState('')
   const [shownCount, setShownCount] = useState(pageSize)
@@ -200,18 +195,18 @@ export function PlacesPage() {
         crumbs={[{ label: 'City', href: '/city' }, { label: 'Places directory' }]}
       >
         <div className="flex flex-wrap gap-2">
-          <span lang={language} className="rounded-full border border-line bg-white px-3 py-1.5 text-xs font-bold text-ink-700">59 {translate('barangays')}</span>
-          <span lang={language} className="rounded-full border border-line bg-white px-3 py-1.5 text-xs font-bold text-ink-700">{placeCategories.length} {translate('place categories')}</span>
-          <span lang={language} className="rounded-full border border-line bg-white px-3 py-1.5 text-xs font-bold text-ink-700">{translate('Search the map for more places')}</span>
+          <span className="rounded-full border border-line bg-white px-3 py-1.5 text-xs font-bold text-ink-700">59 {'barangays'}</span>
+          <span className="rounded-full border border-line bg-white px-3 py-1.5 text-xs font-bold text-ink-700">{placeCategories.length} {'place categories'}</span>
+          <span className="rounded-full border border-line bg-white px-3 py-1.5 text-xs font-bold text-ink-700">Search the map for more places</span>
         </div>
       </PageHero>
 
       <div className="container-page py-8 sm:py-12">
-        <section aria-label={translate('Search places')} className="rounded-3xl border border-line bg-surface p-4 shadow-card sm:p-6">
+        <section aria-label="Search places" className="rounded-3xl border border-line bg-surface p-4 shadow-card sm:p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="min-w-0 flex-1">
               <label htmlFor="places-search" className="mb-2 block text-xs font-bold uppercase tracking-[0.14em] text-ink-600">
-                {translate('Search this directory')}
+                {'Search this directory'}
               </label>
               <div className="flex min-h-12 items-center gap-3 rounded-xl border border-line-dark bg-white px-3 shadow-sm focus-within:border-brand-400 focus-within:ring-2 focus-within:ring-brand-100">
                 <Search aria-hidden="true" className="size-5 shrink-0 text-ink-400" />
@@ -220,14 +215,14 @@ export function PlacesPage() {
                   type="search"
                   value={query}
                   onChange={(event) => updateQuery(event.target.value)}
-                  placeholder={translate('Try an agency, place, barangay or service')}
+                  placeholder="Try an agency, place, barangay or service"
                   className="min-w-0 flex-1 bg-transparent py-3 text-sm text-ink-950 outline-none placeholder:text-ink-400"
                 />
                 {query ? (
                   <button
                     type="button"
                     onClick={() => updateQuery('')}
-                    aria-label={translate('Clear place search')}
+                    aria-label="Clear place search"
                     className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg text-ink-500 hover:bg-surface hover:text-ink-950 focus-visible:outline-2 focus-visible:outline-brand-600"
                   >
                     <X aria-hidden="true" className="size-4" />
@@ -241,14 +236,14 @@ export function PlacesPage() {
               rel="noreferrer"
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-brand-700 px-5 text-sm font-bold text-white transition hover:bg-brand-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
             >
-              {translate('Search Google Maps')} <ArrowUpRight aria-hidden="true" className="size-4" />
+              {'Search Google Maps'} <ArrowUpRight aria-hidden="true" className="size-4" />
             </a>
           </div>
 
           <div className="mt-5">
-            <p lang={language} className="mb-2 text-xs font-bold uppercase tracking-[0.14em] text-ink-600">{translate('Browse by category')}</p>
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.14em] text-ink-600">Browse by category</p>
             <div className="places-category-scroll relative lg:after:hidden">
-              <div className="places-category-list flex gap-2 overflow-x-auto pb-2 pr-8 lg:flex-wrap lg:overflow-visible lg:pb-0 lg:pr-0" role="group" aria-label={translate('Filter places by category')}>
+              <div className="places-category-list flex gap-2 overflow-x-auto pb-2 pr-8 lg:flex-wrap lg:overflow-visible lg:pb-0 lg:pr-0" role="group" aria-label="Filter places by category">
                 <button
                   type="button"
                   aria-pressed={activeCategory === 'all'}
@@ -257,7 +252,7 @@ export function PlacesPage() {
                     activeCategory === 'all' ? 'border-brand-700 bg-brand-700 text-white' : 'border-line-dark bg-white text-ink-700 hover:border-brand-300 hover:text-brand-700'
                   }`}
                 >
-                  {translate('All places')} <span className="ml-1 text-xs font-bold opacity-70">{places.length}</span>
+                  {'All places'} <span className="ml-1 text-xs font-bold opacity-70">{places.length}</span>
                 </button>
                 {placeCategories.map((category) => {
                   const Icon = categoryIcons[category.id]
@@ -272,7 +267,7 @@ export function PlacesPage() {
                         activeCategory === category.id ? 'border-brand-700 bg-brand-700 text-white' : 'border-line-dark bg-white text-ink-700 hover:border-brand-300 hover:text-brand-700'
                       }`}
                     >
-                      <Icon aria-hidden="true" className="size-4" /> {translate(category.label)} <span className="text-xs font-bold opacity-70">{count}</span>
+                      <Icon aria-hidden="true" className="size-4" /> {category.label} <span className="text-xs font-bold opacity-70">{count}</span>
                     </button>
                   )
                 })}
@@ -283,16 +278,16 @@ export function PlacesPage() {
 
         <div className="mt-7 flex flex-col gap-4 border-b border-line pb-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p lang={language} className="text-xs font-bold uppercase tracking-[0.14em] text-brand-700">{activeCategoryRecord ? translate(activeCategoryRecord.label) : translate('City directory')}</p>
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand-700">{activeCategoryRecord ? activeCategoryRecord.label : 'City directory'}</p>
             <h2 className="mt-1 text-2xl font-extrabold tracking-tight text-ink-950 sm:text-3xl">
-              {activeCategoryRecord ? translate(activeCategoryRecord.label) : translate('Places and services')}
+              {activeCategoryRecord ? activeCategoryRecord.label : 'Places and services'}
             </h2>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-600">
-              {translate(activeCategoryRecord?.description ?? 'Search the directory or choose a category. Use the live map search to discover more businesses and recently added listings.')}
+              {(activeCategoryRecord?.description ?? 'Search the directory or choose a category. Use the live map search to discover more businesses and recently added listings.')}
             </p>
           </div>
           <p aria-live="polite" className="shrink-0 text-sm font-semibold tabular-nums text-ink-600">
-            {filteredPlaces.length} {translate(filteredPlaces.length === 1 ? 'place listed' : 'places listed')}
+            {filteredPlaces.length} {(filteredPlaces.length === 1 ? 'place listed' : 'places listed')}
           </p>
         </div>
 
@@ -303,10 +298,10 @@ export function PlacesPage() {
         ) : (
           <div className="mt-6 rounded-2xl border border-dashed border-line-dark bg-surface px-5 py-10 text-center">
             <Search aria-hidden="true" className="mx-auto size-8 text-ink-400" />
-            <h2 lang={language} className="mt-3 text-lg font-extrabold text-ink-950">{translate('No matching places')}</h2>
-            <p lang={language} className="mt-1 text-sm text-ink-600">{translate('Try another name or search live map results for this category.')}</p>
+            <h2 className="mt-3 text-lg font-extrabold text-ink-950">No matching places</h2>
+            <p className="mt-1 text-sm text-ink-600">Try another name or search live map results for this category.</p>
             <a href={mapHref} target="_blank" rel="noreferrer" className="mt-4 inline-flex min-h-10 items-center gap-2 rounded-lg bg-brand-700 px-4 text-sm font-bold text-white hover:bg-brand-800">
-              {translate('Search Google Maps')} <ArrowUpRight aria-hidden="true" className="size-4" />
+              {'Search Google Maps'} <ArrowUpRight aria-hidden="true" className="size-4" />
             </a>
           </div>
         )}
@@ -318,7 +313,7 @@ export function PlacesPage() {
               onClick={() => setShownCount((count) => count + pageSize)}
               className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-line-dark bg-white px-5 text-sm font-bold text-ink-800 shadow-sm hover:border-brand-300 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
             >
-              {translate('Show more places')} <ArrowDown aria-hidden="true" className="size-4" />
+              {'Show more places'} <ArrowDown aria-hidden="true" className="size-4" />
             </button>
           </div>
         ) : null}
@@ -333,10 +328,10 @@ export function PlacesPage() {
               { href: 'https://bohol.gov.ph/contact-us/', label: 'Provincial Government contacts' },
             ]}
           >
-            <LocalizedText text={"Agency listings follow official city and provincial directories. Only verified marks and selected institution logos are shown; other listings appear by name. Google Maps may include old or duplicate entries, so confirm hours and operation before visiting. Nearby towns are excluded."} /></SourceNote>
+            {"Agency listings follow official city and provincial directories. Only verified marks and selected institution logos are shown; other listings appear by name. Google Maps may include old or duplicate entries, so confirm hours and operation before visiting. Nearby towns are excluded."}</SourceNote>
           <details className="mt-3 rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink-600">
             <summary className="cursor-pointer font-semibold text-ink-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600">
-              {translate('Logo sources and attributions')} <span className="ml-1 text-xs font-medium text-ink-500">({logoSources.length})</span>
+              {'Logo sources and attributions'} <span className="ml-1 text-xs font-medium text-ink-500">({logoSources.length})</span>
             </summary>
             <ul className="mt-3 grid gap-x-5 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
               {logoSources.map((source) => (

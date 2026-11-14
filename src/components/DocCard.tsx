@@ -1,6 +1,5 @@
 import { ArrowUpRight, FileText } from 'lucide-react'
 import type { BudgetDoc } from '../data/types'
-import { LocalizedText } from '../i18n/LocalizedText'
 
 export function DocCard({ doc }: { doc: BudgetDoc }) {
   return (
@@ -20,9 +19,9 @@ export function DocCard({ doc }: { doc: BudgetDoc }) {
         />
       </div>
       <h3 className="mt-4 text-[15px] font-bold leading-6 text-ink-950 group-hover:text-brand-700">{doc.title}</h3>
-      <p className="mt-1 flex-1 text-sm leading-6 text-ink-600"><LocalizedText text={doc.description} /></p>
+      <p className="mt-1 flex-1 text-sm leading-6 text-ink-600">{doc.description}</p>
       <p className="mt-4 border-t border-line pt-3 text-[11px] font-bold uppercase tracking-[0.12em] text-brand-700">
-        <LocalizedText text={doc.category} />
+        {doc.category}
       </p>
     </a>
   )

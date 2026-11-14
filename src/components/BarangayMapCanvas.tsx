@@ -7,7 +7,6 @@ import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import boundaryUrl from '../data/inabanga-barangays.geojson?url'
 import { barangayMap } from '../data/barangayMap'
 import { barangays } from '../data/barangays'
-import { useLanguage } from '../i18n/language'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 setWorkerUrl(workerUrl)
@@ -123,7 +122,6 @@ interface BarangayMapCanvasProps {
 }
 
 export function BarangayMapCanvas({ resetToken, onSelect, onHover }: BarangayMapCanvasProps) {
-  const { translate } = useLanguage()
   const containerRef = useRef<HTMLDivElement | null>(null)
   const mapRef = useRef<MapLibreMap | null>(null)
   const labelMarkerRef = useRef<Marker | null>(null)
@@ -381,17 +379,17 @@ export function BarangayMapCanvas({ resetToken, onSelect, onHover }: BarangayMap
           className="h-full w-full"
           data-lenis-prevent-wheel
           role="application"
-          aria-label={translate('Interactive 3D map of Inabanga barangays. Scroll to zoom, drag to pan, click a barangay to select it.')}
+          aria-label="Interactive 3D map of Inabanga barangays. Scroll to zoom, drag to pan, click a barangay to select it."
         />
       </div>
       <div className="pointer-events-none absolute bottom-3 left-3 z-10 rounded-lg bg-white/90 px-2.5 py-1.5 text-[10px] font-semibold text-ink-600 shadow-sm backdrop-blur-sm">
-        {translate('Scroll to zoom · drag to pan')}
+        {'Scroll to zoom · drag to pan'}
       </div>
       <button
         type="button"
         onClick={clearSelection}
-        title={translate('Reset map view')}
-        aria-label={translate('Reset map view')}
+        title="Reset map view"
+        aria-label="Reset map view"
         className="group absolute right-[2.5px] top-[5.5rem] z-10 inline-flex size-11 cursor-pointer items-center justify-center rounded-md text-ink-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
       >
         <span className="inline-flex size-[29px] items-center justify-center rounded-[4px] bg-white shadow-[0_0_0_2px_rgba(0,0,0,0.1)] transition-colors group-hover:bg-black/5">

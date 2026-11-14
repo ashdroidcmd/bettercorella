@@ -29,7 +29,6 @@
 
 - The affected route or page (`src/pages/`, `src/App.tsx`)
 - Affected components (`src/components/`) and data files (`src/data/`)
-- i18n strings in `en`, `fil` and `ceb` (`src/i18n/`)
 - Affected tests, docs, screenshots and user-manual pages
 
 ## Data Rules

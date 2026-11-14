@@ -1,6 +1,5 @@
 import { ChevronRight, House } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { useLanguage } from '../i18n/language'
 import { cn } from '../lib/utils'
 
 export interface Crumb {
@@ -14,17 +13,16 @@ interface BreadcrumbsProps {
 }
 
 export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
-  const { language, translate, hasTranslation } = useLanguage()
 
   return (
-    <nav aria-label={translate('Breadcrumb')} className={cn('flex flex-wrap items-center gap-x-2 gap-y-1 text-sm', className)}>
+    <nav aria-label="Breadcrumb" className={cn('flex flex-wrap items-center gap-x-2 gap-y-1 text-sm', className)}>
       <Link
         to="/"
         viewTransition
         className="inline-flex items-center gap-1.5 font-medium text-ink-500 transition hover:text-brand-700"
       >
         <House aria-hidden="true" className="size-3.5" />
-        <span lang={hasTranslation('Home') ? language : 'en'}>{translate('Home')}</span>
+        <span>Home</span>
       </Link>
       {items.map((item, index) => {
         const isLast = index === items.length - 1
@@ -33,11 +31,11 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
             <ChevronRight aria-hidden="true" className="size-3.5 text-ink-400" />
             {item.href && !isLast ? (
               <Link to={item.href} viewTransition className="font-medium text-ink-500 transition hover:text-brand-700">
-                <span lang={hasTranslation(item.label) ? language : 'en'}>{translate(item.label)}</span>
+                <span>{item.label}</span>
               </Link>
             ) : (
               <span aria-current={isLast ? 'page' : undefined} className="font-semibold text-ink-700">
-                <span lang={hasTranslation(item.label) ? language : 'en'}>{translate(item.label)}</span>
+                <span>{item.label}</span>
               </span>
             )}
           </span>

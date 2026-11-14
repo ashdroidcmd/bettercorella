@@ -1,6 +1,5 @@
 import { ArrowRight, FileText } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { useLanguage } from '../i18n/language'
 import type { Service } from '../data/types'
 
 interface ServiceCardProps {
@@ -9,7 +8,6 @@ interface ServiceCardProps {
 }
 
 export function ServiceCard({ service, categoryName }: ServiceCardProps) {
-  const { language, translate, hasTranslation } = useLanguage()
 
   return (
     <Link
@@ -23,7 +21,7 @@ export function ServiceCard({ service, categoryName }: ServiceCardProps) {
         </span>
         <div className="min-w-0">
           {categoryName ? (
-            <p lang={hasTranslation(categoryName) ? language : 'en'} className="text-[11px] font-bold uppercase tracking-[0.13em] text-brand-700">{translate(categoryName)}</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.13em] text-brand-700">{categoryName}</p>
           ) : null}
           <h3 lang="en" className="mt-0.5 line-clamp-none text-[15px] font-bold leading-6 text-ink-950 group-hover:text-brand-700 md:line-clamp-3">
             {service.title}

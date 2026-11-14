@@ -1,6 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react'
 import { AlertCircle, RefreshCw, Home } from 'lucide-react'
-import { useLanguage } from '../i18n/language'
 
 interface Props {
   children: ReactNode
@@ -53,13 +52,12 @@ export class ErrorBoundary extends Component<Props, State> {
 }
 
 function ErrorFallback({ onRetry }: { onRetry: () => void }) {
-  const { translate } = useLanguage()
 
   return (
     <>
-      <h2 className="mt-4 text-lg font-bold text-ink-950">{translate('Something went wrong loading this content')}</h2>
+      <h2 className="mt-4 text-lg font-bold text-ink-950">Something went wrong loading this content</h2>
       <p className="mt-2 text-sm leading-6 text-ink-600">
-        {translate('A temporary network interruption or updated site asset may have prevented this section from opening.')}
+        {'A temporary network interruption or updated site asset may have prevented this section from opening.'}
       </p>
       <div className="mt-6 flex flex-wrap justify-center gap-3">
         <button
@@ -68,14 +66,14 @@ function ErrorFallback({ onRetry }: { onRetry: () => void }) {
           className="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
         >
           <RefreshCw className="size-4" aria-hidden="true" />
-          {translate('Try again')}
+          {'Try again'}
         </button>
         <a
           href="/"
           className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-semibold text-ink-700 transition hover:bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
         >
           <Home className="size-4" aria-hidden="true" />
-          {translate('Back to home')}
+          {'Back to home'}
         </a>
       </div>
     </>

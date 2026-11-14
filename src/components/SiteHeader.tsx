@@ -38,7 +38,6 @@ import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import { categories } from '../data/categories'
-import { useLanguage } from '../i18n/language'
 
 const CommandPalette = lazy(() =>
   import('./CommandPalette').then((module) => ({ default: module.CommandPalette })),
@@ -206,7 +205,6 @@ function isNavItemActive(item: PrimaryNavItem, pathname: string) {
 
 function MenuLinkTile({ item, onNavigate }: { item: MenuLink; onNavigate: () => void }) {
   const Icon = item.Icon
-  const { language, translate, hasTranslation } = useLanguage()
 
   return (
     <Link
@@ -219,18 +217,17 @@ function MenuLinkTile({ item, onNavigate }: { item: MenuLink; onNavigate: () => 
         <Icon aria-hidden="true" className="size-[18px]" />
       </span>
       <span className="min-w-0 flex-1 py-0.5">
-        <span lang={hasTranslation(item.label) ? language : 'en'} className="flex items-center justify-between gap-2 text-[13px] font-bold leading-5 text-ink-900">
-          {translate(item.label)}
+        <span className="flex items-center justify-between gap-2 text-[13px] font-bold leading-5 text-ink-900">
+          {item.label}
           <ChevronRight aria-hidden="true" className="size-3.5 shrink-0 text-ink-400 opacity-0 transition group-hover/menu-link:translate-x-0.5 group-hover/menu-link:opacity-100" />
         </span>
-        <span lang={hasTranslation(item.description) ? language : 'en'} className="mt-0.5 block line-clamp-2 text-xs leading-[1.4] text-ink-500">{translate(item.description)}</span>
+        <span className="mt-0.5 block line-clamp-2 text-xs leading-[1.4] text-ink-500">{item.description}</span>
       </span>
     </Link>
   )
 }
 
 export function SiteHeader() {
-  const { translate } = useLanguage()
   const lenis = useLenis()
   const reduceMotion = useReducedMotion()
   const [menuPath, setMenuPath] = useState<string | null>(null)
@@ -369,7 +366,7 @@ export function SiteHeader() {
             }}
             className="relative hidden items-center lg:flex"
           >
-            <nav aria-label={translate('Main navigation')} className="flex items-center gap-0.5">
+            <nav aria-label="Main navigation" className="flex items-center gap-0.5">
               {primaryNav.map((item) => {
                 const expanded = activeDesktopMenu === item.label
                 const current = isNavItemActive(item, location.pathname)
@@ -397,7 +394,7 @@ export function SiteHeader() {
                         : 'text-ink-600 hover:bg-surface hover:text-ink-950'
                     }`}
                   >
-                    {translate(item.label)}
+                    {item.label}
                     <ChevronDown
                       aria-hidden="true"
                       className={`size-3.5 text-ink-400 transition ${expanded ? 'rotate-180' : ''}`}
@@ -423,7 +420,7 @@ export function SiteHeader() {
                       <div className="mb-3 flex items-center justify-between gap-3 border-b border-line px-2 pb-3">
                         <div>
                           <p className="text-[10px] font-bold uppercase tracking-[0.17em] text-ink-400">
-                            {translate(`Explore ${activeNavItem.label}`)}
+                            {`Explore ${activeNavItem.label}`}
                           </p>
                           <Link
                             to={activeNavItem.href}
@@ -431,14 +428,14 @@ export function SiteHeader() {
                             onClick={closeNavigation}
                             className="mt-1 inline-flex items-center gap-1 text-sm font-bold text-brand-700 hover:text-brand-800 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-brand-500"
                           >
-                            {translate(`View ${activeNavItem.label.toLowerCase()} overview`)}
+                            {`View ${activeNavItem.label.toLowerCase()} overview`}
                             <ChevronRight aria-hidden="true" className="size-4" />
                           </Link>
                         </div>
                         <button
                           type="button"
                           onClick={() => setDesktopMenu(null)}
-                          aria-label={translate(`Close ${activeNavItem.label} menu`)}
+                          aria-label={`Close ${activeNavItem.label} menu`}
                           className="flex size-9 shrink-0 items-center justify-center rounded-lg text-ink-500 transition hover:bg-surface hover:text-ink-900 focus-visible:outline-2 focus-visible:outline-brand-500"
                         >
                           <X aria-hidden="true" className="size-4" />
@@ -448,7 +445,7 @@ export function SiteHeader() {
                         {activeNavItem.sections.map((section) => (
                           <section key={section.title}>
                             <h2 className="px-2.5 pb-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-ink-400">
-                              {translate(section.title)}
+                              {section.title}
                             </h2>
                             <div className="grid gap-0.5">
                               {section.items.map((item) => (
@@ -469,8 +466,8 @@ export function SiteHeader() {
             <button
               type="button"
               onClick={openPalette}
-              aria-label={translate('Search this site (Ctrl+K)')}
-              title={translate('Search (Ctrl+K)')}
+              aria-label="Search this site (Ctrl+K)"
+              title="Search (Ctrl+K)"
               className="inline-flex size-11 items-center justify-center rounded-xl text-ink-600 transition hover:bg-surface hover:text-brand-700"
             >
               <Search aria-hidden="true" className="size-5" />
@@ -480,14 +477,14 @@ export function SiteHeader() {
               viewTransition
               className="hidden rounded-xl border border-line px-3.5 py-2 text-xs font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700 sm:inline-flex"
             >
-              {translate('Hotlines')}
+              {'Hotlines'}
             </Link>
             <button
               type="button"
               ref={menuButtonRef}
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
-              aria-label={translate(menuOpen ? 'Close menu' : 'Open menu')}
+              aria-label={(menuOpen ? 'Close menu' : 'Open menu')}
               onClick={() => {
                 if (menuOpen) {
                   closeNavigation()
@@ -515,7 +512,7 @@ export function SiteHeader() {
               style={{ top: mobileMenuTop }}
               className="fixed inset-x-0 bottom-0 z-50 flex flex-col overflow-hidden border-t border-line bg-white shadow-xl lg:hidden"
             >
-              <nav aria-label={translate('Mobile navigation')} className="container-page min-h-0 flex-1 overflow-y-auto overscroll-contain py-3">
+              <nav aria-label="Mobile navigation" className="container-page min-h-0 flex-1 overflow-y-auto overscroll-contain py-3">
                 <div className="divide-y divide-line border-b border-line">
                   {primaryNav.map((item) => {
                     const expanded = mobileSection === item.label
@@ -533,9 +530,9 @@ export function SiteHeader() {
                           }`}
                         >
                           <span>
-                          <span className="block text-[15px] font-bold">{translate(item.label)}</span>
+                          <span className="block text-[15px] font-bold">{item.label}</span>
                             <span className="mt-0.5 block text-[11px] text-ink-500">
-                              {item.sections.reduce((count, section) => count + section.items.length, 0)} {translate('links')}
+                              {item.sections.reduce((count, section) => count + section.items.length, 0)} {'links'}
                             </span>
                           </span>
                           <ChevronDown
@@ -552,14 +549,14 @@ export function SiteHeader() {
                               onClick={closeNavigation}
                               className="mb-3 flex items-center justify-between rounded-xl bg-brand-50 px-3.5 py-3 text-sm font-bold text-brand-700 focus-visible:outline-2 focus-visible:outline-brand-500"
                             >
-                              {translate(`View ${item.label.toLowerCase()} overview`)}
+                              {`View ${item.label.toLowerCase()} overview`}
                               <ChevronRight aria-hidden="true" className="size-4" />
                             </Link>
                             <div className="grid gap-4">
                               {item.sections.map((section) => (
                                 <section key={section.title}>
                                   <h2 className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-ink-400">
-                                  {translate(section.title)}
+                                  {section.title}
                                   </h2>
                                   <div className="grid gap-1">
                                     {section.items.map((link) => {
@@ -575,10 +572,10 @@ export function SiteHeader() {
                                           <Icon aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-700" />
                                           <span className="min-w-0">
                                             <span className="block text-[13px] font-semibold leading-5 text-ink-900">
-                                              {translate(link.label)}
+                                              {link.label}
                                             </span>
                                             <span className="mt-0.5 block line-clamp-2 text-xs leading-[1.4] text-ink-500">
-                                              {translate(link.description)}
+                                              {link.description}
                                             </span>
                                           </span>
                                         </Link>
@@ -602,7 +599,7 @@ export function SiteHeader() {
                   onClick={closeNavigation}
                   className="rounded-xl bg-surface px-3 py-3 text-center text-sm font-semibold text-ink-700 transition hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-brand-500"
                 >
-                  {translate('Emergency hotlines')}
+                  {'Emergency hotlines'}
                 </Link>
                 <Link
                   to="/search"
@@ -610,7 +607,7 @@ export function SiteHeader() {
                   onClick={closeNavigation}
                   className="rounded-xl bg-surface px-3 py-3 text-center text-sm font-semibold text-ink-700 transition hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-brand-500"
                 >
-                  {translate('Search the site')}
+                  {'Search the site'}
                 </Link>
               </div>
             </motion.div>

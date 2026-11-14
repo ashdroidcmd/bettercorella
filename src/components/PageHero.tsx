@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import { Breadcrumbs, type Crumb } from './Breadcrumbs'
-import { useLanguage } from '../i18n/language'
 
 interface PageHeroProps {
   title: string
@@ -12,7 +11,6 @@ interface PageHeroProps {
 }
 
 export function PageHero({ title, description, eyebrow, crumbs, children, overflowVisible = false }: PageHeroProps) {
-  const { language, translate, hasTranslation } = useLanguage()
 
   return (
     <section
@@ -24,13 +22,13 @@ export function PageHero({ title, description, eyebrow, crumbs, children, overfl
       <div className="container-page py-10 sm:py-12 lg:py-16">
         {crumbs ? <Breadcrumbs items={crumbs} className="mb-7" /> : null}
         {eyebrow ? (
-          <p lang={hasTranslation(eyebrow) ? language : 'en'} className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-700">{translate(eyebrow)}</p>
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-brand-700">{eyebrow}</p>
         ) : null}
-        <h1 lang={hasTranslation(title) ? language : 'en'} className="max-w-4xl text-balance text-3xl font-extrabold leading-[1.08] tracking-[-0.035em] text-ink-950 sm:text-4xl lg:text-[3.25rem]">
-          {translate(title)}
+        <h1 className="max-w-4xl text-balance text-3xl font-extrabold leading-[1.08] tracking-[-0.035em] text-ink-950 sm:text-4xl lg:text-[3.25rem]">
+          {title}
         </h1>
         {description ? (
-          <p lang={hasTranslation(description) ? language : 'en'} className="mt-4 max-w-3xl text-pretty text-base leading-7 text-ink-600 sm:text-lg">{translate(description)}</p>
+          <p className="mt-4 max-w-3xl text-pretty text-base leading-7 text-ink-600 sm:text-lg">{description}</p>
         ) : null}
         {children ? <div className="mt-7">{children}</div> : null}
       </div>

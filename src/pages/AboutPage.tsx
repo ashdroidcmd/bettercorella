@@ -1,4 +1,3 @@
-import { LocalizedText } from '../i18n/LocalizedText'
 import { ArrowRight, ArrowUpRight, Database, ExternalLink, MapPin } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PageHero } from '../components/PageHero'
@@ -39,23 +38,23 @@ export function AboutPage() {
                   description="This is not the official city website. It is an independent civic project that organizes public information and links back to the government sources behind every dataset."
                 />
                 <p className="mt-5 text-[15px] leading-7 text-ink-600">
-                  <LocalizedText text={"The guide covers municipal services from the Citizens’ Charter, the elected mayor and Sangguniang Bayan, all 50 barangays, and the budget and procurement records published under the Full Disclosure Policy. It does not process transactions, issue permits, or speak for the municipal government."} /></p>
+                  {"The guide covers municipal services from the Citizens’ Charter, the elected mayor and Sangguniang Bayan, all 50 barangays, and the budget and procurement records published under the Full Disclosure Policy. It does not process transactions, issue permits, or speak for the municipal government."}</p>
                 <p className="mt-4 text-[15px] leading-7 text-ink-600">
-                  <LocalizedText text={"Where records conflict or change, the official source takes precedence. Each dataset is dated so you can see when it was last checked."} /></p>
+                  {"Where records conflict or change, the official source takes precedence. Each dataset is dated so you can see when it was last checked."}</p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
                     to="/services"
                     viewTransition
                     className="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800"
                   >
-                    <LocalizedText text={"Browse services"} /><ArrowRight aria-hidden="true" className="size-4" />
+                    {"Browse services"}<ArrowRight aria-hidden="true" className="size-4" />
                   </Link>
                   <Link
                     to="/contact"
                     viewTransition
                     className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
                   >
-                    <LocalizedText text={"Contact and sources"} /></Link>
+                    {"Contact and sources"}</Link>
                 </div>
               </div>
             </Reveal>
@@ -72,21 +71,21 @@ export function AboutPage() {
           <div className="mt-12 grid gap-4 sm:grid-cols-3">
             <div className="rounded-2xl border border-line bg-white p-5 shadow-card">
               <Database aria-hidden="true" className="size-5 text-brand-700" />
-              <h2 className="mt-3 text-base font-extrabold text-ink-950"><LocalizedText text={"Structured public data"} /></h2>
+              <h2 className="mt-3 text-base font-extrabold text-ink-950">{"Structured public data"}</h2>
               <p className="mt-2 text-sm leading-6 text-ink-600">
-                <LocalizedText text={"242 services, 38 offices, 50 barangays, 15 officials, and the city’s budget and procurement documents."} /></p>
+                {"242 services, 38 offices, 50 barangays, 15 officials, and the city’s budget and procurement documents."}</p>
             </div>
             <div className="rounded-2xl border border-line bg-white p-5 shadow-card">
               <ExternalLink aria-hidden="true" className="size-5 text-brand-700" />
-              <h2 className="mt-3 text-base font-extrabold text-ink-950"><LocalizedText text={"Links to the source"} /></h2>
+              <h2 className="mt-3 text-base font-extrabold text-ink-950">{"Links to the source"}</h2>
               <p className="mt-2 text-sm leading-6 text-ink-600">
-                <LocalizedText text={"Every service, office, barangay, news item, and financial document points back to an official city or national source."} /></p>
+                {"Every service, office, barangay, news item, and financial document points back to an official city or national source."}</p>
             </div>
             <div className="rounded-2xl border border-line bg-white p-5 shadow-card">
               <MapPin aria-hidden="true" className="size-5 text-brand-700" />
-              <h2 className="mt-3 text-base font-extrabold text-ink-950"><LocalizedText text={"Local by design"} /></h2>
+              <h2 className="mt-3 text-base font-extrabold text-ink-950">{"Local by design"}</h2>
               <p className="mt-2 text-sm leading-6 text-ink-600">
-                <LocalizedText text={"Written around the way people actually use Municipal Hall: by transaction, office, barangay, and public record."} /></p>
+                {"Written around the way people actually use Municipal Hall: by transaction, office, barangay, and public record."}</p>
             </div>
           </div>
         </div>
@@ -149,8 +148,8 @@ export function AboutPage() {
                 />
                 <p className="text-sm font-extrabold text-brand-700">{item.year}</p>
                 <div>
-                  <h3 className="text-base font-bold text-ink-950"><LocalizedText text={item.title} /></h3>
-                <p className="mt-1 max-w-3xl text-sm leading-6 text-ink-600"><LocalizedText text={item.text} /></p>
+                  <h3 className="text-base font-bold text-ink-950">{item.title}</h3>
+                <p className="mt-1 max-w-3xl text-sm leading-6 text-ink-600">{item.text}</p>
                 </div>
               </li>
             ))}
@@ -178,14 +177,14 @@ export function AboutPage() {
               >
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="text-sm font-bold leading-6 text-ink-950 group-hover:text-brand-700">
-                    <LocalizedText text={source.name} />
+                    {source.name}
                   </h3>
                   <ArrowUpRight
                     aria-hidden="true"
                     className="size-4 shrink-0 text-ink-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand-700"
                   />
                 </div>
-                <p className="mt-1 flex-1 text-xs leading-5 text-ink-500"><LocalizedText text={source.note} /></p>
+                <p className="mt-1 flex-1 text-xs leading-5 text-ink-500">{source.note}</p>
               </a>
             ))}
           </div>
@@ -202,7 +201,7 @@ export function AboutPage() {
                 { href: 'https://www.bohol.gov.ph', label: 'Bohol provincial government portal' },
               ]}
             >
-              <LocalizedText text={"Better Inabanga is an independent project, not affiliated with the Municipal Government of Inabanga. The displayed land area is the PSA/PhilAtlas figure (168.49 km²) covering all 50 barangays. Core municipal profile facts were checked against cited public records on October 24, 2026; each dataset has its own source date. For official transactions, always use the municipality’s own channels."} /></SourceNote>
+              {"Better Inabanga is an independent project, not affiliated with the Municipal Government of Inabanga. The displayed land area is the PSA/PhilAtlas figure (168.49 km²) covering all 50 barangays. Core municipal profile facts were checked against cited public records on October 24, 2026; each dataset has its own source date. For official transactions, always use the municipality’s own channels."}</SourceNote>
           </div>
         </div>
       </section>

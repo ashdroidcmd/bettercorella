@@ -1,4 +1,3 @@
-import { LocalizedText } from '../i18n/LocalizedText'
 import { ArrowRight, Database, FileSearch, Landmark, MapPin, Wallet } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { PageHero } from '../components/PageHero'
@@ -76,11 +75,11 @@ export function TransparencyPage() {
                     <Wallet aria-hidden="true" className="size-5" />
                   </span>
                   <h2 className="mt-5 text-xl font-extrabold tracking-tight text-ink-950 group-hover:text-brand-700">
-                    <LocalizedText text={"Budget and spending"} /></h2>
+                    {"Budget and spending"}</h2>
                   <p className="mt-2 flex-1 text-sm leading-6 text-ink-600">
-                    <LocalizedText text={"The Local Expenditure Program, statements of receipts and expenditures, special funds, and audit reports."} /></p>
+                    {"The Local Expenditure Program, statements of receipts and expenditures, special funds, and audit reports."}</p>
                   <span className="mt-5 inline-flex items-center justify-between gap-3 border-t border-line pt-4 text-sm font-bold text-brand-700">
-                    {budgetCount} <LocalizedText text={"documents"} /><ArrowRight
+                    {budgetCount} {"documents"}<ArrowRight
                       aria-hidden="true"
                       className="size-4 transition group-hover:translate-x-0.5"
                     />
@@ -98,11 +97,11 @@ export function TransparencyPage() {
                     <FileSearch aria-hidden="true" className="size-5" />
                   </span>
                   <h2 className="mt-5 text-xl font-extrabold tracking-tight text-ink-950 group-hover:text-brand-700">
-                    <LocalizedText text={"Procurement and bids"} /></h2>
+                    {"Procurement and bids"}</h2>
                   <p className="mt-2 flex-1 text-sm leading-6 text-ink-600">
-                    <LocalizedText text={"Annual procurement plans, quarterly bid results, bid documents, and infrastructure project status."} /></p>
+                    {"Annual procurement plans, quarterly bid results, bid documents, and infrastructure project status."}</p>
                   <span className="mt-5 inline-flex items-center justify-between gap-3 border-t border-line pt-4 text-sm font-bold text-brand-700">
-                    {procurementCount} <LocalizedText text={"documents"} /><ArrowRight
+                    {procurementCount} {"documents"}<ArrowRight
                       aria-hidden="true"
                       className="size-4 transition group-hover:translate-x-0.5"
                     />
@@ -121,14 +120,14 @@ export function TransparencyPage() {
                   <MapPin aria-hidden="true" className="size-5" />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700"><LocalizedText text={"Project tracker"} /></p>
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-700">{"Project tracker"}</p>
                   <h2 className="mt-1 text-xl font-extrabold tracking-tight text-ink-950 group-hover:text-brand-700">
-                    <LocalizedText text={"Every DPWH project linked to the city"} /></h2>
+                    {"Every DPWH project linked to the city"}</h2>
                   <p className="mt-1 text-sm leading-6 text-ink-600">
-                    <LocalizedText text={"Contract values, status, contractors, and locations as published in the source records."} /></p>
+                    {"Contract values, status, contractors, and locations as published in the source records."}</p>
                 </div>
                 <span className="inline-flex shrink-0 items-center gap-2 text-sm font-bold text-brand-700">
-                  {dpwhProjects.length} <LocalizedText text={"projects"} /><ArrowRight aria-hidden="true" className="size-4 transition group-hover:translate-x-0.5" />
+                  {dpwhProjects.length} {"projects"}<ArrowRight aria-hidden="true" className="size-4 transition group-hover:translate-x-0.5" />
                 </span>
               </Link>
             </Reveal>
@@ -143,13 +142,13 @@ export function TransparencyPage() {
                   <Database aria-hidden="true" className="size-5" />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-300"><LocalizedText text={"Open data"} /></p>
-                  <h2 className="mt-1 text-xl font-extrabold tracking-tight"><LocalizedText text={"See the sources behind the numbers"} /></h2>
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-300">{"Open data"}</p>
+                  <h2 className="mt-1 text-xl font-extrabold tracking-tight">{"See the sources behind the numbers"}</h2>
                   <p className="mt-1 text-sm leading-6 text-white/60">
-                    <LocalizedText text={"The national datasets behind the fiscal profile, barangay map, election history, and contract totals, with their licenses and caveats."} /></p>
+                    {"The national datasets behind the fiscal profile, barangay map, election history, and contract totals, with their licenses and caveats."}</p>
                 </div>
                 <span className="inline-flex shrink-0 items-center gap-2 text-sm font-bold text-brand-300">
-                  {openDataSources.length} <LocalizedText text={"datasets"} /><ArrowRight aria-hidden="true" className="size-4 transition group-hover:translate-x-0.5" />
+                  {openDataSources.length} {"datasets"}<ArrowRight aria-hidden="true" className="size-4 transition group-hover:translate-x-0.5" />
                 </span>
               </Link>
             </Reveal>
@@ -173,9 +172,9 @@ export function TransparencyPage() {
                   )
                 })}
                 <div className="flex items-center justify-between gap-4 px-5 py-4">
-                  <span className="text-sm font-semibold text-ink-800"><LocalizedText text={"Procurement"} /></span>
+                  <span className="text-sm font-semibold text-ink-800">{"Procurement"}</span>
                   <span className="text-xs font-bold uppercase tracking-[0.1em] text-ink-400">
-                    {procurementCount} <LocalizedText text={"documents"} /></span>
+                    {procurementCount} {"documents"}</span>
                 </div>
               </div>
             </div>
@@ -183,16 +182,16 @@ export function TransparencyPage() {
             <Reveal delay={0.06}>
               <div className="h-full rounded-2xl border border-line bg-ink-950 p-6 text-white shadow-card">
                 <Landmark aria-hidden="true" className="size-6 text-brand-300" />
-                <h2 className="mt-4 text-xl font-extrabold tracking-tight"><LocalizedText text={"The Full Disclosure Policy"} /></h2>
+                <h2 className="mt-4 text-xl font-extrabold tracking-tight">{"The Full Disclosure Policy"}</h2>
                 <p className="mt-2 text-sm leading-6 text-white/60">
-                  <LocalizedText text={"The city publishes budget, procurement, and accountability documents under the national Full Disclosure Policy."} /></p>
+                  {"The city publishes budget, procurement, and accountability documents under the national Full Disclosure Policy."}</p>
                 <a
                   href="https://www.inabanga.gov.ph/full-disclosure-policy/"
                   target="_blank"
                   rel="noreferrer"
                   className="mt-5 inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-white/15"
                 >
-                  <LocalizedText text={"Open the disclosure portal"} /><ArrowRight aria-hidden="true" className="size-3.5" />
+                  {"Open the disclosure portal"}<ArrowRight aria-hidden="true" className="size-3.5" />
                 </a>
               </div>
             </Reveal>
@@ -200,7 +199,7 @@ export function TransparencyPage() {
 
           <div className="mt-8">
             <SourceNote href={city.website} linkLabel="Visit the official city website">
-              <LocalizedText text={"Figures are dated individually. Budget and procurement links point to documents published by the Municipal Government of Inabanga; use each linked publisher for the latest releases."} /></SourceNote>
+              {"Figures are dated individually. Budget and procurement links point to documents published by the Municipal Government of Inabanga; use each linked publisher for the latest releases."}</SourceNote>
           </div>
         </div>
       </section>

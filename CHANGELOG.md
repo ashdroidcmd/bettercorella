@@ -11,6 +11,10 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 - Graphify knowledge graph setup (`.graphifyignore`, git hooks).
 - AI workflow docs: `AGENTS.md`, `CLAUDE.md` and `.claude/skills/`.
 
+### Removed
+
+- Language switching (Filipino and Cebuano). The site is English only for now.
+
 ### Fixed
 
 - `vercel.json` now builds with Vite (`npm run build` → `dist`) instead of Next.js.

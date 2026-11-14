@@ -1,4 +1,3 @@
-import { LocalizedText } from '../i18n/LocalizedText'
 import {
   ArrowRight,
   Building2,
@@ -158,7 +157,7 @@ export function BusinessPage() {
                     <Icon aria-hidden="true" className="size-4" />
                   </span>
                   <span className="min-w-0 text-left">{sector.title}</span>
-                  <span className="sr-only"><LocalizedText text={"Priority sector"} trailingSpace />{index + 1}</span>
+                  <span className="sr-only">{"Priority sector"}{' '}{index + 1}</span>
                 </li>
               )
             })}
@@ -182,12 +181,12 @@ export function BusinessPage() {
                 <span className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
                   <Wallet aria-hidden="true" className="size-5" />
                 </span>
-                <h3 className="mt-4 text-base font-extrabold tracking-tight text-ink-950"><LocalizedText text={"Wage rates"} /></h3>
+                <h3 className="mt-4 text-base font-extrabold tracking-tight text-ink-950">{"Wage rates"}</h3>
                 <p className="mt-1 text-xs font-semibold uppercase tracking-[0.1em] text-ink-400">
-                  <LocalizedText text={"Wage Order No. RB1-24 · effective November 19, 2025"} /></p>
+                  {"Wage Order No. RB1-24 · effective November 19, 2025"}</p>
                 <ul className="mt-3 space-y-2 text-sm leading-6 text-ink-600">
-                  <li><LocalizedText text={"₱505.00 per day — non-agriculture, 10 or more employees"} /></li>
-                  <li><LocalizedText text={"₱480.00 per day — agriculture and non-agriculture, fewer than 10 employees"} /></li>
+                  <li>{"₱505.00 per day — non-agriculture, 10 or more employees"}</li>
+                  <li>{"₱480.00 per day — agriculture and non-agriculture, fewer than 10 employees"}</li>
                 </ul>
                 <a
                   href="https://nwpc.dole.gov.ph/region-i/"
@@ -195,7 +194,7 @@ export function BusinessPage() {
                   rel="noreferrer"
                   className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 hover:text-brand-800"
                 >
-                  <LocalizedText text={"See the current Region I wage order"} /><ExternalLink aria-hidden="true" className="size-3.5" />
+                  {"See the current Region I wage order"}<ExternalLink aria-hidden="true" className="size-3.5" />
                 </a>
               </div>
             </Reveal>
@@ -205,15 +204,15 @@ export function BusinessPage() {
                 <span className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
                   <Building2 aria-hidden="true" className="size-5" />
                 </span>
-                <h3 className="mt-4 text-base font-extrabold tracking-tight text-ink-950"><LocalizedText text={"Rental and lease rates"} /></h3>
+                <h3 className="mt-4 text-base font-extrabold tracking-tight text-ink-950">{"Rental and lease rates"}</h3>
                 <p className="mt-1 text-xs leading-5 text-ink-500">
-                  <LocalizedText text={"City-published reference ranges; no effective date or rental period is stated."} /></p>
+                  {"City-published reference ranges; no effective date or rental period is stated."}</p>
                 <ul className="mt-3 space-y-2 text-sm leading-6 text-ink-600">
-                  <li><LocalizedText text={"Commercial space: ₱200 to ₱550 per square meter"} /></li>
-                  <li><LocalizedText text={"1-bedroom condo or apartment: ₱5,000 to ₱8,000"} /></li>
-                  <li><LocalizedText text={"2–3 bedroom condo or apartment: ₱7,000 to ₱10,000"} /></li>
-                  <li><LocalizedText text={"4-bedroom house: ₱8,000 to ₱15,000"} /></li>
-                  <li><LocalizedText text={"Land: ₱4,000 to ₱60,000 per square meter"} /></li>
+                  <li>{"Commercial space: ₱200 to ₱550 per square meter"}</li>
+                  <li>{"1-bedroom condo or apartment: ₱5,000 to ₱8,000"}</li>
+                  <li>{"2–3 bedroom condo or apartment: ₱7,000 to ₱10,000"}</li>
+                  <li>{"4-bedroom house: ₱8,000 to ₱15,000"}</li>
+                  <li>{"Land: ₱4,000 to ₱60,000 per square meter"}</li>
                 </ul>
               </div>
             </Reveal>
@@ -223,23 +222,23 @@ export function BusinessPage() {
                 <span className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
                   <Zap aria-hidden="true" className="size-5" />
                 </span>
-                <h3 className="mt-4 text-base font-extrabold tracking-tight text-ink-950"><LocalizedText text={"Electricity tariffs"} /></h3>
+                <h3 className="mt-4 text-base font-extrabold tracking-tight text-ink-950">{"Electricity tariffs"}</h3>
                 <p className="mt-2 text-sm leading-6 text-ink-600">
-                  <LocalizedText text={"BOHECO I publishes monthly power rate advisories and tariff schedules for residential and commercial connections in Inabanga."} /></p>
+                  {"BOHECO I publishes monthly power rate advisories and tariff schedules for residential and commercial connections in Inabanga."}</p>
                 <a
                   href="https://boheco1.com.ph"
                   target="_blank"
                   rel="noreferrer"
                   className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-brand-700 hover:text-brand-800"
                 >
-                  <LocalizedText text={"View BOHECO I power rates"} /><ExternalLink aria-hidden="true" className="size-3.5" />
+                  {"View BOHECO I power rates"}<ExternalLink aria-hidden="true" className="size-3.5" />
                 </a>
               </div>
             </Reveal>
           </div>
 
           <p className="mt-4 text-xs leading-5 text-ink-500">
-            <LocalizedText text={"Confirm the city’s undated rental estimates with the provider before making a decision. Water and telecommunications prices are not listed in the city profile."} /></p>
+            {"Confirm the city’s undated rental estimates with the provider before making a decision. Water and telecommunications prices are not listed in the city profile."}</p>
         </div>
       </section>
 
@@ -257,7 +256,7 @@ export function BusinessPage() {
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-bold text-brand-700 transition hover:text-brand-800"
                 >
-                  <LocalizedText text={"All forms on the official page"} /><ExternalLink aria-hidden="true" className="size-4" />
+                  {"All forms on the official page"}<ExternalLink aria-hidden="true" className="size-4" />
                 </a>
               }
             />
@@ -285,7 +284,7 @@ export function BusinessPage() {
               rel="noreferrer"
               className="group flex items-center justify-between gap-3 rounded-2xl border border-line bg-white p-4 text-sm font-semibold text-ink-800 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:text-brand-700 hover:shadow-float"
             >
-              <LocalizedText text={"Business Permit: Unified Application Form"} /><ExternalLink
+              {"Business Permit: Unified Application Form"}<ExternalLink
                 aria-hidden="true"
                 className="size-3.5 shrink-0 text-ink-400 transition group-hover:text-brand-700"
               />
@@ -298,7 +297,7 @@ export function BusinessPage() {
               viewTransition
               className="inline-flex items-center gap-2 text-sm font-bold text-brand-700 transition hover:text-brand-800"
             >
-              <LocalizedText text={"Apply online through the e-Business Permits and Licensing System"} /><ArrowRight aria-hidden="true" className="size-4" />
+              {"Apply online through the e-Business Permits and Licensing System"}<ArrowRight aria-hidden="true" className="size-4" />
             </Link>
           </div>
         </div>
@@ -317,25 +316,25 @@ export function BusinessPage() {
           <div className="mt-8 grid gap-4 lg:grid-cols-3">
             <Reveal className="h-full">
               <div className="h-full rounded-2xl border border-line bg-white p-5 shadow-card">
-                <h3 className="text-base font-extrabold tracking-tight text-ink-950"><LocalizedText text={"Port of U-og Trade and Maritime Gateway"} /></h3>
+                <h3 className="text-base font-extrabold tracking-tight text-ink-950">{"Port of U-og Trade and Maritime Gateway"}</h3>
                 <p className="mt-2 text-sm leading-6 text-ink-600">
-                  <LocalizedText text={"A strategic municipal seaport in Barangay U-og connecting Inabanga across the Camotes Sea to Cebu and neighboring coastal islands for cargo and passenger craft."} /></p>
+                  {"A strategic municipal seaport in Barangay U-og connecting Inabanga across the Camotes Sea to Cebu and neighboring coastal islands for cargo and passenger craft."}</p>
               </div>
             </Reveal>
 
             <Reveal delay={0.05} className="h-full">
               <div className="h-full rounded-2xl border border-line bg-white p-5 shadow-card">
-                <h3 className="text-base font-extrabold tracking-tight text-ink-950"><LocalizedText text={"Poblacion Commercial & Raffia Heritage Hub"} /></h3>
+                <h3 className="text-base font-extrabold tracking-tight text-ink-950">{"Poblacion Commercial & Raffia Heritage Hub"}</h3>
                 <p className="mt-2 text-sm leading-6 text-ink-600">
-                  <LocalizedText text={"Barangay Poblacion serves as the commercial center anchored by the Inabanga Public Market, municipal government complex, rural banking, and the Raffia Weaving Demonstration Center."} /></p>
+                  {"Barangay Poblacion serves as the commercial center anchored by the Inabanga Public Market, municipal government complex, rural banking, and the Raffia Weaving Demonstration Center."}</p>
               </div>
             </Reveal>
 
             <Reveal delay={0.1} className="h-full">
               <div className="h-full rounded-2xl border border-line bg-white p-5 shadow-card">
-                <h3 className="text-base font-extrabold tracking-tight text-ink-950"><LocalizedText text={"Inabanga River Eco-Tourism Corridor"} /></h3>
+                <h3 className="text-base font-extrabold tracking-tight text-ink-950">{"Inabanga River Eco-Tourism Corridor"}</h3>
                 <p className="mt-2 text-sm leading-6 text-ink-600">
-                  <LocalizedText text={"The fertile Inabanga River basin and Danajon Bank coastal waters offer prime opportunities in community-based eco-tours, sustainable aquaculture, and high-value agriculture."} /></p>
+                  {"The fertile Inabanga River basin and Danajon Bank coastal waters offer prime opportunities in community-based eco-tours, sustainable aquaculture, and high-value agriculture."}</p>
               </div>
             </Reveal>
           </div>
@@ -343,11 +342,11 @@ export function BusinessPage() {
           <Reveal>
             <div className="mt-8 flex flex-col gap-4 rounded-2xl border border-line bg-ink-950 p-6 text-white shadow-card sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/60"><LocalizedText text={"Incentives"} /></p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/60">{"Incentives"}</p>
                 <h3 className="mt-1.5 text-lg font-extrabold tracking-tight">
-                  <LocalizedText text={"Inabanga Investments & Incentives Code — Ordinance No. 2024-41"} /></h3>
+                  {"Inabanga Investments & Incentives Code — Ordinance No. 2024-41"}</h3>
                 <p className="mt-1.5 text-sm text-white/60">
-                  <LocalizedText text={"The municipality’s incentive framework for qualified local investments."} /></p>
+                  {"The municipality’s incentive framework for qualified local investments."}</p>
               </div>
               <a
                 href="https://drive.google.com/file/d/1S5q2HOklGy4O692uYMgHrZNNXOpYqZ69/view?usp=sharing"
@@ -356,7 +355,7 @@ export function BusinessPage() {
                 className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white/10 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-white/15"
               >
                 <Download aria-hidden="true" className="size-3.5" />
-                <LocalizedText text={"Download the code"} /></a>
+                {"Download the code"}</a>
             </div>
           </Reveal>
 
@@ -373,7 +372,7 @@ export function BusinessPage() {
                 },
               ]}
             >
-              <LocalizedText text={"Investment priorities, business procedures, and commercial guidelines for the Municipality of Inabanga. Wage rates follow the current DOLE Region VII Regional Tripartite Wages and Productivity Board order; electric power rates follow BOHECO I monthly advisories."} /></SourceNote>
+              {"Investment priorities, business procedures, and commercial guidelines for the Municipality of Inabanga. Wage rates follow the current DOLE Region VII Regional Tripartite Wages and Productivity Board order; electric power rates follow BOHECO I monthly advisories."}</SourceNote>
           </div>
         </div>
       </section>
@@ -383,10 +382,10 @@ export function BusinessPage() {
           <div className="flex items-center gap-3 text-sm text-ink-600">
             <HeartPulse aria-hidden="true" className="size-4 shrink-0 text-brand-700" />
             <p>
-              <LocalizedText text={"Doing business in the city also means being part of its community. Explore"} />{' '}
+              {"Doing business in the city also means being part of its community. Explore"}{' '}
               <Link to="/city/life" viewTransition className="font-bold text-brand-700 hover:text-brand-800">
-                <LocalizedText text={"life and tourism in Inabanga"} /></Link>{' '}
-              <LocalizedText text={"to see what makes the city livable."} /></p>
+                {"life and tourism in Inabanga"}</Link>{' '}
+              {"to see what makes the city livable."}</p>
           </div>
         </div>
       </section>

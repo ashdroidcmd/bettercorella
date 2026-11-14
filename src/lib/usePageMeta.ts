@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { useLanguage } from '../i18n/language'
 
 const SITE_NAME = 'Better Inabanga'
 
@@ -37,11 +36,10 @@ function absoluteUrl(value: string) {
 }
 
 export function usePageMeta(title: string, description?: string, options: PageMetaOptions = {}) {
-  const { translate, language } = useLanguage()
   const { path, image = '/og.png', type = 'website', jsonLd } = options
   const json = jsonLd ? JSON.stringify(jsonLd) : ''
-  const localizedTitle = translate(title)
-  const localizedDescription = description ? translate(description) : undefined
+  const localizedTitle = title
+  const localizedDescription = description ? description : undefined
 
   useEffect(() => {
     const fullTitle = localizedTitle === SITE_NAME ? localizedTitle : `${localizedTitle} | ${SITE_NAME}`
@@ -78,5 +76,5 @@ export function usePageMeta(title: string, description?: string, options: PageMe
     } else if (script) {
       script.remove()
     }
-  }, [localizedTitle, localizedDescription, language, path, image, type, json])
+  }, [localizedTitle, localizedDescription, path, image, type, json])
 }

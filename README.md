@@ -35,7 +35,6 @@
   - **Infrastructure Projects Tracker (`/transparency/projects`):** Real-time monitoring of priority DPWH and municipal capital projects (Port of U-og expansion, river revetment walls, farm-to-market roads).
   - **Open Data (`/transparency/open-data`):** Downloadable machine-readable JSON/CSV datasets.
 - **Civic News & Advisories (`/news`, `/news/:slug`, `/news/archive`):** Announcements, DRRMO flood alerts, and agricultural distribution schedules.
-- **Multi-Language Internationalization (i18n):** Live switching between **English (`en`)**, **Filipino (`fil`)**, and authentic Boholano **Sinugboanon / Cebuano (`ceb`)**.
 - **Progressive Web App (PWA) & Offline Caching:** Built with service worker support for offline access during emergencies.
 
 ---
