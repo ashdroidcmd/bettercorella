@@ -2,6 +2,7 @@
 
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { MapEmbed } from '../../../components/ui/MapEmbed'
 import { PageHero } from '../../../components/ui/PageHero'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
@@ -69,6 +70,10 @@ export function TownProfilePage() {
               </div>
             ))}
           </dl>
+
+          <Reveal className="mt-10">
+            <MapEmbed title={`Map of ${city.officialName}`} query={`${city.name}, ${city.province}, Philippines`} zoom={13} />
+          </Reveal>
         </div>
       </section>
 

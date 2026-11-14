@@ -3,6 +3,7 @@
 import { AlertTriangle, ArrowRight, ArrowUpRight, Clock, ExternalLink, Mail, MapPin, Phone } from 'lucide-react'
 import Link from 'next/link'
 import { ComingSoon } from '../../../components/ui/ComingSoon'
+import { MapEmbed } from '../../../components/ui/MapEmbed'
 import { PageHero } from '../../../components/ui/PageHero'
 import { SourceNote } from '../../../components/ui/SourceNote'
 import { city } from '../../../config/city'
@@ -81,6 +82,15 @@ export function ContactPage() {
                   </div>
                 ) : null}
               </dl>
+
+              {city.coordinates ? (
+                <MapEmbed
+                  className="mt-6"
+                  title={`Map of the ${city.name} Municipal Hall`}
+                  query={`${city.coordinates.lat},${city.coordinates.lng}`}
+                  zoom={17}
+                />
+              ) : null}
 
               {city.website || city.facebook ? (
                 <div className="mt-6 flex flex-wrap gap-3 border-t border-line pt-5">
@@ -199,8 +209,8 @@ export function ContactPage() {
         ) : null}
 
         <div className="mt-10">
-          <SourceNote href="https://bohol.gov.ph/contact-us/" linkLabel="Provincial Government of Bohol contacts">
-            {'Municipal contact details are listed only after they are confirmed with the LGU.'}
+          <SourceNote href="https://corella-bohol.gov.ph/contact-us/" linkLabel="Contact page of the official municipal website">
+            {'Municipal Hall address, phone and email come from the official municipal website and the Citizen’s Charter 2026 (checked November 14, 2026). Office hours are added once confirmed with the LGU.'}
           </SourceNote>
         </div>
       </div>

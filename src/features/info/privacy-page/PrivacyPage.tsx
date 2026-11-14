@@ -84,7 +84,7 @@ export function PrivacyPage() {
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"03 · Off-site services"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Third-party services and links"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
-            {"The Plus Jakarta Sans typeface is served from this site itself, so your browser does not contact Google Fonts. Links to official government websites and other public records take you to services with their own privacy policies. This guide does not control those services."}</p>
+            {"The Plus Jakarta Sans typeface is served from this site itself, so your browser does not contact Google Fonts. Some pages (town profile, barangays, contact) embed a Google Maps map; when it loads, Google may receive your IP address and set cookies under Google's privacy policy. Links to official government websites and other public records take you to services with their own privacy policies. This guide does not control those services."}</p>
         </section>
 
         <section id="your-choices" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">

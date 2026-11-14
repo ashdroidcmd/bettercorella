@@ -129,6 +129,13 @@ test.describe('Corella rebrand', () => {
     await expect(page.getByText(/Citizen's Charter 2026/).first()).toBeVisible()
   })
 
+  test('town and contact pages embed a titled map', async ({ page }) => {
+    await page.goto('/town')
+    await expect(page.locator('iframe[title^="Map of"]')).toHaveCount(1)
+    await page.goto('/contact')
+    await expect(page.locator('iframe[title*="Municipal Hall"]')).toHaveCount(1)
+  })
+
   test('hotlines list the national 911 line', async ({ page }) => {
     await page.goto('/government/hotlines')
     await expect(page.getByRole('link', { name: '911' }).first()).toBeVisible()

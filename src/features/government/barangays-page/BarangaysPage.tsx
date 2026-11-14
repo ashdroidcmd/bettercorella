@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { BarangayMap } from './components/BarangayMap'
 import { ComingSoon } from '../../../components/ui/ComingSoon'
 import { EmptyState } from '../../../components/ui/EmptyState'
+import { MapEmbed } from '../../../components/ui/MapEmbed'
 import { PageHero } from '../../../components/ui/PageHero'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
@@ -200,7 +201,16 @@ export function BarangaysPage() {
               </div>
             </Reveal>
           </section>
-          ) : null}
+          ) : (
+            <Reveal>
+              <SectionHeading
+                eyebrow="Map"
+                title={`Where ${city.name} is`}
+                description="An interactive map of each barangay's boundary will be added once verified boundary data is in place."
+              />
+              <MapEmbed className="mt-6" title={`Map of ${city.officialName}`} query={`${city.name}, ${city.province}, Philippines`} zoom={13} />
+            </Reveal>
+          )}
 
           {barangays.length ? (
           <>
