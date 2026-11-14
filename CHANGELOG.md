@@ -57,6 +57,7 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Removed
 
+- Services page: the "Common situations" tags and the "Full directory" section (filters and category accordions, which also showed a leftover template count of 242). Residents browse by category cards; the Citizen's Charter source note stays.
 - News section: the `/news`, `/news/archive` and news detail pages, the "Latest updates" link and section on the home page, and the news data, cards and footer and sitemap links. There is no official news source to draw from yet.
 - Global site search: the header search button, the Ctrl/Cmd+K command palette, the `/search` page and the hero search bars on the home, services and category pages. The home and services pages link straight to popular services instead. In-page list filters (barangays, offices, services) stay.
 - All template data from BetterInabanga and Better San Fernando (La Union): 249 services, offices, officials, 50 barangays and their map boundaries, news, legislation, projects, budget and procurement figures, places, and town profile text.
