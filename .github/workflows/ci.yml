@@ -115,20 +115,18 @@ jobs:
           fi
       - uses: actions/checkout@v7
         if: steps.secrets.outputs.ready == 'true'
-      - uses: pnpm/action-setup@v6
-        if: steps.secrets.outputs.ready == 'true'
       - uses: actions/setup-node@v7
         if: steps.secrets.outputs.ready == 'true'
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - name: Build and deploy preview
+      # Upload the source and let Vercel build it. A --prebuilt deploy uploads thousands of
+      # generated files per run and trips the Hobby plan's CLI upload limit; source uploads
+      # are deduplicated, so only changed files are sent.
+      - name: Deploy preview (Vercel builds remotely)
         id: deploy
         if: steps.secrets.outputs.ready == 'true'
         run: |
-          pnpm dlx "$VERCEL_CLI" pull --yes --environment=preview --token="$VERCEL_TOKEN"
-          pnpm dlx "$VERCEL_CLI" build --token="$VERCEL_TOKEN"
-          url=$(pnpm dlx "$VERCEL_CLI" deploy --prebuilt --token="$VERCEL_TOKEN")
+          url=$(npx --yes "$VERCEL_CLI" deploy --yes --token="$VERCEL_TOKEN")
           echo "url=$url" >> "$GITHUB_OUTPUT"
           echo "### Preview deployed: $url" >> "$GITHUB_STEP_SUMMARY"
       - name: Comment preview URL on the PR
@@ -168,17 +166,14 @@ jobs:
             exit 1
           fi
       - uses: actions/checkout@v7
-      - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-      - name: Build and deploy to production
+      # Source deploy; Vercel builds remotely (see deploy-preview for why not --prebuilt).
+      - name: Deploy to production (Vercel builds remotely)
         id: deploy
         run: |
-          pnpm dlx "$VERCEL_CLI" pull --yes --environment=production --token="$VERCEL_TOKEN"
-          pnpm dlx "$VERCEL_CLI" build --prod --token="$VERCEL_TOKEN"
-          url=$(pnpm dlx "$VERCEL_CLI" deploy --prebuilt --prod --token="$VERCEL_TOKEN")
+          url=$(npx --yes "$VERCEL_CLI" deploy --yes --prod --token="$VERCEL_TOKEN")
           echo "url=$url" >> "$GITHUB_OUTPUT"
           echo "### Production deployed: $url" >> "$GITHUB_STEP_SUMMARY"
 
