@@ -20,6 +20,12 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Changed
 
+- Government data for Corella:
+  - **officials:** mayor, vice mayor, 7 Sangguniang Bayan members, ABC and SK Federation presidents (official municipal website, term 2025–2028)
+  - **barangays:** 8 barangays with PSA codes and 2024 population, 2020/2015 census figures, computed share and growth, and Cancatac's barangay council
+  - **offices:** 14 municipal offices with phone numbers and office emails from the Citizen's Charter 2026
+  - **hotlines:** Municipal Hall, MDRRMO and Municipal Health Office numbers added after 911
+  - official cards without portraits show initials instead of an empty photo frame; empty election history is hidden; barangay and office pages no longer show template numbers ("of 50", city population) or "city" wording
 - LGU profile (`src/config/city.ts`) filled with verified facts: 2024 population 9,889 and 2020 population 9,479, 8 barangays, 4th income class (PSA), 1st District and 37.22 km² land area (Province of Bohol), Municipal Hall address, phone (038) 422-3865, email, official website, Citizen's Charter, Facebook page and tagline (corella-bohol.gov.ph).
 - New BetterCorella logo: Corella's PSA/NAMRIA map outline in blue with the Philippine flag sun, plus a "Better Corella" wordmark in Plus Jakarta Sans. Header and footer use the horizontal logo; favicon, app icons and the social preview image use the new mark.
 - New color palette matched to the BetterCorella logo: Philippine blue `#0038A8` as the brand color (buttons, links, theme color) and sun gold `#FCD116` as the accent. The template's sky blue is gone.

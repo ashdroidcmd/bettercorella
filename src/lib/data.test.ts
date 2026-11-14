@@ -146,7 +146,7 @@ describe('government', () => {
     for (const barangay of barangays) {
       expect(barangay.slug).toMatch(slugPattern)
       expect(barangay.population2024).toBeGreaterThan(0)
-      expect(barangay.punongBarangay.trim()).not.toBe('')
+      if (barangay.kagawads.length) expect(barangay.punongBarangay.trim()).not.toBe('')
       expect(barangay.sourceUrl).toMatch(http)
       expect(barangay.dilgSourceUrl).toMatch(http)
     }

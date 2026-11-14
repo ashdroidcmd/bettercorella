@@ -36,7 +36,7 @@ export function BarangayDetailPage() {
       <PageHero
         eyebrow={barangay.district}
         title={barangay.name}
-        description={`A barangay in ${barangay.district}, ${city.officialName}. Population, growth, and elected barangay officials from public records.`}
+        description={`A barangay of the ${city.officialName}. Population, growth, and barangay officials from public records.`}
         crumbs={[
           { label: 'Government', href: '/government' },
           { label: 'Barangays', href: '/government/barangays' },
@@ -49,7 +49,7 @@ export function BarangayDetailPage() {
             {barangay.district}
           </span>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-700 px-3 py-1.5 text-xs font-bold text-white">
-            {"Rank"}{' '}{barangay.rank} {"of 50"}</span>
+            {"Rank"}{' '}{barangay.rank} {`of ${barangays.length}`}</span>
           {barangay.poblacion ? (
             <span className="rounded-full border border-line bg-white px-3 py-1.5 text-xs font-semibold text-ink-700">
               {"Poblacion"}</span>
@@ -63,7 +63,7 @@ export function BarangayDetailPage() {
             <StatCard value={formatNumber(barangay.population2024)} label="Population 2024" note="2024 Census" />
             <StatCard value={formatNumber(barangay.population2020)} label="Population 2020" note="2020 Census" />
             <StatCard value={formatNumber(barangay.population2015)} label="Population 2015" note="2015 Census" />
-            <StatCard value={barangay.share} label="Share of city" note="Of 124,809 residents" />
+            <StatCard value={barangay.share} label="Share of town" note={`Of ${formatNumber(barangays.reduce((total, item) => total + item.population2024, 0))} residents`} />
             <StatCard value={barangay.change} label="Change" note="2020 to 2024" />
             <StatCard value={barangay.apgr} label="Annual growth rate" note="2020 to 2024" />
           </div>
@@ -106,7 +106,7 @@ export function BarangayDetailPage() {
               <div className="mt-6 rounded-2xl bg-brand-700 p-4 text-white">
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-brand-200">{"Punong Barangay"}</p>
-                  <p className="mt-0.5 text-lg font-extrabold leading-tight">{barangay.punongBarangay}</p>
+                  <p className="mt-0.5 text-lg font-extrabold leading-tight">{barangay.punongBarangay || 'Not yet listed'}</p>
                 </div>
               </div>
 
@@ -114,6 +114,9 @@ export function BarangayDetailPage() {
                 <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-ink-400">
                   <Users aria-hidden="true" className="size-3.5" />
                   {"Sangguniang Barangay members"}</p>
+                {barangay.kagawads.length ? null : (
+                  <p className="mt-3 text-sm leading-6 text-ink-500">{"Not yet listed. The official barangay page publishes the council as photos only; names are added once confirmed."}</p>
+                )}
                 <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                   {barangay.kagawads.map((kagawad, index) => (
                     <li
@@ -152,8 +155,8 @@ export function BarangayDetailPage() {
 
         <section className="mt-10 border-t border-line pt-8">
           <SectionHeading
-            eyebrow="Same district"
-            title={`Other barangays in ${barangay.district}`}
+            eyebrow="Barangays"
+            title={`Other barangays in ${city.name}`}
             action={
               <Link
                 href="/government/barangays"
@@ -183,15 +186,15 @@ export function BarangayDetailPage() {
 
         <div className="mt-8">
           <SourceNote
-            href={barangay.sourceUrl}
-            linkLabel="city barangay directory"
+            href={barangay.dilgSourceUrl}
+            linkLabel="Official barangay page"
             links={[
-              { href: 'https://psa.gov.ph/classification/psgc/barangays/0103314000', label: 'PSA barangay list and population' },
+              { href: barangay.sourceUrl, label: 'PSA barangay list and 2024 population' },
               { href: barangayDilgSourceUrl, label: 'DILG barangay officials directory' },
               { href: 'https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/103013', label: 'Republic Act No. 12326' },
             ]}
           >
-            {"Population figures follow the PSA Census of Population. Barangay officials follow the DILG Barangay Information System; confirm names with DILG before relying on them. The next regular barangay and SK elections are scheduled for November 2028 under Republic Act No. 12326."}</SourceNote>
+            {"Population figures follow the PSA Census of Population (2024 from the PSA PSGC; 2020 and 2015 census figures as republished by PhilAtlas and bohol.ph). Barangay officials come from the barangay's page on the official municipal website; confirm names with the barangay or DILG before relying on them. The next regular barangay and SK elections are scheduled for November 2028 under Republic Act No. 12326."}</SourceNote>
         </div>
 
         <div className="mt-6">

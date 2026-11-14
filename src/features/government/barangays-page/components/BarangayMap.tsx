@@ -114,7 +114,7 @@ export function BarangayMap() {
               </div>
               <div className="rounded-xl bg-surface p-3">
                 <dt className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink-500">Punong Barangay</dt>
-                <dd className="mt-1 line-clamp-2 text-xs font-bold leading-5 text-ink-900">{preview.punongBarangay}</dd>
+                <dd className="mt-1 line-clamp-2 text-xs font-bold leading-5 text-ink-900">{preview.punongBarangay || 'Not yet listed'}</dd>
               </div>
             </dl>
             <div className="mt-5 flex flex-wrap gap-3">

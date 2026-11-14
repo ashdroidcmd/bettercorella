@@ -108,10 +108,18 @@ test.describe('Corella rebrand', () => {
   })
 
   test('sections without verified data show the coming-soon notice', async ({ page }) => {
-    for (const path of ['/government/officials', '/transparency/budget', '/news']) {
+    for (const path of ['/transparency/budget', '/news']) {
       await page.goto(path)
       await expect(page.getByRole('heading', { name: 'Information coming soon' })).toBeVisible()
     }
+  })
+
+  test('government pages list Corella officials and barangays', async ({ page }) => {
+    await page.goto('/government/officials')
+    await expect(page.getByText('Juan Manuel Y. Lim').first()).toBeVisible()
+    await page.goto('/government/barangays/cancatac')
+    await expect(page.getByRole('heading', { level: 1, name: 'Cancatac' })).toBeVisible()
+    await expect(page.getByText('Apolio C. Lumactud').first()).toBeVisible()
   })
 
   test('hotlines list the national 911 line', async ({ page }) => {

@@ -25,7 +25,7 @@ export function HotlinesPage() {
       <PageHero
         eyebrow="Emergency contacts"
         title="Hotlines and emergency numbers"
-        description={`Call 911 for immediate emergencies anywhere in the Philippines. Local emergency numbers for ${city.name} (MDRRMO, police, fire, rural health unit) are added once they are verified with the LGU.`}
+        description={`Call 911 for immediate emergencies anywhere in the Philippines. Below are ${city.name}'s Municipal Hall, MDRRMO and Municipal Health Office numbers from the Citizen's Charter. Police and fire station numbers are added once verified.`}
         crumbs={[{ label: 'Government', href: '/government' }, { label: 'Hotlines' }]}
       />
 
@@ -101,8 +101,8 @@ export function HotlinesPage() {
 
         <div className="mt-8">
           <ComingSoon
-            topic="Local emergency numbers (MDRRMO, police, fire and rural health unit)"
-            source="They will be confirmed directly with the municipal government before they are listed."
+            topic={`${city.name} police (PNP) and fire (BFP) station numbers, and a 24/7 rescue line`}
+            source="The official municipal website shows them only as images, so they will be confirmed with the LGU before they are listed."
           />
         </div>
 
@@ -139,10 +139,10 @@ export function HotlinesPage() {
 
         <div className="mt-8">
           <SourceNote
-            href="https://bohol.gov.ph/contact-us/"
-            linkLabel="Provincial Government of Bohol contacts"
+            href="https://corella-bohol.gov.ph/citizens-charter/"
+            linkLabel="Citizen's Charter 2026 (List of Offices)"
           >
-            {'911 and 8888 are national hotlines. For life-threatening emergencies, call 911.'}
+            {'911 and 8888 are national hotlines. Corella office numbers come from the Citizen’s Charter 2026 and are office lines, not confirmed 24/7. For life-threatening emergencies, call 911.'}
           </SourceNote>
         </div>
       </div>

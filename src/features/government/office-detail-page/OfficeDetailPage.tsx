@@ -32,9 +32,9 @@ export function OfficeDetailPage() {
   return (
     <>
       <PageHero
-        eyebrow="City office"
+        eyebrow="Municipal office"
         title={office.name}
-        description="Office profile help"
+        description={`Contact details and services of the ${office.name}, ${city.officialName}.`}
         crumbs={[
           { label: 'Government', href: '/government' },
           { label: 'Offices', href: '/government/offices' },
@@ -155,7 +155,7 @@ export function OfficeDetailPage() {
                 </div>
                 <div>
                   <dt className="text-xs font-semibold text-ink-500">Municipal Hall hours</dt>
-                  <dd className="mt-1 font-semibold leading-6 text-ink-900">{city.hours}</dd>
+                  <dd className="mt-1 font-semibold leading-6 text-ink-900">{city.hours ?? 'Not yet listed'}</dd>
                 </div>
               </dl>
             </div>

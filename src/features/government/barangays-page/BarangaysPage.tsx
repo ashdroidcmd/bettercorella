@@ -153,7 +153,7 @@ export function BarangaysPage() {
                         <span className="mt-0.5 block truncate text-xs text-ink-500">
                           {barangay.district} · {formatNumber(barangay.population2024)} {"residents in 2024"}</span>
                         <span className="mt-0.5 block truncate text-xs text-ink-500">
-                          {'Punong Barangay'}: {barangay.punongBarangay}
+                          {'Punong Barangay'}: {barangay.punongBarangay || 'not yet listed'}
                         </span>
                       </span>
                       <ArrowRight aria-hidden="true" className="size-4 shrink-0 text-ink-400" />
@@ -212,7 +212,11 @@ export function BarangaysPage() {
                 label="Residents"
                 note="PSA Census of Population"
               />
-              <StatCard value={formatNumber(districtNumbers.length)} label="Districts" note="Administrative districts" />
+              {districtNumbers.length > 1 ? (
+                <StatCard value={formatNumber(districtNumbers.length)} label="Districts" note="Administrative districts" />
+              ) : (
+                <StatCard value={city.incomeClass ?? '—'} label="Income class" note="Municipal income class (PSA)" />
+              )}
               <StatCard
                 value={formatNumber(poblacionCount)}
                 label="Poblacion barangays"
@@ -225,7 +229,7 @@ export function BarangaysPage() {
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-700">Directory</p>
               <h2 className="mt-2 text-2xl font-extrabold tracking-[-0.025em] text-ink-950 sm:text-3xl">
-                {(normalizedQuery ? 'Search results' : 'Browse by district')}
+                {(normalizedQuery ? 'Search results' : districtNumbers.length > 1 ? 'Browse by district' : 'All barangays')}
               </h2>
               <p className="mt-2 text-sm text-ink-600">
                 {normalizedQuery
@@ -325,7 +329,7 @@ export function BarangaysPage() {
                               <td className="px-4 py-3 text-right tabular-nums text-ink-600">{barangay.share}</td>
                               <td className="px-4 py-3 text-right tabular-nums text-ink-600">{barangay.change}</td>
                               <td className="px-4 py-3 text-right tabular-nums text-ink-600">#{barangay.rank}</td>
-                              <td className="px-4 py-3 text-ink-600">{barangay.punongBarangay}</td>
+                              <td className="px-4 py-3 text-ink-600">{barangay.punongBarangay || 'Not yet listed'}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -369,7 +373,7 @@ export function BarangaysPage() {
                 { href: 'https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/103013', label: 'Republic Act No. 12326' },
               ]}
             >
-              {'Barangay names and populations follow the PSA. Barangay officials follow the DILG directory. The next regular barangay and SK elections are scheduled for November 2028 under Republic Act No. 12326.'}
+              {'Barangay names and 2024 populations follow the PSA PSGC. Barangay officials come from each barangay’s page on the official municipal website; most are published as photos, so names are added once confirmed. The next regular barangay and SK elections are scheduled for November 2028 under Republic Act No. 12326.'}
             </SourceNote>
           </div>
         </div>

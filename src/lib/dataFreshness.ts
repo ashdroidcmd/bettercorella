@@ -53,23 +53,23 @@ export const manuallyMaintainedData: DataFreshnessRow[] = [
   },
   {
     dataset: 'Municipal office directory',
-    source: "Municipal office directory and Citizen's Charter",
+    source: "Citizen's Charter 2026 (2nd ed.), List of Offices",
     recordCount: offices.length,
-    lastVerified: null,
+    lastVerified: offices.length ? '2026-11-14' : null,
     reviewEveryDays: 180,
   },
   {
     dataset: 'Elected officials',
-    source: 'Official municipal sources and COMELEC',
+    source: 'Municipal Officials page, corella-bohol.gov.ph (term 2025-2028)',
     recordCount: officials.length,
-    lastVerified: null,
+    lastVerified: officials.length ? '2026-11-14' : null,
     reviewEveryDays: 90,
   },
   {
     dataset: 'Barangays',
-    source: 'PSA PSGC and census; DILG barangay officials directory',
+    source: 'PSA PSGC (2024 POPCEN) and census; barangay pages on corella-bohol.gov.ph',
     recordCount: barangays.length,
-    lastVerified: null,
+    lastVerified: barangays.length ? '2026-11-14' : null,
     reviewEveryDays: 180,
   },
   {
@@ -95,7 +95,7 @@ export const manuallyMaintainedData: DataFreshnessRow[] = [
   },
   {
     dataset: 'Emergency hotlines',
-    source: 'National hotlines (911, 8888); local numbers pending LGU verification',
+    source: "National hotlines (911, 8888) and Corella office numbers from the Citizen's Charter 2026",
     recordCount: hotlines.length,
     lastVerified: '2026-11-14',
     reviewEveryDays: 90,

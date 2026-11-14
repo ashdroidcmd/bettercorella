@@ -1,7 +1,8 @@
 import type { Hotline } from '../types/index.ts';
 
-// Only national hotlines are listed until Corella's local emergency numbers (MDRRMO, PNP, BFP,
-// RHU, Municipal Hall) are verified against an official LGU source.
+// 911 and 8888 are national lines. Corella numbers come from the "List of Offices" in the Citizen's
+// Charter 2026 (checked 2026-11-14). Police (PNP), fire (BFP) and 24/7 rescue numbers are still pending:
+// the official site shows them only as images.
 export const hotlines: Hotline[] = [
   {
     "label": "National Emergency Hotline",
@@ -10,6 +11,30 @@ export const hotlines: Hotline[] = [
     ],
     "note": "24/7 nationwide emergency line for police, fire, and medical emergencies. Free to call from any mobile or landline.",
     "primary": true
+  },
+  {
+    "label": "Corella Municipal Hall (Office of the Mayor)",
+    "numbers": [
+      "(038) 422-3865"
+    ],
+    "email": "municipality.corella@gmail.com",
+    "note": "Municipal Hall trunkline, also used for public assistance and complaints. Office hours; not a 24/7 line. Source: Citizen's Charter 2026."
+  },
+  {
+    "label": "MDRRMO Corella",
+    "numbers": [
+      "0920-378-8788"
+    ],
+    "email": "corella.drrm@gmail.com",
+    "note": "Municipal Disaster Risk Reduction and Management Office. Office number from the Citizen's Charter 2026; 24/7 availability not yet confirmed."
+  },
+  {
+    "label": "Municipal Health Office",
+    "numbers": [
+      "0932-843-6516"
+    ],
+    "email": "corellamho@yahoo.com",
+    "note": "Rural health unit services. Office number from the Citizen's Charter 2026; for medical emergencies call 911."
   },
   {
     "label": "Citizens' Complaint Hotline",

@@ -69,12 +69,13 @@ function OfficialsPageContent() {
             ))}
           </div>
 
+          {cityElections.length ? (
           <div className="mt-10 overflow-hidden rounded-2xl border border-line bg-white shadow-card">
             <div className="border-b border-line p-5 sm:p-6">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-700">Election history</p>
-              <h3 className="mt-2 text-xl font-extrabold tracking-tight text-ink-950">City mayors and vice mayors</h3>
+              <h3 className="mt-2 text-xl font-extrabold tracking-tight text-ink-950">Mayors and vice mayors</h3>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-600">
-                {'Winning candidates by city election year. Records combine OpenHalalan and COMELEC lists where needed. Party labels follow each source.'}{' '}
+                {'Winning candidates by election year. Records combine OpenHalalan and COMELEC lists where needed. Party labels follow each source.'}{' '}
                 <a
                   href={electionSupplementSources[0]?.url}
                   target="_blank"
@@ -147,10 +148,11 @@ function OfficialsPageContent() {
                   label: `${source.year} ${'COMELEC list'}`,
                 }))}
               >
-                {'Election records use OpenHalalan for 2001, 2004, and 2016–2025, with COMELEC lists filling 2007, 2010, and 2013. Missing names do not mean no election was held.'}
+                {'Election records use OpenHalalan and COMELEC lists. Missing names do not mean no election was held.'}
               </SourceNote>
             </div>
           </div>
+          ) : null}
         </div>
       </section>
 
@@ -176,7 +178,7 @@ function OfficialsPageContent() {
       <section className="border-t border-line">
         <div className="container-page py-8">
           <SourceNote href={city.website} linkLabel="View official profiles">
-            {'The municipal government supplies these portraits, roles, and profile links. This guide does not publish personal contact details. Check official profiles for current roles and news.'}
+            {'Names and roles come from the Municipal Officials page of the official municipal website (term 2025–2028). Portraits are added only when published by the LGU. This guide does not publish personal contact details.'}
           </SourceNote>
         </div>
       </section>
