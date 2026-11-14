@@ -55,11 +55,9 @@ test.describe('Smoke — main pages', () => {
 })
 
 test.describe('Navigation', () => {
-  test('Ctrl+K opens the command palette', async ({ page, isMobile }) => {
-    test.skip(isMobile, 'keyboard shortcut is desktop-only')
-    await page.goto('/')
-    await page.keyboard.press('Control+k')
-    await expect(page.getByRole('dialog')).toBeVisible()
+  test('global search is removed', async ({ request }) => {
+    const response = await request.get('/search')
+    expect(response.status()).toBe(404)
   })
 })
 

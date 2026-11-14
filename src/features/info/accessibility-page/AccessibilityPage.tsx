@@ -14,7 +14,7 @@ const sections = [
 
 const features = [
   'Semantic landmarks, headings, lists, tables, and a skip-to-content link on every page.',
-  'Keyboard-accessible navigation, search, filters, and expandable sections, with visible focus styles.',
+  'Keyboard-accessible navigation, filters, and expandable sections, with visible focus styles.',
   'Text alternatives for meaningful images; decorative images are hidden from assistive technology.',
   'Reduced-motion support: animations respect the operating system preference and no media autoplays.',
   'Responsive layouts that reflow on small screens and remain usable when text is enlarged.',

@@ -56,14 +56,14 @@ export function FaqPage() {
             <div className="rounded-2xl border border-line bg-ink-950 p-5 text-white shadow-card">
               <h2 className="text-lg font-extrabold tracking-tight">{"Still looking?"}</h2>
               <p className="mt-2 text-sm leading-6 text-white/60">
-                {"Search the full guide, browse services by category, or contact the right municipal office directly."}</p>
+                {"Browse services by category, check the site map, or contact the right municipal office directly."}</p>
               <div className="mt-4 grid gap-2">
                 <Link
-                  href="/search"
+                  href="/sitemap"
                  
                   className="inline-flex items-center justify-between gap-3 rounded-xl bg-white/10 px-4 py-2.5 text-xs font-bold text-white transition hover:bg-white/15"
                 >
-                  {"Search the site"}<ArrowRight aria-hidden="true" className="size-3.5" />
+                  {"Site map"}<ArrowRight aria-hidden="true" className="size-3.5" />
                 </Link>
                 <Link
                   href="/services"

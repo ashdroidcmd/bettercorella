@@ -1,12 +1,12 @@
 'use client'
 
-import { ArrowRight, Fingerprint, Globe2, Search, ShieldCheck } from 'lucide-react'
+import { ArrowRight, Bookmark, Fingerprint, Globe2, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
 import { InfoPageLayout } from '../shared/components/InfoPageLayout'
 import { PageHero } from '../../../components/ui/PageHero'
 
 const sections = [
-  { id: 'search-and-forms', label: 'Search and forms' },
+  { id: 'search-and-forms', label: 'Saved services and forms' },
   { id: 'hosting-logs', label: 'Hosting and technical logs' },
   { id: 'third-party-services', label: 'Third-party services and links' },
   { id: 'your-choices', label: 'Your choices' },
@@ -20,9 +20,9 @@ const privacyHighlights = [
     text: 'There are no sign-ups, comments, or forms that send personal data to this project.',
   },
   {
-    icon: Search,
-    title: 'Search stays in your browser',
-    text: 'Search matches against information bundled with the site.',
+    icon: Bookmark,
+    title: 'Saved services stay on your device',
+    text: 'Bookmarked services are stored only in your browser.',
   },
   {
     icon: ShieldCheck,
@@ -68,9 +68,9 @@ export function PrivacyPage() {
 
         <section id="search-and-forms" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"01 · On this site"}</p>
-          <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Search and forms"}</h2>
+          <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Saved services and forms"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
-            {"Search terms are read from the page address and matched against local data in your browser. They are not sent to a server operated by this project. The site does not include a transaction form, payment flow, or user account system."}</p>
+            {"Services you bookmark are saved in your browser's local storage and are never sent to a server operated by this project. The site does not include a transaction form, payment flow, or user account system."}</p>
         </section>
 
         <section id="hosting-logs" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">

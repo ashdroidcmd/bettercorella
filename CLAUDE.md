@@ -18,7 +18,7 @@ Read `AGENTS.md` first. It holds the project rules. This file adds Claude-specif
   - `src/components/{layout,ui,seo}`: feature-agnostic UI (site shell, building blocks, JSON-LD).
   - `src/config/`: `site.ts` (site name/URL) and `city.ts` (LGU identity).
   - `src/lib/`: `utils.ts`, `seo/` (metadata + route list), `dataFreshness.ts` and cross-feature data tests.
-  - Features: `home`, `services`, `government`, `town`, `transparency`, `news`, `search`, `info`.
+  - Features: `home`, `services`, `government`, `town`, `transparency`, `news`, `info`. There is no global site search (removed on purpose).
   - Import with relative paths inside `src/features` and `src/lib` (the data files must also load in plain Node for `scripts/data-freshness.ts`). Files in `src/app/` use `@/`.
 - **SEO:** `src/lib/seo/routeMetadata.ts` is the single list of routes. It drives `generateMetadata` (`src/lib/seo/metadata.ts`), JSON-LD (`RouteJsonLd`), `/sitemap.xml` and static params. Add new routes there.
 - **PWA:** Serwist (`@serwist/turbopack`). The worker source is `src/sw.ts`, served at `/serwist/sw.js`.

@@ -8,7 +8,6 @@ import { CustomSelect } from '../../../components/ui/CustomSelect'
 import { PageHero } from '../../../components/ui/PageHero'
 import { PendingPage } from '../../../components/ui/PendingPage'
 import { Reveal } from '../../../components/ui/Reveal'
-import { SearchBox } from '../../search/shared/components/SearchBox'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
 import { categories } from '../shared/data/categories'
@@ -18,12 +17,12 @@ import { onlineServiceSlugs } from '../shared/data/onlineServices'
 import { services } from '../shared/data/services'
 
 const scenarios = [
-  { label: 'Opening a business', href: '/search?q=business%20permit' },
-  { label: 'Getting a birth certificate', href: '/search?q=birth%20certificate' },
-  { label: 'Getting married', href: '/search?q=marriage' },
-  { label: 'Building or renovating', href: '/search?q=building%20permit' },
-  { label: 'Asking for financial help', href: '/search?q=financial%20assistance' },
-  { label: 'Paying property tax', href: '/search?q=real%20property%20tax' },
+  { label: 'Opening a business', href: '/services/business/bplo-service-issuance-of-business-permits-licenses-for-new' },
+  { label: 'Getting a birth certificate', href: '/services/certificates/issuance-of-certification-certified-true-copy' },
+  { label: 'Getting married', href: '/services/certificates/applying-for-marriage-license' },
+  { label: 'Building or renovating', href: '/services/infrastructure/issuance-of-building-permit' },
+  { label: 'Asking for financial help', href: '/services/social/assistance-in-crisis-situation' },
+  { label: 'Paying property tax', href: '/services/taxes/real-property-tax' },
 ]
 
 const officeOptions = offices
@@ -70,8 +69,7 @@ function ServicesPageContent() {
         overflowVisible
       >
         <div className="max-w-2xl">
-          <SearchBox large placeholder="Search services, offices, barangays…" />
-          <div className="mt-4 flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-ink-400">Common situations</span>
             {scenarios.map((scenario) => (
               <Link

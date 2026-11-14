@@ -7,7 +7,6 @@ import { NotFoundPage } from '../../info/not-found-page'
 import { ComingSoon } from '../../../components/ui/ComingSoon'
 import { PageHero } from '../../../components/ui/PageHero'
 import { Reveal } from '../../../components/ui/Reveal'
-import { SearchBox } from '../../search/shared/components/SearchBox'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { ServiceCard } from '../shared/components/ServiceCard'
 import { SourceNote } from '../../../components/ui/SourceNote'
@@ -34,12 +33,7 @@ export function ServiceCategoryPage() {
         title={category.name}
         description={category.description}
         crumbs={[{ label: 'Services', href: '/services' }, { label: category.shortName }]}
-        overflowVisible
-      >
-        <div className="max-w-2xl">
-          <SearchBox large placeholder={`Search within ${category.shortName.toLowerCase()} or all services…`} />
-        </div>
-      </PageHero>
+      />
 
       <section>
         <div className="container-page py-12 sm:py-16">

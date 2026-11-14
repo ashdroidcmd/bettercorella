@@ -28,7 +28,6 @@ BetterCorella is **not** the official website of the Municipality of Corella. Ev
 
 | Area | Route | What it offers |
 | --- | --- | --- |
-| **Search** | `Ctrl+K` / `Cmd+K`, `/search` | Search across services, offices, barangays and news from any page |
 | **Services** | `/services`, `/services/:category/:slug` | The 86 services of the Corella Citizen's Charter 2026 in 12 categories, with the issuing office, who may avail, processing time, listed fees and a link to the charter page. Services can be bookmarked on your device |
 | **Online services** | `/online-services` | Links to national e-government services (eGov PH, PSA, SSS, PhilHealth, Pag-IBIG, DTI and more) |
 | **Government** | `/government` | Elected officials, municipal offices, barangays, legislation, and **24/7 emergency hotlines** |
@@ -72,7 +71,6 @@ src/
 │   ├── town/            town-profile-page/, life-page/, places-page/, business-page/, shared/
 │   ├── transparency/    transparency-page/, budget-page/, procurement-page/, open-data-page/, projects-page/, shared/
 │   ├── news/            news-page/, news-archive-page/, news-detail-page/, shared/
-│   ├── search/          search-page/, shared/
 │   └── info/            about-page/, contact-page/, faq-page/, privacy-page/, terms-page/, ... shared/
 ├── components/          # layout/ (site shell), ui/ (building blocks), seo/
 ├── config/              # site.ts (site name and URL), city.ts (LGU identity)

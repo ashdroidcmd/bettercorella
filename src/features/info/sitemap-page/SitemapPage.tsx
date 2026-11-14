@@ -19,7 +19,6 @@ const mainLinks = [
   { label: 'About this project', href: '/about' },
   { label: 'Contact and sources', href: '/contact' },
   { label: 'Frequently asked questions', href: '/faq' },
-  { label: 'Search', href: '/search' },
 ]
 
 const governmentLinks = [

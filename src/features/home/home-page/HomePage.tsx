@@ -17,7 +17,6 @@ import { CategoryCard } from '../../services/shared/components/CategoryCard'
 import { ComingSoon } from '../../../components/ui/ComingSoon'
 import { NewsCard } from '../../news/shared/components/NewsCard'
 import { Reveal } from '../../../components/ui/Reveal'
-import { SearchBox } from '../../search/shared/components/SearchBox'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
 import { StatCard } from '../../../components/ui/StatCard'
@@ -31,7 +30,13 @@ import { telHref } from '../../../lib/utils'
 
 const featuredCategories = categories.slice(0, 6)
 const latestNews = news.slice(0, 3)
-const popularSearches = ['Business permit', 'Birth certificate', 'Real property tax', 'Senior citizen ID']
+const popularServices = [
+  { label: 'Business permit', href: '/services/business/bplo-service-issuance-of-business-permits-licenses-for-new' },
+  { label: 'Birth, marriage and death certificates', href: '/services/certificates/issuance-of-certification-certified-true-copy' },
+  { label: 'Real property tax', href: '/services/taxes/real-property-tax' },
+  { label: 'Cedula', href: '/services/taxes/community-tax-certificate' },
+  { label: 'Senior citizen, PWD and solo parent ID', href: '/services/social/securing-certificates-at-the-municipal-social-welfare-and' },
+]
 
 const exploreLinks = [
   {
@@ -93,27 +98,19 @@ export function HomePage() {
             </Reveal>
 
             <Reveal delay={0.18}>
-              <div className="mt-8 max-w-xl">
-                <SearchBox
-                  large
-                  placeholder="Search services, offices, barangays…"
-                  defaultSuggestions={popularSearches}
-                />
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.24}>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {popularSearches.map((term) => (
-                  <Link
-                    key={term}
-                    href={`/search?q=${encodeURIComponent(term)}`}
-                   
-                    className="rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white/65 transition hover:border-white/30 hover:text-white"
-                  >
-                    {term}
-                  </Link>
-                ))}
+              <div className="mt-8">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/50">{'Popular services'}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {popularServices.map((service) => (
+                    <Link
+                      key={service.href}
+                      href={service.href}
+                      className="rounded-full border border-white/15 bg-white/5 px-3.5 py-2 text-sm font-semibold text-white/80 transition hover:border-white/35 hover:bg-white/10 hover:text-white"
+                    >
+                      {service.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </Reveal>
 

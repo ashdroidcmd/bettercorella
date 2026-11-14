@@ -25,7 +25,6 @@ import {
   Newspaper,
   ReceiptText,
   ScrollText,
-  Search,
   ShieldAlert,
   ShieldCheck,
   Siren,
@@ -36,15 +35,12 @@ import {
 } from 'lucide-react'
 import { useLenis } from 'lenis/react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
-import { Suspense, lazy, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import logo from '../../assets/logo.png'
 import { categories } from '../../features/services/shared/data/categories'
 
-const CommandPalette = lazy(() =>
-  import('../../features/search/shared/components/CommandPalette').then((module) => ({ default: module.CommandPalette })),
-)
 
 type MenuLink = { label: string; href: string; description: string; Icon: LucideIcon }
 type MenuSection = { title: string; items: MenuLink[] }
@@ -237,8 +233,6 @@ export function SiteHeader() {
   const [mobileSection, setMobileSection] = useState('')
   const [mobileMenuTop, setMobileMenuTop] = useState(0)
   const [desktopMenu, setDesktopMenu] = useState<{ label: string; pathname: string } | null>(null)
-  const [paletteOpen, setPaletteOpen] = useState(false)
-  const [paletteLoaded, setPaletteLoaded] = useState(false)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const headerRef = useRef<HTMLElement>(null)
   const desktopMenuRef = useRef<HTMLDivElement>(null)
@@ -257,18 +251,6 @@ export function SiteHeader() {
   const menuPanelWidth = activeNavItem?.sections.length === 1
     ? 'w-[min(620px,calc(100vw-2rem))]'
     : 'w-[min(860px,calc(100vw-2rem))]'
-
-  useEffect(() => {
-    function onKeyDown(event: KeyboardEvent) {
-      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
-        event.preventDefault()
-        setPaletteLoaded(true)
-        setPaletteOpen((open) => !open)
-      }
-    }
-    window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
-  }, [])
 
   useEffect(() => {
     if (!menuOpen) return
@@ -329,10 +311,6 @@ export function SiteHeader() {
     setMenuPath(null)
   }
 
-  function openPalette() {
-    setPaletteLoaded(true)
-    setPaletteOpen(true)
-  }
 
   return (
     <>
@@ -466,15 +444,6 @@ export function SiteHeader() {
           </div>
 
           <div className="flex shrink-0 items-center gap-1">
-            <button
-              type="button"
-              onClick={openPalette}
-              aria-label="Search this site (Ctrl+K)"
-              title="Search (Ctrl+K)"
-              className="inline-flex size-11 items-center justify-center rounded-xl text-ink-600 transition hover:bg-surface hover:text-brand-700"
-            >
-              <Search aria-hidden="true" className="size-5" />
-            </button>
             <Link
               href="/government/hotlines"
              
@@ -605,23 +574,18 @@ export function SiteHeader() {
                   {'Emergency hotlines'}
                 </Link>
                 <Link
-                  href="/search"
-                 
+                  href="/contact"
+
                   onClick={closeNavigation}
                   className="rounded-xl bg-surface px-3 py-3 text-center text-sm font-semibold text-ink-700 transition hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-brand-500"
                 >
-                  {'Search the site'}
+                  {'Contact'}
                 </Link>
               </div>
             </motion.div>
           ) : null}
         </AnimatePresence>
       </header>
-      {paletteLoaded ? (
-        <Suspense fallback={null}>
-          <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />
-        </Suspense>
-      ) : null}
     </>
   )
 }

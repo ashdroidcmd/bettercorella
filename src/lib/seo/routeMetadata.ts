@@ -56,14 +56,6 @@ function homeJsonLd() {
       url: DEFAULT_ORIGIN,
       description: SITE_DESCRIPTION,
       inLanguage: 'en',
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: {
-          '@type': 'EntryPoint',
-          urlTemplate: `${DEFAULT_ORIGIN}/search?q={search_term_string}`,
-        },
-        'query-input': 'required name=search_term_string',
-      },
     },
     {
       '@context': 'https://schema.org',
@@ -280,14 +272,6 @@ const staticRoutes: RouteMetadata[] = [
       },
       makeBreadcrumbs([home, { name: 'FAQ', path: '/faq' }]),
     ],
-  },
-  {
-    path: '/search',
-    title: 'Search',
-    description: 'Find a municipal service, an office, a barangay or a page across the guide.',
-    priority: 0.5,
-    changefreq: 'monthly',
-    jsonLd: makeBreadcrumbs([home, { name: 'Search', path: '/search' }]),
   },
   {
     path: '/sitemap',

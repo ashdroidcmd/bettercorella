@@ -56,6 +56,7 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Removed
 
+- Global site search: the header search button, the Ctrl/Cmd+K command palette, the `/search` page and the hero search bars on the home, services and category pages. The home and services pages link straight to popular services instead. In-page list filters (barangays, offices, services) stay.
 - All template data from BetterInabanga and Better San Fernando (La Union): 249 services, offices, officials, 50 barangays and their map boundaries, news, legislation, projects, budget and procurement figures, places, and town profile text.
 - About 750 template assets: Citizen's Charter PDFs, officials' photos, festival, place and news images, and business logos.
 - `public/wp-content/`: 496 template PDFs that nothing referenced.

@@ -23,7 +23,6 @@ import { sources } from '../features/info/about-page/data/sources'
 import { stats } from '../features/town/shared/data/stats'
 import { timeline } from '../features/town/shared/data/timeline'
 import { buildRouteMetadata } from './seo/routeMetadata'
-import { searchIndex } from '../features/search/shared/utils/search'
 import { pageMetadata, paramsFor } from './seo/metadata'
 
 // These tests check invariants that must hold whether a dataset is empty, partial or complete,
@@ -238,25 +237,12 @@ describe('news, documents and projects', () => {
   })
 })
 
-describe('search index', () => {
-  it('indexes every record with a valid internal link', () => {
-    expect(searchIndex.filter((result) => result.kind === 'Service')).toHaveLength(services.length)
-    expect(searchIndex.filter((result) => result.kind === 'Office')).toHaveLength(offices.length)
-    expect(searchIndex.filter((result) => result.kind === 'Barangay')).toHaveLength(barangays.length)
-    for (const result of searchIndex) {
-      expect(result.href.startsWith('/')).toBe(true)
-      expect(result.title.trim()).not.toBe('')
-    }
-    expect(searchIndex.some((result) => result.href === '/town')).toBe(true)
-    expect(searchIndex.some((result) => result.href.startsWith('/city'))).toBe(false)
-  })
-})
-
 describe('route metadata', () => {
   it('covers every static and data-driven route exactly once', () => {
     const pages = buildRouteMetadata()
     expect(unique(pages.map((page) => page.path))).toBe(true)
-    expect(pages).toHaveLength(28 + categories.length + services.length + offices.length + barangays.length + news.length)
+    expect(pages.some((page) => page.path === '/search')).toBe(false)
+    expect(pages).toHaveLength(27 + categories.length + services.length + offices.length + barangays.length + news.length)
     expect(pages.some((page) => page.path === '/town')).toBe(true)
     expect(pages.some((page) => page.path.startsWith('/city'))).toBe(false)
   })
