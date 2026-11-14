@@ -12,9 +12,9 @@ import logo from '../../assets/logo.png'
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services', activePaths: ['/online-services'] },
-  { label: 'Government', href: '/government', exclude: ['/government/barangays', '/government/hotlines'] },
+  { label: 'Government', href: '/government', exclude: ['/government/hotlines'] },
   { label: 'Transparency', href: '/transparency' },
-  { label: 'Barangays', href: '/government/barangays' },
+  { label: 'Barangays', href: '/barangays' },
   { label: 'Hotlines & Contact', href: '/contact', activePaths: ['/government/hotlines'] },
 ]
 

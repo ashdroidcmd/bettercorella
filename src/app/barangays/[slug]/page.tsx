@@ -7,19 +7,19 @@ type Props = { params: Promise<{ slug: string }> }
 export const dynamicParams = false
 
 export function generateStaticParams() {
-  return paramsFor('/government/barangays/[slug]')
+  return paramsFor('/barangays/[slug]')
 }
 
 export async function generateMetadata({ params: paramsPromise }: Props) {
   const params = await paramsPromise
-  return pageMetadata(`/government/barangays/${params.slug}`)
+  return pageMetadata(`/barangays/${params.slug}`)
 }
 
 export default async function Page({ params: paramsPromise }: Props) {
   const params = await paramsPromise
   return (
     <>
-      <RouteJsonLd path={`/government/barangays/${params.slug}`} />
+      <RouteJsonLd path={`/barangays/${params.slug}`} />
       <BarangayDetailPage />
     </>
   )

@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowRight, ArrowUpRight, Building2, MapPin, Phone, Users } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Building2, Phone, Users } from 'lucide-react'
 import Link from 'next/link'
 import { OfficeCard } from '../shared/components/OfficeCard'
 import { OfficialCard } from '../shared/components/OfficialCard'
@@ -9,27 +9,25 @@ import { PageHero } from '../../../components/ui/PageHero'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
-import { barangays } from '../shared/data/barangays'
 import { city } from '../../../config/city'
 import { hotlines } from '../shared/data/hotlines'
 import { offices } from '../shared/data/offices'
 import { officials } from '../shared/data/officials'
-import { formatNumber, telHref } from '../../../lib/utils'
+import { telHref } from '../../../lib/utils'
 
 const quickLinks = [
   { label: 'Municipal officials', count: officials.length, note: 'profiles', href: '/government/officials', icon: Users },
   { label: 'Offices', count: offices.length, note: 'departments', href: '/government/offices', icon: Building2 },
-  { label: 'Barangays', count: barangays.length, note: 'communities', href: '/government/barangays', icon: MapPin },
   { label: 'Hotlines', count: undefined, note: 'Emergency contacts', href: '/government/hotlines', icon: Phone },
 ]
 
 const featuredOfficeSlugs = [
-  'office-of-the-city-treasurer',
-  'local-economic-and-business-development-office',
-  'civil-registrar-s-office',
-  'city-health-office',
-  'city-social-welfare-and-development-office',
-  'office-of-the-city-engineer',
+  'mayors-office',
+  'treasurers-office',
+  'civil-registrar',
+  'health-office',
+  'social-welfare-office',
+  'engineering-office',
 ]
 
 export function GovernmentPage() {
@@ -40,7 +38,6 @@ export function GovernmentPage() {
   const featuredOffices = featuredOfficeSlugs
     .map((slug) => offices.find((office) => office.slug === slug))
     .filter((office) => office !== undefined)
-  const topBarangays = [...barangays].sort((a, b) => b.population2024 - a.population2024).slice(0, 5)
   const keyHotlines = hotlines.slice(0, 4)
 
   return (
@@ -51,7 +48,7 @@ export function GovernmentPage() {
         description={`The Municipality of ${city.name} is led by an elected mayor, vice mayor, and Sangguniang Bayan, supported by municipal offices and barangays.`}
         crumbs={[{ label: 'Government' }]}
       >
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 sm:grid-cols-3">
           {quickLinks.map((item) => {
             const Icon = item.icon
             return (
@@ -163,66 +160,15 @@ export function GovernmentPage() {
 
       <section>
         <div className="container-page py-12 sm:py-16">
-          <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-            <div>
-              <Reveal>
-                <SectionHeading
-                  eyebrow="Barangays"
-                  title="The town, community by community"
-                  description={barangays.length ? `${city.name} has ${barangays.length} barangays. These are the five largest by population.` : `The barangays of ${city.name}, with population and officials.`}
-                  action={
-                    <Link
-                      href="/government/barangays"
-                     
-                      className="inline-flex items-center gap-2 text-sm font-bold text-brand-700 transition hover:text-brand-800"
-                    >
-                      {"All barangays"}<ArrowRight aria-hidden="true" className="size-4" />
-                    </Link>
-                  }
-                />
-              </Reveal>
-
-              {topBarangays.length ? (
-              <ol className="mt-6 divide-y divide-line rounded-2xl border border-line bg-white shadow-card">
-                {topBarangays.map((barangay, index) => (
-                  <li key={barangay.slug}>
-                    <Link
-                      href={`/government/barangays/${barangay.slug}`}
-                     
-                      className="group flex items-center gap-4 px-5 py-4 transition hover:bg-surface"
-                    >
-                      <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-surface text-xs font-extrabold text-ink-500">
-                        {index + 1}
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="block truncate font-bold text-ink-950 group-hover:text-brand-700">
-                          {barangay.name}
-                        </span>
-                        <span className="block text-xs text-ink-500">
-                          {barangay.district} {"· Rank"}{' '}{barangay.rank} {`of ${barangays.length}`}</span>
-                      </span>
-                      <span className="shrink-0 text-sm font-bold text-ink-700">
-                        {formatNumber(barangay.population2024)}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ol>
-              ) : (
-                <div className="mt-6">
-                  <ComingSoon topic="Barangays" source="Names and populations will come from the PSA." />
-                </div>
-              )}
-            </div>
-
+          <div>
             <Reveal delay={0.08}>
               <div className="h-full rounded-2xl border border-line bg-ink-950 p-6 text-white shadow-card sm:p-7">
                 <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/60">{"Emergency contacts"}</p>
                 <h2 className="mt-2 text-2xl font-extrabold tracking-tight">{"Help, without the guesswork"}</h2>
                 <p className="mt-2 text-sm leading-6 text-white/60">
-                  {"National emergency lines now; local MDRRMO, police and fire contacts once they are verified."}</p>
+                  {"Emergency and municipal numbers. Police and fire contacts are added once they are verified."}</p>
 
-                <div className="mt-6 space-y-3">
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
                   {keyHotlines.map((hotline) => (
                     <div key={hotline.label} className="rounded-xl border border-white/10 bg-white/5 p-4">
                       <p className="text-xs font-bold uppercase tracking-[0.1em] text-brand-300">{hotline.label}</p>
@@ -256,7 +202,7 @@ export function GovernmentPage() {
 
           <div className="mt-8">
             <SourceNote href={city.website} linkLabel="Visit the official municipal website">
-              {`Officials, office contacts and barangay records are added as they are verified with the Municipal Government of ${city.name}, the PSA and DILG. Details can change; use official directories for the latest information.`}</SourceNote>
+              {`Officials and office contacts are added as they are verified with the Municipal Government of ${city.name}, the PSA and DILG. Details can change; use official directories for the latest information.`}</SourceNote>
           </div>
         </div>
       </section>

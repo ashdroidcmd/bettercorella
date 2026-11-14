@@ -70,7 +70,7 @@ export function SiteFooter() {
                   { label: 'Online services', href: '/online-services' },
                   { label: 'Municipal government', href: '/government' },
                   { label: 'Municipal officials', href: '/government/officials' },
-                  { label: 'Barangays', href: '/government/barangays' },
+                  { label: 'Barangays', href: '/barangays' },
                   { label: 'Ordinances and executive orders', href: '/government/legislation' },
                   { label: 'Town profile', href: '/town' },
                   { label: 'Life and tourism', href: '/town/life' },

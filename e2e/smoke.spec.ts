@@ -11,7 +11,7 @@ const PAGES = [
   '/government',
   '/government/officials',
   '/government/offices',
-  '/government/barangays',
+  '/barangays',
   '/government/hotlines',
   '/government/legislation',
   '/town',
@@ -116,6 +116,12 @@ test.describe('Corella rebrand', () => {
     await expect(page).toHaveURL(/\/town$/)
   })
 
+  test('old /government/barangays URLs redirect to /barangays', async ({ page }) => {
+    await page.goto('/government/barangays/poblacion')
+    await expect(page).toHaveURL(/\/barangays\/poblacion$/)
+    await expect(page.getByRole('navigation', { name: 'Breadcrumb' })).not.toContainText('Government')
+  })
+
   test('sections without verified data show the coming-soon notice', async ({ page }) => {
     for (const path of ['/transparency/budget', '/transparency/procurement']) {
       await page.goto(path)
@@ -126,7 +132,7 @@ test.describe('Corella rebrand', () => {
   test('government pages list Corella officials and barangays', async ({ page }) => {
     await page.goto('/government/officials')
     await expect(page.getByText('Juan Manuel Y. Lim').first()).toBeVisible()
-    await page.goto('/government/barangays/cancatac')
+    await page.goto('/barangays/cancatac')
     await expect(page.getByRole('heading', { level: 1, name: 'Cancatac' })).toBeVisible()
     await expect(page.getByText('Apolio C. Lumactud').first()).toBeVisible()
   })

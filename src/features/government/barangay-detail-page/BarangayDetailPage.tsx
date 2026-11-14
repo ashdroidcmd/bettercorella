@@ -38,8 +38,7 @@ export function BarangayDetailPage() {
         title={barangay.name}
         description={`A barangay of the ${city.officialName}. Population, growth, and barangay officials from public records.`}
         crumbs={[
-          { label: 'Government', href: '/government' },
-          { label: 'Barangays', href: '/government/barangays' },
+          { label: 'Barangays', href: '/barangays' },
           { label: barangay.name },
         ]}
       >
@@ -159,7 +158,7 @@ export function BarangayDetailPage() {
             title={`Other barangays in ${city.name}`}
             action={
               <Link
-                href="/government/barangays"
+                href="/barangays"
                
                 className="inline-flex items-center gap-2 text-sm font-bold text-brand-700 transition hover:text-brand-800"
               >
@@ -171,7 +170,7 @@ export function BarangayDetailPage() {
             {neighbors.map((item) => (
               <Link
                 key={item.slug}
-                href={`/government/barangays/${item.slug}`}
+                href={`/barangays/${item.slug}`}
                
                 className="group rounded-xl border border-line bg-white p-4 shadow-sm transition hover:border-brand-200 hover:shadow-card"
               >
@@ -199,7 +198,7 @@ export function BarangayDetailPage() {
 
         <div className="mt-6">
           <Link
-            href="/government/barangays"
+            href="/barangays"
            
             className="inline-flex items-center gap-2 text-sm font-bold text-brand-700 transition hover:text-brand-800"
           >

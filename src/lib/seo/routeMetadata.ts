@@ -118,12 +118,12 @@ const staticRoutes: RouteMetadata[] = [
     jsonLd: makeBreadcrumbs([home, government, { name: 'Offices', path: '/government/offices' }]),
   },
   {
-    path: '/government/barangays',
+    path: '/barangays',
     title: 'Barangays',
     description: `The barangays of ${PLACE}, with PSA population figures and elected barangay officials as they are verified.`,
     priority: 0.8,
     changefreq: 'monthly',
-    jsonLd: makeBreadcrumbs([home, government, { name: 'Barangays', path: '/government/barangays' }]),
+    jsonLd: makeBreadcrumbs([home, { name: 'Barangays', path: '/barangays' }]),
   },
   {
     path: '/government/hotlines',
@@ -366,7 +366,7 @@ export function buildRouteMetadata(): RouteMetadata[] {
   }))
 
   const barangayRoutes: RouteMetadata[] = barangays.map((barangay) => ({
-    path: `/government/barangays/${barangay.slug}`,
+    path: `/barangays/${barangay.slug}`,
     title: barangay.name,
     description: `${barangay.name}, ${city.officialName}: population history and barangay officials.`,
     priority: 0.7,
@@ -376,14 +376,13 @@ export function buildRouteMetadata(): RouteMetadata[] {
         '@context': 'https://schema.org',
         '@type': 'AdministrativeArea',
         name: barangay.name,
-        url: `${DEFAULT_ORIGIN}/government/barangays/${barangay.slug}`,
+        url: `${DEFAULT_ORIGIN}/barangays/${barangay.slug}`,
         containedInPlace: { '@type': 'AdministrativeArea', name: PLACE },
       },
       makeBreadcrumbs([
         home,
-        government,
-        { name: 'Barangays', path: '/government/barangays' },
-        { name: barangay.name, path: `/government/barangays/${barangay.slug}` },
+        { name: 'Barangays', path: '/barangays' },
+        { name: barangay.name, path: `/barangays/${barangay.slug}` },
       ]),
     ],
   }))

@@ -121,7 +121,7 @@ export function BarangayMap() {
             <div className="mt-5 flex flex-wrap gap-3">
               {isPinned ? (
                 <Link
-                  href={`/government/barangays/${preview.slug}`}
+                  href={`/barangays/${preview.slug}`}
                  
                   className="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800"
                 >

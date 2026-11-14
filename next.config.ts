@@ -20,6 +20,9 @@ const nextConfig: NextConfig = {
     return [
       { source: '/city', destination: '/town', permanent: true },
       { source: '/city/:path*', destination: '/town/:path*', permanent: true },
+      // Barangays moved out of the government section.
+      { source: '/government/barangays', destination: '/barangays', permanent: true },
+      { source: '/government/barangays/:path*', destination: '/barangays/:path*', permanent: true },
     ]
   },
 }

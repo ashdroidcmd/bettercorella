@@ -123,7 +123,7 @@ export function TownProfilePage() {
       <section className="border-t border-line bg-surface">
         <div className="container-page flex flex-wrap gap-3 py-10">
           {[
-            { label: 'Barangays', href: '/government/barangays' },
+            { label: 'Barangays', href: '/barangays' },
             { label: 'Life and tourism', href: '/town/life' },
             { label: 'Places directory', href: '/town/places' },
             { label: 'Business and investment', href: '/town/business' },

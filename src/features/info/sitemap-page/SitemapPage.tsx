@@ -12,6 +12,7 @@ const mainLinks = [
   { label: 'Home', href: '/' },
   { label: 'All services', href: '/services' },
   { label: 'Municipal government', href: '/government' },
+  { label: 'Barangays', href: '/barangays' },
   { label: 'Places directory', href: '/town/places' },
   { label: 'Transparency', href: '/transparency' },
   { label: 'About this project', href: '/about' },
@@ -22,7 +23,6 @@ const mainLinks = [
 const governmentLinks = [
   { label: 'Municipal officials', href: '/government/officials' },
   { label: 'Offices and departments', href: '/government/offices' },
-  { label: 'Barangays', href: '/government/barangays' },
   { label: 'Emergency hotlines', href: '/government/hotlines' },
   { label: 'Ordinances and executive orders', href: '/government/legislation' },
 ]
@@ -138,7 +138,7 @@ export function SitemapPage() {
               .map((barangay) => (
                 <li key={barangay.slug}>
                   <Link
-                    href={`/government/barangays/${barangay.slug}`}
+                    href={`/barangays/${barangay.slug}`}
                    
                     className="group flex min-h-10 items-center justify-between gap-2 rounded-lg border border-transparent bg-white/60 px-3 py-2 text-sm text-ink-700 transition hover:border-line hover:bg-white hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-600"
                   >
