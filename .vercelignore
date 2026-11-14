@@ -1,0 +1,12 @@
+# Files Vercel doesn't need to build or serve the site (keeps the deploy archive small).
+.git
+.github
+.claude
+e2e
+graphify-out
+playwright-report
+test-results
+node_modules
+.next
+*.md
+!public/**/*.md

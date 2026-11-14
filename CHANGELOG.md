@@ -20,6 +20,7 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Changed
 
+- CI deploys now upload the source and let Vercel build remotely, instead of uploading a prebuilt output (`--prebuilt`). The source is uploaded as a single `tgz` archive (`--archive=tgz`), which fixes the "Upload aborted" / `api-upload-free` failures caused by the Hobby plan's limit of 5,000 file uploads per day.
 - Vercel's automatic Git deployments are disabled (`vercel.json`); deploys now come only from CI.
 - **Rebrand to Corella (in progress):** `README.md`, `CONTRIBUTING.md` and `package.json` now describe BetterCorella. They point to the `ashdroidcmd/bettercorella` repository and `bettercorella.vercel.app`, and credit the BetterInabanga and Better San Fernando projects. Site pages and data are rebranded in later steps.
 - Switched the package manager from npm to pnpm (`pnpm-lock.yaml`, version pinned via `packageManager`).
@@ -29,4 +30,5 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Removed
 
+- `public/wp-content/`: 496 template PDFs that nothing referenced.
 - Language switching (Filipino and Cebuano). The site is English only for now.
