@@ -119,14 +119,14 @@ jobs:
         if: steps.secrets.outputs.ready == 'true'
         with:
           node-version: ${{ env.NODE_VERSION }}
-      # Upload the source and let Vercel build it. A --prebuilt deploy uploads thousands of
-      # generated files per run and trips the Hobby plan's CLI upload limit; source uploads
-      # are deduplicated, so only changed files are sent.
+      # Upload the source as one tgz archive and let Vercel build it. A --prebuilt deploy uploads thousands of
+      # generated files per run and trips the Hobby plan's 5,000-uploads-per-day limit; one archive
+      # counts as a single upload.
       - name: Deploy preview (Vercel builds remotely)
         id: deploy
         if: steps.secrets.outputs.ready == 'true'
         run: |
-          url=$(npx --yes "$VERCEL_CLI" deploy --yes --token="$VERCEL_TOKEN")
+          url=$(npx --yes "$VERCEL_CLI" deploy --yes --archive=tgz --token="$VERCEL_TOKEN")
           echo "url=$url" >> "$GITHUB_OUTPUT"
           echo "### Preview deployed: $url" >> "$GITHUB_STEP_SUMMARY"
       - name: Comment preview URL on the PR
@@ -173,7 +173,7 @@ jobs:
       - name: Deploy to production (Vercel builds remotely)
         id: deploy
         run: |
-          url=$(npx --yes "$VERCEL_CLI" deploy --yes --prod --token="$VERCEL_TOKEN")
+          url=$(npx --yes "$VERCEL_CLI" deploy --yes --prod --archive=tgz --token="$VERCEL_TOKEN")
           echo "url=$url" >> "$GITHUB_OUTPUT"
           echo "### Production deployed: $url" >> "$GITHUB_STEP_SUMMARY"
 
