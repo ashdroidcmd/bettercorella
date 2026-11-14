@@ -187,16 +187,16 @@ export function BarangaysPage() {
               </div>
               <div className="mt-4">
                 <SourceNote
-                  href="https://data.bettergov.ph/datasets/23"
-                  linkLabel="Barangay boundary data on data.bettergov.ph"
+                  href="https://github.com/faeldon/philippines-psgc-shapefiles"
+                  linkLabel="2023 PSA/NAMRIA boundary archive"
                   links={[
                     {
-                      href: 'https://github.com/altcoder/philippines-psgc-shapefiles',
-                      label: '2023 PSA/NAMRIA boundary archive',
+                      href: 'https://data.bettergov.ph/datasets/23',
+                      label: 'Barangay boundary data on data.bettergov.ph',
                     },
                   ]}
                 >
-                  {'Boundaries are simplified from the PSA/NAMRIA barangay boundary release and are approximate. Use them to explore, not to determine legal property lines.'}
+                  {'Boundaries come from the PSA/NAMRIA administrative boundary release (2023) and are approximate. Use them to explore, not to determine legal property lines.'}
                 </SourceNote>
               </div>
             </Reveal>

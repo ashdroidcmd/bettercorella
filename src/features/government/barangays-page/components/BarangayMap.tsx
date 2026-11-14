@@ -20,16 +20,17 @@ const BarangayMapCanvas = dynamic(
 )
 
 const colors = {
-  population: ['#d7e9f7', '#a9cdea', '#72add4', '#4388b7', '#205b82'],
-  selected: '#dd8c2d',
+  population: ['#dce6ff', '#b9cdff', '#8aa9f7', '#4f7be6', '#0038a8'],
+  selected: '#fcd116',
 }
 
+// Bands sized for Corella's barangays (about 850 to 2,000 residents each, 2024 Census).
 const populationBands = [
-  { label: '≤ 1,000', color: colors.population[0] },
-  { label: '1,001–2,500', color: colors.population[1] },
-  { label: '2,501–5,000', color: colors.population[2] },
-  { label: '5,001–8,000', color: colors.population[3] },
-  { label: '> 8,000', color: colors.population[4] },
+  { label: '≤ 900', color: colors.population[0] },
+  { label: '901–1,100', color: colors.population[1] },
+  { label: '1,101–1,400', color: colors.population[2] },
+  { label: '1,401–1,800', color: colors.population[3] },
+  { label: '> 1,800', color: colors.population[4] },
 ]
 
 export function BarangayMap() {
@@ -156,8 +157,10 @@ export function BarangayMap() {
                 <dd className="mt-1 text-base font-extrabold tabular-nums text-ink-950">{city.barangayCount ?? barangayMap.features.length}</dd>
               </div>
               <div className="rounded-xl bg-surface p-3">
-                <dt className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink-500">Districts</dt>
-                <dd className="mt-1 text-base font-extrabold tabular-nums text-ink-950">{city.districtCount ?? '—'}</dd>
+                <dt className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink-500">{city.districtCount ? 'Districts' : 'Land area'}</dt>
+                <dd className="mt-1 text-base font-extrabold tabular-nums text-ink-950">
+                  {city.districtCount ?? `${barangayMap.features.reduce((total, feature) => total + feature.areaSqKm, 0).toFixed(1)} km²`}
+                </dd>
               </div>
             </dl>
           </>
