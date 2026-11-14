@@ -59,3 +59,31 @@ test.describe('Navigation', () => {
     await expect(page.getByRole('dialog')).toBeVisible()
   })
 })
+
+test.describe('Server-rendered HTML (SEO)', () => {
+  test('page content and metadata are in the HTML before JavaScript runs', async ({ request }) => {
+    const response = await request.get('/government/officials')
+    expect(response.status()).toBe(200)
+    const html = await response.text()
+
+    expect(html).toMatch(/<h1[^>]*>[^<]+/)
+    expect(html).toMatch(/<title>[^<]+<\/title>/)
+    expect(html).toContain('rel="canonical"')
+    expect(html).toContain('property="og:title"')
+  })
+
+  test('sitemap.xml and robots.txt are served', async ({ request }) => {
+    const sitemap = await request.get('/sitemap.xml')
+    expect(sitemap.status()).toBe(200)
+    expect(await sitemap.text()).toContain('<urlset')
+
+    const robots = await request.get('/robots.txt')
+    expect(robots.status()).toBe(200)
+    expect(await robots.text()).toContain('Sitemap:')
+  })
+
+  test('unknown routes return HTTP 404', async ({ request }) => {
+    const response = await request.get('/this-page-does-not-exist')
+    expect(response.status()).toBe(404)
+  })
+})

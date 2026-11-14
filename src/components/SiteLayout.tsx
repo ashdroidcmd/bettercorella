@@ -1,6 +1,7 @@
+'use client'
+
 import { ExternalLink, ShieldCheck } from 'lucide-react'
-import { Suspense } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Suspense, type ReactNode } from 'react'
 import { city } from '../data/city'
 import { ErrorBoundary } from './ErrorBoundary'
 import { PageFallback } from './PageFallback'
@@ -8,7 +9,7 @@ import { ScrollProgress } from './ScrollProgress'
 import { SiteFooter } from './SiteFooter'
 import { SiteHeader } from './SiteHeader'
 
-export function SiteLayout() {
+export function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col">
       <ScrollProgress />
@@ -49,7 +50,7 @@ export function SiteLayout() {
       <main id="main-content" tabIndex={-1} className="flex-1 scroll-mt-24">
         <ErrorBoundary>
           <Suspense fallback={<PageFallback />}>
-            <Outlet />
+            {children}
           </Suspense>
         </ErrorBoundary>
       </main>

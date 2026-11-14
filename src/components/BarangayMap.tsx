@@ -1,14 +1,22 @@
+'use client'
+
 import { ArrowRight, ExternalLink, MapPin } from 'lucide-react'
-import { Suspense, lazy, useState } from 'react'
-import { Link } from 'react-router-dom'
+import dynamic from 'next/dynamic'
+import { useState } from 'react'
+import Link from 'next/link'
 import { barangayMap } from '../data/barangayMap'
 import { barangays } from '../data/barangays'
 import { city } from '../data/city'
 import { formatNumber } from '../lib/utils'
 
 const barangayBySlug = new Map(barangays.map((barangay) => [barangay.slug, barangay]))
-const BarangayMapCanvas = lazy(() =>
-  import('./BarangayMapCanvas').then((module) => ({ default: module.BarangayMapCanvas })),
+// MapLibre touches window on import, so the canvas only loads in the browser.
+const BarangayMapCanvas = dynamic(
+  () => import('./BarangayMapCanvas').then((module) => module.BarangayMapCanvas),
+  {
+    ssr: false,
+    loading: () => <div className="h-[27rem] animate-pulse rounded-2xl bg-surface sm:h-[32rem]" aria-label="Loading map" />,
+  },
 )
 
 const colors = {
@@ -43,11 +51,7 @@ export function BarangayMap() {
       <figure
         className="overflow-hidden rounded-3xl border border-[#d7e2ea] bg-[#e9eff1] p-2.5 shadow-[0_12px_35px_-24px_rgba(28,55,76,0.45)] sm:p-4"
       >
-        <Suspense
-          fallback={<div className="h-[27rem] animate-pulse rounded-2xl bg-surface sm:h-[32rem]" aria-label="Loading map" />}
-        >
-          <BarangayMapCanvas resetToken={resetToken} onSelect={setSelectedSlug} onHover={setHoveredSlug} />
-        </Suspense>
+        <BarangayMapCanvas resetToken={resetToken} onSelect={setSelectedSlug} onHover={setHoveredSlug} />
         <div className="mt-3 rounded-xl border border-line bg-white px-3 py-3">
           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
             <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink-600">Population · 2024 census</span>
@@ -116,8 +120,8 @@ export function BarangayMap() {
             <div className="mt-5 flex flex-wrap gap-3">
               {isPinned ? (
                 <Link
-                  to={`/government/barangays/${preview.slug}`}
-                  viewTransition
+                  href={`/government/barangays/${preview.slug}`}
+                 
                   className="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800"
                 >
                   {'View barangay profile'}

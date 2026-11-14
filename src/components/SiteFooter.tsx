@@ -1,6 +1,8 @@
+'use client'
+
 import { ArrowUpRight, ChevronDown, Clock, ExternalLink, HandHeart, Mail, MapPin, Phone } from 'lucide-react'
 import { useEffect, useState, type ReactNode } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import logoLight from '../assets/logo-light.png'
 import { categories } from '../data/categories'
 import { city } from '../data/city'
@@ -45,7 +47,7 @@ export function SiteFooter() {
             <div>
               <div>
                 <img
-                  src={logoLight}
+                  src={logoLight.src}
                   alt="Better Inabanga"
                   width="960"
                   height="199"
@@ -79,7 +81,7 @@ export function SiteFooter() {
                   { label: 'News archive', href: '/news/archive' },
                 ].map(({ label, href }) => (
                   <li key={href}>
-                    <Link to={href} viewTransition className="text-white/70 transition hover:text-white">
+                    <Link href={href} className="text-white/70 transition hover:text-white">
                       {label}
                     </Link>
                   </li>
@@ -92,8 +94,8 @@ export function SiteFooter() {
                 {categories.slice(0, 6).map((category) => (
                   <li key={category.slug}>
                     <Link
-                      to={`/services/${category.slug}`}
-                      viewTransition
+                      href={`/services/${category.slug}`}
+                     
                       className="text-white/70 transition hover:text-white"
                     >
                       {category.shortName}
@@ -222,7 +224,7 @@ export function SiteFooter() {
                 { label: 'Terms', href: '/terms' },
                 { label: 'Contact', href: '/contact' },
               ].map(({ label, href }) => (
-                <Link key={href} to={href} viewTransition className="transition hover:text-white">
+                <Link key={href} href={href} className="transition hover:text-white">
                   {label}
                 </Link>
               ))}

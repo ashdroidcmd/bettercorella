@@ -22,7 +22,7 @@ import { services } from './services'
 import { sources } from './sources'
 import { buildRouteMetadata } from './routeMetadata'
 import { searchIndex } from '../lib/search'
-import { renderStaticMetadata } from '../lib/staticMetadata'
+import { pageMetadata, paramsFor } from '../lib/metadata'
 
 const http = /^https?:\/\//
 const slugPattern = /^[a-z0-9-]+$/
@@ -400,20 +400,20 @@ describe('prerender metadata', () => {
     )
   })
 
-  it('writes route-specific, escaped title and social metadata into the HTML shell', () => {
-    const html = '<html><head><title>Default</title><meta name="description" content="Default"><meta property="og:title" content="Default"><meta property="og:type" content="website"><meta property="og:image" content="/og.png"><meta property="og:description" content="Default"><meta name="twitter:title" content="Default"><meta name="twitter:description" content="Default"><meta name="twitter:image" content="/og.png"></head></html>'
-    const rendered = renderStaticMetadata(
-      html,
-      { path: '/news/civic-update', title: 'Council & community', description: 'Residents’ update <today>', image: '/news/news-1.jpg', type: 'article' },
-      'https://example.test',
-    )
+  it('builds Next.js metadata and static params from the route list', () => {
+    const service = services[0]
+    if (!service) throw new Error('Service catalog must contain at least one service.')
+    const path = `/services/${service.category}/${service.slug}`
+    const meta = pageMetadata(path)
 
-    expect(rendered).toContain('<title>Council &amp; community | Better Inabanga</title>')
-    expect(rendered).toContain('content="Residents’ update &lt;today&gt;"')
-    expect(rendered).toContain('content="article"')
-    expect(rendered).toContain('content="https://example.test/news/civic-update"')
-    expect(rendered).toContain('content="https://example.test/news/news-1.jpg"')
-    expect(rendered).toContain('rel="canonical" href="https://example.test/news/civic-update"')
+    expect(meta.title).toEqual({ absolute: `${service.title} | Better Inabanga` })
+    expect(meta.alternates?.canonical).toBe(path)
+    expect(meta.openGraph?.url).toBe(path)
+    expect(pageMetadata('/does-not-exist')).toEqual({})
+
+    const params = paramsFor('/services/[category]/[slug]')
+    expect(params).toHaveLength(services.length)
+    expect(params).toContainEqual({ category: service.category, slug: service.slug })
   })
 })
 

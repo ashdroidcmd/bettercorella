@@ -1,9 +1,56 @@
 // @vitest-environment jsdom
-import { act, type HTMLAttributes, type ReactNode } from 'react'
+import { act, useSyncExternalStore, type AnchorHTMLAttributes, type HTMLAttributes, type ReactNode } from 'react'
 import { createRoot, type Root } from 'react-dom/client'
-import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { SiteLayout } from './SiteLayout'
+
+// Minimal in-memory stand-in for the Next.js App Router: a pathname store plus a Link that updates it.
+const router = vi.hoisted(() => {
+  let pathname = '/'
+  const listeners = new Set<() => void>()
+  return {
+    get: () => pathname,
+    push: (next: string) => {
+      pathname = next
+      listeners.forEach((listener) => listener())
+    },
+    subscribe: (listener: () => void) => {
+      listeners.add(listener)
+      return () => listeners.delete(listener)
+    },
+  }
+})
+
+function usePathnameMock() {
+  return useSyncExternalStore(router.subscribe, router.get)
+}
+
+vi.mock('next/navigation', () => ({
+  usePathname: usePathnameMock,
+  useRouter: () => ({ push: router.push, replace: router.push, prefetch: () => undefined }),
+  useSearchParams: () => new URLSearchParams(),
+}))
+
+vi.mock('next/link', () => ({
+  default: ({ href, onClick, children, ...props }: AnchorHTMLAttributes<HTMLAnchorElement> & { href: string }) => (
+    <a
+      {...props}
+      href={href}
+      onClick={(event) => {
+        onClick?.(event)
+        event.preventDefault()
+        router.push(href)
+      }}
+    >
+      {children}
+    </a>
+  ),
+}))
+
+function RouteContent() {
+  const pathname = usePathnameMock()
+  return <p>{pathname === '/services' ? 'Services route content' : 'Home route content'}</p>
+}
 
 vi.mock('./ScrollProgress', () => ({ ScrollProgress: () => null }))
 vi.mock('./BackToTopButton', () => ({ BackToTopButton: () => null }))
@@ -42,19 +89,15 @@ describe('SiteLayout navigation', () => {
       })),
     })
 
+    router.push('/')
     container = document.createElement('div')
     document.body.append(container)
     root = createRoot(container)
     act(() => {
       root.render(
-        <MemoryRouter initialEntries={['/']}>
-          <Routes>
-            <Route element={<SiteLayout />}>
-              <Route index element={<p>Home route content</p>} />
-              <Route path="services" element={<p>Services route content</p>} />
-            </Route>
-          </Routes>
-        </MemoryRouter>,
+        <SiteLayout>
+          <RouteContent />
+        </SiteLayout>,
       )
     })
   })

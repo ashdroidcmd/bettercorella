@@ -6,7 +6,7 @@ description: Standard end-to-end procedure for implementing any feature, fix or 
 # Development Workflow
 
 1. **Understand** the task and restate the acceptance criteria.
-2. **Locate** the relevant code with `graphify query "<feature>"`, then `graphify explain "<Component>"` if needed. Routes are in `src/App.tsx`, pages in `src/pages/`, data in `src/data/`.
+2. **Locate** the relevant code with `graphify query "<feature>"`, then `graphify explain "<Component>"` if needed. Routes are in `src/app/` (thin server files), page views in `src/views/`, data in `src/data/`. New routes must also be added to `src/data/routeMetadata.ts`.
 3. **Read** only the relevant docs (`../docs/`), source and tests.
 4. **Plan** a short list of the files to change.
 5. **Implement** the smallest correct change, reusing existing components (`PageHero`, `SectionHeading`, `SourceNote`, cards) and data types (`src/data/types.ts`). The site is English only.

@@ -1,5 +1,7 @@
+'use client'
+
 import { ChevronRight, House } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { cn } from '../lib/utils'
 
 export interface Crumb {
@@ -17,8 +19,8 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
   return (
     <nav aria-label="Breadcrumb" className={cn('flex flex-wrap items-center gap-x-2 gap-y-1 text-sm', className)}>
       <Link
-        to="/"
-        viewTransition
+        href="/"
+       
         className="inline-flex items-center gap-1.5 font-medium text-ink-500 transition hover:text-brand-700"
       >
         <House aria-hidden="true" className="size-3.5" />
@@ -30,7 +32,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
           <span key={`${item.label}-${index}`} className="inline-flex items-center gap-2">
             <ChevronRight aria-hidden="true" className="size-3.5 text-ink-400" />
             {item.href && !isLast ? (
-              <Link to={item.href} viewTransition className="font-medium text-ink-500 transition hover:text-brand-700">
+              <Link href={item.href} className="font-medium text-ink-500 transition hover:text-brand-700">
                 <span>{item.label}</span>
               </Link>
             ) : (

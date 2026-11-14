@@ -48,3 +48,8 @@ next-env.d.ts
 
 # claude code (machine-local hooks, e.g. graphify paths)
 .claude/settings.local.json
+
+# next.js
+/.next/
+next-env.d.ts
+/public/vendor/

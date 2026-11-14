@@ -1,3 +1,5 @@
+'use client'
+
 import { Check, ChevronDown } from 'lucide-react'
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react'
 import { cn } from '../lib/utils'

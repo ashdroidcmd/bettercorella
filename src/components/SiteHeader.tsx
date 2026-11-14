@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Accessibility,
   Archive,
@@ -35,7 +37,8 @@ import {
 import { useLenis } from 'lenis/react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { Suspense, lazy, useEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import logo from '../assets/logo.png'
 import { categories } from '../data/categories'
 
@@ -208,8 +211,8 @@ function MenuLinkTile({ item, onNavigate }: { item: MenuLink; onNavigate: () => 
 
   return (
     <Link
-      to={item.href}
-      viewTransition
+      href={item.href}
+     
       onClick={onNavigate}
       className="group/menu-link flex min-w-0 gap-3 rounded-xl p-2.5 transition hover:bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
     >
@@ -240,16 +243,16 @@ export function SiteHeader() {
   const headerRef = useRef<HTMLElement>(null)
   const desktopMenuRef = useRef<HTMLDivElement>(null)
   const desktopTriggerRef = useRef<HTMLButtonElement>(null)
-  const location = useLocation()
-  const [prevPathname, setPrevPathname] = useState(location.pathname)
-  if (prevPathname !== location.pathname) {
-    setPrevPathname(location.pathname)
+  const pathname = usePathname()
+  const [prevPathname, setPrevPathname] = useState(pathname)
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname)
     if (desktopMenu !== null) {
       setDesktopMenu(null)
     }
   }
-  const menuOpen = menuPath === location.pathname
-  const activeDesktopMenu = desktopMenu?.pathname === location.pathname ? desktopMenu.label : null
+  const menuOpen = menuPath === pathname
+  const activeDesktopMenu = desktopMenu?.pathname === pathname ? desktopMenu.label : null
   const activeNavItem = primaryNav.find((item) => item.label === activeDesktopMenu)
   const menuPanelWidth = activeNavItem?.sections.length === 1
     ? 'w-[min(620px,calc(100vw-2rem))]'
@@ -318,7 +321,7 @@ export function SiteHeader() {
   }, [activeDesktopMenu])
 
   function showDesktopMenu(label: string) {
-    setDesktopMenu({ label, pathname: location.pathname })
+    setDesktopMenu({ label, pathname: pathname })
   }
 
   function closeNavigation() {
@@ -336,10 +339,10 @@ export function SiteHeader() {
       <header ref={headerRef} className="sticky top-0 z-50 border-b border-line bg-white">
         <div className="container-page flex h-[4.5rem] items-center justify-between gap-4 lg:h-20">
           <Link
-            to="/"
-            viewTransition
+            href="/"
+           
             onClick={() => {
-              if (location.pathname !== '/') return
+              if (pathname !== '/') return
 
               if (lenis) {
                 lenis.scrollTo(0, { immediate: Boolean(reduceMotion) })
@@ -350,7 +353,7 @@ export function SiteHeader() {
             className="group flex min-w-0 items-center"
           >
             <img
-              src={logo}
+              src={logo.src}
               alt="Better Inabanga"
               width="960"
               height="199"
@@ -369,7 +372,7 @@ export function SiteHeader() {
             <nav aria-label="Main navigation" className="flex items-center gap-0.5">
               {primaryNav.map((item) => {
                 const expanded = activeDesktopMenu === item.label
-                const current = isNavItemActive(item, location.pathname)
+                const current = isNavItemActive(item, pathname)
 
                 return (
                   <button
@@ -423,8 +426,8 @@ export function SiteHeader() {
                             {`Explore ${activeNavItem.label}`}
                           </p>
                           <Link
-                            to={activeNavItem.href}
-                            viewTransition
+                            href={activeNavItem.href}
+                           
                             onClick={closeNavigation}
                             className="mt-1 inline-flex items-center gap-1 text-sm font-bold text-brand-700 hover:text-brand-800 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-brand-500"
                           >
@@ -473,8 +476,8 @@ export function SiteHeader() {
               <Search aria-hidden="true" className="size-5" />
             </button>
             <Link
-              to="/government/hotlines"
-              viewTransition
+              href="/government/hotlines"
+             
               className="hidden rounded-xl border border-line px-3.5 py-2 text-xs font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700 sm:inline-flex"
             >
               {'Hotlines'}
@@ -491,7 +494,7 @@ export function SiteHeader() {
                 } else {
                   setMobileMenuTop(headerRef.current?.getBoundingClientRect().bottom ?? 0)
                   setMobileSection('')
-                  setMenuPath(location.pathname)
+                  setMenuPath(pathname)
                 }
               }}
               className="inline-flex size-11 items-center justify-center rounded-xl text-ink-700 transition hover:bg-surface lg:hidden"
@@ -516,7 +519,7 @@ export function SiteHeader() {
                 <div className="divide-y divide-line border-b border-line">
                   {primaryNav.map((item) => {
                     const expanded = mobileSection === item.label
-                    const current = isNavItemActive(item, location.pathname)
+                    const current = isNavItemActive(item, pathname)
 
                     return (
                       <section key={item.href}>
@@ -544,8 +547,8 @@ export function SiteHeader() {
                         {expanded ? (
                           <div id={`mobile-section-${item.label.toLowerCase()}`} className="pb-4">
                             <Link
-                              to={item.href}
-                              viewTransition
+                              href={item.href}
+                             
                               onClick={closeNavigation}
                               className="mb-3 flex items-center justify-between rounded-xl bg-brand-50 px-3.5 py-3 text-sm font-bold text-brand-700 focus-visible:outline-2 focus-visible:outline-brand-500"
                             >
@@ -564,8 +567,8 @@ export function SiteHeader() {
                                       return (
                                         <Link
                                           key={link.href}
-                                          to={link.href}
-                                          viewTransition
+                                          href={link.href}
+                                         
                                           onClick={closeNavigation}
                                           className="flex min-w-0 items-start gap-3 rounded-xl px-2.5 py-2.5 transition hover:bg-surface focus-visible:outline-2 focus-visible:outline-brand-500"
                                         >
@@ -594,16 +597,16 @@ export function SiteHeader() {
               </nav>
               <div className="grid shrink-0 grid-cols-2 gap-2 border-t border-line bg-white px-4 py-3">
                 <Link
-                  to="/government/hotlines"
-                  viewTransition
+                  href="/government/hotlines"
+                 
                   onClick={closeNavigation}
                   className="rounded-xl bg-surface px-3 py-3 text-center text-sm font-semibold text-ink-700 transition hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-brand-500"
                 >
                   {'Emergency hotlines'}
                 </Link>
                 <Link
-                  to="/search"
-                  viewTransition
+                  href="/search"
+                 
                   onClick={closeNavigation}
                   className="rounded-xl bg-surface px-3 py-3 text-center text-sm font-semibold text-ink-700 transition hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-brand-500"
                 >

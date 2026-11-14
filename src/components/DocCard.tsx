@@ -1,3 +1,5 @@
+'use client'
+
 import { ArrowUpRight, FileText } from 'lucide-react'
 import type { BudgetDoc } from '../data/types'
 

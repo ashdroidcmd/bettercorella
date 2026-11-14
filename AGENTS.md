@@ -27,7 +27,7 @@
 
 ## Before Coding, Identify
 
-- The affected route or page (`src/pages/`, `src/App.tsx`)
+- The affected route (`src/app/<route>/page.tsx`) and its view (`src/views/`)
 - Affected components (`src/components/`) and data files (`src/data/`)
 - Affected tests, docs, screenshots and user-manual pages
 

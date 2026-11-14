@@ -1,6 +1,6 @@
 import { defineConfig, devices } from '@playwright/test'
 
-const PORT = 5173
+const PORT = 3000
 
 /**
  * End-to-end tests live in e2e/. Unit tests (Vitest) live next to the code in src/.
@@ -20,10 +20,11 @@ export default defineConfig({
   },
 
   webServer: {
-    command: `npm run dev -- --port ${PORT} --strictPort`,
+    // Tests run against the production build: the same HTML that search engines and visitors get.
+    command: `npm run build && npm run start -- --port ${PORT}`,
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
-    timeout: 60_000,
+    timeout: 300_000,
   },
 
   projects: [

@@ -18,7 +18,7 @@ export interface RouteMetadata {
   changefreq?: 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never'
 }
 
-const DEFAULT_ORIGIN = 'https://betterinabanga.pages.dev'
+import { SITE_URL as DEFAULT_ORIGIN } from '../lib/site.ts'
 
 function makeBreadcrumbs(items: Array<{ name: string; path: string }>) {
   return {

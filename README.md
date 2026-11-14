@@ -41,13 +41,12 @@
 
 ## 🛠️ Tech Stack
 
-- **Framework:** [Vite](https://vitejs.dev/) + [React 19](https://react.dev/)
-- **Routing:** [React Router v7](https://reactrouter.com/)
+- **Framework:** [Next.js 16](https://nextjs.org/) (App Router, static prerendering) + [React 19](https://react.dev/)
 - **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) with custom Inabanga Bohol oceanic blues (`#0284c7`) and golden raffia accents (`#f59e0b`)
 - **Typography:** Figtree via Google Fonts
 - **Icons:** [Lucide React](https://lucide.dev/)
 - **Smooth Scrolling & Motion:** [Lenis](https://lenis.darkroom.engineering/) + [Motion](https://motion.dev/)
-- **PWA & Caching:** [Vite PWA](https://vite-pwa-org.netlify.app/)
+- **PWA & Caching:** [Serwist](https://serwist.pages.dev/)
 - **SEO & Prerendering:** Route metadata plugin prerendering 416 static routes and generating `sitemap.xml` and `robots.txt`
 
 ---
@@ -71,7 +70,7 @@
 
 4. **Preview production build:**
    ```bash
-   npm run preview
+   npm run start
    ```
 
 ---

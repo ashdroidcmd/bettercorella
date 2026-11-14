@@ -4,6 +4,11 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ## [Unreleased]
 
+### Changed
+
+- Migrated from Vite + React Router to Next.js 16 (App Router). Every page is now prerendered with its full content in the HTML, which search engines and AI crawlers can read without running JavaScript.
+- Service worker moved from vite-plugin-pwa to Serwist.
+
 ### Added
 
 - Started BetterCorella from the BetterInabanga template (ISC), with an ISC `LICENSE` crediting the original authors.
@@ -15,6 +20,3 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 - Language switching (Filipino and Cebuano). The site is English only for now.
 
-### Fixed
-
-- `vercel.json` now builds with Vite (`npm run build` → `dist`) instead of Next.js.

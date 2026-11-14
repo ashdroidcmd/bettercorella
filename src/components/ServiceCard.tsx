@@ -1,5 +1,7 @@
+'use client'
+
 import { ArrowRight, FileText } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import type { Service } from '../data/types'
 
 interface ServiceCardProps {
@@ -11,8 +13,8 @@ export function ServiceCard({ service, categoryName }: ServiceCardProps) {
 
   return (
     <Link
-      to={`/services/${service.category}/${service.slug}`}
-      viewTransition
+      href={`/services/${service.category}/${service.slug}`}
+     
       className="group flex h-full min-w-0 flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
     >
       <div className="flex items-start gap-3">

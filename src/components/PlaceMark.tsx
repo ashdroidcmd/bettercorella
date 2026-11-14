@@ -1,3 +1,5 @@
+'use client'
+
 import type { PlaceRecord } from '../data/places'
 
 const imageMarks: Array<{ match: string; src: string; wide?: boolean; large?: boolean; dark?: boolean }> = [

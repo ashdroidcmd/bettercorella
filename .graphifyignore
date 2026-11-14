@@ -1,7 +1,8 @@
 ﻿# Dependencies & build output
 node_modules/
 dist/
-.vite/
+.next/
+public/vendor/
 coverage/
 test-results/
 playwright-report/

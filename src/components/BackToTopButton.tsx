@@ -1,3 +1,5 @@
+'use client'
+
 import { useLenis } from 'lenis/react'
 import { useReducedMotion } from 'motion/react'
 import { ArrowUp } from 'lucide-react'

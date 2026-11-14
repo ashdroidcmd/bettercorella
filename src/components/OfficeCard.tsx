@@ -1,5 +1,7 @@
+'use client'
+
 import { ArrowRight, Building2, Phone } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import type { Office } from '../data/types'
 
 interface OfficeCardProps {
@@ -9,8 +11,8 @@ interface OfficeCardProps {
 export function OfficeCard({ office }: OfficeCardProps) {
   return (
     <Link
-      to={`/government/offices/${office.slug}`}
-      viewTransition
+      href={`/government/offices/${office.slug}`}
+     
       className="group flex h-full min-w-0 flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
     >
       <div className="flex items-start justify-between gap-3">

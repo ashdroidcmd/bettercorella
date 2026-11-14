@@ -1,13 +1,16 @@
+'use client'
+
 import { LngLatBounds, Map as MapLibreMap, Marker, NavigationControl, setWorkerUrl } from 'maplibre-gl'
 import type { FilterSpecification } from 'maplibre-gl'
 import type { FeatureCollection, Geometry, GeoJsonProperties } from 'geojson'
 import { RotateCcw } from 'lucide-react'
 import { useCallback, useEffect, useRef } from 'react'
-import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
-import boundaryUrl from '../data/inabanga-barangays.geojson?url'
 import { barangayMap } from '../data/barangayMap'
 import { barangays } from '../data/barangays'
 import 'maplibre-gl/dist/maplibre-gl.css'
+
+const workerUrl = '/vendor/maplibre-gl-worker.mjs'
+const boundaryUrl = '/data/inabanga-barangays.geojson'
 
 setWorkerUrl(workerUrl)
 

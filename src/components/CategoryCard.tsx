@@ -1,5 +1,7 @@
+'use client'
+
 import { ArrowUpRight } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import type { ServiceCategory } from '../data/types'
 import { CategoryIcon } from './CategoryIcon'
 
@@ -12,8 +14,8 @@ export function CategoryCard({ category, count }: CategoryCardProps) {
 
   return (
     <Link
-      to={`/services/${category.slug}`}
-      viewTransition
+      href={`/services/${category.slug}`}
+     
       className="group relative flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float sm:p-6"
     >
       <div className="flex items-start justify-between gap-4">

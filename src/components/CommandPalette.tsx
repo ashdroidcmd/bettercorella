@@ -1,8 +1,10 @@
+'use client'
+
 import { ArrowRight, Search, X } from 'lucide-react'
 import { useLenis } from 'lenis/react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { searchAll } from '../lib/search'
 
 interface CommandPaletteProps {
@@ -30,7 +32,7 @@ export function CommandPalette({ open, onClose }: CommandPaletteProps) {
 }
 
 function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
-  const navigate = useNavigate()
+  const router = useRouter()
   const inputRef = useRef<HTMLInputElement>(null)
   const dialogRef = useRef<HTMLDivElement>(null)
   const [query, setQuery] = useState('')
@@ -98,7 +100,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
     const item = items[index]
     if (!item) return
     onClose()
-    navigate(item.href)
+    router.push(item.href)
   }
 
   return (
@@ -186,7 +188,7 @@ function CommandPaletteDialog({ onClose }: { onClose: () => void }) {
                 type="button"
                 onClick={() => {
                   onClose()
-                  navigate(`/search?q=${encodeURIComponent(query.trim())}`)
+                  router.push(`/search?q=${encodeURIComponent(query.trim())}`)
                 }}
                 className="font-bold text-brand-700 hover:text-brand-800"
               >

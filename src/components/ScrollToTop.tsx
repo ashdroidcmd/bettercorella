@@ -1,14 +1,18 @@
+'use client'
+
 import { useLenis } from 'lenis/react'
 import { useReducedMotion } from 'motion/react'
+import { usePathname } from 'next/navigation'
 import { useLayoutEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 
+/** Resets scroll (or jumps to the URL hash) on navigation, including when Lenis drives scrolling. */
 export function ScrollToTop() {
-  const { pathname, hash } = useLocation()
+  const pathname = usePathname()
   const lenis = useLenis()
   const reduceMotion = useReducedMotion()
 
   useLayoutEffect(() => {
+    const hash = window.location.hash
     if (hash) {
       const target = document.getElementById(hash.slice(1))
       if (target) {
@@ -26,7 +30,7 @@ export function ScrollToTop() {
     } else {
       window.scrollTo({ top: 0, behavior: 'auto' })
     }
-  }, [pathname, hash, lenis, reduceMotion])
+  }, [pathname, lenis, reduceMotion])
 
   return null
 }

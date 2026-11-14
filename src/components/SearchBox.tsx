@@ -1,3 +1,5 @@
+'use client'
+
 import {
   ArrowRight,
   Building2,
@@ -16,7 +18,7 @@ import {
   type FormEvent,
   type KeyboardEvent,
 } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import type { SearchResult } from '../lib/search'
 import { cn } from '../lib/utils'
 
@@ -53,7 +55,7 @@ export function SearchBox({
   const containerRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const searchModuleRef = useRef<Promise<typeof import('../lib/search')> | null>(null)
-  const navigate = useNavigate()
+  const router = useRouter()
   const baseId = useId()
   const inputId = `${baseId}-input`
   const listboxId = `${baseId}-results`
@@ -116,7 +118,7 @@ export function SearchBox({
       return
     }
     setOpen(false)
-    navigate(`/search?q=${encodeURIComponent(term)}`, { viewTransition: true })
+    router.push(`/search?q=${encodeURIComponent(term)}`)
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -126,7 +128,7 @@ export function SearchBox({
 
   function choose(result: SearchResult) {
     setOpen(false)
-    navigate(result.href, { viewTransition: true })
+    router.push(result.href)
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
