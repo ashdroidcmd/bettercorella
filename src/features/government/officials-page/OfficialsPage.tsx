@@ -178,7 +178,7 @@ function OfficialsPageContent() {
       <section className="border-t border-line">
         <div className="container-page py-8">
           <SourceNote href={city.website} linkLabel="View official profiles">
-            {'Names and roles come from the Municipal Officials page of the official municipal website (term 2025–2028). Portraits are added only when published by the LGU. This guide does not publish personal contact details.'}
+            {'Names and roles come from the Municipal Officials page of the official municipal website (term 2025–2028). Portraits are not shown. This guide does not publish personal contact details.'}
           </SourceNote>
         </div>
       </section>

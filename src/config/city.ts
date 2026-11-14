@@ -66,7 +66,7 @@ export const city: CityProfile = {
   districtCount: null,
   coordinates: { lat: 9.687, lng: 123.9214 },
   elevationM: null,
-  zip: null,
+  zip: '6337', // PHLPost via PhilAtlas; confirmed by the maintainer (2026-11-14)
   address: 'Corella Municipal Building, S Sayon St, Poblacion, Corella, Bohol',
   trunkline: '(038) 422-3865',
   email: 'municipality.corella@gmail.com',
