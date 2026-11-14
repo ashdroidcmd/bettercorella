@@ -186,7 +186,7 @@ export function BarangayMapCanvas({ resetToken, onSelect, onHover }: BarangayMap
     map.addControl(new NavigationControl({ showCompass: false }), 'top-right')
 
     const label = document.createElement('div')
-    label.className = 'rounded-full bg-[#0284c7] px-3 py-1 text-xs font-bold text-white shadow-lg ring-2 ring-white/90'
+    label.className = 'rounded-full bg-brand-600 px-3 py-1 text-xs font-bold text-white shadow-lg ring-2 ring-white/90'
     label.style.pointerEvents = 'none'
     const labelMarker = new Marker({ element: label, anchor: 'center' })
     labelMarkerRef.current = labelMarker

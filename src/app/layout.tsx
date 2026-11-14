@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from 'next'
-import { Figtree } from 'next/font/google'
+import { Plus_Jakarta_Sans } from 'next/font/google'
 import type { ReactNode } from 'react'
 import { SiteLayout } from '@/components/layout/SiteLayout'
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, THEME_COLOR } from '@/config/site'
 import { Providers } from '@/app/providers'
 import '@/index.css'
 
-const figtree = Figtree({ subsets: ['latin'], variable: '--font-figtree', display: 'swap' })
+const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-jakarta', display: 'swap' })
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -36,7 +36,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={figtree.variable}>
+    <html lang="en" className={jakarta.variable}>
       <body>
         <Providers>
           <SiteLayout>{children}</SiteLayout>

@@ -45,7 +45,7 @@ BetterCorella is **not** the official website of the Municipality of Corella. Ev
 | --- | --- |
 | Framework | [Next.js 16](https://nextjs.org/) (App Router) + [React 19](https://react.dev/) + TypeScript |
 | Rendering | Every page is prerendered to static HTML at build time, so content is readable by search engines without JavaScript |
-| Styling | [Tailwind CSS v4](https://tailwindcss.com/), Figtree font |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com/), Plus Jakarta Sans font |
 | Icons & motion | [Lucide](https://lucide.dev/), [Motion](https://motion.dev/), [Lenis](https://lenis.darkroom.engineering/) smooth scrolling |
 | Maps | [MapLibre GL](https://maplibre.org/) |
 | Offline / PWA | [Serwist](https://serwist.pages.dev/) service worker |
