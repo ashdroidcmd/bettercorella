@@ -115,7 +115,7 @@ function ServicesPageContent() {
             <div>
               <h2 className="text-base font-extrabold tracking-tight">Some services can be done online</h2>
               <p className="mt-1 text-sm text-white/60">
-                {'Business registration, jobs, procurement, and records have official national portals.'}
+                {'Apply for or renew a Corella business permit online, pay through Landbank, and use national portals for registration, jobs, and records.'}
               </p>
             </div>
           </div>

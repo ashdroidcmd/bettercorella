@@ -122,6 +122,13 @@ test.describe('Corella rebrand', () => {
     await expect(page.getByText('Apolio C. Lumactud').first()).toBeVisible()
   })
 
+  test('services come from the Corella Citizen\'s Charter', async ({ page }) => {
+    await page.goto('/services/business/bplo-service-issuance-of-business-permits-licenses-for-new')
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Business Permits')
+    await expect(page.getByText('Available online').first()).toBeVisible()
+    await expect(page.getByText(/Citizen's Charter 2026/).first()).toBeVisible()
+  })
+
   test('hotlines list the national 911 line', async ({ page }) => {
     await page.goto('/government/hotlines')
     await expect(page.getByRole('link', { name: '911' }).first()).toBeVisible()

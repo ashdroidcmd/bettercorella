@@ -1,11 +1,30 @@
 import type { OnlineService } from '../types/index.ts';
 
-// Slugs of Corella services that can be completed online. Empty until the municipal Citizen's
-// Charter is verified (see services.ts).
-export const onlineServiceSlugs: string[] = [];
+// Slugs of Corella charter services that can be started online (business permits through the
+// municipality's online BPLS, linked from corella-bohol.gov.ph, checked 2026-11-14).
+export const onlineServiceSlugs: string[] = [
+  'bplo-service-issuance-of-business-permits-licenses-for-new',
+  'bplo-service-renewal-of-business-permits-licenses',
+];
 
-// National e-government portals available to every Corella resident.
+// Corella's own online services first, then national e-government portals.
 export const onlineServices: OnlineService[] = [
+  {
+    slug: 'corella-business-permit',
+    name: 'Corella Online Business Permit Application',
+    shortName: 'Business permit (Corella)',
+    description: 'Apply for a new business permit or renew one with the Municipality of Corella online, linked from the official municipal website.',
+    url: 'https://bpbc3.ibpls.com/corellabohol',
+    category: 'Business'
+  },
+  {
+    slug: 'corella-online-payment',
+    name: 'Corella Online Payment (LBP iAccess)',
+    shortName: 'Online payment (Corella)',
+    description: 'Pay municipal fees and taxes online through Landbank, as linked from the official municipal website.',
+    url: 'https://corella-bohol.gov.ph/online-payment/',
+    category: 'Government'
+  },
   {
     slug: 'egov',
     name: 'eGov PH Super App',

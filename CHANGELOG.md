@@ -20,6 +20,8 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Changed
 
+- 86 municipal services from the Corella Citizen's Charter 2026 (2nd edition), across 14 offices and all 12 service categories. Each record has the office, classification, transaction type, who may avail, the charter's description, processing time, the peso amounts listed and a link to its charter page.
+- Online services: Corella's online business permit application and LBP online payment are listed first, and the two business permit services are marked "Available online".
 - Government data for Corella:
   - **officials:** mayor, vice mayor, 7 Sangguniang Bayan members, ABC and SK Federation presidents (official municipal website, term 2025–2028)
   - **barangays:** 8 barangays with PSA codes and 2024 population, 2020/2015 census figures, computed share and growth, and Cancatac's barangay council

@@ -46,7 +46,7 @@ export const manuallyMaintainedData: DataFreshnessRow[] = [
   },
   {
     dataset: 'Service charter records',
-    source: "Municipal Citizen's Charter",
+    source: "Municipality of Corella Citizen's Charter 2026 (2nd ed.)",
     recordCount: services.length,
     lastVerified: oldestVerificationDate(services),
     reviewEveryDays: 365,
@@ -102,7 +102,7 @@ export const manuallyMaintainedData: DataFreshnessRow[] = [
   },
   {
     dataset: 'Online services',
-    source: 'National e-government portals; links checked November 14, 2026',
+    source: 'Corella online business permit and payment links (corella-bohol.gov.ph) and national e-government portals; checked November 14, 2026',
     recordCount: onlineServices.length,
     lastVerified: '2026-11-14',
     reviewEveryDays: 90,
