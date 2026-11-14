@@ -22,11 +22,11 @@ export function OpenDataPage() {
         crumbs={[{ label: 'Transparency', href: '/transparency' }, { label: 'Open data' }]}
       >
         <div className="flex flex-wrap gap-2 text-xs font-semibold">
-          <span className="rounded-full border border-line bg-white/80 px-3 py-1.5 text-ink-600 shadow-card">
+          <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-white/75">
             {openDataSources.length} {"datasets tracked"}</span>
-          <span className="rounded-full border border-line bg-white/80 px-3 py-1.5 text-ink-600 shadow-card">
+          <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-white/75">
             {integrated.length} {"built into the site"}</span>
-          <span className="rounded-full border border-line bg-white/80 px-3 py-1.5 text-ink-600 shadow-card">
+          <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-white/75">
             {reference.length} {"reference sources"}</span>
         </div>
       </PageHero>

@@ -56,22 +56,22 @@ export function GovernmentPage() {
                 key={item.href}
                 href={item.href}
                
-                className="group flex items-center justify-between gap-3 rounded-2xl border border-line bg-white p-4 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
+                className="group flex items-center justify-between gap-3 rounded-2xl border border-white/15 bg-white/[0.06] p-4 transition hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/10"
               >
                 <span className="flex items-center gap-3">
-                  <span className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
+                  <span className="inline-flex size-10 items-center justify-center rounded-xl bg-white/10 text-brand-300">
                     <Icon aria-hidden="true" className="size-4" />
                   </span>
                   <span>
-                    <span className="block text-sm font-bold text-ink-950 group-hover:text-brand-700">
+                    <span className="block text-sm font-bold text-white">
                       {item.label}
                     </span>
-                    <span className="block text-xs text-ink-500">{item.count === undefined ? item.note : item.count ? `${item.count} ${item.note}` : 'Coming soon'}</span>
+                    <span className="block text-xs text-white/60">{item.count === undefined ? item.note : item.count ? `${item.count} ${item.note}` : 'Coming soon'}</span>
                   </span>
                 </span>
                 <ArrowUpRight
                   aria-hidden="true"
-                  className="size-4 text-ink-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand-700"
+                  className="size-4 text-white/40 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white"
                 />
               </Link>
             )

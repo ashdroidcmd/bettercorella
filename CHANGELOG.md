@@ -20,6 +20,7 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Changed
 
+- Page heroes now use the home page's dark navy (`bg-ink-950`) on every inner page, with light breadcrumbs (`Breadcrumbs` `tone="dark"`), dark stat cards and translucent chips.
 - Barangays are a top-level section at `/barangays` (breadcrumb Home > Barangays); old `/government/barangays` URLs redirect permanently. The barangay search box is gone, since Corella has 8 barangays. The government page no longer repeats the barangay list, and its featured offices now point at Corella's offices (Mayor, Treasurer, Civil Registrar, Health, Social Welfare, Engineering).
 - Simpler header in the BetterInabanga style: a dark 24/7 hotline bar (911, Municipal Hall, MDRRMO; hotlines with a `short` label appear automatically), then the logo, six plain links (Home, Services, Government, Transparency, Barangays, Hotlines & Contact) with no dropdowns, and a "Citizen Feedback" button that opens the new feedback section on the contact page. Town, News and About moved to the footer.
 - Official cards are text-only (role, name, term, profile link); no portrait frame.

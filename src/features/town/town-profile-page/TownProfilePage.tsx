@@ -36,21 +36,24 @@ export function TownProfilePage() {
         crumbs={[{ label: 'Town' }]}
       >
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard value={city.province} label="Province" note={city.region} />
+          <StatCard value={city.province} label="Province" note={city.region} tone="dark" />
           <StatCard
             value={city.population2024 === null ? 'Pending' : formatNumber(city.population2024)}
             label="Population"
             note={`${city.populationYear ?? 2024} Census of Population (PSA)`}
+            tone="dark"
           />
           <StatCard
             value={city.landAreaKm2 === null ? 'Pending' : `${city.landAreaKm2} km²`}
             label="Land area"
             note="Provincial Government of Bohol"
+            tone="dark"
           />
           <StatCard
             value={city.barangayCount === null ? 'Pending' : `${city.barangayCount} barangays`}
             label="Barangays"
             note="PSA Philippine Standard Geographic Code"
+            tone="dark"
           />
         </div>
       </PageHero>

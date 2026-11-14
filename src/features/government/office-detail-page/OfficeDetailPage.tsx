@@ -42,8 +42,8 @@ export function OfficeDetailPage() {
         ]}
       >
         <div className="flex flex-wrap gap-2">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-3 py-1.5 text-xs font-semibold text-ink-700">
-            <Building2 aria-hidden="true" className="size-3.5 text-brand-700" />
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/80">
+            <Building2 aria-hidden="true" className="size-3.5 text-brand-300" />
             {office.sector}
           </span>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-700 px-3 py-1.5 text-xs font-bold text-white">

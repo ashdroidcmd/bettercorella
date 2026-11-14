@@ -20,10 +20,10 @@ export function OnlineServicesPage() {
         crumbs={[{ label: 'Services', href: '/services' }, { label: 'Online services' }]}
       >
         <div className="flex flex-wrap gap-2">
-          <span className="rounded-full border border-line bg-white px-3 py-1.5 text-xs font-semibold text-ink-700">
+          <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/80">
             {onlineServices.length} {'official portals'}
           </span>
-          <span className="rounded-full border border-line bg-white px-3 py-1.5 text-xs font-semibold text-ink-700">
+          <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/80">
             {'Accounts and fees are handled by each agency'}
           </span>
         </div>

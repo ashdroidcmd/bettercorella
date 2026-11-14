@@ -103,7 +103,7 @@ function LegislationPageContent() {
           <Link
             href="/government/officials"
            
-            className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-3.5 py-2 text-xs font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3.5 py-2 text-xs font-bold text-white/85 transition hover:border-white/35 hover:bg-white/10 hover:text-white"
           >
             {"Municipal officials"}</Link>
         </div>
