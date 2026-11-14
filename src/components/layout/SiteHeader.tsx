@@ -355,9 +355,9 @@ export function SiteHeader() {
             <img
               src={logo.src}
               alt="BetterCorella"
-              width="802"
+              width="655"
               height="199"
-              className="h-9 w-auto shrink-0 sm:h-10"
+              className="h-10 w-auto shrink-0 sm:h-12"
             />
           </Link>
 

@@ -50,9 +50,9 @@ export function SiteFooter() {
                 <img
                   src={logoLight.src}
                   alt={SITE_NAME}
-                  width="802"
+                  width="655"
                   height="199"
-                  className="h-10 w-auto"
+                  className="h-12 w-auto"
                 />
                 <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.16em] text-white/60">
                   {'Bohol · Civic guide'}

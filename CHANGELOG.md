@@ -20,6 +20,7 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Changed
 
+- New BetterCorella logo: Corella's PSA/NAMRIA map outline in blue with the Philippine flag sun, plus a "Better Corella" wordmark in Plus Jakarta Sans. Header and footer use the horizontal logo; favicon, app icons and the social preview image use the new mark.
 - New color palette matched to the BetterCorella logo: Philippine blue `#0038A8` as the brand color (buttons, links, theme color) and sun gold `#FCD116` as the accent. The template's sky blue is gone.
 - The site font is now Plus Jakarta Sans (self-hosted by `next/font`), replacing Figtree.
 - CI deploys now upload the source and let Vercel build remotely, instead of uploading a prebuilt output (`--prebuilt`). The source is uploaded as a single `tgz` archive (`--archive=tgz`), which fixes the "Upload aborted" / `api-upload-free` failures caused by the Hobby plan's limit of 5,000 file uploads per day.
