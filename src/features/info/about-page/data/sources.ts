@@ -1,8 +1,28 @@
 import type { Source } from '../types';
 
-// Official sources BetterCorella draws on. Corella-specific sources (municipal website, Citizen's
-// Charter, official social media) are added once they are confirmed.
+// Official sources BetterCorella draws on: Corella's own sources first (checked 2026-11-14), then
+// national and provincial sources.
 export const sources: Source[] = [
+  {
+    name: 'Municipality of Corella (official website)',
+    url: 'https://corella-bohol.gov.ph/',
+    note: 'Officials, offices, barangay pages, history, contacts and announcements'
+  },
+  {
+    name: "Corella Citizen's Charter 2026 (2nd edition)",
+    url: 'https://corella-bohol.gov.ph/citizens-charter/',
+    note: 'The 86 municipal services, their requirements, fees and processing times, and office contacts'
+  },
+  {
+    name: 'PSA PSGC: Corella, Bohol',
+    url: 'https://psa.gov.ph/classification/psgc/barangays/0701215000',
+    note: 'Official barangay list, codes, income class and 2024 Census population'
+  },
+  {
+    name: 'Provincial Government of Bohol: Corella',
+    url: 'https://bohol.gov.ph/about/municipalities/1st-district/corella/',
+    note: 'Congressional district, land area and the 2025–2028 municipal mayor'
+  },
   {
     name: 'PSA Philippine Standard Geographic Code',
     url: 'https://psa.gov.ph/classification/psgc',

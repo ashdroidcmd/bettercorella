@@ -25,7 +25,8 @@ export function AboutPage() {
     ['Congressional district', city.district ?? PENDING],
     ['Barangays', city.barangayCount === null ? PENDING : `${city.barangayCount} barangays`],
     ['Land area', city.landAreaKm2 === null ? PENDING : `${city.landAreaKm2} km²`],
-    ['Population', city.population2024 === null ? PENDING : formatNumber(city.population2024)],
+    ['Population', city.population2024 === null ? PENDING : `${formatNumber(city.population2024)} (${city.populationYear ?? 2024})`],
+    ['Income class', city.incomeClass ? `${city.incomeClass} class` : PENDING],
     ['ZIP code', city.zip ?? PENDING],
   ]
 

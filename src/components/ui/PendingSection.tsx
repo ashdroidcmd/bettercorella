@@ -36,8 +36,8 @@ export function PendingSection({ topic, source, links = [] }: PendingSectionProp
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
+                    target={link.href.startsWith('/') ? undefined : '_blank'}
+                    rel={link.href.startsWith('/') ? undefined : 'noreferrer'}
                     className="group flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
                   >
                     <span className="flex items-start justify-between gap-3">

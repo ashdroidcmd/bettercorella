@@ -14,9 +14,19 @@ export function BusinessPage() {
         crumbs={[{ label: 'Town', href: '/town' }, { label: 'Business and investment' }]}
       />
       <PendingSection
-        topic="Local business permit steps, fees and investment information"
-        source="They will come from the municipal Citizen's Charter and the Business Permits and Licensing Office."
+        topic="Investment information and a local business guide"
+        source="Business permit services are already listed under Services from the Citizen's Charter; investment details will come from the municipal government."
         links={[
+          {
+            label: 'Corella business permit services',
+            href: '/services/business',
+            description: "New and renewal business permit requirements from the Corella Citizen's Charter 2026.",
+          },
+          {
+            label: 'Corella Online Business Permit Application',
+            href: 'https://bpbc3.ibpls.com/corellabohol',
+            description: 'Apply for or renew a business permit online, linked from the official municipal website.',
+          },
           {
             label: 'Central Business Portal',
             href: 'https://business.gov.ph/',
