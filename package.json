@@ -1,8 +1,32 @@
 {
   "name": "bettercorella",
-  "private": true,
   "version": "1.0.0",
+  "private": true,
+  "description": "BetterCorella: an independent civic guide to the services, officials, barangays, budgets and public records of the Municipality of Corella, Bohol",
+  "keywords": [
+    "bettergovph",
+    "civic-tech",
+    "corella",
+    "bohol",
+    "lgu",
+    "open-data",
+    "transparency"
+  ],
+  "homepage": "https://bettercorella.vercel.app",
+  "bugs": {
+    "url": "https://github.com/ashdroidcmd/bettercorella/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashdroidcmd/bettercorella.git"
+  },
+  "license": "ISC",
+  "author": "BetterCorella Contributors",
   "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "packageManager": "pnpm@10.28.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -44,18 +68,5 @@
     "typescript": "~6.0.3",
     "vite": "^8.3.4",
     "vitest": "^5.0.5"
-  },
-  "description": "BetterInabanga.org - Digital Civic Transparency & Public Services Portal for LGU Inabanga, Bohol",
-  "main": "index.js",
-  "keywords": [
-    "bettergovph",
-    "civic-tech",
-    "inabanga",
-    "bohol",
-    "open-data",
-    "transparency"
-  ],
-  "author": "BetterInabanga Contributors",
-  "license": "ISC",
-  "packageManager": "pnpm@10.28.0"
+  }
 }

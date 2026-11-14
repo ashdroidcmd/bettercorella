@@ -1,53 +1,60 @@
-# BetterInabanga 🇵🇭
+# BetterCorella 🇵🇭
 
-> **Digital Civic Transparency & Public Services Guide for the Municipality of Inabanga, Bohol**  
-> Built under the [BetterGov.ph LGU Directory Initiative](https://lgu.bettergov.ph/GUIDE) and modeled after [Better San Fernando, La Union](https://github.com/alvindemesadev/better-san-fernando-lu).
+> **An independent civic guide to the services, officials, barangays, budgets and public records of the Municipality of Corella, Bohol.**
+> Built under the [BetterGov.ph LGU Directory Initiative](https://lgu.bettergov.ph/GUIDE). Adapted from [BetterInabanga](https://github.com/gerardosocias29/betterinabanga) and [Better San Fernando, La Union](https://github.com/alvindemesadev/better-san-fernando-lu).
+
+**Live site:** [bettercorella.vercel.app](https://bettercorella.vercel.app) · **Repository:** [ashdroidcmd/bettercorella](https://github.com/ashdroidcmd/bettercorella)
+
+> [!NOTE]
+> **Rebrand in progress.** This project was started from the BetterInabanga template. Pages are being switched over to Corella, and some still show template content. Corella data is added only after it has been checked against an official source. Until then, a page shows an "information coming soon" notice instead of guessing.
 
 ---
 
 ## 🌟 Overview
 
-**BetterInabanga** is a community-maintained, open-source digital civic portal that makes local government information—citizen's charter services, elected officials, 50 barangays, municipal budgets, 20% development fund infrastructure projects, and 24/7 disaster hotlines—instantly accessible to all Inabangnons and the public.
+**BetterCorella** is a community-maintained, open-source civic portal for the people of Corella, Bohol. It gathers public information that is often scattered or hard to find into one clear, mobile-friendly website:
+
+- how to get a municipal service, and what it requires and costs
+- who the elected officials and office heads are, and how to reach them
+- barangay information and emergency hotlines
+- where public money goes: budgets, procurement and infrastructure projects
+- news and advisories from official sources
+
+BetterCorella is **not** the official website of the Municipality of Corella. Every figure links to the official source it came from, so anyone can check it.
 
 ---
 
-## 🚀 Key Pages & Functionalities
+## 🚀 Key Pages & Features
 
-- **Interactive Command Palette (`Ctrl+K` / `Cmd+K`):** Instant fuzzy-search modal across all municipal services, offices, barangays, news, and civic guides.
-- **Citizen's Charter & Services Directory (`/services`):**
-  - Full catalog grouped into 12 categories: Business & Permits, Taxes & Property, Certificates & Civil Registry, Health & Wellness, Social Services & Welfare, Agriculture & Fisheries, Infrastructure, Environment, Emergency & Safety, Employment & Livelihood, Youth & Education, and Civic Governance.
-  - Dedicated service pages (`/services/:category/:slug`) with step-by-step procedures, documentary requirements, fees, processing turnaround, legal bases, downloadable forms, and a **local storage bookmark/save toggle**.
-- **Digital Online Services Hub (`/online-services`):** Direct links to verified e-government platforms including eGov PH, PhilGEPS, DTI Business Name Registration, PSA Serbilis, SSS, Pag-IBIG Virtual, and PhilHealth.
-- **Municipal Government Directory (`/government`):**
-  - **Officials (`/government/officials`):** Profiles of Municipal Mayor Hon. Dexter M. Ancla, Municipal Vice Mayor Hon. Hermogenes C. Cenabre, Jr., Sangguniang Bayan councilors, ABC President, and SK Federation President.
-  - **Offices (`/government/offices` & `/government/offices/:slug`):** Municipal department heads, physical offices, telephone locals, emails, and direct service charters.
-  - **50 Barangays Directory (`/government/barangays` & `/government/barangays/:slug`):** Complete index of all 50 barangays of Inabanga with 2024 PSA population counts, distance from Poblacion, Punong Barangay rosters, and community highlights.
-  - **24/7 Emergency Hotlines (`/government/hotlines`):** One-tap dialing for MDRRMO ((038) 510-8164 / 0917-814-4117), PNP Inabanga ((038) 512-9039), BFP Fire Station (0927-528-1232), and Bohol TaRSIER 117.
-  - **Local Legislation (`/government/legislation`):** Searchable municipal ordinances and Sangguniang Bayan resolutions.
-- **Town & Living Guide (`/city`):**
-  - **Town Profile (`/city`):** Historical milestones, geography, land area (168.49 km²), economy, and the historic Inabanga River.
-  - **Life & Tourism (`/city/life`):** Town Fiesta of Saint Paul the Apostle, Inabanga River boat cruises, handloom raffia weaving, and coastal cuisine.
-  - **Places Directory (`/city/places`):** Verified landmarks including Saint Paul the Apostle Parish Church, Macaban Cave, Mt. Ilihan Shrine, Port of U-og, and Cuaming & Hambongan Island Marine Sanctuaries.
-  - **Business & Investment (`/city/business`):** Doing business in Inabanga, BPLO permits, tax incentives, and agriculture/aquaculture opportunities.
-- **Full Disclosure Policy & Transparency Hub (`/transparency`):**
-  - **Budget Visualizer (`/transparency/budget`):** Transparent breakdown of the ₱248.6M+ annual municipal budget, NTA/IRA allocation, and 20% Municipal Development Fund.
-  - **Procurement & Bids (`/transparency/procurement`):** PhilGEPS contract awards, Invitations to Bid, and BAC notices.
-  - **Infrastructure Projects Tracker (`/transparency/projects`):** Real-time monitoring of priority DPWH and municipal capital projects (Port of U-og expansion, river revetment walls, farm-to-market roads).
-  - **Open Data (`/transparency/open-data`):** Downloadable machine-readable JSON/CSV datasets.
-- **Civic News & Advisories (`/news`, `/news/:slug`, `/news/archive`):** Announcements, DRRMO flood alerts, and agricultural distribution schedules.
-- **Progressive Web App (PWA) & Offline Caching:** Built with service worker support for offline access during emergencies.
+| Area | Route | What it offers |
+| --- | --- | --- |
+| **Search** | `Ctrl+K` / `Cmd+K`, `/search` | Search across services, offices, barangays and news from any page |
+| **Services** | `/services`, `/services/:category/:slug` | Citizen's Charter services in 12 categories, with requirements, fees, processing time and downloadable forms. Services can be bookmarked on your device |
+| **Online services** | `/online-services` | Links to national e-government services (eGov PH, PSA, SSS, PhilHealth, Pag-IBIG, DTI and more) |
+| **Government** | `/government` | Elected officials, municipal offices, barangays, legislation, and **24/7 emergency hotlines** |
+| **Town guide** | `/city` | Town profile, life and culture, places to visit, and doing business in Corella |
+| **Transparency** | `/transparency` | Budget, procurement and bids, infrastructure projects, and open data downloads |
+| **News** | `/news` | Announcements and advisories, each linked to its official source |
+| **Offline use** | (whole site) | Installable as an app (PWA). Pages you've visited still open without a connection, which helps during emergencies |
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework:** [Next.js 16](https://nextjs.org/) (App Router, static prerendering) + [React 19](https://react.dev/)
-- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/) with custom Inabanga Bohol oceanic blues (`#0284c7`) and golden raffia accents (`#f59e0b`)
-- **Typography:** Figtree via Google Fonts
-- **Icons:** [Lucide React](https://lucide.dev/)
-- **Smooth Scrolling & Motion:** [Lenis](https://lenis.darkroom.engineering/) + [Motion](https://motion.dev/)
-- **PWA & Caching:** [Serwist](https://serwist.pages.dev/)
-- **SEO & Prerendering:** Route metadata plugin prerendering 416 static routes and generating `sitemap.xml` and `robots.txt`
+| Area | Technology |
+| --- | --- |
+| Framework | [Next.js 16](https://nextjs.org/) (App Router) + [React 19](https://react.dev/) + TypeScript |
+| Rendering | Every page is prerendered to static HTML at build time, so content is readable by search engines without JavaScript |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com/), Figtree font |
+| Icons & motion | [Lucide](https://lucide.dev/), [Motion](https://motion.dev/), [Lenis](https://lenis.darkroom.engineering/) smooth scrolling |
+| Maps | [MapLibre GL](https://maplibre.org/) |
+| Offline / PWA | [Serwist](https://serwist.pages.dev/) service worker |
+| SEO | Per-page metadata, Open Graph, JSON-LD structured data, generated `sitemap.xml` and `robots.txt` |
+| Testing | [Vitest](https://vitest.dev/) (unit), [Playwright](https://playwright.dev/) (end-to-end), [oxlint](https://oxc.rs/) |
+| Package manager | [pnpm](https://pnpm.io/) |
+| Hosting | [Vercel](https://vercel.com/) |
+
+There is no backend or database. All content is typed data in the repository, so every change is reviewable in Git.
 
 ---
 
@@ -68,7 +75,7 @@ src/
 │   ├── search/          search-page/, shared/
 │   └── info/            about-page/, contact-page/, faq-page/, privacy-page/, terms-page/, ... shared/
 ├── components/          # layout/ (site shell), ui/ (building blocks), seo/
-├── config/              # site.ts, city.ts
+├── config/              # site.ts (site name and URL), city.ts (LGU identity)
 └── lib/                 # utils, seo/ (metadata + route list), data freshness
 ```
 
@@ -86,34 +93,66 @@ services-page/
 
 ## 💻 Getting Started Locally
 
-This project uses **pnpm** (the exact version is pinned in `package.json`). Node.js ships Corepack, which installs the right pnpm for you:
+**Requirements:** Node.js 22.18 or newer (Node 24 recommended) and pnpm. The exact pnpm version is pinned in `package.json`, and Corepack, which ships with Node.js, installs it for you:
 
 ```bash
 corepack enable
 ```
 
-1. **Install dependencies:**
+1. **Clone and install:**
    ```bash
+   git clone https://github.com/ashdroidcmd/bettercorella.git
+   cd bettercorella
    pnpm install
    ```
 
-2. **Run local development server:**
+2. **Run the development server** at http://localhost:3000:
    ```bash
    pnpm dev
    ```
 
-3. **Build for production:**
+3. **Build and run the production version:**
    ```bash
    pnpm build
-   ```
-
-4. **Preview production build:**
-   ```bash
    pnpm start
    ```
 
+### Useful commands
+
+| Command | What it does |
+| --- | --- |
+| `pnpm dev` | Development server with hot reload |
+| `pnpm build` | Production build (prints a data-freshness report first) |
+| `pnpm start` | Serve the production build |
+| `pnpm lint` | Lint with oxlint |
+| `pnpm test` | Unit and data tests (Vitest) |
+| `pnpm test:e2e` | End-to-end tests in Chromium (builds and starts the site automatically) |
+| `pnpm test:e2e:all` | End-to-end tests in Chromium, Firefox, WebKit and mobile |
+| `pnpm test:e2e:ui` | Playwright's interactive test runner |
+
+### Configuration
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | `https://bettercorella.vercel.app` | Public site address used in canonical URLs, the sitemap and social previews |
+
 ---
 
-## 🤝 Contributing & Community
+## 🤝 Contributing
 
-BetterInabanga is an independent, non-partisan civic tech project developed by community volunteers under the **BetterGov.ph** ecosystem. To contribute data corrections, submit new services, or report issues, please visit our [GitHub repository](https://github.com/gerardosocias29/betterinabanga).
+Corrections and contributions are welcome, especially from people in Corella. You can help by reporting outdated information, sharing official documents, or improving the code. See [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
+
+BetterCorella is an independent, non-partisan, volunteer project under the **BetterGov.ph** ecosystem.
+
+---
+
+## 📜 License & Credits
+
+- **Code:** [ISC License](LICENSE).
+- **Data, photos and logos:** keep the terms of their original sources, which are cited on each page.
+
+BetterCorella builds on the work of:
+
+- [BetterInabanga](https://github.com/gerardosocias29/betterinabanga), the direct template for this project
+- [Better San Fernando, La Union](https://github.com/alvindemesadev/better-san-fernando-lu) by Alvin de Mesa, the original design
+- [BetterGov.ph](https://bettergov.ph) and its LGU Directory Initiative
