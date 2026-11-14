@@ -53,3 +53,5 @@ next-env.d.ts
 /.next/
 next-env.d.ts
 /public/vendor/
+.env*
+!.env.example

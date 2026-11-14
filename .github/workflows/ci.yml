@@ -1,0 +1,221 @@
+# CI/CD for BetterCorella
+#
+#   pull request ─► quality + build + e2e ─► preview deploy (same-repo branches only)
+#   push to main ─► quality + build + e2e ─► production deploy ─► delete the merged PR's branch
+#
+# Vercel's own Git auto-deploy is disabled in vercel.json, so a deploy only happens here,
+# after every check has passed. Required repository secrets (Settings → Secrets → Actions):
+#   VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID   (see README → "CI/CD")
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  # Newer commits on a PR replace older runs; deploys from main always run in order.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: 24
+  VERCEL_CLI: vercel@65.14.0
+
+jobs:
+  quality:
+    name: Lint, typecheck & unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Lint
+        run: pnpm lint
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Unit & data tests
+        run: pnpm test
+
+  build:
+    name: Production build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # The prebuild step prints the data-freshness report and adds it to the job summary.
+      - name: Build
+        run: pnpm build
+
+  e2e:
+    name: End-to-end tests (Playwright)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+      # Playwright builds and starts the production server itself (see playwright.config.ts).
+      - name: Run Playwright
+        run: pnpm test:e2e
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+
+  deploy-preview:
+    name: Deploy preview (Vercel)
+    needs: [quality, build, e2e]
+    # Fork PRs never receive secrets, so they get checks but no preview.
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: write
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - name: Check Vercel secrets
+        id: secrets
+        run: |
+          if [ -z "$VERCEL_TOKEN" ] || [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID" ]; then
+            echo "::notice title=Preview skipped::Add VERCEL_TOKEN, VERCEL_ORG_ID and VERCEL_PROJECT_ID repository secrets to enable preview deploys."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v7
+        if: steps.secrets.outputs.ready == 'true'
+      - uses: pnpm/action-setup@v6
+        if: steps.secrets.outputs.ready == 'true'
+      - uses: actions/setup-node@v7
+        if: steps.secrets.outputs.ready == 'true'
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - name: Build and deploy preview
+        id: deploy
+        if: steps.secrets.outputs.ready == 'true'
+        run: |
+          pnpm dlx "$VERCEL_CLI" pull --yes --environment=preview --token="$VERCEL_TOKEN"
+          pnpm dlx "$VERCEL_CLI" build --token="$VERCEL_TOKEN"
+          url=$(pnpm dlx "$VERCEL_CLI" deploy --prebuilt --token="$VERCEL_TOKEN")
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "### Preview deployed: $url" >> "$GITHUB_STEP_SUMMARY"
+      - name: Comment preview URL on the PR
+        if: steps.secrets.outputs.ready == 'true'
+        uses: actions/github-script@v9
+        env:
+          PREVIEW_URL: ${{ steps.deploy.outputs.url }}
+        with:
+          script: |
+            const marker = '<!-- vercel-preview -->'
+            const body = `${marker}\n**Preview deployed** for ${context.sha.slice(0, 7)}: ${process.env.PREVIEW_URL}`
+            const { owner, repo } = context.repo
+            const issue_number = context.payload.pull_request.number
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number })
+            const existing = comments.find((c) => c.user?.type === 'Bot' && c.body?.includes(marker))
+            if (existing) await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body })
+            else await github.rest.issues.createComment({ owner, repo, issue_number, body })
+
+  deploy-production:
+    name: Deploy production (Vercel)
+    needs: [quality, build, e2e]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: production
+      url: ${{ steps.deploy.outputs.url }}
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - name: Check Vercel secrets
+        run: |
+          if [ -z "$VERCEL_TOKEN" ] || [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID" ]; then
+            echo "::error title=Vercel secrets missing::Add VERCEL_TOKEN, VERCEL_ORG_ID and VERCEL_PROJECT_ID repository secrets (see README → CI/CD)."
+            exit 1
+          fi
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+      - name: Build and deploy to production
+        id: deploy
+        run: |
+          pnpm dlx "$VERCEL_CLI" pull --yes --environment=production --token="$VERCEL_TOKEN"
+          pnpm dlx "$VERCEL_CLI" build --prod --token="$VERCEL_TOKEN"
+          url=$(pnpm dlx "$VERCEL_CLI" deploy --prebuilt --prod --token="$VERCEL_TOKEN")
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "### Production deployed: $url" >> "$GITHUB_STEP_SUMMARY"
+
+  cleanup-branch:
+    name: Delete merged branch
+    needs: deploy-production
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: read
+    steps:
+      - uses: actions/github-script@v9
+        with:
+          script: |
+            const { owner, repo } = context.repo
+            const { data: prs } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+              owner, repo, commit_sha: context.sha,
+            })
+            const pr = prs.find((p) => p.merged_at && p.base.ref === 'main')
+            if (!pr) return core.notice('No merged pull request for this commit; nothing to clean up.')
+
+            const branch = pr.head.ref
+            if (pr.head.repo?.full_name !== `${owner}/${repo}`) return core.notice(`PR #${pr.number} came from a fork; nothing to delete here.`)
+            if (branch === 'main') return core.notice('Refusing to delete main.')
+
+            // Keep the branch if another open PR is stacked on it.
+            const { data: dependents } = await github.rest.pulls.list({ owner, repo, state: 'open', base: branch })
+            if (dependents.length) {
+              return core.notice(`Kept ${branch}: open PR(s) ${dependents.map((d) => '#' + d.number).join(', ')} target it.`)
+            }
+
+            try {
+              await github.rest.git.deleteRef({ owner, repo, ref: `heads/${branch}` })
+              core.notice(`Deleted branch ${branch} (merged in #${pr.number}).`)
+            } catch (error) {
+              if (error.status === 422 || error.status === 404) core.notice(`Branch ${branch} was already deleted.`)
+              else throw error
+            }

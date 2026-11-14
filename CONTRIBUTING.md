@@ -48,12 +48,13 @@ Open an issue describing the problem it solves for residents. For major design o
 5. Before opening a pull request, make sure everything passes:
    ```bash
    pnpm lint
+   pnpm typecheck
    pnpm test
    pnpm build
    pnpm test:e2e   # for changes to pages, navigation or layout
    ```
 6. Add a line to [CHANGELOG.md](CHANGELOG.md) under `[Unreleased]` for any change residents would notice.
-7. Open a pull request that explains what changed and links the official source for any data changes.
+7. Open a pull request that explains what changed and links the official source for any data changes. GitHub Actions runs the same checks on every pull request, and a PR can only be merged once they pass. Pull requests from forks get the checks but no Vercel preview.
 
 Use [Conventional Commits](https://www.conventionalcommits.org/) prefixes for commit messages, for example `feat:`, `fix:`, `docs:`, `chore:` or `refactor:`.
 

@@ -40,7 +40,7 @@
 
 | Change | Run |
 | --- | --- |
-| Any code | `pnpm lint`, `pnpm test`, `pnpm build` |
+| Any code | `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build` |
 | UI, routes, navigation | `pnpm test:e2e` as well |
 
 Do not report completion while relevant tests fail.
