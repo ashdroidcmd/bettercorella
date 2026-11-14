@@ -162,10 +162,10 @@ The deploy jobs need three repository secrets, added under **Settings → Secret
 | Secret | Where to find it |
 | --- | --- |
 | `VERCEL_TOKEN` | Vercel → **Account Settings → Tokens → Create** |
-| `VERCEL_ORG_ID` | The `orgId` value in `.vercel/project.json` (see below). It is also shown as the **Team ID** in your Vercel team's Settings → General |
-| `VERCEL_PROJECT_ID` | The `projectId` value in `.vercel/project.json`, or Vercel → project **bettercorella → Settings → General → Project ID** |
+| `VERCEL_ORG_ID` | The `orgId` value (starts with `team_`) in `.vercel/repo.json` (see below). It's also shown as the **Team ID** in your Vercel team's Settings → General |
+| `VERCEL_PROJECT_ID` | The project `id` value (starts with `prj_`) in `.vercel/repo.json`, or Vercel → project **bettercorella → Settings → General → Project ID** |
 
-The easiest way to get both IDs: run `pnpm dlx vercel link` once in the repo, choose the existing **bettercorella** project, and copy `orgId` and `projectId` from the generated `.vercel/project.json`. That file is git-ignored; don't commit it.
+The easiest way to get both IDs: run `pnpm dlx vercel link` once in the repo, choose the existing **bettercorella** project, and copy the IDs from the generated `.vercel/repo.json` (older CLI versions write `.vercel/project.json`). The `.vercel/` folder and the `.env.local` it creates are git-ignored. `.env.local` holds a short-lived `VERCEL_OIDC_TOKEN` for local use; it is **not** the `VERCEL_TOKEN` secret.
 
 Recommended: protect `main` under **Settings → Branches** and require the **Lint, typecheck & unit tests**, **Production build** and **End-to-end tests** checks before merging.
 
