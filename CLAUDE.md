@@ -43,6 +43,10 @@ Read `AGENTS.md` first. It holds the project rules. This file adds Claude-specif
 
 `.github/workflows/ci.yml` runs lint, typecheck, unit tests, build and e2e on every PR and every push to `main`. A deploy to Vercel (a preview for PRs, production for `main`) happens only after all of them pass. After a production deploy, the merged PR's branch is deleted. Vercel's Git auto-deploy is disabled in `vercel.json`. Keep the workflow passing: don't merge red PRs.
 
+## Rebrand checklist
+
+The remaining rebrand and data work is tracked in `../TODO.md` (workspace root, next to `../docs/`; not in git). Read it before picking up rebrand or data tasks, and tick items off when done.
+
 ## Skills
 
 Project skills live in `.claude/skills/`: `development-workflow`, `playwright`, `documentation`, `changelog`.

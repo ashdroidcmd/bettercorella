@@ -55,6 +55,7 @@ Update only what the change affects:
 - `../user-manual/` for changes to what residents see or do
 - `CHANGELOG.md` for any meaningful change
 - `graphify update .` after code changes (AST only, no API cost)
+- `../TODO.md`: tick off rebrand checklist items you complete (workspace folder, not in git)
 
 ## Final Report
 
