@@ -16,7 +16,6 @@ import Link from 'next/link'
 import { CategoryCard } from '../../services/shared/components/CategoryCard'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
-import { SourceNote } from '../../../components/ui/SourceNote'
 import { StatCard } from '../../../components/ui/StatCard'
 import logoMark from '../../../assets/logo-1x1.png'
 import { categories } from '../../services/shared/data/categories'
@@ -309,13 +308,6 @@ export function HomePage() {
           </div>
         </div>
       </section>
-
-      <div className="container-page py-10 sm:py-12">
-        <Reveal>
-          <SourceNote href={city.website} linkLabel="Visit the official municipal website">
-            {"This is an independent guide. Information is added only after it is checked against an official source; dataset dates vary."}</SourceNote>
-        </Reveal>
-      </div>
     </>
   )
 }

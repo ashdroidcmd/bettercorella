@@ -1,251 +1,136 @@
 'use client'
 
-import { ArrowUpRight, ChevronDown, Clock, ExternalLink, HandHeart, Mail, MapPin, Phone } from 'lucide-react'
-import { useEffect, useState, type ReactNode } from 'react'
+import { ArrowUpRight, HandHeart } from 'lucide-react'
 import Link from 'next/link'
 import logoLight from '../../assets/logo-light.png'
-import { categories } from '../../features/services/shared/data/categories'
 import { city } from '../../config/city'
 import { ISSUES_URL, REPOSITORY_URL, SITE_NAME } from '../../config/site'
-import { telHref } from '../../lib/utils'
 import { BackToTopButton } from './BackToTopButton'
 
-function FooterGroup({ title, children }: { title: string; children: ReactNode }) {
-  const [desktopOpen, setDesktopOpen] = useState(false)
-
-  useEffect(() => {
-    const breakpoint = window.matchMedia('(min-width: 1024px)')
-    const updateOpenState = () => setDesktopOpen(breakpoint.matches)
-    updateOpenState()
-    breakpoint.addEventListener('change', updateOpenState)
-    return () => breakpoint.removeEventListener('change', updateOpenState)
-  }, [])
-
+function FacebookIcon() {
   return (
-    <details
-      open={desktopOpen}
-      className="group/footer rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0"
-    >
-      <summary className="flex min-h-10 cursor-pointer list-none items-center justify-between gap-3 text-xs font-bold uppercase tracking-[0.16em] text-white/60 focus-visible:rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-300 [&::-webkit-details-marker]:hidden lg:min-h-0 lg:cursor-default">
-        {title}
-        <ChevronDown
-          aria-hidden="true"
-          className="size-4 shrink-0 text-white/50 transition group-open/footer:rotate-180 lg:hidden"
-        />
-      </summary>
-      <div className="mt-3 lg:mt-4">{children}</div>
-    </details>
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5" fill="currentColor">
+      <path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07Z" />
+    </svg>
   )
 }
 
-export function SiteFooter() {
+function GitHubIcon({ className = 'size-5' }: { className?: string }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className={className} fill="currentColor">
+      <path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z" />
+    </svg>
+  )
+}
 
+const quickLinks = [
+  { label: 'Town profile', href: '/town' },
+  { label: 'Online services', href: '/online-services' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Sitemap', href: '/sitemap' },
+  { label: 'Terms of Use', href: '/terms' },
+  { label: 'Privacy Policy', href: '/privacy' },
+  { label: 'Accessibility', href: '/accessibility' },
+]
+
+const resources = [
+  city.website ? { label: `Official LGU ${city.name} website`, href: city.website } : null,
+  city.citizensCharter ? { label: "Citizen's Charter", href: city.citizensCharter } : null,
+  city.facebook ? { label: `LGU ${city.name} Facebook`, href: city.facebook } : null,
+  { label: 'Open Data (BetterGov)', href: 'https://data.bettergov.ph/' },
+  { label: 'Freedom of Information', href: 'https://www.foi.gov.ph/' },
+  { label: 'BLGF Portal', href: 'https://blgf.gov.ph/' },
+  { label: 'BetterGov.ph', href: 'https://bettergov.ph/' },
+].filter((link) => link !== null)
+
+const headingClass = 'text-sm font-bold uppercase tracking-[0.12em] text-white/50'
+const linkClass = 'text-white/80 transition hover:text-white'
+const pillClass =
+  'inline-flex min-h-11 items-center gap-2.5 rounded-full bg-white/[0.07] px-4 py-2.5 text-sm font-semibold text-white/85 transition hover:bg-white/[0.12] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-300'
+
+export function SiteFooter() {
   return (
     <>
       <footer className="mt-auto bg-ink-950 text-white">
         <div className="container-page py-12 sm:py-16">
-          <div className="grid gap-10 lg:grid-cols-[1.35fr_0.8fr_0.8fr_1.1fr]">
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1fr_1fr]">
             <div>
-              <div>
-                <img
-                  src={logoLight.src}
-                  alt={SITE_NAME}
-                  width="655"
-                  height="199"
-                  className="h-12 w-auto"
-                />
-                <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.16em] text-white/60">
-                  {'Bohol · Civic guide'}
-                </p>
-              </div>
-              <p className="mt-5 max-w-sm text-sm leading-6 text-white/60">
-                {`A clearer, independent guide to ${city.name}'s municipal services, public officials, barangays, and public money. Built with open data and links to official sources.`}
+              <img src={logoLight.src} alt={SITE_NAME} width="655" height="199" className="h-12 w-auto" />
+              <p className="mt-5 max-w-sm text-sm leading-6 text-white/70">
+                {`Helping the people of ${city.name} find municipal services, officials, barangays and public information, with links back to official sources.`}
               </p>
+              <div className="mt-6 flex gap-3">
+                {city.facebook ? (
+                  <a
+                    href={city.facebook}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`LGU ${city.name} on Facebook (opens in a new tab)`}
+                    className="inline-flex size-11 items-center justify-center rounded-xl bg-white/[0.07] text-white/80 transition hover:bg-white/[0.12] hover:text-white"
+                  >
+                    <FacebookIcon />
+                  </a>
+                ) : null}
+                <a
+                  href={REPOSITORY_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${SITE_NAME} on GitHub (opens in a new tab)`}
+                  className="inline-flex size-11 items-center justify-center rounded-xl bg-white/[0.07] text-white/80 transition hover:bg-white/[0.12] hover:text-white"
+                >
+                  <GitHubIcon />
+                </a>
+              </div>
             </div>
 
-            <FooterGroup title="Explore">
-              <ul className="space-y-2.5 text-sm">
-                {[
-                  { label: 'All services', href: '/services' },
-                  { label: 'Online services', href: '/online-services' },
-                  { label: 'Municipal government', href: '/government' },
-                  { label: 'Municipal officials', href: '/government/officials' },
-                  { label: 'Barangays', href: '/barangays' },
-                  { label: 'Ordinances and executive orders', href: '/government/legislation' },
-                  { label: 'Town profile', href: '/town' },
-                  { label: 'Life and tourism', href: '/town/life' },
-                  { label: 'Places directory', href: '/town/places' },
-                  { label: 'Business and investment', href: '/town/business' },
-                  { label: 'Transparency', href: '/transparency' },
-                  { label: 'Infrastructure projects', href: '/transparency/projects' },
-                ].map(({ label, href }) => (
+            <nav aria-label="Quick links">
+              <h2 className={headingClass}>Quick links</h2>
+              <ul className="mt-4 space-y-2.5 text-sm">
+                {quickLinks.map(({ label, href }) => (
                   <li key={href}>
-                    <Link href={href} className="text-white/70 transition hover:text-white">
+                    <Link href={href} className={linkClass}>
                       {label}
                     </Link>
                   </li>
                 ))}
               </ul>
-            </FooterGroup>
+            </nav>
 
-            <FooterGroup title="Service categories">
-              <ul className="space-y-2.5 text-sm">
-                {categories.slice(0, 6).map((category) => (
-                  <li key={category.slug}>
-                    <Link
-                      href={`/services/${category.slug}`}
-                     
-                      className="text-white/70 transition hover:text-white"
-                    >
-                      {category.shortName}
-                    </Link>
+            <nav aria-label="Resources">
+              <h2 className={headingClass}>Resources</h2>
+              <ul className="mt-4 space-y-2.5 text-sm">
+                {resources.map(({ label, href }) => (
+                  <li key={href}>
+                    <a href={href} target="_blank" rel="noreferrer" className={`inline-flex items-center gap-1 ${linkClass}`}>
+                      {label}
+                      <ArrowUpRight aria-hidden="true" className="size-3.5 text-white/40" />
+                    </a>
                   </li>
                 ))}
               </ul>
-            </FooterGroup>
+            </nav>
 
-            <FooterGroup title="Municipal Hall">
-              <ul className="space-y-3 text-sm text-white/70">
-                {city.address ? (
-                  <li className="flex gap-2.5">
-                    <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
-                    <span>{city.address}</span>
-                  </li>
-                ) : null}
-                {city.trunkline ? (
-                  <li className="flex gap-2.5">
-                    <Phone aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
-                    <a href={telHref(city.trunkline)} className="transition hover:text-white">
-                      {city.trunkline}
-                    </a>
-                  </li>
-                ) : null}
-                {city.email ? (
-                  <li className="flex gap-2.5">
-                    <Mail aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
-                    <a href={`mailto:${city.email}`} className="break-all transition hover:text-white">
-                      {city.email}
-                    </a>
-                  </li>
-                ) : null}
-                {city.hours ? (
-                  <li className="flex gap-2.5">
-                    <Clock aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
-                    <span>{city.hours}</span>
-                  </li>
-                ) : null}
-                {!city.address && !city.trunkline && !city.email ? (
-                  <li className="flex gap-2.5">
-                    <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-300" />
-                    <span>{`Municipal Hall contact details for ${city.name} will be listed once verified.`}</span>
-                  </li>
-                ) : null}
-              </ul>
-            </FooterGroup>
+            <div className="flex flex-col items-start gap-3">
+              <p className="rounded-lg bg-emerald-400/10 px-3.5 py-2 text-sm font-semibold text-white/85">
+                {`Cost to the people of ${city.name} =`} <span className="font-extrabold text-emerald-300">₱0</span>
+              </p>
+              <a href={`${ISSUES_URL}/new`} target="_blank" rel="noreferrer" className={pillClass}>
+                <HandHeart aria-hidden="true" className="size-4" />
+                {'Volunteer with us'}
+              </a>
+              <a href={`${REPOSITORY_URL}/blob/main/CONTRIBUTING.md`} target="_blank" rel="noreferrer" className={pillClass}>
+                <GitHubIcon className="size-4" />
+                {'Contribute code with us'}
+              </a>
+            </div>
           </div>
 
-          <section
-            aria-label="Official and broader civic ecosystem"
-            className="mt-10 grid gap-8 border-t border-white/10 py-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center"
-          >
-            <div className="flex items-start gap-4">
-              <a
-                href="https://bettergov.ph/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="BetterGov.ph national civic portal (opens in a new tab)"
-                className="inline-flex size-12 shrink-0 items-center justify-center rounded-2xl bg-white p-1.5 shadow-xs transition hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-300"
-              >
-                <img
-                  src="/logos/bettergov-icon-primary.svg"
-                  alt="BetterGov.ph"
-                  width="48"
-                  height="48"
-                  className="size-full object-contain"
-                />
-              </a>
-              <div className="min-w-0">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/60">
-                  {'Official & broader ecosystem'}
-                </p>
-                <nav aria-label="Official and broader civic ecosystem" className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                  {city.website ? (
-                    <a href={city.website} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-semibold text-white/85 transition hover:text-white">
-                      {'Official municipal website'}
-                      <ArrowUpRight aria-hidden="true" className="size-3.5" />
-                    </a>
-                  ) : null}
-                  <a href="https://bettergov.ph/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-semibold text-white/85 transition hover:text-white">
-                    {'National services — BetterGov'}
-                    <ArrowUpRight aria-hidden="true" className="size-3.5" />
-                  </a>
-                  <a href="https://lgu.bettergov.ph/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-semibold text-white/85 transition hover:text-white">
-                    {'Other LGUs — BetterLGU'}
-                    <ArrowUpRight aria-hidden="true" className="size-3.5" />
-                  </a>
-                </nav>
-                <p className="mt-3 text-xs leading-5 text-white/55">
-                  {`${SITE_NAME} is an independent civic project, not the official website of the Municipal Government of ${city.name}.`}
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <p className="text-sm font-semibold text-white/75">
-                {`Cost to the people of ${city.name}`} <span className="ml-1 font-extrabold text-emerald-300">₱0</span>
-              </p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <a
-                  href={`${ISSUES_URL}/new`}
-                  target="_blank"
-                  rel="noreferrer"
-                  title="Offer to help or suggest an improvement"
-                  className="inline-flex min-h-10 items-center gap-2 rounded-full bg-white/10 px-3.5 py-2 text-sm font-semibold text-white/85 transition hover:bg-white/15 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-300"
-                >
-                  <HandHeart aria-hidden="true" className="size-4" />
-                  {'Volunteer with us'}
-                </a>
-                <a
-                  href={REPOSITORY_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex min-h-10 items-center gap-2 rounded-full bg-white/10 px-3.5 py-2 text-sm font-semibold text-white/85 transition hover:bg-white/15 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-300"
-                >
-                  <ExternalLink aria-hidden="true" className="size-4" />
-                  {'Open-source on GitHub'}
-                </a>
-                <a
-                  href={`${REPOSITORY_URL}/blob/main/CONTRIBUTING.md`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex min-h-10 items-center gap-2 rounded-full bg-white/10 px-3.5 py-2 text-sm font-semibold text-white/85 transition hover:bg-white/15 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-300"
-                >
-                  {'Contribute code with us'}
-                  <ArrowUpRight aria-hidden="true" className="size-3.5" />
-                </a>
-              </div>
-            </div>
-          </section>
-
-          <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-white/60 lg:flex-row lg:items-center lg:justify-between">
+          <div className="mt-12 border-t border-white/10 pt-6 text-xs leading-5 text-white/55">
             <p>
-              {`© 2026 ${SITE_NAME}. Independent civic project. Source dates vary by dataset; see page citations.`}
+              {`© 2026 ${SITE_NAME} · ISC License · All public information is sourced from official government portals. ${SITE_NAME} is an independent civic project, not the official website of the Municipal Government of ${city.name}.`}
             </p>
-            <nav aria-label="Legal and site links" className="flex flex-wrap gap-x-5 gap-y-2">
-              {[
-                { label: 'About', href: '/about' },
-                { label: 'FAQ', href: '/faq' },
-                { label: 'Sitemap', href: '/sitemap' },
-                { label: 'Accessibility', href: '/accessibility' },
-                { label: 'Privacy', href: '/privacy' },
-                { label: 'Terms', href: '/terms' },
-                { label: 'Contact', href: '/contact' },
-              ].map(({ label, href }) => (
-                <Link key={href} href={href} className="transition hover:text-white">
-                  {label}
-                </Link>
-              ))}
-            </nav>
           </div>
         </div>
       </footer>
