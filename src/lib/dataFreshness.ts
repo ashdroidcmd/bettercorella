@@ -1,3 +1,4 @@
+import { agencies } from '../features/government/shared/data/agencies.ts'
 import { barangays } from '../features/government/shared/data/barangays.ts'
 import { city } from '../config/city.ts'
 import { offices } from '../features/government/shared/data/offices.ts'
@@ -52,9 +53,16 @@ export const manuallyMaintainedData: DataFreshnessRow[] = [
   },
   {
     dataset: 'Municipal office directory',
-    source: "Citizen's Charter 2026 (2nd ed.), List of Offices",
+    source: "Citizen's Charter 2026 (2nd ed.), List of Offices; heads and staff from each office's page on corella-bohol.gov.ph",
     recordCount: offices.length,
-    lastVerified: offices.length ? '2026-11-14' : null,
+    lastVerified: offices.length ? '2026-11-17' : null,
+    reviewEveryDays: 180,
+  },
+  {
+    dataset: 'National government agencies',
+    source: 'National Government Agencies page, corella-bohol.gov.ph',
+    recordCount: agencies.length,
+    lastVerified: agencies.length ? '2026-11-17' : null,
     reviewEveryDays: 180,
   },
   {
@@ -66,9 +74,9 @@ export const manuallyMaintainedData: DataFreshnessRow[] = [
   },
   {
     dataset: 'Barangays',
-    source: 'PSA PSGC (2024 POPCEN) and census; barangay pages on corella-bohol.gov.ph',
+    source: "PSA PSGC (2024 POPCEN) and census; officials and name origins from each barangay's page on corella-bohol.gov.ph",
     recordCount: barangays.length,
-    lastVerified: barangays.length ? '2026-11-14' : null,
+    lastVerified: barangays.length ? '2026-11-17' : null,
     reviewEveryDays: 180,
   },
   {
@@ -87,9 +95,9 @@ export const manuallyMaintainedData: DataFreshnessRow[] = [
   },
   {
     dataset: 'Emergency hotlines',
-    source: "National hotlines (911, 8888) and Corella office numbers from the Citizen's Charter 2026",
+    source: "National hotlines (911, 8888), Corella office numbers from the Citizen's Charter 2026, and police, fire and extra MDRRMO/RHU numbers from the stations' own posts and a public contact listing",
     recordCount: hotlines.length,
-    lastVerified: '2026-11-14',
+    lastVerified: '2026-11-17',
     reviewEveryDays: 90,
   },
   {

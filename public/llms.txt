@@ -9,7 +9,7 @@ Information is published only after it is checked against an official source (th
 - [Municipal services](/services): Requirements, fees and official forms from the Citizen's Charter, as they are verified.
 - [Online services](/online-services): National e-government portals (eGov PH, Central Business Portal, PhilJobNet, PhilGEPS).
 - [Municipal government](/government): Officials, offices, barangays and legislation.
-- [Emergency hotlines](/government/hotlines): The national 911 and 8888 hotlines; local numbers once verified.
+- [Hotlines and contacts](/contact): 911, police, fire, MDRRMO and municipal numbers, the Municipal Hall with a map, and how to send feedback.
 - [Town profile](/town): Facts about Corella from official sources.
 - [Transparency](/transparency): Budget, procurement, infrastructure projects and open datasets.
 - [About](/about): How the project works and where its data comes from.

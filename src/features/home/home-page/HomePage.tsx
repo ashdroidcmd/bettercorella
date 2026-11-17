@@ -12,11 +12,14 @@ import {
   TreePalm,
   X,
 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { CategoryCard } from '../../services/shared/components/CategoryCard'
+import { MunicipalHallCard } from '../../info/contact-page/components/MunicipalHallCard'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { StatCard } from '../../../components/ui/StatCard'
+import heroImage from '../../../assets/hero-corella-church.jpg'
 import logoMark from '../../../assets/logo-1x1.png'
 import { categories } from '../../services/shared/data/categories'
 import { city } from '../../../config/city'
@@ -25,6 +28,8 @@ import { removeSavedService, useSavedServices } from '../../services/shared/util
 import { telHref } from '../../../lib/utils'
 
 const featuredCategories = categories.slice(0, 6)
+// The hero card skips the income class; the full list stays on the About page.
+const heroStats = stats.filter((stat) => stat.label !== 'Income class')
 const popularServices = [
   { label: 'Business permit', href: '/services/business/bplo-service-issuance-of-business-permits-licenses-for-new' },
   { label: 'Birth, marriage and death certificates', href: '/services/certificates/issuance-of-certification-certified-true-copy' },
@@ -68,6 +73,19 @@ export function HomePage() {
   return (
     <>
       <section className="relative isolate z-30 overflow-visible bg-ink-950 text-white">
+        <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden">
+          <Image
+            src={heroImage}
+            alt=""
+            fill
+            priority
+            placeholder="blur"
+            sizes="100vw"
+            className="object-cover object-[70%_center]"
+          />
+          <div className="absolute inset-0 bg-ink-950/70 sm:bg-ink-950/55" />
+          <div className="absolute inset-0 bg-gradient-to-r from-ink-950/95 via-ink-950/70 to-ink-950/10" />
+        </div>
         <div className="container-page relative grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-24">
           <div className="min-w-0">
             <Reveal>
@@ -139,9 +157,9 @@ export function HomePage() {
                 />
               </div>
 
-              <div className="mt-6 grid grid-cols-2 gap-3">
-                {stats.length ? (
-                  stats.map((stat) => <StatCard key={stat.label} {...stat} tone="dark" />)
+              <div className="mt-6 grid grid-cols-2 gap-3 [&>:last-child:nth-child(odd)]:col-span-2">
+                {heroStats.length ? (
+                  heroStats.map((stat) => <StatCard key={stat.label} {...stat} tone="dark" />)
                 ) : (
                   <>
                     <StatCard value={city.province} label="Province" note={city.region} tone="dark" />
@@ -306,6 +324,14 @@ export function HomePage() {
               )
             })}
           </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="container-page py-16 sm:py-20">
+          <Reveal>
+            <MunicipalHallCard />
+          </Reveal>
         </div>
       </section>
     </>

@@ -12,7 +12,8 @@ import { ISSUES_URL, SITE_NAME } from '../../../config/site'
 import { sources } from './data/sources'
 import { stats } from '../../town/shared/data/stats'
 import { timeline } from '../../town/shared/data/timeline'
-import { formatNumber } from '../../../lib/utils'
+import { manuallyMaintainedData } from '../../../lib/dataFreshness'
+import { formatDate, formatNumber } from '../../../lib/utils'
 
 const PENDING = 'Pending verification'
 
@@ -53,7 +54,11 @@ export function AboutPage() {
                   {"The guide covers municipal services from the Citizen’s Charter, elected officials, barangays, and the budget and procurement records published under the Full Disclosure Policy. It does not process transactions, issue permits, or speak for the municipal government."}
                 </p>
                 <p className="mt-4 text-[15px] leading-7 text-ink-600">
-                  {"Information is added only after it is checked against an official source, and each dataset is dated so you can see when it was last checked. Where records conflict or change, the official source takes precedence. Sections still waiting for verified data say so instead of guessing."}
+                  {"Information is added only after it is checked against an official source, and "}
+                  <a href="#data-sources" className="font-semibold text-brand-700 underline decoration-brand-300 underline-offset-2 hover:text-brand-800">
+                    {'each dataset is dated'}
+                  </a>
+                  {" so you can see where it comes from and when it was last checked. Where records conflict or change, the official source takes precedence. Sections still waiting for verified data say so instead of guessing."}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
@@ -190,6 +195,38 @@ export function AboutPage() {
                 <p className="mt-1 flex-1 text-xs leading-5 text-ink-500">{source.note}</p>
               </a>
             ))}
+          </div>
+
+          <div id="data-sources" className="mt-14 scroll-mt-28">
+            <SectionHeading
+              eyebrow="Data sources by section"
+              title="Which source each section uses"
+              description="Every dataset on this site, where it comes from, how many records it has, and when it was last checked."
+            />
+            <div className="mt-8 overflow-hidden rounded-2xl border border-line bg-white shadow-card">
+              <div className="hidden grid-cols-[1fr_2.2fr_0.5fr_0.8fr] gap-4 border-b border-line bg-surface px-5 py-3 text-[11px] font-bold uppercase tracking-[0.12em] text-ink-500 md:grid">
+                <span>Section</span>
+                <span>Source</span>
+                <span>Records</span>
+                <span>Last checked</span>
+              </div>
+              <ul className="divide-y divide-line">
+                {manuallyMaintainedData.map((row) => (
+                  <li key={row.dataset} className="grid gap-1 px-5 py-4 text-sm md:grid-cols-[1fr_2.2fr_0.5fr_0.8fr] md:gap-4">
+                    <span className="font-bold text-ink-950">{row.dataset}</span>
+                    <span className="leading-6 text-ink-600">{row.source}</span>
+                    <span className="text-ink-600">
+                      <span className="text-ink-400 md:hidden">{'Records: '}</span>
+                      {row.recordCount ? formatNumber(row.recordCount) : '—'}
+                    </span>
+                    <span className="text-ink-600">
+                      <span className="text-ink-400 md:hidden">{'Last checked: '}</span>
+                      {row.recordCount && row.lastVerified ? formatDate(row.lastVerified) : 'Pending'}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           <div className="mt-8">

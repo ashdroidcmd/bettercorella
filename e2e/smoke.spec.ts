@@ -12,7 +12,6 @@ const PAGES = [
   '/government/officials',
   '/government/offices',
   '/barangays',
-  '/government/hotlines',
   '/government/legislation',
   '/town',
   '/town/life',
@@ -54,13 +53,12 @@ test.describe('Smoke — main pages', () => {
 })
 
 test.describe('Navigation', () => {
-  test('header has the hotline bar and the citizen feedback link', async ({ page, isMobile }) => {
+  test('header has the hotline bar and an About link', async ({ page, isMobile }) => {
     await page.goto('/')
     await expect(page.locator('a[href="tel:911"]').first()).toBeVisible()
     if (!isMobile) {
-      await page.getByRole('link', { name: 'Citizen Feedback' }).click()
-      await expect(page).toHaveURL(/\/contact#feedback$/)
-      await expect(page.getByRole('heading', { name: 'Feedback and complaints' })).toBeVisible()
+      await page.getByRole('banner').getByRole('link', { name: 'About', exact: true }).click()
+      await expect(page).toHaveURL(/\/about$/)
     }
   })
 
@@ -137,6 +135,28 @@ test.describe('Corella rebrand', () => {
     await expect(page.getByText('Apolio C. Lumactud').first()).toBeVisible()
   })
 
+  test('about page lists the source and date of every dataset', async ({ page }) => {
+    await page.goto('/about#data-sources')
+    await expect(page.getByRole('heading', { name: 'Which source each section uses' })).toBeVisible()
+    await expect(page.locator('#data-sources').getByText('Emergency hotlines')).toBeVisible()
+  })
+
+  test('government page lists national agencies and office pages name their heads', async ({ page }) => {
+    await page.goto('/government')
+    await expect(page.getByRole('heading', { name: 'National agencies in Corella' })).toBeVisible()
+    await expect(page.getByText('Josie M. Montes')).toBeVisible()
+    await page.goto('/government/offices/treasurers-office')
+    await expect(page.getByText('Reynaldo D. Salang').first()).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Office staff' })).toBeVisible()
+  })
+
+  test('barangay pages show the name origin and the full council', async ({ page }) => {
+    await page.goto('/barangays/anislag')
+    await expect(page.getByRole('heading', { name: 'How Anislag got its name' })).toBeVisible()
+    await expect(page.getByText('Dexter M. Curayag').first()).toBeVisible()
+    await expect(page.getByText('Janice S. Inte')).toBeVisible()
+  })
+
   test('services come from the Corella Citizen\'s Charter', async ({ page }) => {
     await page.goto('/services/business/bplo-service-issuance-of-business-permits-licenses-for-new')
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Business Permits')
@@ -151,8 +171,14 @@ test.describe('Corella rebrand', () => {
     await expect(page.locator('iframe[title*="Municipal Hall"]')).toHaveCount(1)
   })
 
-  test('hotlines list the national 911 line', async ({ page }) => {
-    await page.goto('/government/hotlines')
+  test('contacts page lists the hotlines, led by 911', async ({ page }) => {
+    await page.goto('/contact')
     await expect(page.getByRole('link', { name: '911' }).first()).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Corella Police Station (PNP)' })).toBeVisible()
+  })
+
+  test('old /government/hotlines URL redirects to the contacts page', async ({ page }) => {
+    await page.goto('/government/hotlines')
+    await expect(page).toHaveURL(/\/contact#hotlines$/)
   })
 })

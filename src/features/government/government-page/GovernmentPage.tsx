@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowRight, ArrowUpRight, Building2, Phone, Users } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Building2, Mail, Phone, Users } from 'lucide-react'
 import Link from 'next/link'
 import { OfficeCard } from '../shared/components/OfficeCard'
 import { OfficialCard } from '../shared/components/OfficialCard'
@@ -10,7 +10,7 @@ import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
 import { city } from '../../../config/city'
-import { hotlines } from '../shared/data/hotlines'
+import { agencies, agenciesSourceUrl } from '../shared/data/agencies'
 import { offices } from '../shared/data/offices'
 import { officials } from '../shared/data/officials'
 import { telHref } from '../../../lib/utils'
@@ -18,7 +18,7 @@ import { telHref } from '../../../lib/utils'
 const quickLinks = [
   { label: 'Municipal officials', count: officials.length, note: 'profiles', href: '/government/officials', icon: Users },
   { label: 'Offices', count: offices.length, note: 'departments', href: '/government/offices', icon: Building2 },
-  { label: 'Hotlines', count: undefined, note: 'Emergency contacts', href: '/government/hotlines', icon: Phone },
+  { label: 'Hotlines', count: undefined, note: 'Emergency contacts', href: '/contact#hotlines', icon: Phone },
 ]
 
 const featuredOfficeSlugs = [
@@ -38,7 +38,6 @@ export function GovernmentPage() {
   const featuredOffices = featuredOfficeSlugs
     .map((slug) => offices.find((office) => office.slug === slug))
     .filter((office) => office !== undefined)
-  const keyHotlines = hotlines.slice(0, 4)
 
   return (
     <>
@@ -160,49 +159,53 @@ export function GovernmentPage() {
 
       <section>
         <div className="container-page py-12 sm:py-16">
-          <div>
-            <Reveal delay={0.08}>
-              <div className="h-full rounded-2xl border border-line bg-ink-950 p-6 text-white shadow-card sm:p-7">
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/60">{"Emergency contacts"}</p>
-                <h2 className="mt-2 text-2xl font-extrabold tracking-tight">{"Help, without the guesswork"}</h2>
-                <p className="mt-2 text-sm leading-6 text-white/60">
-                  {"Emergency and municipal numbers. Police and fire contacts are added once they are verified."}</p>
-
-                <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                  {keyHotlines.map((hotline) => (
-                    <div key={hotline.label} className="rounded-xl border border-white/10 bg-white/5 p-4">
-                      <p className="text-xs font-bold uppercase tracking-[0.1em] text-brand-300">{hotline.label}</p>
-                      <div className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1">
-                        {hotline.numbers.map((number) => (
-                          <a
-                            key={number}
-                            href={telHref(number)}
-                            className="text-lg font-extrabold tracking-tight text-white transition hover:text-brand-200"
-                          >
-                            {number}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <p className="mt-4 text-xs leading-5 text-white/55">
-                  {"Call 911 for immediate emergencies anywhere in the Philippines."}</p>
-
-                <Link
-                  href="/government/hotlines"
-                 
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-300 transition hover:text-white"
-                >
-                  {"All hotlines"}<ArrowRight aria-hidden="true" className="size-4" />
-                </Link>
-              </div>
-            </Reveal>
+          <Reveal>
+            <SectionHeading
+              eyebrow="National government agencies"
+              title={`National agencies in ${city.name}`}
+              description="Local offices of national agencies, with their heads as listed by the municipal government."
+            />
+          </Reveal>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {agencies.map((agency) => (
+              <article key={agency.slug} className="flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card">
+                <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-700">{agency.agency}</p>
+                <h3 className="mt-2 text-base font-extrabold leading-6 text-ink-950">{agency.officer}</h3>
+                <p className="text-sm text-ink-500">{agency.position}</p>
+                {agency.numbers.length || agency.email || agency.facebook ? (
+                  <div className="mt-4 space-y-1.5 border-t border-line pt-4 text-sm">
+                    {agency.numbers.map((number) => (
+                      <a key={number} href={telHref(number)} className="flex items-center gap-2 font-semibold text-brand-700 hover:text-brand-800">
+                        <Phone aria-hidden="true" className="size-3.5 shrink-0" />
+                        {number}
+                      </a>
+                    ))}
+                    {agency.email ? (
+                      <a href={`mailto:${agency.email}`} className="flex items-center gap-2 break-all text-ink-600 hover:text-brand-700">
+                        <Mail aria-hidden="true" className="size-3.5 shrink-0" />
+                        {agency.email}
+                      </a>
+                    ) : null}
+                    {agency.facebook ? (
+                      <a
+                        href={agency.facebook.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-2 text-ink-600 hover:text-brand-700"
+                      >
+                        <ArrowUpRight aria-hidden="true" className="size-3.5 shrink-0" />
+                        {`Facebook: ${agency.facebook.label}`}
+                      </a>
+                    ) : null}
+                  </div>
+                ) : null}
+              </article>
+            ))}
           </div>
 
           <div className="mt-8">
-            <SourceNote href={city.website} linkLabel="Visit the official municipal website">
-              {`Officials and office contacts are added as they are verified with the Municipal Government of ${city.name}, the PSA and DILG. Details can change; use official directories for the latest information.`}</SourceNote>
+            <SourceNote href={agenciesSourceUrl} linkLabel="See the National Government Agencies page">
+              {`Officials, office heads and agency heads come from the Municipal Government of ${city.name}'s website, where most are published as photos; the names were read from those photos on November 17, 2026. Details can change; check with the office before relying on them.`}</SourceNote>
           </div>
         </div>
       </section>

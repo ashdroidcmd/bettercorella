@@ -1,6 +1,6 @@
 'use client'
 
-import { Menu, MessageSquarePlus, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useLenis } from 'lenis/react'
 import { useReducedMotion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
@@ -8,14 +8,15 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import logo from '../../assets/logo.png'
 
-/** Six plain links: a small town needs no dropdown menus. */
+/** Seven plain links: a small town needs no dropdown menus. */
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services', activePaths: ['/online-services'] },
-  { label: 'Government', href: '/government', exclude: ['/government/hotlines'] },
+  { label: 'Government', href: '/government' },
   { label: 'Transparency', href: '/transparency' },
   { label: 'Barangays', href: '/barangays' },
-  { label: 'Hotlines & Contact', href: '/contact', activePaths: ['/government/hotlines'] },
+  { label: 'Contacts', href: '/contact' },
+  { label: 'About', href: '/about' },
 ]
 
 type NavLink = (typeof navLinks)[number] & { activePaths?: string[]; exclude?: string[] }
@@ -26,8 +27,6 @@ function isActive(link: NavLink, pathname: string) {
   if (link.exclude?.some(matches)) return false
   return matches(link.href) || Boolean(link.activePaths?.some(matches))
 }
-
-const FEEDBACK_HREF = '/contact#feedback'
 
 export function SiteHeader() {
   const lenis = useLenis()
@@ -77,7 +76,7 @@ export function SiteHeader() {
           <img src={logo.src} alt="BetterCorella" width="655" height="199" className="h-10 w-auto sm:h-12" />
         </Link>
 
-        <nav aria-label="Main" className="hidden lg:block">
+        <nav aria-label="Main" className="ml-auto hidden lg:block">
           <ul className="flex items-center gap-1">
             {navLinks.map((link) => {
               const active = isActive(link, pathname)
@@ -92,14 +91,7 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2">
-          <Link
-            href={FEEDBACK_HREF}
-            className="hidden items-center gap-2 rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 sm:inline-flex"
-          >
-            <MessageSquarePlus aria-hidden="true" className="size-4" />
-            {'Citizen Feedback'}
-          </Link>
+        <div className="flex shrink-0 items-center lg:hidden">
           <button
             ref={menuButtonRef}
             type="button"
@@ -139,14 +131,6 @@ export function SiteHeader() {
                 )
               })}
             </ul>
-            <Link
-              href={FEEDBACK_HREF}
-              onClick={() => setMenuPath(null)}
-              className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 py-3 text-base font-bold text-white transition hover:bg-brand-700"
-            >
-              <MessageSquarePlus aria-hidden="true" className="size-5" />
-              {'Citizen Feedback'}
-            </Link>
           </nav>
         </div>
       ) : null}

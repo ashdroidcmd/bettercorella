@@ -65,7 +65,7 @@ src/
 ├── features/
 │   ├── home/            home-page/
 │   ├── services/        services-page/, service-category-page/, service-detail-page/, online-services-page/, shared/
-│   ├── government/      government-page/, officials-page/, offices-page/, barangays-page/, hotlines-page/, ... shared/
+│   ├── government/      government-page/, officials-page/, offices-page/, barangays-page/, ... shared/
 │   ├── town/            town-profile-page/, life-page/, places-page/, business-page/, shared/
 │   ├── transparency/    transparency-page/, budget-page/, procurement-page/, open-data-page/, projects-page/, shared/
 │   └── info/            about-page/, contact-page/, faq-page/, privacy-page/, terms-page/, ... shared/

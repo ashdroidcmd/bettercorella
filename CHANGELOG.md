@@ -6,6 +6,11 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Added
 
+- The About page has a "Data sources by section" table (`/about#data-sources`) listing every dataset with its source, record count and last-checked date, read from `src/lib/dataFreshness.ts`.
+- The home page ends with the Municipal Hall card (address, trunkline, email and map), shared with the contacts page (`MunicipalHallCard`).
+- Office heads and staff for the 14 offices with a page on the official municipal website, read from each page's poster, plus two offices from the website that were not in the charter (Human Resource Management, Tourism). Office pages show an "Office staff" list. The Government page has a new "National agencies in Corella" section (PNP, DILG, BFP, Post Office, COMELEC, BIR) with heads and contacts from the LGU's National Government Agencies page.
+- Barangay pages show the full council for all 8 barangays (Punong Barangay, 7 kagawads, SK chairperson, secretary and treasurer), read from the officials' photos on each barangay's page on the official municipal website, and a new "How <barangay> got its name" history section.
+- Corella Police Station (PNP) and Corella Fire Station (BFP) hotlines, plus extra MDRRMO (Smart, Globe) and Rural Health Unit numbers listed after the Citizen's Charter ones. The header hotline bar now shows emergency lines only (911, PNP, Fire, MDRRMO); the Municipal Hall number stays on the hotlines and contact pages.
 - GitHub Actions CI/CD (`.github/workflows/ci.yml`):
   - lint, typecheck, unit tests, production build and Playwright tests on every pull request and every push to `main`
   - a Vercel preview deploy for each PR (same-repo branches only), with the URL posted on the PR
@@ -20,6 +25,10 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Changed
 
+- Hotlines merged into the Contacts page (`/contact`): hotlines first (911 banner and local cards), then the Municipal Hall with its map, then feedback. The "Official channels" links are removed (the About page lists the official sources). `/government/hotlines` redirects to `/contact#hotlines`. The government page no longer repeats the emergency numbers; its "Hotlines" tile links to the contacts page. The yellow emergency box, the "About this guide" box and the bottom source note are removed, and so are the Facebook and GitHub icons in the footer.
+- Home hero uses a photo of the Corella church (`src/assets/hero-corella-church.jpg`) behind a dark navy overlay. Its "Town at a glance" card shows three figures (population and barangays side by side, land area full width); the income class stays on the About page.
+- Header: the "Citizen Feedback" button is removed, "Hotlines & Contact" is renamed "Contacts", an "About" link is added after it, and the nav links are aligned to the right. The feedback section on the contact page is unchanged.
+- Services pages show the Citizen's Charter source note and link in the page header (new `source` prop on `PageHero`) instead of at the bottom, so it is seen first. The service category page no longer has the "Other service categories" section.
 - Simpler footer (BetterCainta style): logo, short description and Facebook/GitHub icons; "Quick links" (town, online services, about, contact, FAQ, sitemap, terms, privacy, accessibility); "Resources" (official LGU website, Citizen's Charter, LGU Facebook, Open Data, FOI, BLGF, BetterGov); the "Cost to the people = ₱0" badge with Volunteer and Contribute buttons; and one bottom line with the license and the independent-project notice. The home page's bottom source note is removed, since the footer carries that notice.
 - Page heroes now use the home page's dark navy (`bg-ink-950`) on every inner page, with light breadcrumbs (`Breadcrumbs` `tone="dark"`), dark stat cards and translucent chips.
 - Barangays are a top-level section at `/barangays` (breadcrumb Home > Barangays); old `/government/barangays` URLs redirect permanently. The barangay search box is gone, since Corella has 8 barangays. The government page no longer repeats the barangay list, and its featured offices now point at Corella's offices (Mayor, Treasurer, Civil Registrar, Health, Social Welfare, Engineering).

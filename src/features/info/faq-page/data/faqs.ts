@@ -18,7 +18,7 @@ export const faqs: Faq[] = [
   {
     "q": "How do I report an emergency?",
     "a": "Call 911 for police, fire, or medical emergencies anywhere in the Philippines. Corella's local emergency numbers will be listed on the hotlines page once they are verified.",
-    "link": "/government/hotlines",
+    "link": "/contact#hotlines",
     "source": "National Emergency Hotline 911"
   },
   {

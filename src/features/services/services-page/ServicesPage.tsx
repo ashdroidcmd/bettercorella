@@ -7,8 +7,8 @@ import { PageHero } from '../../../components/ui/PageHero'
 import { PendingPage } from '../../../components/ui/PendingPage'
 import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
-import { SourceNote } from '../../../components/ui/SourceNote'
 import { categories } from '../shared/data/categories'
+import { charterSource } from '../shared/data/charterSource'
 import { city } from '../../../config/city'
 import { services } from '../shared/data/services'
 
@@ -20,6 +20,7 @@ function ServicesPageContent() {
         title="Every municipal service, in one place"
         description={`${services.length} services from the official Citizen’s Charter, grouped into ${categories.length} practical categories. Open a service for requirements, fees, forms, and the office that handles it.`}
         crumbs={[{ label: 'Services' }]}
+        source={charterSource}
       />
 
       <section>
@@ -62,13 +63,6 @@ function ServicesPageContent() {
             {'Open online services'}
             <ArrowRight aria-hidden="true" className="size-4" />
           </Link>
-        </div>
-      </section>
-
-      <section className="border-b border-line bg-surface">
-        <div className="container-page py-10 sm:py-12">
-          <SourceNote href={city.citizensCharter} linkLabel="Open the official Citizens’ Charter">
-            {"Service details are summarized from the Municipal Government’s Citizens’ Charter. Requirements, fees, and processing times can change. Confirm with the issuing office before your visit; each service record has its own verification date."}</SourceNote>
         </div>
       </section>
     </>

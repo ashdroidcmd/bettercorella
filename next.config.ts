@@ -23,6 +23,8 @@ const nextConfig: NextConfig = {
       // Barangays moved out of the government section.
       { source: '/government/barangays', destination: '/barangays', permanent: true },
       { source: '/government/barangays/:path*', destination: '/barangays/:path*', permanent: true },
+      // Hotlines merged into the contacts page.
+      { source: '/government/hotlines', destination: '/contact#hotlines', permanent: true },
     ]
   },
 }

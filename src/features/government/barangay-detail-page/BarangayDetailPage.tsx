@@ -12,7 +12,7 @@ import { SourceNote } from '../../../components/ui/SourceNote'
 import { StatCard } from '../../../components/ui/StatCard'
 import { barangayDilgSourceUrl, barangays } from '../shared/data/barangays'
 import { city } from '../../../config/city'
-import { formatNumber } from '../../../lib/utils'
+import { formatDate, formatNumber } from '../../../lib/utils'
 
 export function BarangayDetailPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -67,6 +67,31 @@ export function BarangayDetailPage() {
             <StatCard value={barangay.apgr} label="Annual growth rate" note="2020 to 2024" />
           </div>
         </Reveal>
+
+        {barangay.nameOrigin.length ? (
+          <Reveal>
+            <section className="mt-10 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7">
+              <SectionHeading eyebrow="History" title={`How ${barangay.name} got its name`} />
+              <div className="mt-5 max-w-3xl space-y-4 text-[15px] leading-7 text-ink-700">
+                {barangay.nameOrigin.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+              <p className="mt-5 text-xs leading-5 text-ink-500">
+                {'Retold from the "Origin of its name" story on the '}
+                <a
+                  href={barangay.dilgSourceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-brand-700 underline decoration-brand-300 underline-offset-2 hover:text-brand-800"
+                >
+                  {"barangay's page on the official municipal website"}
+                </a>
+                .
+              </p>
+            </section>
+          </Reveal>
+        ) : null}
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
@@ -148,6 +173,40 @@ export function BarangayDetailPage() {
                   </div>
                 </div>
               )}
+
+              {barangay.secretary || barangay.treasurer ? (
+                <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                  {[
+                    { label: 'Barangay secretary', name: barangay.secretary },
+                    { label: 'Barangay treasurer', name: barangay.treasurer },
+                  ].map((officer) =>
+                    officer.name ? (
+                      <div key={officer.label} className="rounded-xl border border-line bg-surface p-3">
+                        <p className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-ink-500">
+                          <UserRound aria-hidden="true" className="size-3.5" />
+                          {officer.label}
+                        </p>
+                        <p className="mt-1 text-sm font-bold leading-5 text-ink-900">{officer.name}</p>
+                      </div>
+                    ) : null,
+                  )}
+                </div>
+              ) : null}
+
+              {barangay.officialsVerified ? (
+                <p className="mt-5 text-xs leading-5 text-ink-500">
+                  {`As published on the barangay's page on the official municipal website (read ${formatDate(barangay.officialsVerified)}). `}
+                  <a
+                    href={barangay.dilgSourceUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-semibold text-brand-700 underline decoration-brand-300 underline-offset-2 hover:text-brand-800"
+                  >
+                    {'View the official page'}
+                  </a>
+                  .
+                </p>
+              ) : null}
             </section>
           </Reveal>
         </div>
@@ -193,7 +252,7 @@ export function BarangayDetailPage() {
               { href: 'https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/103013', label: 'Republic Act No. 12326' },
             ]}
           >
-            {"Population figures follow the PSA Census of Population (2024 from the PSA PSGC; 2020 and 2015 census figures as republished by PhilAtlas and bohol.ph). Barangay officials come from the barangay's page on the official municipal website; confirm names with the barangay or DILG before relying on them. The next regular barangay and SK elections are scheduled for November 2028 under Republic Act No. 12326."}</SourceNote>
+            {"Population figures follow the PSA Census of Population (2024 from the PSA PSGC; 2020 and 2015 census figures as republished by PhilAtlas and bohol.ph). Barangay officials come from the barangay's page on the official municipal website, where most councils are published as photos; the names were read from those photos, so confirm them with the barangay or DILG before relying on them. The next regular barangay and SK elections are scheduled for November 2028 under Republic Act No. 12326."}</SourceNote>
         </div>
 
         <div className="mt-6">

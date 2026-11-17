@@ -126,14 +126,6 @@ const staticRoutes: RouteMetadata[] = [
     jsonLd: makeBreadcrumbs([home, { name: 'Barangays', path: '/barangays' }]),
   },
   {
-    path: '/government/hotlines',
-    title: 'Emergency hotlines',
-    description: `Emergency hotlines for ${PLACE}: the national 911 line now, with local MDRRMO, police, fire and health contacts once verified.`,
-    priority: 0.8,
-    changefreq: 'monthly',
-    jsonLd: makeBreadcrumbs([home, government, { name: 'Emergency Hotlines', path: '/government/hotlines' }]),
-  },
-  {
     path: '/government/legislation',
     title: 'Ordinances and executive orders',
     description: `Ordinances, resolutions and executive orders of ${PLACE}, with links to official copies.`,
@@ -231,11 +223,11 @@ const staticRoutes: RouteMetadata[] = [
   },
   {
     path: '/contact',
-    title: 'Contact and sources',
-    description: `How to reach ${SITE_NAME}, and official channels of ${PLACE} as they are verified.`,
-    priority: 0.5,
+    title: 'Hotlines and contacts',
+    description: `Emergency hotlines (911, police, fire, MDRRMO), Municipal Hall contacts and map, and how to send feedback in ${PLACE}.`,
+    priority: 0.8,
     changefreq: 'monthly',
-    jsonLd: makeBreadcrumbs([home, { name: 'Contact', path: '/contact' }]),
+    jsonLd: makeBreadcrumbs([home, { name: 'Contacts', path: '/contact' }]),
   },
   {
     path: '/faq',

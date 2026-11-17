@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { agencies } from '../features/government/shared/data/agencies'
 import { barangayMap } from '../features/government/shared/data/barangayMap'
 import { barangays } from '../features/government/shared/data/barangays'
 import { formatDataFreshnessReport, getDataFreshness } from './dataFreshness'
@@ -121,6 +122,18 @@ describe('government', () => {
     for (const office of offices) {
       expect(office.ccUrl === '' || http.test(office.ccUrl)).toBe(true)
       expect(office.sourceUrl).toMatch(http)
+      if (office.head) expect(office.position.trim(), office.slug).not.toBe('')
+      for (const person of office.staff) expect(person.name && person.position, office.slug).toBeTruthy()
+    }
+  })
+
+  it('lists national government agencies with an officer and a source', () => {
+    expect(unique(agencies.map((agency) => agency.slug))).toBe(true)
+    for (const agency of agencies) {
+      expect(agency.officer.trim(), agency.slug).not.toBe('')
+      expect(agency.position.trim(), agency.slug).not.toBe('')
+      expect(agency.sourceUrl).toMatch(http)
+      for (const number of agency.numbers) expect(number).toMatch(/\d/)
     }
   })
 
@@ -144,7 +157,10 @@ describe('government', () => {
     for (const barangay of barangays) {
       expect(barangay.slug).toMatch(slugPattern)
       expect(barangay.population2024).toBeGreaterThan(0)
-      if (barangay.kagawads.length) expect(barangay.punongBarangay.trim()).not.toBe('')
+      expect(barangay.punongBarangay.trim(), barangay.slug).not.toBe('')
+      expect(barangay.kagawads, barangay.slug).toHaveLength(7)
+      expect(barangay.nameOrigin.length, barangay.slug).toBeGreaterThan(0)
+      if (barangay.officialsVerified) expect(barangay.officialsVerified).toMatch(/^\d{4}-\d{2}-\d{2}$/)
       expect(barangay.sourceUrl).toMatch(http)
       expect(barangay.dilgSourceUrl).toMatch(http)
     }
@@ -230,7 +246,7 @@ describe('route metadata', () => {
     const pages = buildRouteMetadata()
     expect(unique(pages.map((page) => page.path))).toBe(true)
     expect(pages.some((page) => page.path === '/search' || page.path.startsWith('/news'))).toBe(false)
-    expect(pages).toHaveLength(25 + categories.length + services.length + offices.length + barangays.length)
+    expect(pages).toHaveLength(24 + categories.length + services.length + offices.length + barangays.length)
     expect(pages.some((page) => page.path === '/town')).toBe(true)
     expect(pages.some((page) => page.path.startsWith('/city'))).toBe(false)
   })
