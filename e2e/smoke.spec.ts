@@ -127,6 +127,22 @@ test.describe('Corella rebrand', () => {
     }
   })
 
+  test('budget page lists national budget lines naming Corella, with detail pages', async ({ page }) => {
+    // Keep the test on the committed snapshot, independent of the live API.
+    await page.route('https://budget.bettergov.ph/**', (route) => route.abort())
+    await page.goto('/transparency/budget')
+    const table = page.getByRole('region', { name: 'FY2027 budget lines for Corella' })
+    await expect(table.getByRole('row').nth(1)).toBeVisible()
+    const gaa = page.getByRole('region', { name: 'GAA 2020 to 2026 lines naming Corella' })
+    await expect(gaa).toBeVisible()
+    await expect(table).not.toContainText(/New Corella|Davao/)
+    await expect(gaa).not.toContainText(/New Corella|Davao/)
+
+    await table.getByRole('link').first().click()
+    await expect(page).toHaveURL(/\/transparency\/budget\/[a-z]+\/[a-z0-9-]+$/, { timeout: 20_000 })
+    await expect(page.getByRole('heading', { name: 'Amount in each version, with the page it is on' })).toBeVisible()
+  })
+
   test('government pages list Corella officials and barangays', async ({ page }) => {
     await page.goto('/government/officials')
     await expect(page.getByText('Juan Manuel Y. Lim').first()).toBeVisible()

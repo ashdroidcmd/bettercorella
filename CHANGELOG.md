@@ -6,6 +6,15 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Added
 
+- Budget portal at `/transparency/budget`, ported from BetterGov's [transparency-portal](https://github.com/bettergovph/transparency-portal) template (MIT) into the Next.js site:
+  - FY2027 lines that name Corella, Bohol (NEP against House Bill 10858; DPWH, FMR, HFEP, NIA). Each line has status filters, search and CSV export.
+  - Enacted GAA 2020–2026 lines naming Corella, with year totals and CSV export.
+  - The Bohol 1st DEO budget by year.
+  - A "How these lists are built" section that lists every query and rule, with the API's notices shown verbatim.
+  - A static detail page for each FY2027 line at `/transparency/budget/<program>/<slug>`, with amounts per version and links to the exact pages of the budget documents.
+  - Data comes from the BetterGov.ph Budget API through a committed snapshot (`pnpm sync:budget`, `scripts/sync-budget.ts`). The browser refreshes the FY2027 list live when the API is reachable.
+  - Scope rules keep New Corella, Davao del Norte out, and a unit test enforces them.
+  - Corella's own municipal budget (BLGF/FDP) is still shown as "coming soon".
 - The About page has a "Data sources by section" table (`/about#data-sources`) listing every dataset with its source, record count and last-checked date, read from `src/lib/dataFreshness.ts`.
 - The home page ends with the Municipal Hall card (address, trunkline, email and map), shared with the contacts page (`MunicipalHallCard`).
 - Office heads and staff for the 14 offices with a page on the official municipal website, read from each page's poster, plus two offices from the website that were not in the charter (Human Resource Management, Tourism). Office pages show an "Office staff" list. The Government page has a new "National agencies in Corella" section (PNP, DILG, BFP, Post Office, COMELEC, BIR) with heads and contacts from the LGU's National Government Agencies page.

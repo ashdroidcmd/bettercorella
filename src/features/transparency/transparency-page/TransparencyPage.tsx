@@ -7,6 +7,7 @@ import { Reveal } from '../../../components/ui/Reveal'
 import { SectionHeading } from '../../../components/ui/SectionHeading'
 import { SourceNote } from '../../../components/ui/SourceNote'
 import { budgetDocs } from '../shared/data/budgetDocs'
+import { budgetSnapshot } from '../shared/data/budgetSnapshot'
 import { city } from '../../../config/city'
 import { openDataSources } from '../shared/data/openData'
 import { dpwhProjects } from '../shared/data/projects'
@@ -52,9 +53,9 @@ export function TransparencyPage() {
                   <h2 className="mt-5 text-xl font-extrabold tracking-tight text-ink-950 group-hover:text-brand-700">
                     {"Budget and spending"}</h2>
                   <p className="mt-2 flex-1 text-sm leading-6 text-ink-600">
-                    {"The Local Expenditure Program, statements of receipts and expenditures, special funds, and audit reports."}</p>
+                    {`National budget lines that name ${city.name} (2027 proposal and 2020 to 2026 enacted), and the municipal budget once verified.`}</p>
                   <span className="mt-5 inline-flex items-center justify-between gap-3 border-t border-line pt-4 text-sm font-bold text-brand-700">
-                    {countLabel(budgetCount, 'documents')}<ArrowRight
+                    {budgetCount ? countLabel(budgetCount, 'documents') : `${budgetSnapshot.fy2027.projects.length} FY2027 budget lines`}<ArrowRight
                       aria-hidden="true"
                       className="size-4 transition group-hover:translate-x-0.5"
                     />

@@ -40,6 +40,7 @@
     "test:e2e:report": "playwright show-report",
     "prebuild": "node scripts/copy-maplibre-worker.mjs && node scripts/data-freshness.ts",
     "start": "next start",
+    "sync:budget": "node scripts/sync-budget.ts",
     "predev": "node scripts/copy-maplibre-worker.mjs"
   },
   "dependencies": {

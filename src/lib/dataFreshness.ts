@@ -6,6 +6,7 @@ import { officials } from '../features/government/shared/data/officials.ts'
 import { services } from '../features/services/shared/data/services.ts'
 import { bidResults } from '../features/transparency/shared/data/bidDocs.ts'
 import { budgetDocs } from '../features/transparency/shared/data/budgetDocs.ts'
+import { budgetSnapshot } from '../features/transparency/shared/data/budgetSnapshot.ts'
 import { cityElections } from '../features/government/shared/data/elections.ts'
 import { hotlines } from '../features/government/shared/data/hotlines.ts'
 import { legislation } from '../features/government/shared/data/legislation.ts'
@@ -120,6 +121,13 @@ export const manuallyMaintainedData: DataFreshnessRow[] = [
     recordCount: budgetDocs.length,
     lastVerified: null,
     reviewEveryDays: 180,
+  },
+  {
+    dataset: 'National budget lines naming Corella',
+    source: 'BetterGov.ph Budget API (NEP and House bill FY2027, GAA 2020–2026); refresh with `pnpm sync:budget`',
+    recordCount: budgetSnapshot.fy2027.projects.length + budgetSnapshot.gaa.rows.length,
+    lastVerified: budgetSnapshot.fetchedAt.slice(0, 10),
+    reviewEveryDays: 30,
   },
   {
     dataset: 'DPWH projects',

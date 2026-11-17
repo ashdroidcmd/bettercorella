@@ -5,6 +5,7 @@ import { barangays } from '../features/government/shared/data/barangays'
 import { formatDataFreshnessReport, getDataFreshness } from './dataFreshness'
 import { bidBulletins, bidResults } from '../features/transparency/shared/data/bidDocs'
 import { budgetDocs } from '../features/transparency/shared/data/budgetDocs'
+import { budgetSnapshot } from '../features/transparency/shared/data/budgetSnapshot'
 import { categories } from '../features/services/shared/data/categories'
 import { city } from '../config/city'
 import { SITE_NAME } from '../config/site'
@@ -61,7 +62,7 @@ describe('LGU identity', () => {
     const datasets = {
       city, services, offices, officials, barangays, barangayMap, hotlines, legislation, legislationSources,
       places, placeCategories, dpwhProjects, budgetDocs, bidResults, bidBulletins, cityElections, onlineServices,
-      openDataSources, sources, faqs, stats, timeline, categories,
+      openDataSources, sources, faqs, stats, timeline, categories, budgetSnapshot,
     }
     const leftovers = /inabanga|inabangnon|san fernando|sanfernando|la union/i
     for (const [name, data] of Object.entries(datasets)) {
@@ -220,6 +221,23 @@ describe('documents and projects', () => {
     }
   })
 
+  it('keeps the national budget snapshot to Corella, Bohol', () => {
+    const { fy2027, gaa, details } = budgetSnapshot
+    expect(isDate(budgetSnapshot.fetchedAt)).toBe(true)
+    // "Corella" alone also matches New Corella, Davao del Norte (Region XI).
+    for (const project of fy2027.projects) {
+      expect(project.region_key === null || project.region_key === 'VII', project.title).toBe(true)
+      expect(project.title).not.toMatch(/new corella|davao/i)
+      expect(project.slug).toMatch(slugPattern)
+      expect(details[project.key], project.key).toBeDefined()
+    }
+    expect(unique(fy2027.projects.map((project) => `${project.dataset}/${project.slug}`))).toBe(true)
+    for (const row of gaa.rows) {
+      expect(row.name).toMatch(/corella/i)
+      expect(row.name).not.toMatch(/new corella|davao/i)
+    }
+  })
+
   it('has a well-formed open data catalog', () => {
     expect(openDataSources.length).toBeGreaterThan(0)
     expect(unique(openDataSources.map((source) => source.id))).toBe(true)
@@ -246,7 +264,9 @@ describe('route metadata', () => {
     const pages = buildRouteMetadata()
     expect(unique(pages.map((page) => page.path))).toBe(true)
     expect(pages.some((page) => page.path === '/search' || page.path.startsWith('/news'))).toBe(false)
-    expect(pages).toHaveLength(24 + categories.length + services.length + offices.length + barangays.length)
+    expect(pages).toHaveLength(
+      24 + categories.length + services.length + offices.length + barangays.length + budgetSnapshot.fy2027.projects.length,
+    )
     expect(pages.some((page) => page.path === '/town')).toBe(true)
     expect(pages.some((page) => page.path.startsWith('/city'))).toBe(false)
   })
@@ -260,6 +280,7 @@ describe('route metadata', () => {
 
     expect(paramsFor('/services/[category]')).toHaveLength(categories.length)
     expect(paramsFor('/services/[category]/[slug]')).toHaveLength(services.length)
+    expect(paramsFor('/transparency/budget/[program]/[slug]')).toHaveLength(budgetSnapshot.fy2027.projects.length)
   })
 })
 
