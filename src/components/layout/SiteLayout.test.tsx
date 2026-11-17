@@ -109,13 +109,13 @@ describe('SiteLayout navigation', () => {
     else Reflect.deleteProperty(window, 'matchMedia')
   })
 
-  it('shows six plain nav links with no dropdowns and marks the current page', () => {
+  it('shows seven plain nav links with no dropdowns and marks the current page', () => {
     const nav = container.querySelector('nav[aria-label="Main"]')
     expect(nav).not.toBeNull()
     expect(nav!.querySelectorAll('button')).toHaveLength(0)
     const links = Array.from(nav!.querySelectorAll('a'))
     expect(links.map((link) => link.textContent?.trim())).toEqual([
-      'Home', 'Services', 'Government', 'Transparency', 'Barangays', 'Hotlines & Contact',
+      'Home', 'Services', 'Government', 'Transparency', 'Barangays', 'Contacts', 'About',
     ])
 
     const services = links.find((link) => link.textContent?.trim() === 'Services')!
@@ -124,9 +124,9 @@ describe('SiteLayout navigation', () => {
     expect(services.getAttribute('aria-current')).toBe('page')
   })
 
-  it('shows the hotline bar and the citizen feedback link', () => {
+  it('shows the hotline bar and no citizen feedback button', () => {
     expect(container.querySelector('a[href="tel:911"]')).not.toBeNull()
-    const feedback = Array.from(container.querySelectorAll('a')).find((link) => link.textContent?.includes('Citizen Feedback'))
-    expect(feedback?.getAttribute('href')).toBe('/contact#feedback')
+    const header = container.querySelector('header')!
+    expect(header.textContent).not.toContain('Citizen Feedback')
   })
 })

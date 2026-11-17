@@ -19,7 +19,7 @@ export function HotlineBar() {
           <span className="hidden truncate text-white/65 xl:inline">{`Emergency response, ${city.name}:`}</span>
         </div>
 
-        <ul className="hidden min-w-0 flex-1 items-center justify-end gap-x-5 md:flex">
+        <ul className="hidden min-w-0 flex-1 items-center justify-end gap-x-5 lg:flex">
           {barHotlines.map((hotline) => {
             const Icon = hotline.primary ? Siren : /MDRRMO|PNP|BFP|police|fire|rescue/i.test(hotline.short ?? '') ? ShieldAlert : Phone
             const number = hotline.numbers[0] ?? ''
@@ -36,12 +36,12 @@ export function HotlineBar() {
         </ul>
 
         <div className="flex shrink-0 items-center gap-4">
-          <a href="tel:911" className="inline-flex items-center gap-1.5 font-bold text-accent md:hidden">
+          <a href="tel:911" className="inline-flex items-center gap-1.5 font-bold text-accent lg:hidden">
             <Siren aria-hidden="true" className="size-3.5" />
             {'Emergency: 911'}
           </a>
           <Link
-            href="/government/hotlines"
+            href="/contact#hotlines"
             className="inline-flex items-center gap-1 font-semibold text-accent underline-offset-4 transition hover:text-white hover:underline"
           >
             {'All hotlines'}

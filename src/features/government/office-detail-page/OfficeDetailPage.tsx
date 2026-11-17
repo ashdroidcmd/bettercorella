@@ -108,6 +108,24 @@ export function OfficeDetailPage() {
               </dl>
             </div>
 
+            {office.staff.length ? (
+              <div className="mt-12">
+                <SectionHeading
+                  eyebrow={`${office.staff.length} ${office.staff.length === 1 ? 'person' : 'people'}`}
+                  title="Office staff"
+                  description="As shown on the office's page on the official municipal website."
+                />
+                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {office.staff.map((person) => (
+                    <li key={`${person.name}-${person.position}`} className="rounded-xl border border-line bg-white px-4 py-3 shadow-card">
+                      <p className="text-sm font-bold leading-5 text-ink-900">{person.name}</p>
+                      <p className="mt-0.5 text-xs leading-5 text-ink-500">{person.position}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
             <div className="mt-12">
               <SectionHeading
                 eyebrow={`${officeServices.length} ${(officeServices.length === 1 ? 'service' : 'services')}`}
@@ -176,7 +194,7 @@ export function OfficeDetailPage() {
             ) : null}
 
             <SourceNote href={office.sourceUrl} linkLabel="View the official office page">
-              {'Contacts and office details come from the municipal government. Check the official directory for changes before contacting or visiting the office.'}
+              {'Phone and email come from the Citizens’ Charter; the head and staff were read from the photos on the office’s page on the official municipal website. Check with the office for changes before contacting or visiting.'}
             </SourceNote>
           </aside>
         </div>

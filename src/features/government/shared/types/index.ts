@@ -5,6 +5,8 @@ export interface Office {
   sector: string;
   head: string;
   position: string;
+  /** Other office staff as shown on the office's page, head excluded. */
+  staff: { name: string; position: string }[];
   contact: string;
   email: string;
   address: string;
@@ -30,6 +32,12 @@ export interface Barangay {
   punongBarangay: string;
   kagawads: string[];
   skChairperson: string | null;
+  secretary: string | null;
+  treasurer: string | null;
+  /** Date the officials were read from the barangay's page on the municipal website. */
+  officialsVerified: string | null;
+  /** How the barangay got its name, in short paragraphs (our summary of the LGU page). */
+  nameOrigin: string[];
   sourceUrl: string;
   dilgSourceUrl: string;
 }
@@ -51,4 +59,17 @@ export interface Hotline {
   primary?: boolean;
   /** Short label shown in the header hotline bar (e.g. "PNP"); omit to keep it off the bar. */
   short?: string;
+}
+
+export interface Agency {
+  slug: string;
+  /** Agency office in Corella, e.g. "PNP Corella". */
+  agency: string;
+  officer: string;
+  position: string;
+  numbers: string[];
+  email: string | null;
+  /** Facebook page name and link as given on the LGU page. */
+  facebook: { label: string; href: string } | null;
+  sourceUrl: string;
 }

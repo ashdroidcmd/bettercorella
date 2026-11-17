@@ -91,7 +91,7 @@ export function FaqPage() {
                 </a>{' '}
                 {"for police, fire, or medical help."}</p>
               <Link
-                href="/government/hotlines"
+                href="/contact#hotlines"
                
                 className="mt-2 inline-flex text-xs font-bold text-brand-700 hover:text-brand-800"
               >

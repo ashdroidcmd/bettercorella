@@ -23,7 +23,7 @@ const mainLinks = [
 const governmentLinks = [
   { label: 'Municipal officials', href: '/government/officials' },
   { label: 'Offices and departments', href: '/government/offices' },
-  { label: 'Emergency hotlines', href: '/government/hotlines' },
+  { label: 'Emergency hotlines', href: '/contact#hotlines' },
   { label: 'Ordinances and executive orders', href: '/government/legislation' },
 ]
 

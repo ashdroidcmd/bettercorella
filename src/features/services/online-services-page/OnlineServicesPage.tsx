@@ -105,7 +105,7 @@ export function OnlineServicesPage() {
                 {"Browse municipal services"}<ArrowUpRight aria-hidden="true" className="size-4" />
               </Link>
               <Link
-                href="/government/hotlines"
+                href="/contact#hotlines"
                
                 className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
               >

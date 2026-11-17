@@ -1,18 +1,26 @@
 'use client'
 
+import { Info } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Breadcrumbs, type Crumb } from './Breadcrumbs'
+
+interface PageHeroSource {
+  href: string | null
+  label: string
+  note?: string
+}
 
 interface PageHeroProps {
   title: string
   description?: string
   eyebrow?: string
   crumbs?: Crumb[]
+  source?: PageHeroSource
   children?: ReactNode
   overflowVisible?: boolean
 }
 
-export function PageHero({ title, description, eyebrow, crumbs, children, overflowVisible = false }: PageHeroProps) {
+export function PageHero({ title, description, eyebrow, crumbs, source, children, overflowVisible = false }: PageHeroProps) {
 
   return (
     <section
@@ -31,7 +39,24 @@ export function PageHero({ title, description, eyebrow, crumbs, children, overfl
         {description ? (
           <p className="mt-4 max-w-3xl text-pretty text-base leading-7 text-white/65 sm:text-lg">{description}</p>
         ) : null}
-        {children ? <div className="mt-7">{children}</div> : null}
+        {source?.href ? (
+          <p className="mt-5 flex max-w-3xl gap-2.5 text-sm leading-6 text-white/65">
+            <Info aria-hidden="true" className="mt-1 size-4 shrink-0 text-brand-300" />
+            <span>
+              {source.note ? `${source.note} ` : null}
+              <a
+                href={source.href}
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-white underline decoration-brand-300 underline-offset-2 hover:text-brand-200"
+              >
+                {source.label}
+              </a>
+              .
+            </span>
+          </p>
+        ) : null}
+        {children ?<div className="mt-7">{children}</div> : null}
       </div>
     </section>
   )

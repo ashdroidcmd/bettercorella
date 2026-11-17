@@ -7,7 +7,6 @@ import { NotFoundPage } from '../../info/not-found-page'
 import { PageHero } from '../../../components/ui/PageHero'
 import { city } from '../../../config/city'
 import { Reveal } from '../../../components/ui/Reveal'
-import { SourceNote } from '../../../components/ui/SourceNote'
 import { categories } from '../shared/data/categories'
 import { offices } from '../../government/shared/data/offices'
 import { onlineServiceSlugs } from '../shared/data/onlineServices'
@@ -61,6 +60,11 @@ export function ServiceDetailPage() {
           { label: category.shortName, href: `/services/${category.slug}` },
           { label: service.title },
         ]}
+        source={{
+          href: service.sourceUrl,
+          label: 'Open the official charter entry',
+          note: `Summarized from the published Citizen’s Charter record, last verified ${formatDate(service.lastVerified)}. Requirements and fees can change; confirm with the ${office?.name ?? service.office} before your visit.`,
+        }}
       >
         <div className="flex flex-wrap gap-2">
           <span className="rounded-full bg-brand-700 px-3 py-1.5 text-xs font-bold text-white">
@@ -256,9 +260,6 @@ export function ServiceDetailPage() {
                 className="size-4 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               />
             </a>
-
-            <SourceNote href={service.sourceUrl} linkLabel="Open the official entry">
-              {"This page summarizes the published service record. Requirements and fees can change without notice. Confirm details with the"}{' '}{office?.name ?? service.office} {"before your visit. The verification date above applies to this service record only."}</SourceNote>
           </aside>
         </div>
       </div>
