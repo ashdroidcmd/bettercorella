@@ -4,15 +4,12 @@ import { city } from '../config/city.ts'
 import { offices } from '../features/government/shared/data/offices.ts'
 import { officials } from '../features/government/shared/data/officials.ts'
 import { services } from '../features/services/shared/data/services.ts'
-import { bidResults } from '../features/transparency/shared/data/bidDocs.ts'
-import { budgetDocs } from '../features/transparency/shared/data/budgetDocs.ts'
+import { budgetSnapshot } from '../features/transparency/shared/data/budgetSnapshot.ts'
 import { cityElections } from '../features/government/shared/data/elections.ts'
 import { hotlines } from '../features/government/shared/data/hotlines.ts'
 import { legislation } from '../features/government/shared/data/legislation.ts'
 import { onlineServices } from '../features/services/shared/data/onlineServices.ts'
-import { openDataSources } from '../features/transparency/shared/data/openData.ts'
 import { places } from '../features/town/shared/data/places.ts'
-import { dpwhProjects } from '../features/transparency/shared/data/projects.ts'
 
 export interface DataFreshnessRow {
   dataset: string
@@ -108,25 +105,11 @@ export const manuallyMaintainedData: DataFreshnessRow[] = [
     reviewEveryDays: 90,
   },
   {
-    dataset: 'Bid results',
-    source: 'PhilGEPS and municipal Bids and Awards Committee postings',
-    recordCount: bidResults.length,
-    lastVerified: null,
-    reviewEveryDays: 90,
-  },
-  {
-    dataset: 'Budget documents',
-    source: 'DILG Full Disclosure Policy portal and BLGF',
-    recordCount: budgetDocs.length,
-    lastVerified: null,
-    reviewEveryDays: 180,
-  },
-  {
-    dataset: 'DPWH projects',
-    source: 'BetterGov extract of DPWH infrastructure projects',
-    recordCount: dpwhProjects.length,
-    lastVerified: null,
-    reviewEveryDays: 180,
+    dataset: 'National budget lines naming Corella',
+    source: 'BetterGov.ph Budget API (NEP and House bill FY2027, GAA 2020–2026); refresh with `pnpm sync:budget`',
+    recordCount: budgetSnapshot.fy2027.projects.length + budgetSnapshot.gaa.rows.length,
+    lastVerified: budgetSnapshot.fetchedAt.slice(0, 10),
+    reviewEveryDays: 30,
   },
   {
     dataset: 'Places directory',
@@ -134,13 +117,6 @@ export const manuallyMaintainedData: DataFreshnessRow[] = [
     recordCount: places.length,
     lastVerified: null,
     reviewEveryDays: 90,
-  },
-  {
-    dataset: 'Open-data source registry',
-    source: 'National datasets on data.bettergov.ph; each keeps its own upstream dates',
-    recordCount: openDataSources.length,
-    lastVerified: '2026-11-14',
-    reviewEveryDays: 180,
   },
 ]
 

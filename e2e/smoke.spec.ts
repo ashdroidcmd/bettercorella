@@ -18,10 +18,6 @@ const PAGES = [
   '/town/places',
   '/town/business',
   '/transparency',
-  '/transparency/budget',
-  '/transparency/procurement',
-  '/transparency/projects',
-  '/transparency/open-data',
   '/about',
   '/contact',
   '/faq',
@@ -120,11 +116,27 @@ test.describe('Corella rebrand', () => {
     await expect(page.getByRole('navigation', { name: 'Breadcrumb' })).not.toContainText('Government')
   })
 
-  test('sections without verified data show the coming-soon notice', async ({ page }) => {
-    for (const path of ['/transparency/budget', '/transparency/procurement']) {
+  test('old transparency sub-pages redirect to the one transparency page', async ({ page }) => {
+    for (const path of ['/transparency/budget', '/transparency/procurement', '/transparency/projects', '/transparency/open-data']) {
       await page.goto(path)
-      await expect(page.getByRole('heading', { name: 'Information coming soon' })).toBeVisible()
+      await expect(page).toHaveURL(/\/transparency$/)
     }
+  })
+
+  test('budget page lists national budget lines naming Corella, with detail pages', async ({ page }) => {
+    // Keep the test on the committed snapshot, independent of the live API.
+    await page.route('https://budget.bettergov.ph/**', (route) => route.abort())
+    await page.goto('/transparency')
+    const table = page.getByRole('region', { name: 'FY2027 budget lines for Corella' })
+    await expect(table.getByRole('row').nth(1)).toBeVisible()
+    const gaa = page.getByRole('region', { name: 'GAA 2020 to 2026 lines naming Corella' })
+    await expect(gaa).toBeVisible()
+    await expect(table).not.toContainText(/New Corella|Davao/)
+    await expect(gaa).not.toContainText(/New Corella|Davao/)
+
+    await table.getByRole('link').first().click()
+    await expect(page).toHaveURL(/\/transparency\/budget\/[a-z]+\/[a-z0-9-]+$/, { timeout: 20_000 })
+    await expect(page.getByRole('heading', { name: 'Amount in each version, with the page it is on' })).toBeVisible()
   })
 
   test('government pages list Corella officials and barangays', async ({ page }) => {

@@ -6,6 +6,15 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Added
 
+- Budget portal at `/transparency/budget`, ported from BetterGov's [transparency-portal](https://github.com/bettergovph/transparency-portal) template (MIT) into the Next.js site:
+  - FY2027 lines that name Corella, Bohol (NEP against House Bill 10858; DPWH, FMR, HFEP, NIA). Each line has status filters, search and CSV export.
+  - Enacted GAA 2020–2026 lines naming Corella, with year totals and CSV export.
+  - The Bohol 1st DEO budget by year.
+  - A "How these lists are built" section that lists every query and rule, with the API's notices shown verbatim.
+  - A static detail page for each FY2027 line at `/transparency/budget/<program>/<slug>`, with amounts per version and links to the exact pages of the budget documents.
+  - Data comes from the BetterGov.ph Budget API through a committed snapshot (`pnpm sync:budget`, `scripts/sync-budget.ts`). The browser refreshes the FY2027 list live when the API is reachable.
+  - Scope rules keep New Corella, Davao del Norte out, and a unit test enforces them.
+  - Corella's own municipal budget (BLGF/FDP) is still shown as "coming soon".
 - The About page has a "Data sources by section" table (`/about#data-sources`) listing every dataset with its source, record count and last-checked date, read from `src/lib/dataFreshness.ts`.
 - The home page ends with the Municipal Hall card (address, trunkline, email and map), shared with the contacts page (`MunicipalHallCard`).
 - Office heads and staff for the 14 offices with a page on the official municipal website, read from each page's poster, plus two offices from the website that were not in the charter (Human Resource Management, Tourism). Office pages show an "Office staff" list. The Government page has a new "National agencies in Corella" section (PNP, DILG, BFP, Post Office, COMELEC, BIR) with heads and contacts from the LGU's National Government Agencies page.
@@ -24,6 +33,8 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 - Project metadata in `package.json`: homepage, repository, issue tracker and the minimum Node.js version (22.18).
 
 ### Changed
+
+- Transparency is one page. `/transparency` is now the budget page: national budget lines naming Corella, then an "Official sources" list (DILG Full Disclosure Policy, BLGF, PhilGEPS, COA and the DPWH dataset) for records not on the site yet. The procurement, infrastructure projects and open-data pages, which had no Corella data, are removed along with their empty data files (`budgetDocs`, `bidDocs`, `projects`, `openData`) and data-freshness rows. `/transparency/budget`, `/transparency/procurement`, `/transparency/projects` and `/transparency/open-data` redirect to `/transparency`. Project detail pages stay at `/transparency/budget/<program>/<slug>`.
 
 - Hotlines merged into the Contacts page (`/contact`): hotlines first (911 banner and local cards), then the Municipal Hall with its map, then feedback. The "Official channels" links are removed (the About page lists the official sources). `/government/hotlines` redirects to `/contact#hotlines`. The government page no longer repeats the emergency numbers; its "Hotlines" tile links to the contacts page. The yellow emergency box, the "About this guide" box and the bottom source note are removed, and so are the Facebook and GitHub icons in the footer.
 - Home hero uses a photo of the Corella church (`src/assets/hero-corella-church.jpg`) behind a dark navy overlay. Its "Town at a glance" card shows three figures (population and barangays side by side, land area full width); the income class stays on the About page.

@@ -28,11 +28,7 @@ const governmentLinks = [
 ]
 
 const transparencyLinks = [
-  { label: 'Transparency overview', href: '/transparency' },
-  { label: 'Budget and spending', href: '/transparency/budget' },
-  { label: 'Procurement and bids', href: '/transparency/procurement' },
-  { label: 'Infrastructure projects', href: '/transparency/projects' },
-  { label: 'Open data', href: '/transparency/open-data' },
+  { label: 'Budget and public funds', href: '/transparency' },
 ]
 
 const cityLinks = [

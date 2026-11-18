@@ -25,6 +25,12 @@ const nextConfig: NextConfig = {
       { source: '/government/barangays/:path*', destination: '/barangays/:path*', permanent: true },
       // Hotlines merged into the contacts page.
       { source: '/government/hotlines', destination: '/contact#hotlines', permanent: true },
+      // Transparency is one page; these had no Corella data (detail pages under /transparency/budget/* stay).
+      ...['budget', 'procurement', 'projects', 'open-data'].map((page) => ({
+        source: `/transparency/${page}`,
+        destination: '/transparency',
+        permanent: true,
+      })),
     ]
   },
 }

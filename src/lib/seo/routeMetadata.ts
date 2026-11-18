@@ -1,4 +1,5 @@
 import { barangays } from '../../features/government/shared/data/barangays.ts'
+import { budgetSnapshot } from '../../features/transparency/shared/data/budgetSnapshot.ts'
 import { categories } from '../../features/services/shared/data/categories.ts'
 import { city } from '../../config/city.ts'
 import { faqs } from '../../features/info/faq-page/data/faqs.ts'
@@ -176,42 +177,10 @@ const staticRoutes: RouteMetadata[] = [
   {
     path: '/transparency',
     title: 'Transparency',
-    description: `Budget, procurement, infrastructure projects and open data for ${PLACE}, linked to official sources.`,
+    description: `National budget lines that name ${PLACE}: the proposed 2027 budget (NEP and House bill) and the enacted budgets of 2020 to 2026, from the BetterGov.ph Budget API.`,
     priority: 0.8,
     changefreq: 'weekly',
     jsonLd: makeBreadcrumbs([home, transparency]),
-  },
-  {
-    path: '/transparency/budget',
-    title: 'Budget and spending',
-    description: `Where ${PLACE}'s public money comes from and how it is spent, based on BLGF and Full Disclosure Policy records.`,
-    priority: 0.7,
-    changefreq: 'monthly',
-    jsonLd: makeBreadcrumbs([home, transparency, { name: 'Budget & Spending', path: '/transparency/budget' }]),
-  },
-  {
-    path: '/transparency/procurement',
-    title: 'Procurement and bids',
-    description: `Bids, awards and contracts of ${PLACE}, based on PhilGEPS and official procurement records.`,
-    priority: 0.7,
-    changefreq: 'monthly',
-    jsonLd: makeBreadcrumbs([home, transparency, { name: 'Procurement', path: '/transparency/procurement' }]),
-  },
-  {
-    path: '/transparency/projects',
-    title: 'Infrastructure projects',
-    description: `Public works projects in ${PLACE}, based on DPWH and municipal records.`,
-    priority: 0.7,
-    changefreq: 'monthly',
-    jsonLd: makeBreadcrumbs([home, transparency, { name: 'Projects', path: '/transparency/projects' }]),
-  },
-  {
-    path: '/transparency/open-data',
-    title: 'Open data',
-    description: 'National open datasets covering local governments: fiscal data, boundaries, elections, public works, procurement and hazard maps.',
-    priority: 0.6,
-    changefreq: 'monthly',
-    jsonLd: makeBreadcrumbs([home, transparency, { name: 'Open Data', path: '/transparency/open-data' }]),
   },
   {
     path: '/about',
@@ -379,5 +348,24 @@ export function buildRouteMetadata(): RouteMetadata[] {
     ],
   }))
 
-  return [...staticRoutes, ...categoryRoutes, ...serviceRoutes, ...officeRoutes, ...barangayRoutes]
+  const budgetRoutes: RouteMetadata[] = budgetSnapshot.fy2027.projects
+    .filter((project) => budgetSnapshot.details[project.key])
+    .map((project) => {
+      const path = `/transparency/budget/${project.dataset}/${project.slug}`
+      return {
+        path,
+        title: project.title,
+        description: `${project.status_label}. FY2027 ${project.dataset.toUpperCase()} line naming ${city.name}: amounts in the NEP and the House bill, with links to the budget documents.`,
+        lastmod: budgetSnapshot.fetchedAt.slice(0, 10),
+        priority: 0.5,
+        changefreq: 'monthly',
+        jsonLd: makeBreadcrumbs([
+          home,
+          transparency,
+          { name: project.title, path },
+        ]),
+      }
+    })
+
+  return [...staticRoutes, ...categoryRoutes, ...serviceRoutes, ...officeRoutes, ...barangayRoutes, ...budgetRoutes]
 }

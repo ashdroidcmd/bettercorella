@@ -1,0 +1,135 @@
+// Takes a snapshot of Corella's lines in the national budget from the BetterGov.ph Budget API
+// (https://budget.bettergov.ph/docs) and writes src/features/transparency/shared/data/budgetSnapshot.ts.
+// Run with `pnpm sync:budget`, review the diff, and commit it. The build never calls the API.
+// Runs with Node's built-in TypeScript type stripping (Node 22.18+ / 24).
+import { writeFile } from 'node:fs/promises'
+import { createBudgetClient } from '../src/features/transparency/shared/budget-api/client.ts'
+import { budgetPortal } from '../src/features/transparency/shared/budget-api/portal.config.ts'
+import {
+  resolveGaa,
+  resolveProjects,
+  type BudgetSnapshot,
+  type ScopedProject,
+} from '../src/features/transparency/shared/budget-api/scope.ts'
+import type {
+  Disclaimer,
+  DistrictCard,
+  Labelled,
+  ProjectDetail,
+  ProjectRow,
+} from '../src/features/transparency/shared/budget-api/types.ts'
+import { BRIDGE_GROUPS } from '../src/features/transparency/shared/budget-api/types.ts'
+
+const OUT = new URL('../src/features/transparency/shared/data/budgetSnapshot.ts', import.meta.url)
+const client = createBudgetClient(undefined, { 'user-agent': 'bettercorella-budget-sync (static civic portal)' })
+
+const ROW_FIELDS = [
+  'id', 'dataset', 'title', 'program', 'pap', 'region', 'region_key', 'office', 'status_label', 'bridge_group',
+  'group_label', 'held', 'nep_php', 'hgab2_php', 'hgab3_php', 'house_php', 'api_php', 'delta_php', 'nep_page',
+  'hgab2_page', 'hgab3_page', 'pdf_url', 'lon', 'lat', 'url', 'api_url',
+] as const satisfies readonly (keyof ProjectRow)[]
+
+function pickRow(r: ProjectRow): ProjectRow {
+  return Object.fromEntries(ROW_FIELDS.map((k) => [k, r[k] ?? null])) as unknown as ProjectRow
+}
+
+function pickLabel(l: Labelled | null | undefined): Labelled | null {
+  if (!l) return null
+  return { code: l.code, label: l.label, ...(l.help ? { help: l.help } : {}) }
+}
+
+function pickDetail(d: ProjectDetail): ProjectDetail {
+  return {
+    ...pickRow(d),
+    length_m: d.length_m ?? null,
+    labels: {
+      status: pickLabel(d.labels.status)!,
+      match: pickLabel(d.labels.match),
+      reading: pickLabel(d.labels.reading),
+      dpwh_site: pickLabel(d.labels.dpwh_site),
+      flags: (d.labels.flags ?? []).map((f) => pickLabel(f)!),
+    },
+  }
+}
+
+const pickDisclaimer = (d: Disclaimer): Disclaimer => ({ id: d.id, title: d.title, body: d.body, url: d.url })
+
+function pickDistrict(c: DistrictCard): DistrictCard {
+  return {
+    id: c.id,
+    label: c.label,
+    region_key: c.region_key,
+    url: c.url,
+    headline: { note: c.headline.note },
+    offices: c.offices.map((o) => ({
+      id: o.id,
+      name: o.name,
+      tier: o.tier,
+      tier_text: o.tier_text,
+      years: (o.years ?? []).map((y) => ({ fy: y.fy, stage: y.stage, stage_label: y.stage_label, php: y.php })),
+    })),
+  }
+}
+
+console.info(`Querying ${client.base} for ${budgetPortal.name}…`)
+const [overview, fy2027, gaa, district] = await Promise.all([
+  client.overview(),
+  resolveProjects(client),
+  resolveGaa(client),
+  client.district(budgetPortal.district),
+])
+
+const projects: ScopedProject[] = fy2027.projects.map((p) => ({ ...pickRow(p), key: p.key, slug: p.slug }))
+const slugs = new Set(projects.map((p) => `${p.dataset}/${p.slug}`))
+if (slugs.size !== projects.length) throw new Error('Two projects share a URL slug; projectSlug() needs a fix.')
+
+const details: BudgetSnapshot['details'] = {}
+for (const p of projects) details[p.key] = pickDetail((await client.project(p.dataset, p.id)).data)
+
+const groupsFromApi = overview.data.datasets[0]?.bridge.groups
+const snapshot: BudgetSnapshot = {
+  fetchedAt: new Date().toISOString(),
+  api: client.base,
+  fy2027: { ...fy2027, projects, disclaimers: fy2027.disclaimers.map(pickDisclaimer) },
+  details,
+  labels: {
+    groups: Object.fromEntries(
+      BRIDGE_GROUPS.map((g) => {
+        const w = groupsFromApi?.[g]
+        return [g, { label: w?.label ?? g, sub: w?.sub ?? '', help: w?.help ?? '' }]
+      }),
+    ) as BudgetSnapshot['labels']['groups'],
+    datasets: overview.data.datasets.map((d) => ({ key: d.key, label: d.label, short: d.short })),
+    versions: overview.data.record_versions.map((v) => ({ key: v.key, label: v.label })),
+  },
+  district: { card: pickDistrict(district.data), disclaimers: district.disclaimers.map(pickDisclaimer) },
+  gaa: {
+    ...gaa,
+    rows: gaa.rows.map((r) => ({
+      department_id: r.department_id,
+      agency_id: r.agency_id,
+      fam_key: r.fam_key,
+      name: r.name,
+      years: r.years,
+      key: r.key,
+      department: r.department,
+    })),
+  },
+}
+
+const wrongRegion = projects.filter((p) => p.region_key != null && p.region_key !== budgetPortal.place.region)
+if (wrongRegion.length) throw new Error(`Rows outside Region ${budgetPortal.place.region}: ${wrongRegion.map((p) => p.key).join(', ')}`)
+
+const source = `// Generated by \`pnpm sync:budget\` (scripts/sync-budget.ts) from the BetterGov.ph Budget API.
+// Do not edit by hand: change src/features/transparency/shared/budget-api/portal.config.ts and re-run.
+import type { BudgetSnapshot } from '../budget-api/scope.ts'
+
+export const budgetSnapshot: BudgetSnapshot = ${JSON.stringify(snapshot, null, 2)}
+`
+await writeFile(OUT, source, 'utf8')
+
+console.info(`FY2027 lines: ${projects.length}`)
+for (const q of fy2027.queries) console.info(`  ${q.dataset}: API returned ${q.total}, kept ${q.kept}`)
+console.info(`GAA 2020–2026 programs: ${gaa.rows.length} kept, ${gaa.dropped.length} dropped by name rules`)
+console.info(`District: ${district.data.label}`)
+console.info(`Wrote ${OUT.pathname}`)
