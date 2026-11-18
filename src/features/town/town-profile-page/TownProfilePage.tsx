@@ -127,7 +127,7 @@ export function TownProfilePage() {
         <div className="container-page flex flex-wrap gap-3 py-10">
           {[
             { label: 'Barangays', href: '/barangays' },
-            { label: 'Life and tourism', href: '/town/life' },
+            { label: 'Tourism and events', href: '/town/life' },
             { label: 'Places directory', href: '/town/places' },
             { label: 'Business and investment', href: '/town/business' },
           ].map((link) => (

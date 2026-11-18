@@ -46,9 +46,9 @@ const exploreLinks = [
     icon: Landmark,
   },
   {
-    title: 'Life and tourism',
+    title: 'Tourism and events',
     href: '/town/life',
-    description: 'Culture, festivals, and things to do.',
+    description: 'Fiestas, the tarsier sanctuary, and places to visit.',
     icon: TreePalm,
   },
   {
@@ -293,7 +293,7 @@ export function HomePage() {
             <SectionHeading
               eyebrow="Get to know the town"
               title={`Explore ${city.name}`}
-              description="Beyond transactions: the town’s profile, its life and tourism, doing business here, and the portals that save you a trip."
+              description="Beyond transactions: the town’s profile, its fiestas and tourist spots, doing business here, and the portals that save you a trip."
             />
           </Reveal>
 

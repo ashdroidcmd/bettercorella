@@ -33,7 +33,7 @@ const transparencyLinks = [
 
 const cityLinks = [
   { label: 'Town profile', href: '/town' },
-  { label: 'Life and tourism', href: '/town/life' },
+  { label: 'Tourism and events', href: '/town/life' },
   { label: 'Places directory', href: '/town/places' },
   { label: 'Business and investment', href: '/town/business' },
   { label: 'Online services', href: '/online-services' },

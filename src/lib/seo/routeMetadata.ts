@@ -144,11 +144,11 @@ const staticRoutes: RouteMetadata[] = [
   },
   {
     path: '/town/life',
-    title: 'Life and tourism',
-    description: `Culture, festivals and things to do in ${PLACE}.`,
+    title: 'Tourism and events',
+    description: `Fiestas, celebrations, tourist spots and things to do in ${PLACE}, including the Philippine Tarsier Sanctuary.`,
     priority: 0.7,
     changefreq: 'monthly',
-    jsonLd: makeBreadcrumbs([home, town, { name: 'Life & Tourism', path: '/town/life' }]),
+    jsonLd: makeBreadcrumbs([home, town, { name: 'Tourism & Events', path: '/town/life' }]),
   },
   {
     path: '/town/places',
