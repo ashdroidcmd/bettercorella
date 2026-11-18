@@ -7,7 +7,7 @@ Read `AGENTS.md` first. It holds the project rules. This file adds Claude-specif
 - **Name:** BetterCorella, the civic portal for the Municipality of Corella, Bohol
 - **Maintainer:** ashdroidcmd (GitHub)
 - **Frontend:** Next.js 16 (App Router), React 19, TypeScript 6, Tailwind CSS 4, Motion and Lenis, Lucide icons, MapLibre GL
-- **Backend / Database:** no database (static site; typed data in each feature's `data/` folder). Two server routes post public forms to Discord via `src/app/api/_shared/discordForm.ts`: `/api/suggestions` (tourism, form hidden) and `/api/business-listings` (business directory, form hidden); webhooks are server-only env vars. See `../docs/features/tourism-events.md` and `../docs/features/business-directory.md`.
+- **Backend / Database:** no database (static site; typed data in each feature's `data/` folder). Three server routes with server-only env vars: `/api/weather` proxies OpenWeather (free tier, `OPENWEATHER_API_KEY`; see `../docs/features/weather.md`), and `/api/suggestions` (tourism, form hidden) and `/api/business-listings` (business directory, form hidden) post public forms to Discord via `src/app/api/_shared/discordForm.ts`. See `../docs/features/tourism-events.md` and `../docs/features/business-directory.md`.
 - **Package manager:** pnpm (version pinned in `package.json` `packageManager`; run `corepack enable` once). Use `pnpm add`, never `npm install`. Dependencies allowed to run install scripts are listed in `pnpm-workspace.yaml`.
 - **Language:** English only (language switching was removed; no i18n layer)
 - **Rendering:** every route is prerendered to static HTML at build time (`generateStaticParams` for dynamic routes), so page content is in the HTML for search engines.
@@ -18,7 +18,7 @@ Read `AGENTS.md` first. It holds the project rules. This file adds Claude-specif
   - `src/components/{layout,ui,seo}`: feature-agnostic UI (site shell, building blocks, JSON-LD).
   - `src/config/`: `site.ts` (site name/URL) and `city.ts` (LGU identity).
   - `src/lib/`: `utils.ts`, `seo/` (metadata + route list), `dataFreshness.ts` and cross-feature data tests.
-  - Features: `home`, `services`, `government`, `town`, `transparency`, `info`. There is no global site search or news section (both removed on purpose).
+  - Features: `home`, `services`, `government`, `town`, `transparency`, `info`, `weather` (shared only, used by the home page). There is no global site search or news section (both removed on purpose).
   - Import with relative paths inside `src/features` and `src/lib` (the data files must also load in plain Node for `scripts/data-freshness.ts`). Files in `src/app/` use `@/`.
 - **SEO:** `src/lib/seo/routeMetadata.ts` is the single list of routes. It drives `generateMetadata` (`src/lib/seo/metadata.ts`), JSON-LD (`RouteJsonLd`), `/sitemap.xml` and static params. Add new routes there.
 - **PWA:** Serwist (`@serwist/turbopack`). The worker source is `src/sw.ts`, served at `/serwist/sw.js`.

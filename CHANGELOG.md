@@ -18,6 +18,7 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
   - A "Suggest a spot or event" form, built but **hidden for now** (`SHOW_SUGGEST_FORM` in `LifePage.tsx`) (title, when, barangay, venue, details, fees, link, optional photo and contact). A new server route, `/api/suggestions`, posts each suggestion to a private Discord channel through a webhook (`DISCORD_SUGGESTIONS_WEBHOOK_URL`), with mentions disabled, a honeypot, a minimum fill time, a per-connection rate limit and photo checks. Volunteers review suggestions and add them by hand.
   - A photo folder, `src/assets/tourism/{spots,events}/`, with a README on naming and credits.
   - "Tourist spots" and "Events and fiestas" rows in the data-sources table.
+- Current weather for Corella on the home page: a tile in the hero's "Town at a glance" panel and a "Weather in Corella" section (temperature, condition, feels-like, humidity, wind, clouds, rain, pressure, sunrise and sunset), from the OpenWeather Current Weather API (free tier) with attribution. A new server route `/api/weather` keeps the key (`OPENWEATHER_API_KEY`) private and caches readings for 10 minutes. The weather hides itself when the key is missing or the API is unreachable. See `../docs/features/weather.md`.
 - `.env.example` listing the environment variables.
 
 - Budget portal at `/transparency/budget`, ported from BetterGov's [transparency-portal](https://github.com/bettergovph/transparency-portal) template (MIT) into the Next.js site:
