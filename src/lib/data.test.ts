@@ -19,6 +19,7 @@ import { services } from '../features/services/shared/data/services'
 import { sources } from '../features/info/about-page/data/sources'
 import { stats } from '../features/town/shared/data/stats'
 import { timeline } from '../features/town/shared/data/timeline'
+import { touristSpots, townEvents } from '../features/town/shared/data/tourism'
 import { buildRouteMetadata } from './seo/routeMetadata'
 import { pageMetadata, paramsFor } from './seo/metadata'
 
@@ -58,7 +59,7 @@ describe('LGU identity', () => {
     const datasets = {
       city, services, offices, officials, barangays, barangayMap, hotlines, legislation, legislationSources,
       places, placeCategories, cityElections, onlineServices,
-      sources, faqs, stats, timeline, categories, budgetSnapshot,
+      sources, faqs, stats, timeline, categories, budgetSnapshot, touristSpots, townEvents,
     }
     const leftovers = /inabanga|inabangnon|san fernando|sanfernando|la union/i
     for (const [name, data] of Object.entries(datasets)) {
@@ -194,6 +195,41 @@ describe('government', () => {
   it('has well-formed election records', () => {
     expect(unique(cityElections.map((election) => String(election.year)))).toBe(true)
     for (const election of cityElections) expect(election.year).toBeGreaterThanOrEqual(2000)
+  })
+})
+
+describe('tourism and events', () => {
+  const barangayNames = new Set(barangays.map((barangay) => barangay.name))
+
+  it('has unique, sourced tourist spots in known barangays', () => {
+    expect(touristSpots.length).toBeGreaterThan(0)
+    expect(unique(touristSpots.map((spot) => spot.slug))).toBe(true)
+    for (const spot of touristSpots) {
+      expect(spot.slug).toMatch(slugPattern)
+      expect(spot.name.trim()).not.toBe('')
+      expect(spot.categories.length, spot.slug).toBeGreaterThan(0)
+      expect(barangayNames.has(spot.barangay), `${spot.slug} barangay`).toBe(true)
+      expect(spot.sourceUrl).toMatch(http)
+      expect(isDate(spot.lastVerified)).toBe(true)
+      for (const fee of spot.fees ?? []) expect(fee.amountPhp).toBeGreaterThanOrEqual(0)
+    }
+  })
+
+  it('has unique, sourced events with valid schedules', () => {
+    expect(unique(townEvents.map((event) => event.slug))).toBe(true)
+    for (const event of townEvents) {
+      expect(event.slug).toMatch(slugPattern)
+      expect(event.sourceUrl).toMatch(http)
+      expect(isDate(event.lastVerified)).toBe(true)
+      expect(event.schedule.month).toBeGreaterThanOrEqual(1)
+      expect(event.schedule.month).toBeLessThanOrEqual(12)
+      if (event.schedule.kind === 'annual-fixed') {
+        expect(event.schedule.day).toBeGreaterThanOrEqual(1)
+        expect(event.schedule.day).toBeLessThanOrEqual(31)
+      }
+      if (event.barangay) expect(barangayNames.has(event.barangay), `${event.slug} barangay`).toBe(true)
+      if (event.lastHeld) expect(isDate(event.lastHeld.start)).toBe(true)
+    }
   })
 })
 

@@ -10,6 +10,7 @@ import { hotlines } from '../features/government/shared/data/hotlines.ts'
 import { legislation } from '../features/government/shared/data/legislation.ts'
 import { onlineServices } from '../features/services/shared/data/onlineServices.ts'
 import { places } from '../features/town/shared/data/places.ts'
+import { touristSpots, townEvents } from '../features/town/shared/data/tourism.ts'
 
 export interface DataFreshnessRow {
   dataset: string
@@ -110,6 +111,20 @@ export const manuallyMaintainedData: DataFreshnessRow[] = [
     recordCount: budgetSnapshot.fy2027.projects.length + budgetSnapshot.gaa.rows.length,
     lastVerified: budgetSnapshot.fetchedAt.slice(0, 10),
     reviewEveryDays: 30,
+  },
+  {
+    dataset: 'Tourist spots',
+    source: 'Municipality of Corella (What to see, Where to go, Where to eat); hours and fees still to confirm with the venues',
+    recordCount: touristSpots.length,
+    lastVerified: oldestVerificationDate(touristSpots),
+    reviewEveryDays: 180,
+  },
+  {
+    dataset: 'Events and fiestas',
+    source: 'Municipality of Corella (History); yearly dates announced by the LGU and the parish',
+    recordCount: townEvents.length,
+    lastVerified: oldestVerificationDate(townEvents),
+    reviewEveryDays: 180,
   },
   {
     dataset: 'Places directory',

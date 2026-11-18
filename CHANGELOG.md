@@ -6,6 +6,14 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Added
 
+- Tourism and events page at `/town/life` (was the "Life and tourism" placeholder):
+  - Events and fiestas: the Town Fiesta of Nuestra Señora del Villar (every April 27, with the next date shown) and Adlaw sa Corella, the founding anniversary (early September; 142nd in 2026).
+  - Tourist spots: the Philippine Tarsier Sanctuary (hours, admission, visitor rules), the Corella Church of Nuestra Señora del Villar and Green Thumb Farm, shown as short cards (name, barangay, two-line summary, hours and lowest fee) that open a details dialog with hours, admission, tips, contact, directions and the source. Details not yet on an official page are marked "confirm before visiting".
+  - A "Suggest a spot or event" form, built but **hidden for now** (`SHOW_SUGGEST_FORM` in `LifePage.tsx`) (title, when, barangay, venue, details, fees, link, optional photo and contact). A new server route, `/api/suggestions`, posts each suggestion to a private Discord channel through a webhook (`DISCORD_SUGGESTIONS_WEBHOOK_URL`), with mentions disabled, a honeypot, a minimum fill time, a per-connection rate limit and photo checks. Volunteers review suggestions and add them by hand.
+  - A photo folder, `src/assets/tourism/{spots,events}/`, with a README on naming and credits.
+  - "Tourist spots" and "Events and fiestas" rows in the data-sources table.
+- `.env.example` listing the environment variables.
+
 - Budget portal at `/transparency/budget`, ported from BetterGov's [transparency-portal](https://github.com/bettergovph/transparency-portal) template (MIT) into the Next.js site:
   - FY2027 lines that name Corella, Bohol (NEP against House Bill 10858; DPWH, FMR, HFEP, NIA). Each line has status filters, search and CSV export.
   - Enacted GAA 2020–2026 lines naming Corella, with year totals and CSV export.
