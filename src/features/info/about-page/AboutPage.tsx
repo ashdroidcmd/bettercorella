@@ -227,6 +227,18 @@ export function AboutPage() {
                 ))}
               </ul>
             </div>
+            <p className="mt-3 text-sm leading-6 text-ink-600">
+              {'Live data: the home page’s current weather comes from '}
+              <a
+                href="https://openweathermap.org/"
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-brand-700 underline decoration-brand-300 underline-offset-2 hover:text-brand-800"
+              >
+                OpenWeather
+              </a>
+              {' (refreshed about every 10 minutes). For storm warnings, follow PAGASA and the MDRRMO.'}
+            </p>
           </div>
 
           <div className="mt-8">

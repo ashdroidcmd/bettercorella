@@ -26,6 +26,9 @@ import { city } from '../../../config/city'
 import { stats } from '../../town/shared/data/stats'
 import { removeSavedService, useSavedServices } from '../../services/shared/utils/savedServices'
 import { telHref } from '../../../lib/utils'
+import { useCurrentWeather } from '../../weather/shared/hooks/useCurrentWeather'
+import { WeatherSection } from '../../weather/shared/components/WeatherSection'
+import { WeatherTile } from '../../weather/shared/components/WeatherTile'
 
 const featuredCategories = categories.slice(0, 6)
 // The hero card skips the income class; the full list stays on the About page.
@@ -66,9 +69,8 @@ const exploreLinks = [
 ]
 
 export function HomePage() {
-
-
   const savedServices = useSavedServices()
+  const weather = useCurrentWeather()
 
   return (
     <>
@@ -157,7 +159,11 @@ export function HomePage() {
                 />
               </div>
 
-              <div className="mt-6 grid grid-cols-2 gap-3 [&>:last-child:nth-child(odd)]:col-span-2">
+              <div className="mt-6 empty:hidden">
+                <WeatherTile weather={weather} />
+              </div>
+
+              <div className="mt-3 grid grid-cols-2 gap-3 [&>:last-child:nth-child(odd)]:col-span-2">
                 {heroStats.length ? (
                   heroStats.map((stat) => <StatCard key={stat.label} {...stat} tone="dark" />)
                 ) : (
@@ -254,6 +260,8 @@ export function HomePage() {
           </div>
         </section>
       ) : null}
+
+      <WeatherSection weather={weather} />
 
       <section>
         <div className="container-page py-16 sm:py-20">

@@ -6,6 +6,9 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Added
 
+- Current weather for Corella on the home page: a tile in the hero's "Town at a glance" panel and a "Weather in Corella" section (temperature, condition, feels-like, humidity, wind, clouds, rain, pressure, sunrise and sunset), from the OpenWeather Current Weather API (free tier) with attribution. A new server route `/api/weather` keeps the key (`OPENWEATHER_API_KEY`) private and caches readings for 10 minutes. The weather hides itself when the key is missing or the API is unreachable. See `../docs/features/weather.md`.
+- `.env.example` listing the environment variables.
+
 - Budget portal at `/transparency/budget`, ported from BetterGov's [transparency-portal](https://github.com/bettergovph/transparency-portal) template (MIT) into the Next.js site:
   - FY2027 lines that name Corella, Bohol (NEP against House Bill 10858; DPWH, FMR, HFEP, NIA). Each line has status filters, search and CSV export.
   - Enacted GAA 2020–2026 lines naming Corella, with year totals and CSV export.
