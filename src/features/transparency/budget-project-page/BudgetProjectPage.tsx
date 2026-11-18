@@ -41,7 +41,6 @@ export function BudgetProjectPage({ program, slug }: { program: string; slug: st
         title={p.title}
         crumbs={[
           { label: 'Transparency', href: '/transparency' },
-          { label: 'Budget and spending', href: '/transparency/budget' },
           { label: 'Project' },
         ]}
       />

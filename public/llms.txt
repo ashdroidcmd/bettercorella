@@ -11,7 +11,7 @@ Information is published only after it is checked against an official source (th
 - [Municipal government](/government): Officials, offices, barangays and legislation.
 - [Hotlines and contacts](/contact): 911, police, fire, MDRRMO and municipal numbers, the Municipal Hall with a map, and how to send feedback.
 - [Town profile](/town): Facts about Corella from official sources.
-- [Transparency](/transparency): Budget, procurement, infrastructure projects and open datasets.
+- [Transparency](/transparency): National budget lines that name Corella, Bohol (2027 proposal and 2020-2026 enacted budgets).
 - [About](/about): How the project works and where its data comes from.
 
 ## Project

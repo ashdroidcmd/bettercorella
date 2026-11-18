@@ -1,1 +1,0 @@
-export { ProcurementPage } from './ProcurementPage'

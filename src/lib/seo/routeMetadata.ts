@@ -177,42 +177,10 @@ const staticRoutes: RouteMetadata[] = [
   {
     path: '/transparency',
     title: 'Transparency',
-    description: `Budget, procurement, infrastructure projects and open data for ${PLACE}, linked to official sources.`,
+    description: `National budget lines that name ${PLACE}: the proposed 2027 budget (NEP and House bill) and the enacted budgets of 2020 to 2026, from the BetterGov.ph Budget API.`,
     priority: 0.8,
     changefreq: 'weekly',
     jsonLd: makeBreadcrumbs([home, transparency]),
-  },
-  {
-    path: '/transparency/budget',
-    title: 'Budget and spending',
-    description: `National budget lines that name ${PLACE}: the proposed 2027 budget (NEP and House bill) and the enacted budgets of 2020 to 2026, from the BetterGov.ph Budget API.`,
-    priority: 0.7,
-    changefreq: 'monthly',
-    jsonLd: makeBreadcrumbs([home, transparency, { name: 'Budget & Spending', path: '/transparency/budget' }]),
-  },
-  {
-    path: '/transparency/procurement',
-    title: 'Procurement and bids',
-    description: `Bids, awards and contracts of ${PLACE}, based on PhilGEPS and official procurement records.`,
-    priority: 0.7,
-    changefreq: 'monthly',
-    jsonLd: makeBreadcrumbs([home, transparency, { name: 'Procurement', path: '/transparency/procurement' }]),
-  },
-  {
-    path: '/transparency/projects',
-    title: 'Infrastructure projects',
-    description: `Public works projects in ${PLACE}, based on DPWH and municipal records.`,
-    priority: 0.7,
-    changefreq: 'monthly',
-    jsonLd: makeBreadcrumbs([home, transparency, { name: 'Projects', path: '/transparency/projects' }]),
-  },
-  {
-    path: '/transparency/open-data',
-    title: 'Open data',
-    description: 'National open datasets covering local governments: fiscal data, boundaries, elections, public works, procurement and hazard maps.',
-    priority: 0.6,
-    changefreq: 'monthly',
-    jsonLd: makeBreadcrumbs([home, transparency, { name: 'Open Data', path: '/transparency/open-data' }]),
   },
   {
     path: '/about',
@@ -394,7 +362,6 @@ export function buildRouteMetadata(): RouteMetadata[] {
         jsonLd: makeBreadcrumbs([
           home,
           transparency,
-          { name: 'Budget & Spending', path: '/transparency/budget' },
           { name: project.title, path },
         ]),
       }

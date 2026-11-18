@@ -1,1 +1,0 @@
-export { TransparencyPage } from './TransparencyPage'
