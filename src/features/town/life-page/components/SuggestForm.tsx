@@ -1,10 +1,11 @@
 'use client'
 
 import { CheckCircle2, ImagePlus, LoaderCircle, Send } from 'lucide-react'
-import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react'
+import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { CustomSelect } from '../../../../components/ui/CustomSelect'
 import { ISSUES_URL } from '../../../../config/site'
 import { cn } from '../../../../lib/utils'
+import { BotTraps, Field, inputClass, resizePhoto, type FormStatus } from '../../shared/components/formParts'
 import {
   BARANGAY_OPTIONS,
   readSuggestion,
@@ -15,37 +16,13 @@ import {
   type SuggestionKind,
 } from '../../shared/utils/suggestion'
 
-const MAX_EDGE = 1600
-
-/** Shrinks a photo to at most 1600 px on its long edge (JPEG), so uploads stay small. Falls back to the original. */
-async function resizePhoto(file: File): Promise<File> {
-  try {
-    const bitmap = await createImageBitmap(file)
-    const scale = Math.min(1, MAX_EDGE / Math.max(bitmap.width, bitmap.height))
-    const canvas = document.createElement('canvas')
-    canvas.width = Math.round(bitmap.width * scale)
-    canvas.height = Math.round(bitmap.height * scale)
-    canvas.getContext('2d')?.drawImage(bitmap, 0, 0, canvas.width, canvas.height)
-    bitmap.close()
-    const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.85))
-    return blob ? new File([blob], 'photo.jpg', { type: 'image/jpeg' }) : file
-  } catch {
-    return file
-  }
-}
-
-type Status = { state: 'idle' } | { state: 'sending' } | { state: 'sent' } | { state: 'failed'; message: string }
-
-const inputClass =
-  'mt-1.5 w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-sm text-ink-950 shadow-sm outline-none transition placeholder:text-ink-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 aria-[invalid=true]:border-red-400'
-
 export function SuggestForm() {
   const formId = useId()
   const formRef = useRef<HTMLFormElement>(null)
   const [kind, setKind] = useState<SuggestionKind>('event')
   const [barangay, setBarangay] = useState('')
   const [errors, setErrors] = useState<SuggestionErrors>({})
-  const [status, setStatus] = useState<Status>({ state: 'idle' })
+  const [status, setStatus] = useState<FormStatus>({ state: 'idle' })
   const [startedAt, setStartedAt] = useState('')
   useEffect(() => setStartedAt(String(Date.now())), [])
 
@@ -248,14 +225,7 @@ export function SuggestForm() {
         </Field>
       </div>
 
-      {/* Bot traps: humans never see or fill the honeypot, and real people take more than a few seconds. */}
-      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
-        <label>
-          Website
-          <input name="website" tabIndex={-1} autoComplete="off" />
-        </label>
-      </div>
-      <input type="hidden" name="startedAt" value={startedAt} />
+      <BotTraps startedAt={startedAt} />
 
       <div className="mt-6">
         <label className="flex gap-3 text-sm leading-6 text-ink-700">
@@ -303,37 +273,5 @@ export function SuggestForm() {
         <p className="text-xs text-ink-500">{'Suggestions go to the volunteers, not the municipal government.'}</p>
       </div>
     </form>
-  )
-}
-
-function Field({
-  label,
-  id,
-  error,
-  hint,
-  className,
-  children,
-}: {
-  label: string
-  id: string
-  error?: string | undefined
-  hint?: string
-  className?: string
-  children: ReactNode
-}) {
-  return (
-    <div className={className}>
-      <label htmlFor={id} className="text-sm font-bold text-ink-950">
-        {label}
-      </label>
-      {children}
-      {error ? (
-        <p id={`${id}-error`} className="mt-1 text-sm font-semibold text-red-700">
-          {error}
-        </p>
-      ) : hint ? (
-        <p className="mt-1 text-xs text-ink-500">{hint}</p>
-      ) : null}
-    </div>
   )
 }

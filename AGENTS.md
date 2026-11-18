@@ -4,7 +4,7 @@
 
 **BetterCorella** is a volunteer-run, open-source civic portal for the **Municipality of Corella, Bohol, Philippines**. It shows the LGU's services, officials, barangays, hotlines and budget.
 
-- Frontend only, with no database; typed data lives in each feature's `data/` folder under `src/features/`. The one server route is `src/app/api/suggestions/route.ts`, which forwards the "Suggest a spot or event" form to a private Discord channel (`DISCORD_SUGGESTIONS_WEBHOOK_URL`, server-only; see `../docs/features/tourism-events.md`). Suggestions are never published automatically.
+- Frontend only, with no database; typed data lives in each feature's `data/` folder under `src/features/`. Two server routes forward public forms to private Discord channels through `src/app/api/_shared/discordForm.ts`: `/api/suggestions` (tourism suggestions, `DISCORD_SUGGESTIONS_WEBHOOK_URL`; form hidden for now) and `/api/business-listings` ("Register your business", `DISCORD_BUSINESS_WEBHOOK_URL`; form hidden for now). Webhook URLs are server-only. Nothing submitted is published automatically; volunteers add approved records by hand (see `../docs/features/tourism-events.md` and `business-directory.md`).
 - It is derived from BetterInabanga (ISC). The site is rebranded to Corella. Datasets without verified Corella records (legislation, budget, procurement, projects, places) stay empty and show `ComingSoon`; source notes and conflicts are in `../rebranding/` (outside git). Never add data from another LGU — `src/lib/data.test.ts` fails if Inabanga, San Fernando or La Union content appears.
 - LGU identity lives in `src/config/city.ts`. Unverified fields are `null`; components must handle `null` (hide the item or show "Pending").
 

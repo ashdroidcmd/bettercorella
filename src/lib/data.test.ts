@@ -20,6 +20,7 @@ import { sources } from '../features/info/about-page/data/sources'
 import { stats } from '../features/town/shared/data/stats'
 import { timeline } from '../features/town/shared/data/timeline'
 import { touristSpots, townEvents } from '../features/town/shared/data/tourism'
+import { businessCategoryLabels, businesses } from '../features/town/shared/data/businesses'
 import { buildRouteMetadata } from './seo/routeMetadata'
 import { pageMetadata, paramsFor } from './seo/metadata'
 
@@ -59,7 +60,7 @@ describe('LGU identity', () => {
     const datasets = {
       city, services, offices, officials, barangays, barangayMap, hotlines, legislation, legislationSources,
       places, placeCategories, cityElections, onlineServices,
-      sources, faqs, stats, timeline, categories, budgetSnapshot, touristSpots, townEvents,
+      sources, faqs, stats, timeline, categories, budgetSnapshot, touristSpots, townEvents, businesses,
     }
     const leftovers = /inabanga|inabangnon|san fernando|sanfernando|la union/i
     for (const [name, data] of Object.entries(datasets)) {
@@ -229,6 +230,25 @@ describe('tourism and events', () => {
       }
       if (event.barangay) expect(barangayNames.has(event.barangay), `${event.slug} barangay`).toBe(true)
       if (event.lastHeld) expect(isDate(event.lastHeld.start)).toBe(true)
+    }
+  })
+})
+
+describe('business directory', () => {
+  it('has unique, sourced listings with a contact', () => {
+    const barangayNames = new Set(barangays.map((barangay) => barangay.name))
+    expect(unique(businesses.map((business) => business.slug))).toBe(true)
+    for (const business of businesses) {
+      expect(business.slug).toMatch(slugPattern)
+      expect(business.category in businessCategoryLabels, business.slug).toBe(true)
+      expect(business.offerings.length, business.slug).toBeGreaterThan(0)
+      if (business.barangay) expect(barangayNames.has(business.barangay), `${business.slug} barangay`).toBe(true)
+      expect(Object.values(business.contact).some(Boolean), `${business.slug} contact`).toBe(true)
+      for (const link of [business.contact.website, business.contact.facebook, business.contact.github]) {
+        if (link) expect(link).toMatch(http)
+      }
+      expect(business.sourceUrl).toMatch(http)
+      expect(isDate(business.lastVerified)).toBe(true)
     }
   })
 })
