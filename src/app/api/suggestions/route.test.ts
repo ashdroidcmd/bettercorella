@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { resetRateLimit } from './rateLimit'
+import { resetRateLimit } from '../_shared/rateLimit'
 import { POST } from './route'
 
 const WEBHOOK = 'https://discord.com/api/webhooks/123/secret-token'

@@ -161,7 +161,7 @@ const staticRoutes: RouteMetadata[] = [
   {
     path: '/town/business',
     title: 'Business and investment',
-    description: `Starting and running a business in ${PLACE}: permits, guidance and national business portals.`,
+    description: `Local businesses and services in ${PLACE}, a free directory listing, and business permits and portals.`,
     priority: 0.7,
     changefreq: 'monthly',
     jsonLd: makeBreadcrumbs([home, town, { name: 'Business & Investment', path: '/town/business' }]),

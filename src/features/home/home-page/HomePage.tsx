@@ -54,7 +54,7 @@ const exploreLinks = [
   {
     title: 'Business and investment',
     href: '/town/business',
-    description: 'Permits, guidance, and national business portals.',
+    description: 'Local businesses, permits, and business portals.',
     icon: Briefcase,
   },
   {

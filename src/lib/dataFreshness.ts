@@ -11,6 +11,7 @@ import { legislation } from '../features/government/shared/data/legislation.ts'
 import { onlineServices } from '../features/services/shared/data/onlineServices.ts'
 import { places } from '../features/town/shared/data/places.ts'
 import { touristSpots, townEvents } from '../features/town/shared/data/tourism.ts'
+import { businesses } from '../features/town/shared/data/businesses.ts'
 
 export interface DataFreshnessRow {
   dataset: string
@@ -124,6 +125,13 @@ export const manuallyMaintainedData: DataFreshnessRow[] = [
     source: 'Municipality of Corella (History); yearly dates announced by the LGU and the parish',
     recordCount: townEvents.length,
     lastVerified: oldestVerificationDate(townEvents),
+    reviewEveryDays: 180,
+  },
+  {
+    dataset: 'Local business directory',
+    source: 'Listings sent by the business owners and checked by volunteers',
+    recordCount: businesses.length,
+    lastVerified: oldestVerificationDate(businesses),
     reviewEveryDays: 180,
   },
   {

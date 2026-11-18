@@ -6,6 +6,12 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Added
 
+- Business directory on `/town/business` (was a placeholder):
+  - "Local businesses and services": short listing cards that open a details dialog (offerings, location, hours, contact, source). The first listing is the maintainer's "Developer for hire" service (AI, web, games, automation, IoT, ESP32, Arduino), marked as listed by the maintainer.
+  - "Register your business": a free directory-listing form, built but **hidden for now** (`SHOW_BUSINESS_FORM` in `BusinessPage.tsx`) (name, category, offer, barangay, address, hours, at least one public contact, optional logo, and review-only owner name and permit number). A new route, `/api/business-listings`, posts each request to Discord (`DISCORD_BUSINESS_WEBHOOK_URL`, falling back to `DISCORD_SUGGESTIONS_WEBHOOK_URL`). The page says clearly that a listing is not a business permit.
+  - "Permits and business portals": the official permit and registration links as cards.
+  - A logo folder, `src/assets/business/`, and a "Local business directory" row in the data-sources table.
+
 - Tourism and events page at `/town/life` (was the "Life and tourism" placeholder):
   - Events and fiestas: the Town Fiesta of Nuestra Señora del Villar (every April 27, with the next date shown) and Adlaw sa Corella, the founding anniversary (early September; 142nd in 2026).
   - Tourist spots: the Philippine Tarsier Sanctuary (hours, admission, visitor rules), the Corella Church of Nuestra Señora del Villar and Green Thumb Farm, shown as short cards (name, barangay, two-line summary, hours and lowest fee) that open a details dialog with hours, admission, tips, contact, directions and the source. Details not yet on an official page are marked "confirm before visiting".
