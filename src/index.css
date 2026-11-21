@@ -146,6 +146,80 @@
   }
 }
 
+/*
+ * First-load splash (SplashScreen.tsx). Hidden for the first 300 ms so fast loads never see it,
+ * and gone after 4 s even if the app never hydrates. Keep 4 s in sync with the init script in layout.tsx.
+ */
+.app-splash {
+  animation:
+    splash-in 200ms ease-out 300ms both,
+    splash-out 300ms ease-in 4s forwards;
+}
+
+.app-splash-bar {
+  position: relative;
+  width: 0;
+  animation: splash-bar 3.5s cubic-bezier(0.1, 0.6, 0.2, 1) forwards;
+}
+
+/* Yellow leading edge. */
+.app-splash-bar::after {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: 1.5rem;
+  background: var(--color-accent);
+  content: "";
+}
+
+[data-phase="done"] .app-splash-bar,
+[data-phase="leaving"] .app-splash-bar {
+  width: 100%;
+  animation: none;
+  transition: width 200ms ease-out;
+}
+
+@keyframes splash-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes splash-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes splash-bar {
+  to {
+    width: 85%;
+  }
+}
+
+/*
+ * Scroll reveal (Reveal.tsx). Content is visible unless `html.reveal-ready` is set by the init script,
+ * which drops it again if the app hasn't hydrated within 4 s.
+ */
+[data-reveal] {
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
+}
+
+html.reveal-ready [data-reveal]:not([data-revealed]) {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.reveal-ready [data-reveal]:not([data-revealed]) {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .scrollbar-slim::-webkit-scrollbar {
   width: 10px;
   height: 10px;

@@ -223,3 +223,28 @@ test.describe('Theme', () => {
     await expect(page.getByRole('button', { name: 'Dark mode' })).toHaveAttribute('aria-pressed', 'true')
   })
 })
+
+test.describe('Loading', () => {
+  const opacity = (locator: import('@playwright/test').Locator) =>
+    locator.evaluate((element) => Number(getComputedStyle(element).opacity))
+
+  test('splash leaves after load and revealed content is visible', async ({ page }) => {
+    await page.goto('/')
+    await expect(page.getByRole('progressbar', { name: 'Loading BetterCorella' })).toHaveCount(0)
+    const section = page.locator('[data-reveal]').first()
+    await section.scrollIntoViewIfNeeded()
+    await expect.poll(() => opacity(section)).toBe(1)
+  })
+})
+
+test.describe('Loading without JavaScript', () => {
+  test.use({ javaScriptEnabled: false })
+
+  test('content is visible and the splash is hidden', async ({ page }) => {
+    await page.goto('/services')
+    await expect(page.getByRole('progressbar', { name: 'Loading BetterCorella' })).toBeHidden()
+    const sections = page.locator('[data-reveal]')
+    expect(await sections.count()).toBeGreaterThan(0)
+    expect(await sections.first().evaluate((element) => getComputedStyle(element).opacity)).toBe('1')
+  })
+})
