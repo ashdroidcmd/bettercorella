@@ -6,7 +6,7 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Added
 
-- Loading splash on first page load: the logo in the center and a blue loading bar (yellow leading edge) along the bottom, in light and dark (`SplashScreen.tsx`, rendered in the root layout). It stays invisible for the first 300 ms, so fast and repeat visits never see it. It completes and fades out once the app hydrates. It also hides itself after 4 s, or never shows without JavaScript, and it never reappears on client-side navigation.
+- Loading splash on first page load: the logo in the center with a short blue loading bar (yellow leading edge) just below it, in light and dark (`SplashScreen.tsx`, rendered in the root layout). It stays invisible for the first 300 ms, so fast and repeat visits never see it. It completes and fades out once the app hydrates. It also hides itself after 4 s, or never shows without JavaScript, and it never reappears on client-side navigation.
 
 - Light and dark mode: a sun/moon switch in the header. The site follows the device setting until a visitor picks a theme, then remembers the choice (`localStorage`, key `bettercorella-theme`). A small inline script in `layout.tsx` applies the theme before first paint, so pages don't flash. Dark mode remaps the color tokens in `src/index.css` under `:root.dark`. New fixed tokens (`card`, `night`, `primary`, `primary-hover`, `brand-strong`) replace `bg-white`, dark-section `bg-ink-950` and solid brand button fills, so heroes, the footer and white-on-blue buttons look the same in both themes. Use `bg-card` instead of `bg-white` for surfaces from now on. The header shows the light logo in dark mode, and the browser theme color follows the OS scheme.
 

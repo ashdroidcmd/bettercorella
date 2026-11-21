@@ -7,7 +7,7 @@ import logoLight from '../../assets/logo-light.png'
 type Phase = 'loading' | 'done' | 'leaving' | 'gone'
 
 /**
- * First-load splash: the logo in the center and a loading bar along the bottom. It sits in the
+ * First-load splash: the logo in the center with a short loading bar just below it. It sits in the
  * prerendered HTML, so it paints before JavaScript arrives, and leaves once the app hydrates.
  * It stays invisible for the first 300 ms (fast loads never see it) and hides itself after 4 s
  * even without JavaScript (see `.app-splash` in src/index.css). The root layout never remounts,
@@ -38,11 +38,11 @@ export function SplashScreen() {
       aria-label="Loading BetterCorella"
       aria-busy={phase === 'loading'}
     >
-      <div className="app-splash absolute inset-0 flex items-center justify-center bg-card">
+      <div className="app-splash absolute inset-0 flex flex-col items-center justify-center gap-6 bg-card">
         <img src={logo.src} alt="" width="655" height="199" className="h-16 w-auto sm:h-20 dark:hidden" />
         <img src={logoLight.src} alt="" width="655" height="199" className="hidden h-16 w-auto sm:h-20 dark:block" />
-        <div className="absolute inset-x-0 bottom-0 h-1 overflow-hidden bg-line">
-          <div className="app-splash-bar h-full bg-brand-strong" />
+        <div className="h-1.5 w-40 overflow-hidden rounded-full bg-line sm:w-48">
+          <div className="app-splash-bar h-full rounded-full bg-brand-strong" />
         </div>
       </div>
     </div>

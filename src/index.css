@@ -167,7 +167,8 @@
   position: absolute;
   inset-block: 0;
   inset-inline-end: 0;
-  width: 1.5rem;
+  width: 0.75rem;
+  border-radius: 999px;
   background: var(--color-accent);
   content: "";
 }
