@@ -27,7 +27,7 @@ export function BusinessDetailsDialog({ business, ref }: { business: BusinessLis
       onClick={(event) => {
         if (event.target === event.currentTarget) event.currentTarget.close()
       }}
-      className="m-auto w-[calc(100%-2rem)] max-w-xl overflow-hidden rounded-2xl bg-white p-0 text-ink-950 shadow-float backdrop:bg-ink-950/60 backdrop:backdrop-blur-sm"
+      className="m-auto w-[calc(100%-2rem)] max-w-xl overflow-hidden rounded-2xl bg-card p-0 text-ink-950 shadow-float backdrop:bg-night/60 backdrop:backdrop-blur-sm"
     >
       <div data-lenis-prevent className="max-h-[85vh] overflow-y-auto overscroll-contain p-5 sm:p-7">
         <div className="flex items-start gap-4">

@@ -194,3 +194,32 @@ test.describe('Corella rebrand', () => {
     await expect(page).toHaveURL(/\/contact#hotlines$/)
   })
 })
+
+test.describe('Theme', () => {
+  test('dark mode toggle applies and persists across reloads', async ({ page }) => {
+    await page.emulateMedia({ colorScheme: 'light' })
+    await page.goto('/')
+    const html = page.locator('html')
+    const toggle = page.getByRole('button', { name: 'Dark mode' })
+
+    await expect(html).not.toHaveClass(/\bdark\b/)
+    await expect(toggle).toHaveAttribute('aria-pressed', 'false')
+
+    await toggle.click()
+    await expect(html).toHaveClass(/\bdark\b/)
+    await expect(toggle).toHaveAttribute('aria-pressed', 'true')
+
+    await page.reload()
+    await expect(html).toHaveClass(/\bdark\b/)
+
+    await page.getByRole('button', { name: 'Dark mode' }).click()
+    await expect(html).not.toHaveClass(/\bdark\b/)
+  })
+
+  test('follows the OS setting when no theme is saved', async ({ page }) => {
+    await page.emulateMedia({ colorScheme: 'dark' })
+    await page.goto('/')
+    await expect(page.locator('html')).toHaveClass(/\bdark\b/)
+    await expect(page.getByRole('button', { name: 'Dark mode' })).toHaveAttribute('aria-pressed', 'true')
+  })
+})

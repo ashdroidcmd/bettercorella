@@ -74,7 +74,7 @@ export function HomePage() {
 
   return (
     <>
-      <section className="relative isolate z-30 overflow-visible bg-ink-950 text-white">
+      <section className="relative isolate z-30 overflow-visible bg-night text-white">
         <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden">
           <Image
             src={heroImage}
@@ -85,8 +85,8 @@ export function HomePage() {
             sizes="100vw"
             className="object-cover object-[70%_center]"
           />
-          <div className="absolute inset-0 bg-ink-950/70 sm:bg-ink-950/55" />
-          <div className="absolute inset-0 bg-gradient-to-r from-ink-950/95 via-ink-950/70 to-ink-950/10" />
+          <div className="absolute inset-0 bg-night/70 sm:bg-night/55" />
+          <div className="absolute inset-0 bg-gradient-to-r from-night/95 via-night/70 to-night/10" />
         </div>
         <div className="container-page relative grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-24">
           <div className="min-w-0">
@@ -133,7 +133,7 @@ export function HomePage() {
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <a
                   href="#services"
-                  className="inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-bold text-ink-950 transition hover:bg-white"
+                  className="inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-bold text-ink-950 transition hover:bg-card"
                 >
                   {'Browse services'}
                   <ArrowRight aria-hidden="true" className="size-4" />
@@ -231,7 +231,7 @@ export function HomePage() {
                   <Link
                     href={`/services/${service.category}/${service.slug}`}
                    
-                    className="group flex min-w-0 flex-1 items-center justify-between gap-3 rounded-xl border border-line bg-white p-4 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
+                    className="group flex min-w-0 flex-1 items-center justify-between gap-3 rounded-xl border border-line bg-card p-4 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
                   >
                     <span className="min-w-0">
                       <span className="block truncate text-sm font-bold text-ink-950 group-hover:text-brand-700">
@@ -248,7 +248,7 @@ export function HomePage() {
                     type="button"
                     onClick={() => removeSavedService(service)}
                     aria-label={`${'Remove from saved services'}: ${service.title}`}
-                    className="inline-flex w-11 shrink-0 items-center justify-center rounded-xl border border-line bg-white text-ink-400 transition hover:border-red-200 hover:text-red-600"
+                    className="inline-flex w-11 shrink-0 items-center justify-center rounded-xl border border-line bg-card text-ink-400 transition hover:border-red-200 hover:text-red-600"
                   >
                     <X aria-hidden="true" className="size-4" />
                   </button>
@@ -313,7 +313,7 @@ export function HomePage() {
                   <Link
                     href={link.href}
                    
-                    className="group flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
+                    className="group flex h-full flex-col rounded-2xl border border-line bg-card p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
                   >
                     <span className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
                       <Icon aria-hidden="true" className="size-5" />

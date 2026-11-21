@@ -34,7 +34,7 @@ export function ComingSoon({ topic, source }: ComingSoonProps) {
           href={ISSUES_URL}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-4 py-2 text-sm font-semibold text-brand-700 transition hover:border-brand-200 hover:bg-brand-50"
+          className="inline-flex items-center gap-1.5 rounded-full border border-line bg-card px-4 py-2 text-sm font-semibold text-brand-700 transition hover:border-brand-200 hover:bg-brand-50"
         >
           Share an official source
           <ExternalLink aria-hidden="true" className="size-3.5" />

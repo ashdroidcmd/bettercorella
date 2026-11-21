@@ -59,7 +59,7 @@ export function TermsPage() {
 
         <ul className="grid gap-3 sm:grid-cols-3">
           {termsHighlights.map(({ icon: Icon, title, text }) => (
-            <li key={title} className="rounded-2xl border border-line bg-white p-4 shadow-card">
+            <li key={title} className="rounded-2xl border border-line bg-card p-4 shadow-card">
               <Icon aria-hidden="true" className="size-4 text-brand-700" />
               <span className="mt-3 block text-sm font-bold text-ink-950">{title}</span>
               <span className="mt-1 block text-xs leading-5 text-ink-600">{text}</span>
@@ -67,35 +67,35 @@ export function TermsPage() {
           ))}
         </ul>
 
-        <section id="use-of-site" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
+        <section id="use-of-site" className="scroll-mt-28 rounded-2xl border border-line bg-card p-5 shadow-card sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"01 · Using this guide"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Use of the site"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
             {"You may read, link to, and share the guide for personal, civic, educational, and journalistic use. Do not present it as an official municipal publication or use it to mislead others about an official transaction."}</p>
         </section>
 
-        <section id="accuracy" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
+        <section id="accuracy" className="scroll-mt-28 rounded-2xl border border-line bg-card p-5 shadow-card sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"02 · Public information"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Accuracy and timeliness"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
             {"The guide summarizes public records and links to official sources. Requirements, fees, schedules, officials, and documents can change without notice. Information is provided as-is, without a warranty of completeness or accuracy. Always confirm details with the issuing office or the official municipal channels before relying on them."}</p>
         </section>
 
-        <section id="professional-advice" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
+        <section id="professional-advice" className="scroll-mt-28 rounded-2xl border border-line bg-card p-5 shadow-card sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"03 · Decisions"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"No professional advice"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
             {"Nothing on this site is legal, tax, financial, medical, or engineering advice. For decisions with legal or financial consequences, consult a qualified professional or the appropriate government office."}</p>
         </section>
 
-        <section id="external-links" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
+        <section id="external-links" className="scroll-mt-28 rounded-2xl border border-line bg-card p-5 shadow-card sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"04 · Other websites"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"External links"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
             {"Links to government websites, the Citizen’s Charter, and other public records are provided for reference. This project does not control those destinations and is not responsible for their content, availability, or policies."}</p>
         </section>
 
-        <section id="intellectual-property" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
+        <section id="intellectual-property" className="scroll-mt-28 rounded-2xl border border-line bg-card p-5 shadow-card sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"05 · Attribution"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Intellectual property"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">

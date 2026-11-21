@@ -26,7 +26,7 @@ export function PhotoFrame({ photo, icon: Icon }: { photo: TourismPhoto | undefi
         style={photo.position ? { objectPosition: photo.position } : undefined}
       />
       {photo.credit ? (
-        <figcaption className="absolute bottom-0 right-0 rounded-tl-lg bg-ink-950/60 px-2 py-0.5 text-[10px] text-white/85">
+        <figcaption className="absolute bottom-0 right-0 rounded-tl-lg bg-night/60 px-2 py-0.5 text-[10px] text-white/85">
           {photo.creditUrl ? (
             <a href={photo.creditUrl} target="_blank" rel="noreferrer" className="hover:text-white">
               {photo.credit}

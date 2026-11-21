@@ -33,7 +33,7 @@ export function AccessibilityPage() {
       />
 
       <InfoPageLayout sections={sections}>
-          <section id="our-approach" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7">
+          <section id="our-approach" className="scroll-mt-28 rounded-2xl border border-line bg-card p-5 shadow-card sm:p-7">
             <h2 className="text-xl font-extrabold tracking-tight text-ink-950">{"Our approach"}</h2>
             <p className="mt-3 text-[15px] leading-7 text-ink-600">
               {"BetterCorella is an independent civic project. We aim to follow the Web Content Accessibility Guidelines (WCAG) 2.2 at the AA level, but the site has not been formally audited or certified. This page describes the practices in place and the known gaps."}</p>
@@ -55,7 +55,7 @@ export function AccessibilityPage() {
               {features.map((feature) => (
                 <li
                   key={feature}
-                  className="flex gap-3 rounded-2xl border border-line bg-white p-4 text-sm leading-6 text-ink-600"
+                  className="flex gap-3 rounded-2xl border border-line bg-card p-4 text-sm leading-6 text-ink-600"
                 >
                   <CheckCircle2 aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-600" />
                   <span>{feature}</span>
@@ -78,7 +78,7 @@ export function AccessibilityPage() {
             </ul>
           </section>
 
-          <section id="reporting-a-barrier" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7">
+          <section id="reporting-a-barrier" className="scroll-mt-28 rounded-2xl border border-line bg-card p-5 shadow-card sm:p-7">
             <h2 className="text-xl font-extrabold tracking-tight text-ink-950">{"Reporting a barrier"}</h2>
             <p className="mt-3 text-[15px] leading-7 text-ink-600">
               {"This independent project does not yet publish a dedicated support inbox. For barriers in official data or documents, use the contact page to find the right official channel. For a problem with this site’s layout or navigation, note the page address and the assistive technology you use so it can be reviewed."}</p>

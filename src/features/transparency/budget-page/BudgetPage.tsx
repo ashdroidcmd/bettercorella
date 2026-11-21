@@ -79,7 +79,7 @@ export function BudgetPage() {
                     href={link.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="group flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
+                    className="group flex h-full flex-col rounded-2xl border border-line bg-card p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
                   >
                     <span className="flex items-start justify-between gap-3">
                       <span className="text-base font-bold text-ink-950">{link.label}</span>

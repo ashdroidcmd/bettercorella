@@ -16,7 +16,7 @@ export function BusinessCard({ business }: { business: BusinessListing }) {
   const place = business.barangay ? `Brgy. ${business.barangay}` : business.serviceArea
 
   return (
-    <article className="group relative flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float">
+    <article className="group relative flex h-full flex-col rounded-2xl border border-line bg-card p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float">
       <div className="flex items-start gap-4">
         <BusinessLogo business={business} size="sm" />
         <div className="min-w-0">

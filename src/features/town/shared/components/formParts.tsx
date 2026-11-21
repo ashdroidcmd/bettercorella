@@ -30,7 +30,7 @@ export type FormStatus =
   | { state: 'failed'; message: string }
 
 export const inputClass =
-  'mt-1.5 w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-sm text-ink-950 shadow-sm outline-none transition placeholder:text-ink-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 aria-[invalid=true]:border-red-400'
+  'mt-1.5 w-full rounded-xl border border-line bg-card px-3.5 py-2.5 text-sm text-ink-950 shadow-sm outline-none transition placeholder:text-ink-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 aria-[invalid=true]:border-red-400'
 
 /** Bot traps: a hidden honeypot field humans never fill, and the time the form was shown. */
 export function BotTraps({ startedAt }: { startedAt: string }) {

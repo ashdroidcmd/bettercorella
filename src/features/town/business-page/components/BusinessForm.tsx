@@ -117,7 +117,7 @@ export function BusinessForm() {
       onSubmit={onSubmit}
       noValidate
       aria-label="Register your business"
-      className="relative rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7"
+      className="relative rounded-2xl border border-line bg-card p-5 shadow-card sm:p-7"
     >
       <fieldset>
         <legend className="text-base font-extrabold text-ink-950">{'About the business'}</legend>
@@ -207,7 +207,7 @@ export function BusinessForm() {
               name="photo"
               type="file"
               accept="image/jpeg,image/png,image/webp"
-              className="min-w-0 text-sm text-ink-700 file:mr-3 file:rounded-lg file:border-0 file:bg-brand-700 file:px-3 file:py-1.5 file:text-sm file:font-bold file:text-white hover:file:bg-brand-800"
+              className="min-w-0 text-sm text-ink-700 file:mr-3 file:rounded-lg file:border-0 file:bg-primary file:px-3 file:py-1.5 file:text-sm file:font-bold file:text-white hover:file:bg-primary-hover"
               {...errorProps('photo')}
             />
           </div>
@@ -260,7 +260,7 @@ export function BusinessForm() {
           type="submit"
           disabled={sending}
           aria-busy={sending}
-          className="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-brand-800 disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-bold text-white transition hover:bg-primary-hover disabled:opacity-60"
         >
           {sending ? <LoaderCircle aria-hidden="true" className="size-4 animate-spin" /> : <Send aria-hidden="true" className="size-4" />}
           {sending ? 'Sending…' : 'Send listing'}

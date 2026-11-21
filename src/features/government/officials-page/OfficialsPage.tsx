@@ -70,7 +70,7 @@ function OfficialsPageContent() {
           </div>
 
           {cityElections.length ? (
-          <div className="mt-10 overflow-hidden rounded-2xl border border-line bg-white shadow-card">
+          <div className="mt-10 overflow-hidden rounded-2xl border border-line bg-card shadow-card">
             <div className="border-b border-line p-5 sm:p-6">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-700">Election history</p>
               <h3 className="mt-2 text-xl font-extrabold tracking-tight text-ink-950">Mayors and vice mayors</h3>

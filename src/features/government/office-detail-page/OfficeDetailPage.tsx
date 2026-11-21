@@ -46,7 +46,7 @@ export function OfficeDetailPage() {
             <Building2 aria-hidden="true" className="size-3.5 text-brand-300" />
             {office.sector}
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-700 px-3 py-1.5 text-xs font-bold text-white">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-white">
             {officeServices.length} {(officeServices.length === 1 ? 'service' : 'services')}
           </span>
         </div>
@@ -56,7 +56,7 @@ export function OfficeDetailPage() {
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
           <div>
             <SectionHeading eyebrow="Contact" title="Visit, call, or write" />
-            <div className="mt-6 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7">
+            <div className="mt-6 rounded-2xl border border-line bg-card p-5 shadow-card sm:p-7">
               <dl className="grid gap-6 sm:grid-cols-2">
                 <div>
                   <dt className="text-xs font-bold uppercase tracking-[0.12em] text-ink-400">Office head</dt>
@@ -117,7 +117,7 @@ export function OfficeDetailPage() {
                 />
                 <ul className="mt-6 grid gap-3 sm:grid-cols-2">
                   {office.staff.map((person) => (
-                    <li key={`${person.name}-${person.position}`} className="rounded-xl border border-line bg-white px-4 py-3 shadow-card">
+                    <li key={`${person.name}-${person.position}`} className="rounded-xl border border-line bg-card px-4 py-3 shadow-card">
                       <p className="text-sm font-bold leading-5 text-ink-900">{person.name}</p>
                       <p className="mt-0.5 text-xs leading-5 text-ink-500">{person.position}</p>
                     </li>
@@ -148,7 +148,7 @@ export function OfficeDetailPage() {
                       <Link
                         href="/services"
                        
-                        className="rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800"
+                        className="rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white transition hover:bg-primary-hover"
                       >
                         {'Browse all services'}
                       </Link>
@@ -160,7 +160,7 @@ export function OfficeDetailPage() {
           </div>
 
           <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
-            <div className="rounded-2xl border border-line bg-white p-5 shadow-card">
+            <div className="rounded-2xl border border-line bg-card p-5 shadow-card">
               <h2 className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-400">Office at a glance</h2>
               <dl className="mt-4 space-y-3 text-sm">
                 <div className="border-b border-line pb-3">
@@ -183,7 +183,7 @@ export function OfficeDetailPage() {
                 href={office.ccUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex items-center justify-between gap-3 rounded-2xl bg-brand-700 p-5 text-sm font-bold text-white shadow-card transition hover:bg-brand-800"
+                className="group flex items-center justify-between gap-3 rounded-2xl bg-primary p-5 text-sm font-bold text-white shadow-card transition hover:bg-primary-hover"
               >
                 <span>Citizens’ Charter office page</span>
                 <ArrowUpRight

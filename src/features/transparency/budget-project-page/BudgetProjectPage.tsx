@@ -52,7 +52,7 @@ export function BudgetProjectPage({ program, slug }: { program: string; slug: st
           </div>
 
           <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-            <div className="rounded-2xl border border-line bg-white p-5 shadow-card">
+            <div className="rounded-2xl border border-line bg-card p-5 shadow-card">
               <h2 className="text-base font-extrabold text-ink-950">Amount in each version, with the page it is on</h2>
               <table className="mt-4 w-full text-sm">
                 <tbody className="divide-y divide-line">
@@ -98,7 +98,7 @@ export function BudgetProjectPage({ program, slug }: { program: string; slug: st
               ) : null}
             </div>
 
-            <aside className="rounded-2xl border border-line bg-white p-5 text-sm shadow-card">
+            <aside className="rounded-2xl border border-line bg-card p-5 text-sm shadow-card">
               <dl className="space-y-3">
                 {details
                   .filter(([, v]) => v)

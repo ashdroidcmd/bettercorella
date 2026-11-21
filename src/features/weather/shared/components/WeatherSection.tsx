@@ -55,7 +55,7 @@ function WeatherDetails({ data }: { data: WeatherNow }) {
   return (
     <Reveal delay={0.06}>
       <div className="mt-8 grid gap-4 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="flex items-center gap-5 rounded-2xl border border-line bg-white p-6 shadow-card">
+        <div className="flex items-center gap-5 rounded-2xl border border-line bg-card p-6 shadow-card">
           <span className="inline-flex size-16 shrink-0 items-center justify-center rounded-2xl bg-brand-50 text-brand-700">
             <Icon aria-hidden="true" className="size-9" />
           </span>
@@ -70,7 +70,7 @@ function WeatherDetails({ data }: { data: WeatherNow }) {
 
         <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {details.map(({ icon: DetailIcon, label, value }) => (
-            <div key={label} className="rounded-2xl border border-line bg-white p-4 shadow-card">
+            <div key={label} className="rounded-2xl border border-line bg-card p-4 shadow-card">
               <dt className="flex items-center gap-1.5 text-xs font-semibold text-ink-500">
                 <DetailIcon aria-hidden="true" className="size-3.5 text-brand-600" />
                 {label}

@@ -24,7 +24,7 @@ function YearBars({ items, label }: { items: { key: string; year: string; php: n
         <div key={i.key} className="flex h-full min-w-11 flex-1 flex-col items-center justify-end gap-1">
           <span className="text-[10px] font-bold tabular-nums text-ink-700 sm:text-xs">{i.php ? php(i.php) : '—'}</span>
           <span
-            className={`w-full rounded-t-md ${i.note ? 'bg-accent' : 'bg-brand-600'}`}
+            className={`w-full rounded-t-md ${i.note ? 'bg-accent' : 'bg-brand-strong'}`}
             style={{ height: `${Math.max(2, (i.php / max) * 100)}%` }}
           />
           <span className="text-[10px] font-semibold text-ink-500 sm:text-xs">{i.year}</span>
@@ -50,7 +50,7 @@ export function HistorySection({ district, gaa }: Pick<BudgetSnapshot, 'district
       />
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <div className="min-w-0 rounded-2xl border border-line bg-white p-5 shadow-card">
+        <div className="min-w-0 rounded-2xl border border-line bg-card p-5 shadow-card">
           <h3 className="text-base font-extrabold text-ink-950">Lines that name Corella, per year</h3>
           <p className="mt-1 text-sm text-ink-600">Sum of the GAA lines in the table below, for each year they are funded.</p>
           <div className="mt-6">
@@ -62,7 +62,7 @@ export function HistorySection({ district, gaa }: Pick<BudgetSnapshot, 'district
         </div>
 
         {office ? (
-          <div className="min-w-0 rounded-2xl border border-line bg-white p-5 shadow-card">
+          <div className="min-w-0 rounded-2xl border border-line bg-card p-5 shadow-card">
             <h3 className="text-base font-extrabold text-ink-950">{office.name}</h3>
             <p className="mt-1 text-sm text-ink-600">
               The DPWH office that serves {district.card.label}, which includes Corella. Whole-office budget, not
@@ -93,7 +93,7 @@ export function HistorySection({ district, gaa }: Pick<BudgetSnapshot, 'district
           <button
             type="button"
             onClick={() => downloadText('corella-gaa-2020-2026.csv', gaaCsv(gaa.rows))}
-            className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2 text-xs font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
+            className="inline-flex items-center gap-2 rounded-xl border border-line bg-card px-4 py-2 text-xs font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
           >
             <Download aria-hidden="true" className="size-4" />
             Download CSV
@@ -103,7 +103,7 @@ export function HistorySection({ district, gaa }: Pick<BudgetSnapshot, 'district
           role="region"
           aria-label="GAA 2020 to 2026 lines naming Corella"
           tabIndex={0}
-          className="mt-4 overflow-x-auto rounded-2xl border border-line bg-white shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
+          className="mt-4 overflow-x-auto rounded-2xl border border-line bg-card shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
         >
           <table className="w-full min-w-[960px] text-left text-sm">
             <caption className="sr-only">Enacted budget lines naming Corella, by year</caption>
@@ -138,7 +138,7 @@ export function HistorySection({ district, gaa }: Pick<BudgetSnapshot, 'district
             <button
               type="button"
               onClick={() => setShown(gaa.rows.length)}
-              className="rounded-xl border border-line bg-white px-4 py-2 text-xs font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
+              className="rounded-xl border border-line bg-card px-4 py-2 text-xs font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
             >
               Show all
             </button>

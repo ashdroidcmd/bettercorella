@@ -25,7 +25,7 @@ export function ContactPage() {
           <MunicipalHallCard />
         </section>
 
-        <section id="feedback" className="mt-12 scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7">
+        <section id="feedback" className="mt-12 scroll-mt-28 rounded-2xl border border-line bg-card p-5 shadow-card sm:p-7">
           <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-700">
             <MessageSquarePlus aria-hidden="true" className="size-4" />
             {'Citizen feedback'}

@@ -14,7 +14,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       <ScrollProgress />
       <a
         href="#main-content"
-        className="sr-only z-[70] rounded-lg bg-white px-4 py-2 font-semibold text-brand-700 shadow-lg focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+        className="sr-only z-[70] rounded-lg bg-card px-4 py-2 font-semibold text-brand-700 shadow-lg focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
       >
         {'Skip to content'}
       </a>

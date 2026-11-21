@@ -42,7 +42,7 @@ function OfficesPageContent() {
           <label htmlFor="office-search" className="sr-only">
             {'Search offices'}
           </label>
-          <div className="flex items-center gap-2 rounded-2xl border border-line bg-white p-1.5 shadow-float focus-within:ring-2 focus-within:ring-brand-300">
+          <div className="flex items-center gap-2 rounded-2xl border border-line bg-card p-1.5 shadow-float focus-within:ring-2 focus-within:ring-brand-300">
             <Search aria-hidden="true" className="ml-2 size-5 shrink-0 text-ink-400" />
             <input
               id="office-search"
@@ -82,7 +82,7 @@ function OfficesPageContent() {
               <button
                 type="button"
                 onClick={() => setQuery('')}
-                className="rounded-xl border border-line bg-white px-3.5 py-2 text-sm font-semibold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
+                className="rounded-xl border border-line bg-card px-3.5 py-2 text-sm font-semibold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
               >
                 {'Clear search'}
               </button>
@@ -116,7 +116,7 @@ function OfficesPageContent() {
                   <button
                     type="button"
                     onClick={() => setQuery('')}
-                    className="rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800"
+                    className="rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white transition hover:bg-primary-hover"
                   >
                     {'Show all offices'}
                   </button>

@@ -6,6 +6,10 @@ import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, THEME_COLOR } from '@/config/si
 import { Providers } from '@/app/providers'
 import '@/index.css'
 
+// Applies the saved theme (or the OS setting) before first paint, so dark mode never flashes light.
+// The storage key must match THEME_STORAGE_KEY in src/components/layout/ThemeToggle.tsx.
+const themeInitScript = `try{var t=localStorage.getItem('bettercorella-theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){}`
+
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-jakarta', display: 'swap' })
 
 export const metadata: Metadata = {
@@ -29,14 +33,20 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: THEME_COLOR,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: THEME_COLOR },
+    { media: '(prefers-color-scheme: dark)', color: '#071321' },
+  ],
   width: 'device-width',
   initialScale: 1,
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={jakarta.variable}>
+    <html lang="en" className={jakarta.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
         <Providers>
           <SiteLayout>{children}</SiteLayout>

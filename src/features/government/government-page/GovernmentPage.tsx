@@ -168,7 +168,7 @@ export function GovernmentPage() {
           </Reveal>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {agencies.map((agency) => (
-              <article key={agency.slug} className="flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card">
+              <article key={agency.slug} className="flex h-full flex-col rounded-2xl border border-line bg-card p-5 shadow-card">
                 <p className="text-xs font-bold uppercase tracking-[0.12em] text-brand-700">{agency.agency}</p>
                 <h3 className="mt-2 text-base font-extrabold leading-6 text-ink-950">{agency.officer}</h3>
                 <p className="text-sm text-ink-500">{agency.position}</p>

@@ -28,7 +28,7 @@ export function InfoPageLayout({
                   <li key={section.id}>
                     <a
                       href={`#${section.id}`}
-                      className="group inline-flex min-h-10 items-center gap-2 rounded-lg border border-line bg-white px-3 py-2 text-xs font-semibold text-ink-700 transition hover:border-brand-200 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 lg:w-full lg:justify-between lg:border-transparent lg:bg-transparent lg:px-2"
+                      className="group inline-flex min-h-10 items-center gap-2 rounded-lg border border-line bg-card px-3 py-2 text-xs font-semibold text-ink-700 transition hover:border-brand-200 hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 lg:w-full lg:justify-between lg:border-transparent lg:bg-transparent lg:px-2"
                     >
                       <span>{section.label}</span>
                       <ArrowDownRight

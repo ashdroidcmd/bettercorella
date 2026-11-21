@@ -167,7 +167,7 @@ export function CustomSelect({
         }}
         onKeyDown={handleKeyDown}
         className={cn(
-          'flex h-11 w-full items-center justify-between gap-3 rounded-xl border bg-white px-3.5 text-left text-sm font-semibold text-ink-800 shadow-sm outline-none transition focus-visible:border-brand-400 focus-visible:ring-4 focus-visible:ring-brand-100',
+          'flex h-11 w-full items-center justify-between gap-3 rounded-xl border bg-card px-3.5 text-left text-sm font-semibold text-ink-800 shadow-sm outline-none transition focus-visible:border-brand-400 focus-visible:ring-4 focus-visible:ring-brand-100',
           open ? 'border-brand-300 ring-4 ring-brand-100' : 'border-line hover:border-line-dark',
           buttonClassName,
         )}
@@ -185,7 +185,7 @@ export function CustomSelect({
         data-lenis-prevent
         hidden={!open}
         className={cn(
-          'scrollbar-slim absolute left-0 right-0 top-full z-50 mt-2 max-h-[min(20rem,50vh)] overflow-y-auto overscroll-contain rounded-2xl border border-line bg-white p-1.5 shadow-hero',
+          'scrollbar-slim absolute left-0 right-0 top-full z-50 mt-2 max-h-[min(20rem,50vh)] overflow-y-auto overscroll-contain rounded-2xl border border-line bg-card p-1.5 shadow-hero',
           menuClassName,
         )}
       >

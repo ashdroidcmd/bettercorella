@@ -25,7 +25,7 @@ export function EventCard({ event }: { event: TownEvent }) {
     event.sinceYear && nextYear ? `Next: ${anniversaryOrdinal(event.sinceYear, nextYear)} anniversary, ${nextYear}` : null
 
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-card">
+    <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-card shadow-card">
       <PhotoFrame photo={eventPhotos[event.slug]} icon={PartyPopper} />
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand-700">

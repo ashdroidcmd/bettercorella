@@ -48,7 +48,7 @@ const siteLinks = [
 
 function LinkList({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
-    <section className="flex flex-col rounded-2xl border border-line bg-white p-4 shadow-card sm:p-5">
+    <section className="flex flex-col rounded-2xl border border-line bg-card p-4 shadow-card sm:p-5">
       <div className="flex items-center justify-between gap-3 border-b border-line pb-3">
         <h2 className="text-sm font-extrabold uppercase tracking-[0.12em] text-ink-950">{title}</h2>
         <span className="rounded-full bg-brand-50 px-2 py-1 text-[10px] font-bold tabular-nums text-brand-700">
@@ -92,7 +92,7 @@ export function SitemapPage() {
             { icon: Building2, count: offices.length, label: 'office profiles' },
           ].map(({ icon: Icon, count, label }) => (
             <div key={label} className="flex items-center gap-3 rounded-2xl border border-line bg-surface p-4">
-              <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-white text-brand-700 shadow-sm">
+              <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-card text-brand-700 shadow-sm">
                 <Icon aria-hidden="true" className="size-5" />
               </span>
               <p className="text-sm leading-5 text-ink-600">
@@ -136,7 +136,7 @@ export function SitemapPage() {
                   <Link
                     href={`/barangays/${barangay.slug}`}
                    
-                    className="group flex min-h-10 items-center justify-between gap-2 rounded-lg border border-transparent bg-white/60 px-3 py-2 text-sm text-ink-700 transition hover:border-line hover:bg-white hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-600"
+                    className="group flex min-h-10 items-center justify-between gap-2 rounded-lg border border-transparent bg-card/60 px-3 py-2 text-sm text-ink-700 transition hover:border-line hover:bg-card hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-600"
                   >
                     {barangay.name}
                     <ArrowRight aria-hidden="true" className="size-3.5 shrink-0 text-ink-400 transition group-hover:text-brand-700" />
@@ -160,7 +160,7 @@ export function SitemapPage() {
                   <Link
                     href={`/government/offices/${office.slug}`}
                    
-                    className="group flex min-h-10 items-center justify-between gap-2 rounded-lg border border-transparent bg-white/60 px-3 py-2 text-sm text-ink-700 transition hover:border-line hover:bg-white hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-600"
+                    className="group flex min-h-10 items-center justify-between gap-2 rounded-lg border border-transparent bg-card/60 px-3 py-2 text-sm text-ink-700 transition hover:border-line hover:bg-card hover:text-brand-700 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-600"
                   >
                     {office.name}
                     <ArrowRight aria-hidden="true" className="size-3.5 shrink-0 text-ink-400 transition group-hover:text-brand-700" />

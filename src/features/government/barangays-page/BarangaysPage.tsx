@@ -136,7 +136,7 @@ export function BarangaysPage() {
                       role="region"
                       aria-label={`${districtName} barangay directory`}
                       tabIndex={0}
-                      className="mt-4 overflow-x-auto rounded-2xl border border-line bg-white shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
+                      className="mt-4 overflow-x-auto rounded-2xl border border-line bg-card shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
                     >
                       <table className="min-w-[760px] w-full text-left text-sm">
                         <caption className="sr-only">

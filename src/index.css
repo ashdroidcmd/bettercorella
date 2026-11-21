@@ -29,9 +29,74 @@
   --color-line: #e2e8f0;
   --color-line-dark: #cbd5e1;
 
+  /* Card and page background; remapped in dark mode. */
+  --color-card: #ffffff;
+
+  /* Fixed colors that stay the same in both themes: dark sections and solid brand fills with white text. */
+  --color-night: #071321;
+  --color-primary: #002f8e;
+  --color-primary-hover: #032772;
+  --color-brand-strong: #0038a8;
+
   --shadow-card: 0 1px 2px rgb(7 19 33 / 0.04), 0 14px 36px -22px rgb(7 19 33 / 0.28);
   --shadow-float: 0 2px 4px rgb(7 19 33 / 0.05), 0 24px 64px -24px rgb(7 19 33 / 0.35);
   --shadow-hero: 0 30px 80px -40px rgb(7 19 33 / 0.65);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Dark mode: remap the adaptive tokens. Set by the `.dark` class on <html> (see ThemeToggle and the init script in layout.tsx). */
+:root.dark {
+  color-scheme: dark;
+
+  --color-card: #0f1b2d;
+  --color-surface: #0a1424;
+  --color-line: #1f2e45;
+  --color-line-dark: #2c3e58;
+
+  --color-ink-950: #f1f5fb;
+  --color-ink-900: #e3eaf4;
+  --color-ink-800: #ccd7e5;
+  --color-ink-700: #b6c3d4;
+  --color-ink-600: #9eaec2;
+  --color-ink-500: #8797ae;
+  --color-ink-400: #6c7f99;
+
+  --color-brand-50: #13264d;
+  --color-brand-100: #172e5c;
+  --color-brand-200: #233f78;
+  --color-brand-600: #7d9ef2;
+  --color-brand-700: #8eacf8;
+  --color-brand-800: #b9cdff;
+  --color-brand-900: #dce6ff;
+
+  --color-amber-50: rgb(245 158 11 / 0.1);
+  --color-amber-100: rgb(245 158 11 / 0.18);
+  --color-amber-200: rgb(245 158 11 / 0.3);
+  --color-amber-600: #fbbf24;
+  --color-amber-700: #fcd34d;
+  --color-amber-800: #fde68a;
+  --color-amber-900: #fef3c7;
+  --color-amber-950: #fffbeb;
+  --color-red-50: rgb(239 68 68 / 0.12);
+  --color-red-200: rgb(239 68 68 / 0.35);
+  --color-red-600: #fca5a5;
+  --color-red-700: #fca5a5;
+  --color-red-800: #fecaca;
+  --color-emerald-50: rgb(16 185 129 / 0.12);
+  --color-emerald-700: #6ee7b7;
+  --color-sky-50: rgb(14 165 233 / 0.12);
+  --color-sky-800: #7dd3fc;
+  --color-rose-50: rgb(244 63 94 / 0.12);
+  --color-rose-700: #fda4af;
+  --color-violet-50: rgb(139 92 246 / 0.14);
+  --color-violet-700: #c4b5fd;
+  --color-slate-100: #1e2a3b;
+  --color-slate-600: #a7b4c6;
+  --color-slate-700: #c3cdda;
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 14px 36px -22px rgb(0 0 0 / 0.7);
+  --shadow-float: 0 2px 4px rgb(0 0 0 / 0.3), 0 24px 64px -24px rgb(0 0 0 / 0.8);
 }
 
 @layer base {
@@ -40,7 +105,7 @@
   }
 
   body {
-    @apply bg-white font-sans text-ink-900 antialiased;
+    @apply bg-card font-sans text-ink-900 antialiased;
   }
 
   ::selection {

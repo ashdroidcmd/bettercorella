@@ -15,7 +15,7 @@ export function ServiceCard({ service, categoryName }: ServiceCardProps) {
     <Link
       href={`/services/${service.category}/${service.slug}`}
      
-      className="group flex h-full min-w-0 flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
+      className="group flex h-full min-w-0 flex-col rounded-2xl border border-line bg-card p-5 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
     >
       <div className="flex items-start gap-3">
         <span className="mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-700">

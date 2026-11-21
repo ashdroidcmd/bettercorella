@@ -47,7 +47,7 @@ export function BarangayDetailPage() {
             <MapPin aria-hidden="true" className="size-3.5 text-brand-300" />
             {barangay.district}
           </span>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-700 px-3 py-1.5 text-xs font-bold text-white">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-white">
             {"Rank"}{' '}{barangay.rank} {`of ${barangays.length}`}</span>
           {barangay.poblacion ? (
             <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/80">
@@ -70,7 +70,7 @@ export function BarangayDetailPage() {
 
         {barangay.nameOrigin.length ? (
           <Reveal>
-            <section className="mt-10 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7">
+            <section className="mt-10 rounded-2xl border border-line bg-card p-5 shadow-card sm:p-7">
               <SectionHeading eyebrow="History" title={`How ${barangay.name} got its name`} />
               <div className="mt-5 max-w-3xl space-y-4 text-[15px] leading-7 text-ink-700">
                 {barangay.nameOrigin.map((paragraph) => (
@@ -95,7 +95,7 @@ export function BarangayDetailPage() {
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal>
-            <section className="h-full rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7">
+            <section className="h-full rounded-2xl border border-line bg-card p-5 shadow-card sm:p-7">
               <SectionHeading eyebrow="Census" title="Population history" />
               <div className="mt-6 space-y-5">
                 {history.map((item) => (
@@ -110,7 +110,7 @@ export function BarangayDetailPage() {
                         whileInView={{ width: `${(item.value / maxPopulation) * 100}%` }}
                         viewport={{ once: true, amount: 0.6 }}
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                        className="h-full rounded-full bg-brand-600"
+                        className="h-full rounded-full bg-brand-strong"
                       />
                     </div>
                   </div>
@@ -125,11 +125,11 @@ export function BarangayDetailPage() {
           </Reveal>
 
           <Reveal delay={0.06}>
-            <section className="h-full rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7">
+            <section className="h-full rounded-2xl border border-line bg-card p-5 shadow-card sm:p-7">
               <SectionHeading eyebrow="Barangay officials" title="Your barangay council" />
-              <div className="mt-6 rounded-2xl bg-brand-700 p-4 text-white">
+              <div className="mt-6 rounded-2xl bg-primary p-4 text-white">
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-brand-200">{"Punong Barangay"}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-brand-300">{"Punong Barangay"}</p>
                   <p className="mt-0.5 text-lg font-extrabold leading-tight">{barangay.punongBarangay || 'Not yet listed'}</p>
                 </div>
               </div>
@@ -231,7 +231,7 @@ export function BarangayDetailPage() {
                 key={item.slug}
                 href={`/barangays/${item.slug}`}
                
-                className="group rounded-xl border border-line bg-white p-4 shadow-sm transition hover:border-brand-200 hover:shadow-card"
+                className="group rounded-xl border border-line bg-card p-4 shadow-sm transition hover:border-brand-200 hover:shadow-card"
               >
                 <span className="block text-sm font-bold text-ink-950 group-hover:text-brand-700">{item.name}</span>
                 <span className="mt-1 block text-xs text-ink-500">
