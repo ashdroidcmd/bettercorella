@@ -184,7 +184,7 @@ export function BarangayMapCanvas({ resetToken, onSelect, onHover }: BarangayMap
     map.addControl(new NavigationControl({ showCompass: false }), 'top-right')
 
     const label = document.createElement('div')
-    label.className = 'rounded-full bg-brand-600 px-3 py-1 text-xs font-bold text-white shadow-lg ring-2 ring-white/90'
+    label.className = 'rounded-full bg-brand-strong px-3 py-1 text-xs font-bold text-white shadow-lg ring-2 ring-white/90'
     label.style.pointerEvents = 'none'
     const labelMarker = new Marker({ element: label, anchor: 'center' })
     labelMarkerRef.current = labelMarker
@@ -384,7 +384,7 @@ export function BarangayMapCanvas({ resetToken, onSelect, onHover }: BarangayMap
           aria-label="Interactive 3D map of the barangays. Scroll to zoom, drag to pan, click a barangay to select it."
         />
       </div>
-      <div className="pointer-events-none absolute bottom-3 left-3 z-10 rounded-lg bg-white/90 px-2.5 py-1.5 text-[10px] font-semibold text-ink-600 shadow-sm backdrop-blur-sm">
+      <div className="pointer-events-none absolute bottom-3 left-3 z-10 rounded-lg bg-card/90 px-2.5 py-1.5 text-[10px] font-semibold text-ink-600 shadow-sm backdrop-blur-sm">
         {'Scroll to zoom · drag to pan'}
       </div>
       <button
@@ -394,7 +394,7 @@ export function BarangayMapCanvas({ resetToken, onSelect, onHover }: BarangayMap
         aria-label="Reset map view"
         className="group absolute right-[2.5px] top-[5.5rem] z-10 inline-flex size-11 cursor-pointer items-center justify-center rounded-md text-ink-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
       >
-        <span className="inline-flex size-[29px] items-center justify-center rounded-[4px] bg-white shadow-[0_0_0_2px_rgba(0,0,0,0.1)] transition-colors group-hover:bg-black/5">
+        <span className="inline-flex size-[29px] items-center justify-center rounded-[4px] bg-card shadow-[0_0_0_2px_rgba(0,0,0,0.1)] transition-colors group-hover:bg-black/5">
           <RotateCcw aria-hidden="true" className="size-3.5" />
         </span>
       </button>

@@ -45,7 +45,7 @@ const pillClass =
 export function SiteFooter() {
   return (
     <>
-      <footer className="mt-auto bg-ink-950 text-white">
+      <footer className="mt-auto bg-night text-white">
         <div className="container-page py-12 sm:py-16">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1fr_1fr]">
             <div>

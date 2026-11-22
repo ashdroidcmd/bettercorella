@@ -50,10 +50,10 @@ export function BarangayMap() {
   return (
     <div className="grid gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.75fr)] lg:items-stretch">
       <figure
-        className="overflow-hidden rounded-3xl border border-[#d7e2ea] bg-[#e9eff1] p-2.5 shadow-[0_12px_35px_-24px_rgba(28,55,76,0.45)] sm:p-4"
+        className="overflow-hidden rounded-3xl border border-[#d7e2ea] bg-[#e9eff1] p-2.5 dark:border-line dark:bg-surface shadow-[0_12px_35px_-24px_rgba(28,55,76,0.45)] sm:p-4"
       >
         <BarangayMapCanvas resetToken={resetToken} onSelect={setSelectedSlug} onHover={setHoveredSlug} />
-        <div className="mt-3 rounded-xl border border-line bg-white px-3 py-3">
+        <div className="mt-3 rounded-xl border border-line bg-card px-3 py-3">
           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
             <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-ink-600">Population · 2024 census</span>
             <span className="inline-flex items-center gap-1.5 text-[10px] font-medium text-ink-500">
@@ -83,7 +83,7 @@ export function BarangayMap() {
         </figcaption>
       </figure>
 
-      <div className="flex min-h-[22rem] flex-col rounded-3xl border border-line bg-white p-5 shadow-card sm:p-6" aria-live="polite">
+      <div className="flex min-h-[22rem] flex-col rounded-3xl border border-line bg-card p-5 shadow-card sm:p-6" aria-live="polite">
         {preview ? (
           <>
             <div className="flex items-center justify-between gap-3">
@@ -123,7 +123,7 @@ export function BarangayMap() {
                 <Link
                   href={`/barangays/${preview.slug}`}
                  
-                  className="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800"
+                  className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white transition hover:bg-primary-hover"
                 >
                   {'View barangay profile'}
                   <ArrowRight aria-hidden="true" className="size-4" />
@@ -135,7 +135,7 @@ export function BarangayMap() {
                 <button
                   type="button"
                   onClick={resetMap}
-                  className="rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-semibold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
+                  className="rounded-xl border border-line bg-card px-4 py-2.5 text-sm font-semibold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
                 >
                   {'Reset map'}
                 </button>

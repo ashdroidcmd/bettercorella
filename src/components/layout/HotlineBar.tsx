@@ -10,10 +10,10 @@ const barHotlines = hotlines.filter((hotline) => hotline.short)
 /** Dark top bar with 24/7 hotlines, BetterInabanga style. */
 export function HotlineBar() {
   return (
-    <div className="relative z-[60] bg-ink-950 text-white">
+    <div className="relative z-[60] bg-night text-white">
       <div className="container-page flex items-center justify-between gap-x-4 gap-y-1 py-2 text-xs">
         <div className="flex min-w-0 items-center gap-3">
-          <span className="shrink-0 rounded-md bg-red-700 px-2 py-1 text-[10px] font-extrabold uppercase tracking-[0.12em] text-white">
+          <span className="shrink-0 rounded-md bg-[#b91c1c] px-2 py-1 text-[10px] font-extrabold uppercase tracking-[0.12em] text-white">
             24/7 Hotlines
           </span>
           <span className="hidden truncate text-white/65 xl:inline">{`Emergency response, ${city.name}:`}</span>

@@ -24,7 +24,7 @@ export function FaqPage() {
           <div className="space-y-3">
             {faqs.map((faq, index) => (
               <Reveal key={faq.q} delay={Math.min(index * 0.03, 0.18)}>
-                <details className="group rounded-2xl border border-line bg-white shadow-card">
+                <details className="group rounded-2xl border border-line bg-card shadow-card">
                   <summary className="flex cursor-pointer list-none items-start justify-between gap-4 p-5 [&::-webkit-details-marker]:hidden">
                     <h2 className="text-[15px] font-bold leading-6 text-ink-950">{faq.q}</h2>
                     <ChevronDown
@@ -53,7 +53,7 @@ export function FaqPage() {
           </div>
 
           <aside className="space-y-4 lg:sticky lg:top-28">
-            <div className="rounded-2xl border border-line bg-ink-950 p-5 text-white shadow-card">
+            <div className="rounded-2xl border border-line bg-night p-5 text-white shadow-card">
               <h2 className="text-lg font-extrabold tracking-tight">{"Still looking?"}</h2>
               <p className="mt-2 text-sm leading-6 text-white/60">
                 {"Browse services by category, check the site map, or contact the right municipal office directly."}</p>

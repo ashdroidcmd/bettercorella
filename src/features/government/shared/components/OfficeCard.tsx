@@ -13,7 +13,7 @@ export function OfficeCard({ office }: OfficeCardProps) {
     <Link
       href={`/government/offices/${office.slug}`}
      
-      className="group flex h-full min-w-0 flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
+      className="group flex h-full min-w-0 flex-col rounded-2xl border border-line bg-card p-5 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
     >
       <div className="flex items-start justify-between gap-3">
         <span className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">

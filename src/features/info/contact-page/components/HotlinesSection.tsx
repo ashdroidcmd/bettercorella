@@ -20,9 +20,9 @@ export function HotlinesSection() {
         Hotlines
       </h2>
       {primary && primaryNumber ? (
-        <div className="relative isolate overflow-hidden rounded-3xl bg-ink-950 p-6 text-white shadow-hero sm:p-9">
+        <div className="relative isolate overflow-hidden rounded-3xl bg-night p-6 text-white shadow-hero sm:p-9">
           <div aria-hidden="true" className="hero-grid absolute inset-0 opacity-60" />
-          <div aria-hidden="true" className="absolute -right-16 -top-16 size-56 rounded-full bg-brand-600/30 blur-3xl" />
+          <div aria-hidden="true" className="absolute -right-16 -top-16 size-56 rounded-full bg-brand-strong/30 blur-3xl" />
           <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-brand-300">
@@ -31,7 +31,7 @@ export function HotlinesSection() {
               </p>
               <a
                 href={dialHref(primaryNumber)}
-                className="mt-3 block text-6xl font-extrabold tracking-[-0.05em] transition hover:text-brand-200 sm:text-7xl"
+                className="mt-3 block text-6xl font-extrabold tracking-[-0.05em] transition hover:text-brand-300 sm:text-7xl"
               >
                 {primaryNumber}
               </a>
@@ -39,7 +39,7 @@ export function HotlinesSection() {
             </div>
             <a
               href={dialHref(primaryNumber)}
-              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl bg-accent px-6 py-4 text-sm font-extrabold text-ink-950 transition hover:bg-white"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl bg-accent px-6 py-4 text-sm font-extrabold text-ink-950 transition hover:bg-card"
             >
               <PhoneCall aria-hidden="true" className="size-4" />
               {`Call ${primaryNumber}`}
@@ -50,7 +50,7 @@ export function HotlinesSection() {
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {others.map((hotline) => (
-          <article key={hotline.label} className="flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card">
+          <article key={hotline.label} className="flex h-full flex-col rounded-2xl border border-line bg-card p-5 shadow-card">
             <div className="flex items-start gap-3">
               <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-700">
                 <Phone aria-hidden="true" className="size-4" />

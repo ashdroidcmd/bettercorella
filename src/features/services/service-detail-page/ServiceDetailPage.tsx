@@ -67,7 +67,7 @@ export function ServiceDetailPage() {
         }}
       >
         <div className="flex flex-wrap gap-2">
-          <span className="rounded-full bg-brand-700 px-3 py-1.5 text-xs font-bold text-white">
+          <span className="rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-white">
             {service.classification}
           </span>
           <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/80">
@@ -99,8 +99,8 @@ export function ServiceDetailPage() {
             }
             className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-bold transition ${
               saved
-                ? 'border-brand-200 bg-brand-700 text-white hover:bg-brand-800'
-                : 'border-line bg-white text-ink-700 hover:border-brand-200 hover:text-brand-700'
+                ? 'border-brand-200 bg-primary text-white hover:bg-primary-hover'
+                : 'border-line bg-card text-ink-700 hover:border-brand-200 hover:text-brand-700'
             }`}
           >
             {saved ? (
@@ -128,7 +128,7 @@ export function ServiceDetailPage() {
 
             {eligibilityLeadsIntoDescription ? null : (
               <Reveal>
-                <section className="rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7">
+                <section className="rounded-2xl border border-line bg-card p-5 shadow-card sm:p-7">
                   <h2 className="text-xl font-extrabold tracking-tight text-ink-950">Who may avail</h2>
                   <p className="mt-3 whitespace-pre-line break-words text-[15px] leading-7 text-ink-700">
                     {service.whoMayAvail || 'Eligibility is not listed in the charter. Confirm with the issuing office.'}
@@ -138,7 +138,7 @@ export function ServiceDetailPage() {
             )}
 
             <Reveal>
-              <section className="rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7">
+              <section className="rounded-2xl border border-line bg-card p-5 shadow-card sm:p-7">
                 <h2 className="text-xl font-extrabold tracking-tight text-ink-950">
                   {(eligibilityLeadsIntoDescription ? 'Who may avail and service details' : 'About this service')}
                 </h2>
@@ -149,7 +149,7 @@ export function ServiceDetailPage() {
             </Reveal>
 
             <Reveal>
-              <section className="rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7">
+              <section className="rounded-2xl border border-line bg-card p-5 shadow-card sm:p-7">
                 <h2 className="text-xl font-extrabold tracking-tight text-ink-950">Fees</h2>
                 <p className="mt-3 whitespace-pre-line break-words text-[15px] leading-7 text-ink-700">
                   {service.fees || 'No fees are listed for this service.'}
@@ -158,7 +158,7 @@ export function ServiceDetailPage() {
             </Reveal>
 
             <Reveal>
-              <section className="rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7">
+              <section className="rounded-2xl border border-line bg-card p-5 shadow-card sm:p-7">
                 <h2 className="text-xl font-extrabold tracking-tight text-ink-950">Downloadable forms</h2>
                 {service.pdfs.length ? (
                   <ul className="mt-4 space-y-2">
@@ -172,9 +172,9 @@ export function ServiceDetailPage() {
                             target="_blank"
                             rel="noreferrer"
                             download={`${label}.pdf`}
-                            className="group flex items-start gap-3 rounded-xl border border-line bg-surface p-3 text-sm transition hover:border-brand-200 hover:bg-white"
+                            className="group flex items-start gap-3 rounded-xl border border-line bg-surface p-3 text-sm transition hover:border-brand-200 hover:bg-card"
                           >
-                            <span className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-lg bg-white text-brand-700 shadow-sm">
+                            <span className="mt-0.5 inline-flex size-8 shrink-0 items-center justify-center rounded-lg bg-card text-brand-700 shadow-sm">
                               <Download aria-hidden="true" className="size-4" />
                             </span>
                             <span className="min-w-0">
@@ -211,7 +211,7 @@ export function ServiceDetailPage() {
           </div>
 
           <aside className="min-w-0 space-y-4 lg:sticky lg:top-28 lg:self-start">
-            <div className="rounded-2xl border border-line bg-white p-5 shadow-card">
+            <div className="rounded-2xl border border-line bg-card p-5 shadow-card">
               <h2 className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-400">At a glance</h2>
               <dl className="mt-4 space-y-3 text-sm">
                 <div className="border-b border-line pb-3">
@@ -249,7 +249,7 @@ export function ServiceDetailPage() {
               href={service.sourceUrl}
               target="_blank"
               rel="noreferrer"
-              className="group flex items-center justify-between gap-3 rounded-2xl bg-brand-700 p-5 text-sm font-bold text-white shadow-card transition hover:bg-brand-800"
+              className="group flex items-center justify-between gap-3 rounded-2xl bg-primary p-5 text-sm font-bold text-white shadow-card transition hover:bg-primary-hover"
             >
               <span className="inline-flex items-center gap-2">
                 <ExternalLink aria-hidden="true" className="size-4" />

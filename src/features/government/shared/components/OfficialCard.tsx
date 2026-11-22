@@ -13,7 +13,7 @@ export function OfficialCard({ official, featured = false }: OfficialCardProps) 
   return (
     <article
       className={`flex h-full items-start gap-4 rounded-2xl border border-line p-5 shadow-card ${
-        featured ? 'border-l-4 border-l-brand-600 bg-brand-50/60 sm:p-6' : 'bg-white'
+        featured ? 'border-l-4 border-l-brand-600 bg-brand-50/60 sm:p-6' : 'bg-card'
       }`}
     >
       {official.photo ? (

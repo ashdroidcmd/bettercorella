@@ -13,7 +13,7 @@ export function MunicipalHallCard() {
   return (
     <>
       {hasHallContacts ? (
-        <div className="grid gap-6 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-7 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="grid gap-6 rounded-2xl border border-line bg-card p-5 shadow-card sm:p-7 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-700">Municipal Hall</p>
             <h2 className="mt-2 text-2xl font-extrabold tracking-tight text-ink-950">{`Municipal Government of ${city.name}`}</h2>
@@ -71,7 +71,7 @@ export function MunicipalHallCard() {
                     href={city.website}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800"
+                    className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white transition hover:bg-primary-hover"
                   >
                     {'Official website'}
                     <ArrowUpRight aria-hidden="true" className="size-4" />
@@ -82,7 +82,7 @@ export function MunicipalHallCard() {
                     href={city.facebook}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
+                    className="inline-flex items-center gap-2 rounded-xl border border-line bg-card px-4 py-2.5 text-sm font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
                   >
                     {'Facebook page'}
                     <ExternalLink aria-hidden="true" className="size-4" />

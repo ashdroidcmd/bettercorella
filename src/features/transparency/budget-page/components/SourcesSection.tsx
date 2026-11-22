@@ -23,7 +23,7 @@ export function SourcesSection({ snapshot, fy2027 }: Props) {
       />
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <div className="rounded-2xl border border-line bg-white p-5 text-sm leading-6 text-ink-700 shadow-card">
+        <div className="rounded-2xl border border-line bg-card p-5 text-sm leading-6 text-ink-700 shadow-card">
           <h3 className="text-base font-extrabold text-ink-950">FY2027 lines</h3>
           <p className="mt-1">
             Search &ldquo;{place.q}&rdquo; in each program. Every word must appear in the line. Rows outside Region{' '}
@@ -38,7 +38,7 @@ export function SourcesSection({ snapshot, fy2027 }: Props) {
           </ul>
         </div>
 
-        <div className="rounded-2xl border border-line bg-white p-5 text-sm leading-6 text-ink-700 shadow-card">
+        <div className="rounded-2xl border border-line bg-card p-5 text-sm leading-6 text-ink-700 shadow-card">
           <h3 className="text-base font-extrabold text-ink-950">GAA 2020–2026 lines</h3>
           <p className="mt-1">
             Search &ldquo;{gaa.q}&rdquo; in the programs of all {snapshot.gaa.searched} departments. The GAA has no region,
@@ -63,7 +63,7 @@ export function SourcesSection({ snapshot, fy2027 }: Props) {
       </div>
 
       {exclude.length ? (
-        <div className="rounded-2xl border border-line bg-white p-5 text-sm text-ink-700 shadow-card">
+        <div className="rounded-2xl border border-line bg-card p-5 text-sm text-ink-700 shadow-card">
           <h3 className="text-base font-extrabold text-ink-950">Removed by hand</h3>
           <ul className="mt-2 list-disc space-y-1 pl-5">
             {exclude.map((e) => (

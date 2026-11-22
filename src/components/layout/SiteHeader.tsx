@@ -7,6 +7,8 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import logo from '../../assets/logo.png'
+import logoLight from '../../assets/logo-light.png'
+import { ThemeToggle } from './ThemeToggle'
 
 /** Seven plain links: a small town needs no dropdown menus. */
 const navLinks = [
@@ -59,7 +61,7 @@ export function SiteHeader() {
     }`
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-white">
+    <header className="sticky top-0 z-50 border-b border-line bg-card">
       <div className="container-page flex h-[4.5rem] items-center justify-between gap-4 lg:h-20">
         <Link
           href="/"
@@ -73,7 +75,8 @@ export function SiteHeader() {
           }}
           className="flex shrink-0 items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500"
         >
-          <img src={logo.src} alt="BetterCorella" width="655" height="199" className="h-10 w-auto sm:h-12" />
+          <img src={logo.src} alt="BetterCorella" width="655" height="199" className="h-10 w-auto sm:h-12 dark:hidden" />
+          <img src={logoLight.src} alt="BetterCorella" width="655" height="199" className="hidden h-10 w-auto sm:h-12 dark:block" />
         </Link>
 
         <nav aria-label="Main" className="ml-auto hidden lg:block">
@@ -91,7 +94,8 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="flex shrink-0 items-center lg:hidden">
+        <div className="flex shrink-0 items-center gap-1">
+          <ThemeToggle />
           <button
             ref={menuButtonRef}
             type="button"
@@ -109,7 +113,7 @@ export function SiteHeader() {
       {menuOpen ? (
         <div
           id="mobile-menu"
-          className="absolute inset-x-0 top-full z-40 h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-line bg-white shadow-lg lg:hidden"
+          className="absolute inset-x-0 top-full z-40 h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-line bg-card shadow-lg lg:hidden"
         >
           <nav aria-label="Main" className="container-page py-4">
             <ul className="space-y-1">

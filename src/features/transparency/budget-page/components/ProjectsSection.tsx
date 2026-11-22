@@ -71,8 +71,8 @@ export function ProjectsSection({ projects, labels, detailKeys }: Props) {
               onClick={() => setStatus(active ? '' : g)}
               className={`rounded-xl border px-3.5 py-2 text-left text-xs font-bold transition ${
                 active
-                  ? 'border-brand-600 bg-brand-600 text-white'
-                  : 'border-line bg-white text-ink-700 hover:border-brand-200 hover:text-brand-700'
+                  ? 'border-brand-600 bg-brand-strong text-white'
+                  : 'border-line bg-card text-ink-700 hover:border-brand-200 hover:text-brand-700'
               }`}
             >
               {labels.groups[g].label} · {summary.groups[g].rows}
@@ -81,7 +81,7 @@ export function ProjectsSection({ projects, labels, detailKeys }: Props) {
         })}
       </div>
 
-      <div className="mt-4 grid gap-3 rounded-2xl border border-line bg-white p-4 shadow-card sm:grid-cols-[1.6fr_1fr_auto]">
+      <div className="mt-4 grid gap-3 rounded-2xl border border-line bg-card p-4 shadow-card sm:grid-cols-[1.6fr_1fr_auto]">
         <label className="relative block">
           <span className="sr-only">Search FY2027 projects</span>
           <Search aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-ink-400" />
@@ -97,7 +97,7 @@ export function ProjectsSection({ projects, labels, detailKeys }: Props) {
               type="button"
               onClick={() => setQuery('')}
               aria-label="Clear project search"
-              className="absolute right-1 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-lg text-ink-600 hover:bg-white"
+              className="absolute right-1 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-lg text-ink-600 hover:bg-card"
             >
               <X aria-hidden="true" className="size-4" />
             </button>
@@ -118,7 +118,7 @@ export function ProjectsSection({ projects, labels, detailKeys }: Props) {
         <button
           type="button"
           onClick={() => downloadText('corella-fy2027-budget-lines.csv', projectsCsv(filtered))}
-          className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-xs font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
+          className="inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-card px-4 py-2.5 text-xs font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
         >
           <Download aria-hidden="true" className="size-4" />
           Download CSV{narrowed ? ` (${filtered.length})` : ''}
@@ -130,7 +130,7 @@ export function ProjectsSection({ projects, labels, detailKeys }: Props) {
           role="region"
           aria-label="FY2027 budget lines for Corella"
           tabIndex={0}
-          className="mt-5 overflow-x-auto rounded-2xl border border-line bg-white shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
+          className="mt-5 overflow-x-auto rounded-2xl border border-line bg-card shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
         >
           <table className="w-full min-w-[820px] text-left text-sm">
             <caption className="sr-only">FY2027 budget lines whose titles name Corella, Bohol</caption>
@@ -176,7 +176,7 @@ export function ProjectsSection({ projects, labels, detailKeys }: Props) {
           </table>
         </div>
       ) : (
-        <p className="mt-5 rounded-2xl border border-line bg-white p-8 text-center text-sm text-ink-600 shadow-card">
+        <p className="mt-5 rounded-2xl border border-line bg-card p-8 text-center text-sm text-ink-600 shadow-card">
           No line matches. Try fewer words or clear the filters.
         </p>
       )}

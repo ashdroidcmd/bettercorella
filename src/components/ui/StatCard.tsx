@@ -20,7 +20,7 @@ export function StatCard({ value, label, note, tone = 'light' }: StatCardProps) 
   }
 
   return (
-    <div className="rounded-2xl border border-line bg-white p-4 shadow-card sm:p-5">
+    <div className="rounded-2xl border border-line bg-card p-4 shadow-card sm:p-5">
       <p className="text-2xl font-extrabold tracking-tight text-brand-700 sm:text-3xl">{value}</p>
       <p className="mt-1 text-sm font-semibold text-ink-900">{label}</p>
       {note ? <p className="mt-0.5 text-xs text-ink-500">{note}</p> : null}

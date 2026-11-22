@@ -63,7 +63,7 @@ export function AboutPage() {
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
                     href="/services"
-                    className="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800"
+                    className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white transition hover:bg-primary-hover"
                   >
                     {"Browse services"}
                     <ArrowRight aria-hidden="true" className="size-4" />
@@ -72,7 +72,7 @@ export function AboutPage() {
                     href={ISSUES_URL}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
+                    className="inline-flex items-center gap-2 rounded-xl border border-line bg-card px-4 py-2.5 text-sm font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
                   >
                     {"Share an official source"}
                   </a>
@@ -92,21 +92,21 @@ export function AboutPage() {
           </div>
 
           <div className="mt-12 grid gap-4 sm:grid-cols-3">
-            <div className="rounded-2xl border border-line bg-white p-5 shadow-card">
+            <div className="rounded-2xl border border-line bg-card p-5 shadow-card">
               <Database aria-hidden="true" className="size-5 text-brand-700" />
               <h2 className="mt-3 text-base font-extrabold text-ink-950">{"Structured public data"}</h2>
               <p className="mt-2 text-sm leading-6 text-ink-600">
                 {"Services, offices, barangays, officials, and budget and procurement records, organized so they are easy to search and compare."}
               </p>
             </div>
-            <div className="rounded-2xl border border-line bg-white p-5 shadow-card">
+            <div className="rounded-2xl border border-line bg-card p-5 shadow-card">
               <ExternalLink aria-hidden="true" className="size-5 text-brand-700" />
               <h2 className="mt-3 text-base font-extrabold text-ink-950">{"Links to the source"}</h2>
               <p className="mt-2 text-sm leading-6 text-ink-600">
                 {"Every service, office, barangay, news item, and financial document points back to an official municipal or national source."}
               </p>
             </div>
-            <div className="rounded-2xl border border-line bg-white p-5 shadow-card">
+            <div className="rounded-2xl border border-line bg-card p-5 shadow-card">
               <MapPin aria-hidden="true" className="size-5 text-brand-700" />
               <h2 className="mt-3 text-base font-extrabold text-ink-950">{"Local by design"}</h2>
               <p className="mt-2 text-sm leading-6 text-ink-600">
@@ -153,7 +153,7 @@ export function AboutPage() {
                 >
                   <span
                     aria-hidden="true"
-                    className="absolute -left-[7px] top-1.5 size-3 rounded-full border-2 border-white bg-brand-600 ring-1 ring-brand-200"
+                    className="absolute -left-[7px] top-1.5 size-3 rounded-full border-2 border-card bg-brand-strong ring-1 ring-brand-200"
                   />
                   <p className="text-sm font-extrabold text-brand-700">{item.year}</p>
                   <div>
@@ -183,7 +183,7 @@ export function AboutPage() {
                 href={source.url}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
+                className="group flex h-full flex-col rounded-2xl border border-line bg-card p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
               >
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="text-sm font-bold leading-6 text-ink-950 group-hover:text-brand-700">{source.name}</h3>
@@ -203,7 +203,7 @@ export function AboutPage() {
               title="Which source each section uses"
               description="Every dataset on this site, where it comes from, how many records it has, and when it was last checked."
             />
-            <div className="mt-8 overflow-hidden rounded-2xl border border-line bg-white shadow-card">
+            <div className="mt-8 overflow-hidden rounded-2xl border border-line bg-card shadow-card">
               <div className="hidden grid-cols-[1fr_2.2fr_0.5fr_0.8fr] gap-4 border-b border-line bg-surface px-5 py-3 text-[11px] font-bold uppercase tracking-[0.12em] text-ink-500 md:grid">
                 <span>Section</span>
                 <span>Source</span>

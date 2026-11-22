@@ -12,7 +12,7 @@ export function BusinessLogo({ business, size }: { business: BusinessListing; si
   const box = size === 'lg' ? 'size-16 rounded-2xl' : 'size-12 rounded-xl'
   if (photo) {
     return (
-      <span className={`relative block shrink-0 overflow-hidden border border-line bg-white ${box}`}>
+      <span className={`relative block shrink-0 overflow-hidden border border-line bg-card ${box}`}>
         <Image src={photo.image} alt={photo.alt} fill sizes="64px" className="object-cover" />
       </span>
     )

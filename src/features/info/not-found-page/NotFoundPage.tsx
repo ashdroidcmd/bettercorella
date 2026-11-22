@@ -17,14 +17,14 @@ export function NotFoundPage() {
           <Link
             href="/"
            
-            className="inline-flex items-center gap-2 rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-700"
+            className="inline-flex items-center gap-2 rounded-xl bg-brand-strong px-4 py-2.5 text-sm font-bold text-white transition hover:bg-primary"
           >
             <ArrowLeft aria-hidden="true" className="size-4" />
             {"Back to home"}</Link>
           <Link
             href="/services"
            
-            className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
+            className="inline-flex items-center gap-2 rounded-xl border border-line bg-card px-4 py-2.5 text-sm font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
           >
             <LayoutGrid aria-hidden="true" className="size-4" />
             {"Browse services"}</Link>

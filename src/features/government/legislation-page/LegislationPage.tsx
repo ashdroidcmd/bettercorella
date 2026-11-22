@@ -30,7 +30,7 @@ const statusStyles: Record<string, string> = {
 function LegislationCard({ item }: { item: LegislationItem }) {
 
   return (
-    <article className="flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float sm:p-6">
+    <article className="flex h-full flex-col rounded-2xl border border-line bg-card p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float sm:p-6">
       <div className="flex flex-wrap items-center gap-2">
         <span className={`inline-flex rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.1em] ${statusStyles[item.status]}`}>
           {item.status}
@@ -96,7 +96,7 @@ function LegislationPageContent() {
             href={legislationSourceUrl ?? undefined}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-3.5 py-2 text-xs font-bold text-white transition hover:bg-brand-800"
+            className="inline-flex items-center gap-2 rounded-xl bg-primary px-3.5 py-2 text-xs font-bold text-white transition hover:bg-primary-hover"
           >
             {"SB ordinance index"}<ExternalLink aria-hidden="true" className="size-3.5" />
           </a>
@@ -129,7 +129,7 @@ function LegislationPageContent() {
               />
             </Reveal>
 
-            <div className="mt-6 grid gap-3 rounded-2xl border border-line bg-white p-4 shadow-card sm:grid-cols-[1.6fr_1fr]">
+            <div className="mt-6 grid gap-3 rounded-2xl border border-line bg-card p-4 shadow-card sm:grid-cols-[1.6fr_1fr]">
               <label className="relative block">
                 <span className="sr-only">Search legislation</span>
                 <Search aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-ink-400" />
@@ -141,7 +141,7 @@ function LegislationPageContent() {
                   className="w-full rounded-xl border border-line bg-surface py-2.5 pl-9 pr-9 text-sm text-ink-900 outline-none transition focus:border-brand-300 focus:ring-2 focus:ring-brand-100"
                 />
                 {query ? (
-                  <button type="button" onClick={() => setQuery('')} aria-label="Clear legislation search" className="absolute right-1 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-lg text-ink-600 hover:bg-white hover:text-ink-700">
+                  <button type="button" onClick={() => setQuery('')} aria-label="Clear legislation search" className="absolute right-1 top-1/2 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-lg text-ink-600 hover:bg-card hover:text-ink-700">
                     <X aria-hidden="true" className="size-4" />
                   </button>
                 ) : null}
@@ -173,11 +173,11 @@ function LegislationPageContent() {
                 })}
               </div>
             ) : (
-              <div className="mt-8 rounded-2xl border border-line bg-white p-8 text-center shadow-card">
+              <div className="mt-8 rounded-2xl border border-line bg-card p-8 text-center shadow-card">
                 <h3 className="text-lg font-extrabold text-ink-950">No records match this search</h3>
                 <p className="mt-2 text-sm text-ink-600">Try a different number, title, year, or record type.</p>
                 {hasFilters ? (
-                  <button type="button" onClick={resetFilters} className="mt-4 rounded-xl bg-brand-700 px-4 py-2 text-sm font-bold text-white transition hover:bg-brand-800">
+                  <button type="button" onClick={resetFilters} className="mt-4 rounded-xl bg-primary px-4 py-2 text-sm font-bold text-white transition hover:bg-primary-hover">
                     {'Clear filters'}
                   </button>
                 ) : null}
@@ -200,7 +200,7 @@ function LegislationPageContent() {
                   href={source.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
+                  className="group flex h-full flex-col rounded-2xl border border-line bg-card p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float"
                 >
                   <span className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
                     {source.label === 'Executive orders' ? <Landmark aria-hidden="true" className="size-5" /> : <FileText aria-hidden="true" className="size-5" />}

@@ -94,7 +94,7 @@ export function TownProfilePage() {
                 >
                   <span
                     aria-hidden="true"
-                    className="absolute -left-[7px] top-1.5 size-3 rounded-full border-2 border-white bg-brand-600 ring-1 ring-brand-200"
+                    className="absolute -left-[7px] top-1.5 size-3 rounded-full border-2 border-card bg-brand-strong ring-1 ring-brand-200"
                   />
                   <p className="text-sm font-extrabold text-brand-700">{item.year}</p>
                   <div>
@@ -134,7 +134,7 @@ export function TownProfilePage() {
             <Link
               key={link.href}
               href={link.href}
-              className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-bold text-brand-700 transition hover:border-brand-200 hover:bg-brand-50"
+              className="inline-flex items-center gap-2 rounded-xl border border-line bg-card px-4 py-2.5 text-sm font-bold text-brand-700 transition hover:border-brand-200 hover:bg-brand-50"
             >
               {link.label}
               <ArrowRight aria-hidden="true" className="size-4" />

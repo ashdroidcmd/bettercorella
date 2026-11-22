@@ -55,7 +55,7 @@ export function PrivacyPage() {
           </div>
           <ul className="mt-5 grid gap-3 sm:grid-cols-2">
             {privacyHighlights.map(({ icon: Icon, title, text }) => (
-              <li key={title} className="flex gap-3 rounded-xl border border-white/80 bg-white p-4">
+              <li key={title} className="flex gap-3 rounded-xl border border-white/80 bg-card p-4">
                 <Icon aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-brand-700" />
                 <span>
                   <span className="block text-sm font-bold text-ink-950">{title}</span>
@@ -66,28 +66,28 @@ export function PrivacyPage() {
           </ul>
         </section>
 
-        <section id="search-and-forms" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
+        <section id="search-and-forms" className="scroll-mt-28 rounded-2xl border border-line bg-card p-5 shadow-card sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"01 · On this site"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Saved services and forms"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
             {"Services you bookmark are saved in your browser's local storage and are never sent to a server operated by this project. The site does not include a transaction form, payment flow, or user account system."}</p>
         </section>
 
-        <section id="hosting-logs" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
+        <section id="hosting-logs" className="scroll-mt-28 rounded-2xl border border-line bg-card p-5 shadow-card sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"02 · Site delivery"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Hosting and technical logs"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
             {"The site may be delivered by a third-party hosting provider, which can keep standard request logs such as IP address, browser type, and time of access for security and operations. Those logs are governed by the hosting provider’s policy, not by this guide."}</p>
         </section>
 
-        <section id="third-party-services" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
+        <section id="third-party-services" className="scroll-mt-28 rounded-2xl border border-line bg-card p-5 shadow-card sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"03 · Off-site services"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Third-party services and links"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">
             {"The Plus Jakarta Sans typeface is served from this site itself, so your browser does not contact Google Fonts. Some pages (town profile, barangays, contact) embed a Google Maps map; when it loads, Google may receive your IP address and set cookies under Google's privacy policy. Links to official government websites and other public records take you to services with their own privacy policies. This guide does not control those services."}</p>
         </section>
 
-        <section id="your-choices" className="scroll-mt-28 rounded-2xl border border-line bg-white p-5 shadow-card sm:p-6">
+        <section id="your-choices" className="scroll-mt-28 rounded-2xl border border-line bg-card p-5 shadow-card sm:p-6">
           <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-brand-700">{"04 · Your control"}</p>
           <h2 className="mt-2 text-lg font-extrabold tracking-tight text-ink-950">{"Your choices"}</h2>
           <p className="mt-2 text-[15px] leading-7 text-ink-600">

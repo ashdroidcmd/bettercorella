@@ -16,10 +16,10 @@ export function CategoryCard({ category, count }: CategoryCardProps) {
     <Link
       href={`/services/${category.slug}`}
      
-      className="group relative flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float sm:p-6"
+      className="group relative flex h-full flex-col rounded-2xl border border-line bg-card p-5 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float sm:p-6"
     >
       <div className="flex items-start justify-between gap-4">
-        <span className="inline-flex size-11 items-center justify-center rounded-xl bg-brand-50 text-brand-700 transition group-hover:bg-brand-600 group-hover:text-white">
+        <span className="inline-flex size-11 items-center justify-center rounded-xl bg-brand-50 text-brand-700 transition group-hover:bg-brand-strong group-hover:text-white">
           <CategoryIcon name={category.icon} className="size-5" />
         </span>
         <ArrowUpRight

@@ -146,7 +146,7 @@ export function BusinessPage() {
             {permitLinks.map((link) => {
               const external = link.href.startsWith('http')
               const className =
-                'group flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float'
+                'group flex h-full flex-col rounded-2xl border border-line bg-card p-5 shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float'
               const content = (
                 <>
                   <span className="flex items-start justify-between gap-3 text-base font-extrabold tracking-tight text-ink-950 group-hover:text-brand-700">

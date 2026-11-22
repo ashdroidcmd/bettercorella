@@ -42,7 +42,7 @@ export function OnlineServicesPage() {
           <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {onlineServices.map((service, index) => (
               <Reveal key={service.slug} delay={(index % 3) * 0.05} className="h-full">
-                <div className="flex h-full flex-col rounded-2xl border border-line bg-white p-5 shadow-card">
+                <div className="flex h-full flex-col rounded-2xl border border-line bg-card p-5 shadow-card">
                   <div className="flex items-start justify-between gap-3">
                     <span className="inline-flex size-10 items-center justify-center rounded-xl bg-brand-50 text-brand-700">
                       <MonitorSmartphone aria-hidden="true" className="size-5" />
@@ -100,14 +100,14 @@ export function OnlineServicesPage() {
               <Link
                 href="/services"
                
-                className="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800"
+                className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white transition hover:bg-primary-hover"
               >
                 {"Browse municipal services"}<ArrowUpRight aria-hidden="true" className="size-4" />
               </Link>
               <Link
                 href="/contact#hotlines"
                
-                className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
+                className="inline-flex items-center gap-2 rounded-xl border border-line bg-card px-4 py-2.5 text-sm font-bold text-ink-700 transition hover:border-brand-200 hover:text-brand-700"
               >
                 {"Call an office"}</Link>
             </div>

@@ -24,7 +24,7 @@ export function PageHero({ title, description, eyebrow, crumbs, source, children
 
   return (
     <section
-      className={`relative isolate bg-ink-950 text-white ${
+      className={`relative isolate bg-night text-white ${
         overflowVisible ? 'z-20 overflow-visible' : 'overflow-hidden'
       }`}
     >
@@ -48,7 +48,7 @@ export function PageHero({ title, description, eyebrow, crumbs, source, children
                 href={source.href}
                 target="_blank"
                 rel="noreferrer"
-                className="font-semibold text-white underline decoration-brand-300 underline-offset-2 hover:text-brand-200"
+                className="font-semibold text-white underline decoration-brand-300 underline-offset-2 hover:text-brand-300"
               >
                 {source.label}
               </a>

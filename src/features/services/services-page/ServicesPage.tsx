@@ -42,7 +42,7 @@ function ServicesPageContent() {
         </div>
       </section>
 
-      <section className="bg-ink-950 text-white">
+      <section className="bg-night text-white">
         <div className="container-page flex flex-col gap-4 py-8 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-start gap-3">
             <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-white/10 text-brand-300">

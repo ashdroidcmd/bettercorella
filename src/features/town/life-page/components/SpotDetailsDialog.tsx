@@ -27,7 +27,7 @@ export function SpotDetailsDialog({ spot, ref }: { spot: TouristSpot; ref: Ref<H
       onClick={(event) => {
         if (event.target === event.currentTarget) event.currentTarget.close()
       }}
-      className="m-auto w-[calc(100%-2rem)] max-w-2xl overflow-hidden rounded-2xl bg-white p-0 text-ink-950 shadow-float backdrop:bg-ink-950/60 backdrop:backdrop-blur-sm"
+      className="m-auto w-[calc(100%-2rem)] max-w-2xl overflow-hidden rounded-2xl bg-card p-0 text-ink-950 shadow-float backdrop:bg-night/60 backdrop:backdrop-blur-sm"
     >
       <div data-lenis-prevent className="max-h-[85vh] overflow-y-auto overscroll-contain">
         <div className="relative">
@@ -36,7 +36,7 @@ export function SpotDetailsDialog({ spot, ref }: { spot: TouristSpot; ref: Ref<H
             <button
               type="submit"
               aria-label="Close"
-              className="inline-flex size-9 items-center justify-center rounded-full bg-white/90 text-ink-700 shadow-card transition hover:bg-white hover:text-ink-950"
+              className="inline-flex size-9 items-center justify-center rounded-full bg-card/90 text-ink-700 shadow-card transition hover:bg-card hover:text-ink-950"
             >
               <X aria-hidden="true" className="size-5" />
             </button>
@@ -150,7 +150,7 @@ export function SpotDetailsDialog({ spot, ref }: { spot: TouristSpot; ref: Ref<H
               href={directionsUrl(spot)}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800"
+              className="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white transition hover:bg-primary-hover"
             >
               <Navigation aria-hidden="true" className="size-4" />
               {'Get directions'}

@@ -17,7 +17,7 @@ export function SpotCard({ spot }: { spot: TouristSpot }) {
   const open = () => dialogRef.current?.showModal()
 
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-card shadow-card transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-float">
       <PhotoFrame photo={spotPhotos[spot.slug]} icon={primary.icon} />
       <div className="flex flex-1 flex-col p-5">
         <ul className="flex flex-wrap gap-1.5" aria-label="Type">
