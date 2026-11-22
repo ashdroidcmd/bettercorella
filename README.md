@@ -6,7 +6,7 @@
 **Live site:** [bettercorella.vercel.app](https://bettercorella.vercel.app) · **Repository:** [ashdroidcmd/bettercorella](https://github.com/ashdroidcmd/bettercorella)
 
 > [!NOTE]
-> **Rebranded to Corella, with official data.** The town profile, 86 Citizen's Charter services, 14 offices, elected officials, the 8 barangays (with PSA population and boundaries) and local hotlines come from official sources: the municipal website, the Citizen's Charter 2026, the PSA and the Provincial Government of Bohol. Legislation, budget and procurement records are still being collected, so those sections show an "information coming soon" notice instead of guessing. Have an official document or link? [Share it](https://github.com/ashdroidcmd/bettercorella/issues).
+> **Rebranded to Corella, with official data.** The town profile, 86 Citizen's Charter services, 16 offices, elected officials, the 8 barangays (with PSA population and boundaries), local hotlines, the national budget lines that name Corella, and the town's fiestas and tourist spots come from official sources: the municipal website, the Citizen's Charter 2026, the PSA, the Provincial Government of Bohol and the BetterGov.ph Budget API. Legislation and the places directory are still being collected, so those sections show an "information coming soon" notice instead of guessing. Have an official document or link? [Share it](https://github.com/ashdroidcmd/bettercorella/issues).
 
 ---
 
@@ -17,7 +17,8 @@
 - how to get a municipal service, and what it requires and costs
 - who the elected officials and office heads are, and how to reach them
 - barangay information and emergency hotlines
-- where public money goes: budgets, procurement and infrastructure projects
+- where public money goes: national budget lines that name Corella
+- fiestas, tourist spots, local businesses and today's weather
 
 BetterCorella is **not** the official website of the Municipality of Corella. Every figure links to the official source it came from, so anyone can check it.
 
@@ -27,11 +28,14 @@ BetterCorella is **not** the official website of the Municipality of Corella. Ev
 
 | Area | Route | What it offers |
 | --- | --- | --- |
+| **Home** | `/` | Popular services, saved services, and **current weather** in Corella (OpenWeather) in the hero and a "Weather in Corella" section |
 | **Services** | `/services`, `/services/:category/:slug` | The 86 services of the Corella Citizen's Charter 2026 in 12 categories, with the issuing office, who may avail, processing time, listed fees and a link to the charter page. Services can be bookmarked on your device |
 | **Online services** | `/online-services` | Links to national e-government services (eGov PH, PSA, SSS, PhilHealth, Pag-IBIG, DTI and more) |
-| **Government** | `/government` | Elected officials, municipal offices, barangays, legislation, and **24/7 emergency hotlines** |
-| **Town guide** | `/town` | Town profile, history and map, life and culture, places to visit, and doing business in Corella |
-| **Transparency** | `/transparency` | Budget, procurement and bids, infrastructure projects, and open data downloads |
+| **Government** | `/government`, `/barangays`, `/contact` | Elected officials, municipal offices and national agencies, the 8 barangays with their councils, and **24/7 emergency hotlines** |
+| **Town guide** | `/town` | Town profile, history and map |
+| **Tourism and events** | `/town/life` | The town fiesta (April 27) and Adlaw sa Corella, plus tourist spots (Philippine Tarsier Sanctuary, the church, Green Thumb Farm) with hours, fees, tips and directions in a details dialog |
+| **Business and investment** | `/town/business` | A local business directory (starting with a developer-for-hire listing) and links to business permits and national business portals |
+| **Transparency** | `/transparency` | National budget lines naming Corella (FY2027 NEP and GAA 2020–2026) from the BetterGov.ph Budget API, with detail pages, and links to official sources |
 | **Offline use** | (whole site) | Installable as an app (PWA). Pages you've visited still open without a connection, which helps during emergencies |
 
 ---
@@ -51,7 +55,15 @@ BetterCorella is **not** the official website of the Municipality of Corella. Ev
 | Package manager | [pnpm](https://pnpm.io/) |
 | Hosting | [Vercel](https://vercel.com/) |
 
-There is no backend or database. All content is typed data in the repository, so every change is reviewable in Git.
+There is no database. All content is typed data in the repository, so every change is reviewable in Git. Three small server routes run on Vercel, each keeping its secret on the server:
+
+| Route | Purpose | Status |
+| --- | --- | --- |
+| `/api/weather` | Proxies the OpenWeather Current Weather API (free tier), cached for 10 minutes | Live |
+| `/api/suggestions` | Sends "Suggest a spot or event" submissions to a private Discord channel | Form hidden for now |
+| `/api/business-listings` | Sends "Register your business" requests to a private Discord channel | Form hidden for now |
+
+Nothing sent through a form is published automatically: volunteers review it and add approved records by hand.
 
 ---
 
@@ -62,13 +74,16 @@ The code is organized by feature. Each page has its own folder; code shared by s
 ```
 src/
 ├── app/                 # Next.js routes (metadata + static params; render a feature page)
+│   └── api/             weather/, suggestions/, business-listings/, _shared/ (Discord form handler, rate limit)
 ├── features/
 │   ├── home/            home-page/
 │   ├── services/        services-page/, service-category-page/, service-detail-page/, online-services-page/, shared/
 │   ├── government/      government-page/, officials-page/, offices-page/, barangays-page/, ... shared/
-│   ├── town/            town-profile-page/, life-page/, places-page/, business-page/, shared/
-│   ├── transparency/    transparency-page/, budget-page/, procurement-page/, open-data-page/, projects-page/, shared/
+│   ├── town/            town-profile-page/, life-page/ (tourism and events), places-page/, business-page/, shared/
+│   ├── transparency/    budget-page/, budget-project-page/, shared/
+│   ├── weather/         shared/ (hook, tile, section, OpenWeather mapping)
 │   └── info/            about-page/, contact-page/, faq-page/, privacy-page/, terms-page/, ... shared/
+├── assets/              # images, incl. tourism/{spots,events}/ and business/ (each with a README)
 ├── components/          # layout/ (site shell), ui/ (building blocks), seo/
 ├── config/              # site.ts (site name and URL), city.ts (LGU identity)
 └── lib/                 # utils, seo/ (metadata + route list), data freshness
@@ -128,9 +143,23 @@ corepack enable
 
 ### Configuration
 
+Copy `.env.example` to `.env.local` and fill in what you need. Every variable is optional: without a key, the related feature hides itself and the rest of the site works.
+
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | `https://bettercorella.vercel.app` | Public site address used in canonical URLs, the sitemap and social previews |
+| `OPENWEATHER_API_KEY` | none | Server-only. [OpenWeather](https://openweathermap.org/api) key (free tier) for the home page weather. A new key can take up to about 2 hours to activate |
+| `DISCORD_SUGGESTIONS_WEBHOOK_URL` | none | Server-only. Discord webhook for "Suggest a spot or event" (form hidden for now) |
+| `DISCORD_BUSINESS_WEBHOOK_URL` | falls back to the suggestions webhook | Server-only. Discord webhook for "Register your business" (form hidden for now) |
+
+Never prefix these keys with `NEXT_PUBLIC_`, which would ship them to the browser. On Vercel, add them under **Project → Settings → Environment Variables** for Production and Preview. CI doesn't need them: tests mock the APIs.
+
+### Adding photos
+
+- **Tourist spots and events:** `src/assets/tourism/spots/` and `src/assets/tourism/events/`, registered in `src/features/town/life-page/data/tourismPhotos.ts`.
+- **Business logos:** `src/assets/business/`, registered in `src/features/town/business-page/data/businessPhotos.ts`.
+
+Each folder's README explains naming, size (resize camera originals to about 1600 px) and credits.
 
 ---
 
@@ -178,6 +207,7 @@ BetterCorella is an independent, non-partisan, volunteer project under the **Bet
 
 - **Code:** [ISC License](LICENSE).
 - **Data, photos and logos:** keep the terms of their original sources, which are cited on each page.
+- **Weather data:** © [OpenWeather](https://openweathermap.org/) (CC BY-SA 4.0), credited on the home page.
 
 BetterCorella builds on the work of:
 
