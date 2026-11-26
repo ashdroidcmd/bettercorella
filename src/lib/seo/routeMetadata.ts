@@ -5,7 +5,7 @@ import { city } from '../../config/city.ts'
 import { faqs } from '../../features/info/faq-page/data/faqs.ts'
 import { offices } from '../../features/government/shared/data/offices.ts'
 import { services } from '../../features/services/shared/data/services.ts'
-import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL as DEFAULT_ORIGIN } from '../../config/site.ts'
+import { SITE_DESCRIPTION, SITE_DISPLAY_NAME, SITE_NAME, SITE_TITLE, SITE_URL as DEFAULT_ORIGIN } from '../../config/site.ts'
 
 export interface RouteMetadata {
   path: string
@@ -51,8 +51,8 @@ function homeJsonLd() {
     {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: SITE_NAME,
-      alternateName: SITE_TITLE,
+      name: SITE_DISPLAY_NAME,
+      alternateName: [SITE_TITLE, SITE_NAME],
       url: DEFAULT_ORIGIN,
       description: SITE_DESCRIPTION,
       inLanguage: 'en',

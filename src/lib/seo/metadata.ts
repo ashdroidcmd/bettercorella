@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { buildRouteMetadata, type RouteMetadata } from './routeMetadata'
-import { SITE_NAME, SITE_TITLE } from '../../config/site'
+import { SITE_DISPLAY_NAME, SITE_NAME } from '../../config/site'
 
 const routes = new Map(buildRouteMetadata().map((route) => [route.path, route]))
 
@@ -25,7 +25,7 @@ export function pageMetadata(path: string): Metadata {
       description: page.description,
       url: path,
       type: page.type ?? 'website',
-      siteName: SITE_TITLE,
+      siteName: SITE_DISPLAY_NAME,
       locale: 'en_PH',
       images: [{ url: image, alt: title }],
     },

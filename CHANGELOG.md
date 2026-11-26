@@ -53,6 +53,8 @@ All notable changes to BetterCorella are recorded here. The format follows [Keep
 
 ### Changed
 
+- Search-engine site name is now "Corella, Bohol" (`SITE_DISPLAY_NAME` in `src/config/site.ts`), used the same way in the WebSite JSON-LD `name`, `og:site_name` and `application-name`, so Google gets one consistent name instead of falling back to "Vercel". "BetterCorella, Bohol" and "BetterCorella" stay as JSON-LD `alternateName`s, and the home `<title>` is unchanged.
+
 - `Reveal` scroll animations no longer leave sections blank before JavaScript loads. They are now CSS-driven: sections are visible by default and only start hidden under `html.reveal-ready`, which the init script in `layout.tsx` sets and drops again if the app hasn't hydrated within 4 s. Reduced-motion users get no animation. Motion is no longer used by `Reveal`.
 
 - Transparency is one page. `/transparency` is now the budget page: national budget lines naming Corella, then an "Official sources" list (DILG Full Disclosure Policy, BLGF, PhilGEPS, COA and the DPWH dataset) for records not on the site yet. The procurement, infrastructure projects and open-data pages, which had no Corella data, are removed along with their empty data files (`budgetDocs`, `bidDocs`, `projects`, `openData`) and data-freshness rows. `/transparency/budget`, `/transparency/procurement`, `/transparency/projects` and `/transparency/open-data` redirect to `/transparency`. Project detail pages stay at `/transparency/budget/<program>/<slug>`.

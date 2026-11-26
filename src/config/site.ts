@@ -3,6 +3,8 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://bettercore
 
 export const SITE_NAME = 'BetterCorella'
 export const SITE_TITLE = 'BetterCorella, Bohol'
+/** Site name shown by search engines (WebSite JSON-LD, og:site_name). */
+export const SITE_DISPLAY_NAME = 'Corella, Bohol'
 export const SITE_DESCRIPTION =
   'An independent civic guide to the services, officials, barangays, budgets and public records of the Municipality of Corella, Bohol.'
 export const THEME_COLOR = '#0038A8'

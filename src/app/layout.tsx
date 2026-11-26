@@ -3,7 +3,7 @@ import { Plus_Jakarta_Sans } from 'next/font/google'
 import type { ReactNode } from 'react'
 import { SiteLayout } from '@/components/layout/SiteLayout'
 import { SplashScreen } from '@/components/layout/SplashScreen'
-import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL, THEME_COLOR } from '@/config/site'
+import { SITE_DESCRIPTION, SITE_DISPLAY_NAME, SITE_TITLE, SITE_URL, THEME_COLOR } from '@/config/site'
 import { Providers } from '@/app/providers'
 import '@/index.css'
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
-  applicationName: SITE_TITLE,
+  applicationName: SITE_DISPLAY_NAME,
   manifest: '/manifest.json',
   robots: {
     index: true,
